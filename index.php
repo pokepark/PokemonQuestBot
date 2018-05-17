@@ -144,7 +144,7 @@ if (isset($update['callback_query'])) {
     debug_log($data);
 
     // Set module path by sent action name.
-    $module = 'modules/' . basename($data['action']) . '.php';
+    $module = 'mods/' . basename($data['action']) . '.php';
 
     // Write module to log.
     debug_log($module);
@@ -176,15 +176,15 @@ if (isset($update['callback_query'])) {
 
     // Ask what to create.
     if(RAID_VIA_LOCATION == true && QUEST_VIA_LOCATION == true) {
-        include_once(ROOT_PATH . '/modules/geo_create.php');
+        include_once(ROOT_PATH . '/mods/geo_create.php');
 
     // Create raid and exit.
     } else if(RAID_VIA_LOCATION == true && QUEST_VIA_LOCATION == false) {
-        include_once(ROOT_PATH . '/modules/raid_create.php');
+        include_once(ROOT_PATH . '/mods/raid_create.php');
 
     // Create quest and exit.
     } else if(RAID_VIA_LOCATION == false && QUEST_VIA_LOCATION == true) {
-        include_once(ROOT_PATH . '/modules/quest_geo.php');
+        include_once(ROOT_PATH . '/mods/quest_geo.php');
     }
     exit();
 

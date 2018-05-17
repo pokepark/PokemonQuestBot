@@ -251,6 +251,12 @@
 		"EN": "Pokestop:Pokestops",
 		"PT-BR": "TRANSLATE"
 	},
+  "quest_action_33" : {
+                "NL": "level 3 or higher raid:level 3 or higher raids",
+                "DE": "Level-3-Raid oder höher:Level-3-Raids oder höher",
+                "EN": "level 3 or higher raid:level 3 or higher raids",
+                "PT-BR": "TRANSLATE"
+        },
         "reward_type_1" : {
                 "NL": "Pokemon:Pokemon",
                 "DE": "Pokemon:Pokemon",
