@@ -1,0 +1,50 @@
+<?php
+define('DB_HOST',			'localhost');
+define('DB_NAME',			'your_database_name');
+define('DB_USER',			'your_database_user');
+define('DB_PASSWORD',			'your_database_password');
+
+define('DEBUG',				true);
+define('CONFIG_LOGFILE',		'/var/log/tg-bots/dev-raid-bot.log');
+define('CONFIG_HASH',			'aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000');
+
+define('CURL_USEPROXY',			false);
+define('CURL_PROXYSERVER',		'http://your.proxyserver.com:8080');
+
+define('MAINTAINER',			'@your_tg_username');
+define('MAINTAINER_ID',			'your_tg_integer');
+define('BOT_NAME',			'@RaidPokemonBot');
+define('BOT_ADMINS',			'');
+define('BOT_ACCESS',			'');
+
+// Languages
+define('LANGUAGE',             		'');
+//define('RAID_POLL_LANGUAGE',   		'EN');
+define('QUEST_LANGUAGE',       		'EN');
+
+// Timezone and Google maps API 
+define('TIMEZONE',			'Europe/Berlin');
+define('GOOGLE_API_KEY',		''); 
+
+// Quest creation
+define('QUEST_VIA_LOCATION',		true);
+define('QUEST_LOCATION',		false);
+define('QUEST_STOPS_RADIUS',		'50');
+define('QUEST_HIDE_REWARDS',		true);
+define('QUEST_HIDDEN_REWARDS',		'2,3,8,10');
+
+// Quest sharing
+define('SHARE_MODERATORS',	true);
+define('SHARE_USERS',		true);
+define('SHARE_CHATS',		'');
+
+// Cleanup
+define('CLEANUP',			false);
+define('CLEANUP_LOGFILE',		'/var/log/tg-bots/dev-raid-bot-cleanup.log');
+define('CLEANUP_SECRET',		'your-cleanup-secret/passphrase');
+define('CLEANUP_RAID_TELEGRAM',		true);
+define('CLEANUP_RAID_TIME_TG',		'10');
+define('CLEANUP_RAID_DATABASE',		true);
+define('CLEANUP_RAID_TIME_DB',		'10080');
+define('CLEANUP_QUEST_TELEGRAM',	true);
+define('CLEANUP_QUEST_DATABASE',	true);
