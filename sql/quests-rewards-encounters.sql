@@ -18,7 +18,7 @@ CREATE TABLE `questlist` (
   `quest_quantity` int(10) unsigned NOT NULL,
   `quest_action` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `questlist` WRITE;
@@ -67,6 +67,10 @@ INSERT INTO `questlist` VALUES (41,8,1,15);
 INSERT INTO `questlist` VALUES (42,9,5,15);
 INSERT INTO `questlist` VALUES (43,3,1,28);
 INSERT INTO `questlist` VALUES (44,2,10,32);
+INSERT INTO `questlist` VALUES (45,7,5,31);
+INSERT INTO `questlist` VALUES (46,9,3,13);
+INSERT INTO `questlist` VALUES (47,7,1,31);
+INSERT INTO `questlist` VALUES (48,9,1,33);
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rewardlist`;

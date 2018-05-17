@@ -842,7 +842,7 @@ function delete_quest($quest_id)
     $rs = my_query(
         "
         SELECT        *
-            FROM      cleanup_quests
+            FROM      cleanup
             WHERE     quest_id = '{$quest_id}'
               AND     chat_id <> 0
         "
@@ -868,7 +868,7 @@ function delete_quest($quest_id)
     debug_log('Deleting quest ' . $quest_id . ' from the cleanup table:');
     $rs_cleanup = my_query(
         "
-        DELETE FROM   cleanup_quests
+        DELETE FROM   cleanup
         WHERE   quest_id = '{$quest_id}' 
            OR   cleaned = '{$quest_id}'
         "
@@ -2367,7 +2367,7 @@ function insert_quest_cleanup($chat_id, $message_id, $quest_id)
             $rs = my_query(
                 "
                 SELECT    *
-                    FROM      cleanup_quests
+                    FROM      cleanup
                     WHERE     quest_id = '{$quest_id}'
                 "
             );
@@ -2389,7 +2389,7 @@ function insert_quest_cleanup($chat_id, $message_id, $quest_id)
             debug_log('Adding cleanup info to database:');
             $rs = my_query(
                 "
-                INSERT INTO   cleanup_quests
+                INSERT INTO   cleanup
                 SET           quest_id = '{$quest_id}',
                                   chat_id = '{$chat_id}',
                                   message_id = '{$message_id}'
@@ -2430,7 +2430,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             $rs = my_query(
                 "
                 SELECT    * 
-                FROM      cleanup_quests
+                FROM      cleanup
                   WHERE   chat_id <> 0
                   ORDER BY id DESC
                   LIMIT 0, 250     
@@ -2442,7 +2442,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             $rs = my_query(
                 "
                 SELECT    * 
-                FROM      cleanup_quests
+                FROM      cleanup
                   WHERE   chat_id = 0
                   LIMIT 0, 250
                 ", true
@@ -2453,7 +2453,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             $rs = my_query(
                 "
                 SELECT    * 
-                FROM      cleanup_quests
+                FROM      cleanup
                   LIMIT 0, 250
                 ", true
             );
@@ -2499,7 +2499,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                 cleanup_log('Updating cleanup information.');
                 my_query(
                 "
-                    UPDATE    cleanup_quests
+                    UPDATE    cleanup
                     SET       chat_id = 0, 
                               message_id = 0 
                     WHERE   id = {$row['id']}
@@ -2552,7 +2552,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     cleanup_log('Updating telegram cleanup information.');
                     my_query(
                     "
-                        UPDATE    cleanup_quests
+                        UPDATE    cleanup
                         SET       chat_id = 0, 
                                   message_id = 0 
                         WHERE   id = {$row['id']}
@@ -2588,7 +2588,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     cleanup_log('Updating database cleanup information.');
                     my_query(
                     "
-                        UPDATE    cleanup_quests
+                        UPDATE    cleanup
                         SET       quest_id = 0, 
                                   cleaned = {$row['quest_id']}
                         WHERE   quest_id = {$row['quest_id']}
@@ -2610,7 +2610,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     $rs_cl = my_query(
                     "
                         SELECT *
-                        FROM    cleanup_quests
+                        FROM    cleanup
                         WHERE   cleaned = {$row['cleaned']}
                     ", true
                     );
@@ -2623,7 +2623,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     // Finally delete from cleanup table.
                     my_query(
                     "
-                        DELETE FROM    cleanup_quests
+                        DELETE FROM    cleanup
                         WHERE   cleaned = {$row['cleaned']}
                     ", true
                     );
