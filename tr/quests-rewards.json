@@ -257,6 +257,12 @@
                 "EN": "level 3 or higher raid:level 3 or higher raids",
                 "PT-BR": "TRANSLATE"
         },
+        "quest_action_34" : {
+                "NL": "great curveball throw:great curveball throws",
+                "DE": "großartigen Curveball:großartige Curvebälle",
+                "EN": "great curveball throw:great curveball throws",
+                "PT-BR": "TRANSLATE"
+        },
         "reward_type_1" : {
                 "NL": "Pokemon:Pokemon",
                 "DE": "Pokemon:Pokemon",
