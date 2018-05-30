@@ -18,7 +18,7 @@ CREATE TABLE `questlist` (
   `quest_quantity` int(10) unsigned NOT NULL,
   `quest_action` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `questlist` WRITE;
@@ -76,6 +76,11 @@ INSERT INTO `questlist` VALUES (50,9,3,15);
 INSERT INTO `questlist` VALUES (51,5,3,9);
 INSERT INTO `questlist` VALUES (52,5,3,10);
 INSERT INTO `questlist` VALUES (53,5,3,34);
+INSERT INTO `questlist` VALUES (54,2,2,2);	/* Adventure Week: spin 2 new stops (Onix) */
+INSERT INTO `questlist` VALUES (55,1,2,1);	/* Adventure Week: hatch 2 eggs (Omanyte or 1 rare candy) */
+INSERT INTO `questlist` VALUES (56,3,3,28);	/* Adventure Week: earn 3 buddy candy (Kabuto) */
+INSERT INTO `questlist` VALUES (57,4,1,35);	/* Adventure Week: evolve 1 Omanyte or Kabuto (Aerodactyl) */
+INSERT INTO `questlist` VALUES (58,5,1,36);	/* one excellent throw */
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rewardlist`;
@@ -142,7 +147,7 @@ CREATE TABLE `encounterlist` (
   `quest_id` int(10) unsigned NOT NULL,
   `pokedex_ids` varchar(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `encounterlist` WRITE;
@@ -190,6 +195,12 @@ INSERT INTO `encounterlist` VALUES (40,40,'7');
 INSERT INTO `encounterlist` VALUES (41,41,'312');
 INSERT INTO `encounterlist` VALUES (42,42,'132,185');
 INSERT INTO `encounterlist` VALUES (43,43,'333');
+INSERT INTO `encounterlist` VALUES (44,51,'100');
+INSERT INTO `encounterlist` VALUES (45,52,'95');
+INSERT INTO `encounterlist` VALUES (46,54,'95');	/* Adventure Week: Onix encounter */
+INSERT INTO `encounterlist` VALUES (47,55,'138');	/* Adventure Week: Omanyte encounter */
+INSERT INTO `encounterlist` VALUES (48,56,'140');	/* Adventure Week: Kabuto encounter */
+INSERT INTO `encounterlist` VALUES (49,57,'142');	/* Adventure Week: Aerodactyl encounter */
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `quick_questlist`;
