@@ -66,9 +66,9 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_2": {
-		"NL": "Pokestop you have not visited before:Pokestop you have not visited before",
+		"NL": "Pokestop you have not visited before:Pokestops you have not visited before",
 		"DE": "Pokestop, den du noch nicht besucht hast:Pokestops, die du noch nicht besucht hast",
-		"EN": "Pokestop you have not visited before:Pokestop you have not visited before",
+		"EN": "Pokestop you have not visited before:Pokestops you have not visited before",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_3": {
@@ -132,9 +132,9 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_13": {
-		"NL": "gymbattle:gymbattles",
+		"NL": "Gym battle:Gym battles",
 		"DE": "Arenakampf:Arenakämpfe",
-		"EN": "gymbattle:gymbattles",
+		"EN": "Gym battle:Gym battles",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_14": {
@@ -156,9 +156,9 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_17": {
-		"NL": "Meoth or Skitty:Meoth or Skitty",
+		"NL": "Meowth or Skitty:Meowth or Skitty",
 		"DE": "Mauzi oder Eneco:Mauzi oder Eneco",
-		"EN": "Meoth or Skitty:Meoth or Skitty",
+		"EN": "Meowth or Skitty:Meowth or Skitty",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_18": {
@@ -168,39 +168,39 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_19": {
-		"NL": "Treeko or Mudkip:Treeko or Mudkip",
+		"NL": "Treecko or Mudkip:Treecko or Mudkip",
 		"DE": "Hydropi oder Geckarbor:Hydropi oder Geckarbor",
-		"EN": "Treeko or Mudkip:Treeko or Mudkip",
+		"EN": "Treecko or Mudkip:Treecko or Mudkip",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_20": {
-		"NL": "dragon type:dragon type",
+		"NL": "Dragon-type Pokemon:Dragon-type Pokemon",
 		"DE": "Pokemon vom Typ Drache:Pokemon vom Typ Drache",
-		"EN": "dragon type:dragon type",
+		"EN": "Dragon-type Pokemon:Dragon-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_21": {
-		"NL": "electric type:electric type",
+		"NL": "Electric-type Pokemon:Electric-type Pokemon",
 		"DE": "Pokemon vom Typ Elektro:Pokemon vom Typ Elektro",
-		"EN": "electric type:electric type",
+		"EN": "Electric-type Pokemon:Electric-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_22": {
-		"NL": "bug type:bug type",
+		"NL": "Bug-type Pokemon:Bug-type Pokemon",
 		"DE": "Pokemon vom Typ Käfer:Pokemon vom Typ Käfer",
-		"EN": "bug type:bug type",
+		"EN": "Bug-type Pokemon:Bug-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_23": {
-		"NL": "flying type:flying type",
+		"NL": "Flying-type Pokemon:Flying-type Pokemon",
 		"DE": "Pokemon vom Typ Flug:Pokemon vom Typ Flug",
-		"EN": "flying type:flying type",
+		"EN": "Flying-type Pokemon:Flying-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_24": {
-		"NL": "dark type:dark type",
+		"NL": "Dark-type Pokemon:Dark-type Pokemon",
 		"DE": "Pokemon vom Typ Unlicht:Pokemon vom Typ Unlicht",
-		"EN": "dark type:dark type",
+		"EN": "Dark-type Pokemon:Dark-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_25": {
@@ -210,15 +210,15 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_26": {
-		"NL": "poison type:poison type",
+		"NL": "Poison-type Pokemon:Poison-type Pokemon",
 		"DE": "Pokemon vom Typ Gift:Pokemon vom Typ Gift",
-		"EN": "poison type:poison type",
+		"EN": "Poison-type Pokemon:Poison-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_27": {
-		"NL": "fire type:fire type",
+		"NL": "Fire-type Pokemon:Fire-type Pokemon",
 		"DE": "Pokemon vom Typ Feuer:Pokemon vom Typ Feuer",
-		"EN": "fire type:fire type",
+		"EN": "Fire-type Pokemon:Fire-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_28": {
@@ -228,21 +228,21 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_29": {
-		"NL": "Water-, Electric- or Bug-type:Water-, Electric- or Bug-type",
+		"NL": "Water-, Electric- or Bug-type Pokemon:Water-, Electric- or Bug-type Pokemon",
 		"DE": "Pokemon vom Typ Elektro, Wasser oder Käfer:Pokémon vom Typ Elektro, Wasser oder Käfer",
-		"EN": "Water-, Electric- or Bug-type:Water-, Electric- or Bug-type",
+		"EN": "Water-, Electric- or Bug-type Pokemon:Water-, Electric- or Bug-type Pokemon",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_30": {
-		"NL": "Pokemon with weatherboost:Pokemon with weatherboost",
+		"NL": "Pokemon with Weather Boost:Pokemon with Weather Boost",
 		"DE": "Pokemon mit Wetterboost:Pokemon mit Wetterboost",
-		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
+		"EN": "Pokemon with Weather Boost:Pokemon with Weather Boost",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_31": {
-		"NL": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
+		"NL": "time a supereffective Charged Attack in a Gym Battle:times a supereffective Charged Attack in a Gym Battle",
 		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
-		"EN": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
+		"EN": "time a supereffective Charged Attack in a Gym Battle:times a supereffective Charged Attack in a Gym Battle",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_32": {
@@ -258,9 +258,9 @@
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_34": {
-		"NL": "great curveball throw:great curveball throws",
+		"NL": "Great Curveball throw:Great Curveball throws",
 		"DE": "großartigen Curveball:großartige Curvebälle",
-		"EN": "great curveball throw:great curveball throws",
+		"EN": "Great Curveball throw:Great Curveball throws",
 		"PT-BR": "TRANSLATE"
 	},
 	"quest_action_35": {
