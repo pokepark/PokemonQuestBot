@@ -263,6 +263,12 @@
                 "EN": "great curveball throw:great curveball throws",
                 "PT-BR": "TRANSLATE"
         },
+        "quest_action_35" : {
+                "NL": "Omanyte or Kabuto",
+                "DE": "Amonitas oder Kabuto",
+                "EN": "Omanyte or Kabuto",
+                "PT-BR": "TRANSLATE"
+        },
         "reward_type_1" : {
                 "NL": "Pokemon:Pokemon",
                 "DE": "Pokemon:Pokemon",
