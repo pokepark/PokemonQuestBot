@@ -7,7 +7,7 @@ debug_log('QUEST()');
 //debug_log($data);
 
 // Get pokestops by name.
-$searchterm = trim(substr($update['message']['text'], 6));
+$searchterm = trim(substr($update['message']['text'], 5));
 
 // Get all matching pokestops.
 $keys = get_pokestop_list_keys($searchterm);
