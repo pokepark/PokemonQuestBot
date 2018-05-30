@@ -142,7 +142,7 @@ CREATE TABLE `encounterlist` (
   `quest_id` int(10) unsigned NOT NULL,
   `pokedex_ids` varchar(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `encounterlist` WRITE;
@@ -190,6 +190,8 @@ INSERT INTO `encounterlist` VALUES (40,40,'7');
 INSERT INTO `encounterlist` VALUES (41,41,'312');
 INSERT INTO `encounterlist` VALUES (42,42,'132,185');
 INSERT INTO `encounterlist` VALUES (43,43,'333');
+INSERT INTO `encounterlist` VALUES (44,51,'100');
+INSERT INTO `encounterlist` VALUES (45,52,'95');
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `quick_questlist`;
