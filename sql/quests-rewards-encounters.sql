@@ -80,6 +80,7 @@ INSERT INTO `questlist` VALUES (54,2,2,2);	/* Adventure Week: spin 2 new stops (
 INSERT INTO `questlist` VALUES (55,1,2,1);	/* Adventure Week: hatch 2 eggs (Omanyte or 1 rare candy) */
 INSERT INTO `questlist` VALUES (56,3,3,28);	/* Adventure Week: earn 3 buddy candy (Kabuto) */
 INSERT INTO `questlist` VALUES (57,4,1,35);	/* Adventure Week: evolve 1 Omanyte or Kabuto (Aerodactyl) */
+INSERT INTO `questlist` VALUES (58,5,1,36);	/* one excellent throw */
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rewardlist`;
