@@ -188,6 +188,11 @@ if (isset($update['callback_query'])) {
     }
     exit();
 
+// File received.
+} else if (isset($update['message']['document'])) {
+    include_once(ROOT_PATH . '/mods/setup_file.php');
+
+
 // Cleanup collection from channel/supergroup messages.
 } else if ((isset($update['channel_post']) && $update['channel_post']['chat']['type'] == "channel") || (isset($update['message']) && $update['message']['chat']['type'] == "supergroup")) {
     // Write to log.

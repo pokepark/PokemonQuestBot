@@ -25,6 +25,10 @@ Bot Settings:
  - Allow Groups
    - Group Privacy off
 
+## Git submodules
+
+`git submodule update --init --recursive`
+
 ## Database
 
 Create database named for your bot ID (first part of your Telegram bot token).
