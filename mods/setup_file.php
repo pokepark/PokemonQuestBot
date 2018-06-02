@@ -40,10 +40,13 @@ $json_response = curl_exec($curl);
 $d = json_decode($json_response, true);
 
 $pokestops = 0;
+$duplicates = 0;
 foreach ($d['pokestops'] as $k=>$v) {
-    $query = 'SELECT * FROM pokestops WHERE pokestop_name="'.$db->real_escape_string($v['name']).'" AND lat='.$v['lat'].' AND lon='.$v['lng'].'';
+    $query = 'SELECT COUNT(*) AS c FROM pokestops WHERE pokestop_name="'.$db->real_escape_string($v['name']).'" AND lat='.$v['lat'].' AND lon='.$v['lng'].'';
     $rs = my_query($query);
-    if ($row = $rs->fetch_assoc($rs)) {
+    $row = $rs->fetch_assoc();
+    if ($row['c']) {
+        $duplicates++;
         /* Duplicate */
     } else {
         $query = 'INSERT INTO pokestops SET `pokestop_name`="'.$db->real_escape_string($v['name']).'", lat='.$v['lat'].', lon='.$v['lng'].'';
@@ -52,7 +55,7 @@ foreach ($d['pokestops'] as $k=>$v) {
    }
 }
 
-send_message($update['message']['chat']['id'], $pokestops.' pokestops imported.', []);
+send_message($update['message']['chat']['id'], $pokestops.' pokestops imported, '.$duplicates.' duplicates ignored.', []);
 
 
 
