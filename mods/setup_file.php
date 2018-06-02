@@ -41,9 +41,15 @@ $d = json_decode($json_response, true);
 
 $pokestops = 0;
 foreach ($d['pokestops'] as $k=>$v) {
-    $query = 'INSERT INTO pokestops SET `pokestop_name`="'.$db->real_escape_string($v['name']).'", lat='.$v['lat'].', lon='.$v['lng'].'';
+    $query = 'SELECT * FROM pokestops WHERE pokestop_name="'.$db->real_escape_string($v['name']).'" AND lat='.$v['lat'].' AND lon='.$v['lng'].'';
     $rs = my_query($query);
-    if ($rs) $pokestops++;
+    if ($row = $rs->fetch_assoc($rs)) {
+        /* Duplicate */
+    } else {
+        $query = 'INSERT INTO pokestops SET `pokestop_name`="'.$db->real_escape_string($v['name']).'", lat='.$v['lat'].', lon='.$v['lng'].'';
+        $rs = my_query($query);
+        if ($rs) $pokestops++;
+   }
 }
 
 send_message($update['message']['chat']['id'], $pokestops.' pokestops imported.', []);
