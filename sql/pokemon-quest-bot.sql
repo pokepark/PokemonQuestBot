@@ -11,7 +11,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cleanup` (
+CREATE TABLE `cleanup_quests` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `quest_id` int(10) unsigned NOT NULL,
   `chat_id` bigint(20) NOT NULL,
