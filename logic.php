@@ -842,7 +842,7 @@ function delete_quest($quest_id)
     $rs = my_query(
         "
         SELECT        *
-            FROM      cleanup
+            FROM      cleanup_quests
             WHERE     quest_id = '{$quest_id}'
               AND     chat_id <> 0
         "
@@ -868,7 +868,7 @@ function delete_quest($quest_id)
     debug_log('Deleting quest ' . $quest_id . ' from the cleanup table:');
     $rs_cleanup = my_query(
         "
-        DELETE FROM   cleanup
+        DELETE FROM   cleanup_quests
         WHERE   quest_id = '{$quest_id}' 
            OR   cleaned = '{$quest_id}'
         "
@@ -2302,7 +2302,7 @@ function share_quest_keys($quest_id, $user_id)
     debug_log('User is ' . (($mod == 1) ? '' : 'not ') . 'a moderator: ' . $user_id);
 
     // Add share button if not restricted.
-    if ((SHARE_MODERATORS == true && $mod == 1) || SHARE_USERS == true) {
+    if ((SHARE_QUEST_MODERATORS == true && $mod == 1) || SHARE_QUEST_USERS == true) {
         debug_log('Adding general share key to inline keys');
         // Set the keys.
         $keys[] = [
@@ -2314,9 +2314,9 @@ function share_quest_keys($quest_id, $user_id)
     }
         
     // Add buttons for predefined sharing chats.
-    if (!empty(SHARE_CHATS)) {
+    if (!empty(SHARE_QUEST_CHATS)) {
         // Add keys for each chat.
-        $chats = explode(',', SHARE_CHATS);
+        $chats = explode(',', SHARE_QUEST_CHATS);
         foreach($chats as $chat) {
             // Get chat object 
             debug_log("Getting chat object for '" . $chat . "'");
@@ -2367,7 +2367,7 @@ function insert_quest_cleanup($chat_id, $message_id, $quest_id)
             $rs = my_query(
                 "
                 SELECT    *
-                    FROM      cleanup
+                    FROM      cleanup_quests
                     WHERE     quest_id = '{$quest_id}'
                 "
             );
@@ -2389,7 +2389,7 @@ function insert_quest_cleanup($chat_id, $message_id, $quest_id)
             debug_log('Adding cleanup info to database:');
             $rs = my_query(
                 "
-                INSERT INTO   cleanup
+                INSERT INTO   cleanup_quests
                 SET           quest_id = '{$quest_id}',
                                   chat_id = '{$chat_id}',
                                   message_id = '{$message_id}'
@@ -2430,7 +2430,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             $rs = my_query(
                 "
                 SELECT    * 
-                FROM      cleanup
+                FROM      cleanup_quests
                   WHERE   chat_id <> 0
                   ORDER BY id DESC
                   LIMIT 0, 250     
@@ -2442,7 +2442,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             $rs = my_query(
                 "
                 SELECT    * 
-                FROM      cleanup
+                FROM      cleanup_quests
                   WHERE   chat_id = 0
                   LIMIT 0, 250
                 ", true
@@ -2453,7 +2453,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             $rs = my_query(
                 "
                 SELECT    * 
-                FROM      cleanup
+                FROM      cleanup_quests
                   LIMIT 0, 250
                 ", true
             );
@@ -2499,7 +2499,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                 cleanup_log('Updating cleanup information.');
                 my_query(
                 "
-                    UPDATE    cleanup
+                    UPDATE    cleanup_quests
                     SET       chat_id = 0, 
                               message_id = 0 
                     WHERE   id = {$row['id']}
@@ -2552,7 +2552,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     cleanup_log('Updating telegram cleanup information.');
                     my_query(
                     "
-                        UPDATE    cleanup
+                        UPDATE    cleanup_quests
                         SET       chat_id = 0, 
                                   message_id = 0 
                         WHERE   id = {$row['id']}
@@ -2588,7 +2588,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     cleanup_log('Updating database cleanup information.');
                     my_query(
                     "
-                        UPDATE    cleanup
+                        UPDATE    cleanup_quests
                         SET       quest_id = 0, 
                                   cleaned = {$row['quest_id']}
                         WHERE   quest_id = {$row['quest_id']}
@@ -2610,7 +2610,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     $rs_cl = my_query(
                     "
                         SELECT *
-                        FROM    cleanup
+                        FROM    cleanup_quests
                         WHERE   cleaned = {$row['cleaned']}
                     ", true
                     );
@@ -2623,7 +2623,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
                     // Finally delete from cleanup table.
                     my_query(
                     "
-                        DELETE FROM    cleanup
+                        DELETE FROM    cleanup_quests
                         WHERE   cleaned = {$row['cleaned']}
                     ", true
                     );
@@ -4249,6 +4249,12 @@ function show_raid_poll($raid)
     if ($cnt_all + $cnt_cancel_done['count_cancel'] + $cnt_cancel_done['count_done'] == 0) {
         $msg .= CR . getRaidTranslation('no_participants_yet') . CR;
     }
+
+    //Add custom message from the config.   
+    
+
+        $msg .= CR . MAP_URL ;
+    	
 
     // Display creator.
     $msg .= ($raid['user_id'] && $raid['name']) ? (CR . getRaidTranslation('created_by') . ': <a href="tg://user?id=' . $raid['user_id'] . '">' . htmlspecialchars($raid['name']) . '</a>') : '';
