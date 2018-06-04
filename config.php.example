@@ -38,6 +38,10 @@ define('SHARE_MODERATORS',	true);
 define('SHARE_USERS',		true);
 define('SHARE_CHATS',		'');
 
+define('FUSIONTABLES_ID',		'');
+define('FUSIONTABLES_MAP_LINK',		'https://www.google.com/fusiontables/DataSource?docid=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+
+
 // Cleanup
 define('CLEANUP',			false);
 define('CLEANUP_LOGFILE',		'/var/log/tg-bots/dev-raid-bot-cleanup.log');
