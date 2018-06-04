@@ -683,7 +683,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     $pokestop_name = SP . '<b>' . (!empty($quest['pokestop_name']) ? ($quest['pokestop_name']) : ($getTypeTranslation('unnamed_pokestop'))) . '</b>' . CR;
 
     // Get pokestop info.
-    $stop = get_pokestop($quest['pokestop_id']);
+    $stop = get_pokestop($quest['pokestop_id'], false);
 
     // Add google maps link.
     if(!empty($quest['address'])) {
@@ -766,7 +766,7 @@ function get_todays_formatted_quests()
     // Get the quests.
     while ($todays_quests = $rs->fetch_assoc()) {
         $quest = get_quest($todays_quests['id']);
-        $msg .= get_formatted_quest($quest);
+        $msg .= get_formatted_quest($quest, false, false, true);
         $msg .= CR;
         $count = $count + 1;
     }
