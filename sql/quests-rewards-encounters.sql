@@ -201,6 +201,7 @@ INSERT INTO `encounterlist` VALUES (46,54,'95');	/* Adventure Week: Onix encount
 INSERT INTO `encounterlist` VALUES (47,55,'138');	/* Adventure Week: Omanyte encounter */
 INSERT INTO `encounterlist` VALUES (48,56,'140');	/* Adventure Week: Kabuto encounter */
 INSERT INTO `encounterlist` VALUES (49,57,'142');	/* Adventure Week: Aerodactyl encounter */
+INSERT INTO `encounterlist` VALUES (50,58,'359');	/* Absol */
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `quick_questlist`;
