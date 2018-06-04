@@ -3,13 +3,8 @@
 debug_log('setup_file()');
 
 
-//MAINTAINER_ID
-
-if ($update['message']['from']['id']!=MAINTAINER_ID) {
-    $msg = 'I don\'t know what to do with that';
-//    send_message($update['message']['chat']['id'], $msg, []);
-    exit();
-}
+// Check access - user must be admin!
+bot_access_check($update, BOT_ADMINS);
 
 if ($update['message']['document']['mime_type']!='application/json') {
     send_message($update['message']['chat']['id'], 'Only JSON is supported', []);
