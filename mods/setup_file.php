@@ -6,7 +6,7 @@ debug_log('setup_file()');
 // Check access - user must be admin!
 bot_access_check($update, BOT_ADMINS);
 
-if ($update['message']['document']['mime_type']!='application/json') {
+if (strpos($update['message']['document']['file_name'],'.json')===false) {
     send_message($update['message']['chat']['id'], 'Only JSON is supported', []);
     exit();
 }
