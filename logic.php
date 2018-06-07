@@ -907,7 +907,7 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
         $stop = $rs->fetch_assoc();
 
     // Get address and update address string.
-    if(!empty(GOOGLE_API_KEY) && $update_pokestop == true){
+    if(!empty(GOOGLE_API_KEY) && ($update_pokestop == true || empty($pokestop['address']))) {
         // Get address.
         $lat = $stop['lat'];
         $lon = $stop['lon'];
