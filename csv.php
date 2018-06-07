@@ -64,7 +64,7 @@ while ($row = $rs->fetch_assoc()) {
     } else if(!empty($stop['address'])) {
         $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $stop['lat'] . ',' . $stop['lon'] . '">' . $stop['address'] . '</a>';
     } else {
-        $pokestop_address = '<a href="http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
+        $pokestop_address = '<a href="https://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">https://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
     }
 
     // Quest action: Singular or plural?

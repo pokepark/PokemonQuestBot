@@ -691,7 +691,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     } else if(!empty($stop['address'])) {
         $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $stop['lat'] . ',' . $stop['lon'] . '">' . $stop['address'] . '</a>';
     } else {
-        $pokestop_address = '<a href="http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
+        $pokestop_address = '<a href="https://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">https://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
     }
 
     // Quest action: Singular or plural?
@@ -3875,7 +3875,7 @@ function show_raid_poll($raid)
     if (!empty($raid['address'])) {
         $msg .= '<a href="https://maps.google.com/?daddr=' . $raid['lat'] . ',' . $raid['lon'] . '">' . $raid['address'] . '</a>' . CR;
     } else {
-	$msg .= '<a href="http://maps.google.com/maps?q=' . $raid['lat'] . ',' . $raid['lon'] . '">http://maps.google.com/maps?q=' . $raid['lat'] . ',' . $raid['lon'] . '</a>' . CR;
+	$msg .= '<a href="https://maps.google.com/maps?q=' . $raid['lat'] . ',' . $raid['lon'] . '">https://maps.google.com/maps?q=' . $raid['lat'] . ',' . $raid['lon'] . '</a>' . CR;
     }
 
     // Display raid boss name.
