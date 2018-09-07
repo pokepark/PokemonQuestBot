@@ -38,6 +38,9 @@ define('SHARE_MODERATORS',	true);
 define('SHARE_USERS',		true);
 define('SHARE_CHATS',		'');
 
+//Map settings
+define('MAP_URL',   '');
+
 // Cleanup
 define('CLEANUP',			false);
 define('CLEANUP_LOGFILE',		'/var/log/tg-bots/dev-raid-bot-cleanup.log');
