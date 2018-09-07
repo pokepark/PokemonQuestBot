@@ -731,6 +731,11 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
         $msg .= $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . ' — ' . $qty_reward . $msg_poke;
     }
 
+    //Add custom message from the config.
+    if (defined('MAP_URL') && !empty(MAP_URL)) {
+        $msg .= CR . MAP_URL ;
+    }
+
     // Display creator.
     $msg .= ($quest['user_id'] && $add_creator == true) ? (CR . $getTypeTranslation('created_by') . ': <a href="tg://user?id=' . $quest['user_id'] . '">' . htmlspecialchars($quest['name']) . '</a>') : '';
 
