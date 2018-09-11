@@ -26,10 +26,12 @@ if (!$quest_in_db) {
     // Quest already in the database for this pokestop.
     $msg = EMOJI_WARN . '<b> ' . getTranslation('quest_already_submitted') . ' </b>' . EMOJI_WARN . CR . CR;
     $quest = get_quest($quest_in_db['id']);
+    $quest_id = $quest_in_db['id'];
+    $keys_delete = universal_key($keys, $quest_id, 'quest_delete', '0', getTranslation('delete'));
     $msg .= get_formatted_quest($quest);
 
     // Empty keys.
-    $keys = [];
+    $keys = array_merge($keys_delete);
 }
 
 // Edit the message.
