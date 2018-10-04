@@ -49,7 +49,7 @@ debug_log('Update user: ' . $userUpdate);
 // Callback query received.
 if (isset($update['callback_query'])) {
     // Init empty data array.
-    $data = array();
+    $data = [];
 
     // Callback data found.
     if ($update['callback_query']['data']) {
@@ -138,6 +138,7 @@ if (isset($update['callback_query'])) {
 
     // Write cleanup info to database.
     debug_log('Calling cleanup preparation now!');
+    debug_log('Cleanup_ID: ' . $id);
     if($id != 0) {
         insert_cleanup($chat_id, $message_id, $id);
     }

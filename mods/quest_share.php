@@ -1,6 +1,6 @@
 <?php
 // Write to log.
-debug_log('raid_share()');
+debug_log('quest_share()');
 
 // For debug.
 //debug_log($update);
@@ -39,7 +39,6 @@ send_message($chat, $text, $keys, ['reply_to_message_id' => $chat, 'disable_web_
 
 // Set callback keys and message
 $callback_msg = getTranslation('successfully_shared');
-$callback_keys = array();
 $callback_keys = [];
 
 // Edit message.
