@@ -13,6 +13,7 @@ define('CURL_PROXYSERVER',		'http://your.proxyserver.com:8080');
 
 define('MAINTAINER',			'@your_tg_username');
 define('MAINTAINER_ID',			'your_tg_integer');
+define('BOT_ID',			'Q');
 define('BOT_NAME',			'@RaidPokemonBot');
 define('BOT_ADMINS',			'');
 define('BOT_ACCESS',			'');
