@@ -40,21 +40,6 @@ CREATE TABLE `overview` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pokemon` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pokedex_id` int(10) unsigned NOT NULL,
-  `pokemon_name` varchar(12) DEFAULT NULL,
-  `raid_level` enum('0','1','2','3','4','5','X') DEFAULT '0',
-  `min_cp` int(10) unsigned NOT NULL,
-  `max_cp` int(10) unsigned NOT NULL,
-  `min_weather_cp` int(10) unsigned NOT NULL,
-  `max_weather_cp` int(10) unsigned NOT NULL,
-  `weather` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pokestops` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `pokestop_name` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
