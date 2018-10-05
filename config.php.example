@@ -19,8 +19,7 @@ define('BOT_ADMINS',			'');
 define('BOT_ACCESS',			'');
 
 // Languages
-define('LANGUAGE',             		'');
-//define('RAID_POLL_LANGUAGE',   		'EN');
+define('LANGUAGE',             		'EN');
 define('QUEST_LANGUAGE',       		'EN');
 
 // Timezone and Google maps API 
@@ -35,12 +34,12 @@ define('QUEST_HIDE_REWARDS',		true);
 define('QUEST_HIDDEN_REWARDS',		'2,3,8,10');
 
 // Quest sharing
-define('SHARE_MODERATORS',	true);
-define('SHARE_USERS',		true);
-define('SHARE_CHATS',		'');
+define('SHARE_MODERATORS',		true);
+define('SHARE_USERS',			true);
+define('SHARE_CHATS',			'');
 
 //Map settings
-define('MAP_URL',   '');
+define('MAP_URL',   			'');
 
 // Cleanup
 define('CLEANUP',			false);
