@@ -18,6 +18,13 @@ $keys = get_pokestop_list_keys($searchterm);
 if (is_array($keys)) {
     // Set message.
     $msg = '<b>' . getTranslation('quest_by_pokestop') . '</b>';
+
+    // Add back navigation key.
+    $nav_keys = [];
+    $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
+
+    // Get the inline key array.
+    $keys[] = $nav_keys;
 } else if ($keys == false) {
     // Set message.
     $msg = '<b>' . getTranslation('pokestops_not_found') . '</b>' . CR . CR . getTranslation('pokestops_not_found_command_text') . SP . getTranslation('pokestops_not_found_command_example');
