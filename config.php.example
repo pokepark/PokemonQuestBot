@@ -17,6 +17,8 @@ define('BOT_ID',			'Q');
 define('BOT_NAME',			'@RaidPokemonBot');
 define('BOT_ADMINS',			'');
 define('BOT_ACCESS',			'');
+define('BOT_ALLOW_MEMBERS',             false);
+define('BOT_ALLOW_MEMBERS_CHATS',       '');
 
 // Languages
 define('LANGUAGE',             		'EN');
