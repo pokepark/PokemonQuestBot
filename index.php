@@ -40,11 +40,17 @@ if ($db->connect_errno) {
     sendMessage($update['message']['chat']['id'], "Failed to connect to Database!\nPlease contact " . MAINTAINER . " and forward this message...\n");
 }
 
-// Update the user.
-$userUpdate = update_user($update);
+// Run cleanup if requested
+include_once(CORECLASS_PATH . '/cleanup_run.php');
 
-// Write to log.
-debug_log('Update user: ' . $userUpdate);
+// Update the user
+if ($ddos_count == 0 || $ddos_count > 2) {
+    // Update the user.
+    $userUpdate = update_user($update);
+
+    // Write to log.
+    debug_log('Update user: ' . $userUpdate);
+}
 
 // Callback query received.
 if (isset($update['callback_query'])) {
