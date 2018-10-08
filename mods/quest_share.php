@@ -1,6 +1,6 @@
 <?php
 // Write to log.
-debug_log('raid_share()');
+debug_log('quest_share()');
 
 // For debug.
 //debug_log($update);
@@ -26,7 +26,7 @@ $keys = [];
 if (QUEST_LOCATION == true) {
     // Send location.
     $msg_header = get_formatted_quest($quest, false, false, true, true);
-    $msg_text = !empty($quest['address']) ? $quest['address'] . ', Q-ID = ' . $quest['id'] : $quest['pokestop_name'] . ', ' . $quest['id']; // DO NOT REMOVE " Q-ID = " --> NEEDED FOR CLEANUP PREPARATION!
+    $msg_text = !empty($quest['address']) ? $quest['address'] . ', ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = ' . $quest['id'] : $quest['pokestop_name'] . ', ' . $quest['id']; // DO NOT REMOVE " ID = " --> NEEDED FOR CLEANUP PREPARATION!
     $loc = send_venue($chat, $quest['lat'], $quest['lon'], $msg_header, $msg_text);
 
     // Write to log.
@@ -39,7 +39,6 @@ send_message($chat, $text, $keys, ['reply_to_message_id' => $chat, 'disable_web_
 
 // Set callback keys and message
 $callback_msg = getTranslation('successfully_shared');
-$callback_keys = array();
 $callback_keys = [];
 
 // Edit message.

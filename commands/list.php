@@ -1,6 +1,6 @@
 <?php
 // Write to log.
-debug_log('LISTQUEST()');
+debug_log('LIST()');
 
 // For debug.
 //debug_log($update);
@@ -21,7 +21,7 @@ $rs = my_query(
         LEFT JOIN  rewardlist
         ON         quests.reward_id = rewardlist.id
         WHERE      quest_date = CURDATE()
-        ORDER BY   pokestops.pokestop_name
+        ORDER BY   quests.id
         "
     );
 

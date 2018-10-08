@@ -1,13 +1,13 @@
 <?php
 // Write to log.
-debug_log('DELETEQUEST()');
+debug_log('DELETE()');
 
 // For debug.
 //debug_log($update);
 //debug_log($data);
 
-// Check quest access.
-quest_access_check($update, $data);
+// Check access.
+bot_access_check($update, BOT_ACCESS);
 
 // Get all quests of the day from database.
 $rs = my_query(
@@ -24,7 +24,7 @@ $rs = my_query(
         LEFT JOIN  rewardlist
         ON         quests.reward_id = rewardlist.id
         WHERE      quest_date = CURDATE()
-        ORDER BY   pokestops.pokestop_name
+        ORDER BY   quests.id
         "
     );
 
