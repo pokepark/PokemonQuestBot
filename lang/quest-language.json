@@ -6,7 +6,8 @@
     "IT":"Spedizione",
     "PT-BR":"TRANSLATE",
     "RU":"Квест",
-    "NO":"Oppdrag"
+    "NO":"Oppdrag",
+    "FR":"Quête"
   },
   "pokestop":{  
     "NL":"Pokestop",
@@ -15,7 +16,8 @@
     "IT":"Pokéstop",
     "PT-BR":"TRANSLATE",
     "RU":"Покестоп",
-    "NO":"Pokestop"
+    "NO":"Pokestop",
+    "FR":"Pokéstop"
   },
   "pokestops_not_found":{  
     "NL":"Error! Geen Pokestops gevonden!",
@@ -24,7 +26,8 @@
     "IT":"Errore! Nessun Pokéstop trovato!",
     "PT-BR":"Erro! Nenhum pokestops encontrado!",
     "RU":"Ошибка! Покестоп не найден!",
-    "NO":"Feil! Ingen pokestop funnet!"
+    "NO":"Feil! Ingen pokestop funnet!",
+    "FR":"Erreur ! Aucun Pokéstop trouvé !"
   },
   "pokestops_not_found_command_text":{  
     "NL":"Stuur /quest met een deel of een volledige pokestop naam.",
@@ -33,7 +36,8 @@
     "IT":"Prego usare /quest con una il nome completo di un Pokéstop o una sua parte:",
     "PT-BR":"TRANSLATE",
     "RU":"Введите /quest с частью или полным названием покестопа:",
-    "NO":"Vennligst bruk /quest med en del av navnet på pokestoppet:"
+    "NO":"Vennligst bruk /quest med en del av navnet på pokestoppet:",
+    "FR":"Tape /quest avec une partie ou le nom complet d'un Pokéstop"
   },
   "pokestops_not_found_command_example":{  
     "NL":"<code>/quest PokeCity Stop</code>",
@@ -42,7 +46,8 @@
     "IT":"<code>/quest PokéCity Stop</code>",
     "PT-BR":"<code>/quest PokeCity Stop</code>",
     "RU":"<code>/quest PokeCity Stop</code>",
-    "NO":"<code>/quest PokeCity Stop</code>"
+    "NO":"<code>/quest PokeCity Stop</code>",
+    "FR":"<code>/quest PokeCity Stop</code>"
   },
   "unnamed_pokestop":{  
     "NL":"Onbekende pokestop",
@@ -51,7 +56,8 @@
     "IT":"Pokéstop sconosciuto",
     "PT-BR":"TRANSLATE",
     "RU":"Неизвестный покестоп",
-    "NO":"Ukjent Pokestop"
+    "NO":"Ukjent Pokestop",
+    "FR":"Pokéstop inconnu"
   },
   "quest_by_pokestop":{  
     "NL":"Maak een quest, selecteer een pokestop:",
@@ -60,7 +66,8 @@
     "IT":"Crea una spedizione per il Pokéstop selezionato:",
     "PT-BR":"TRANSLATE",
     "RU":"Создать квест для выбранного покестопа:",
-    "NO":"Lag en quest per pokestop valg"
+    "NO":"Lag en quest per pokestop valg",
+    "FR":"Sélectionner une quête pour un Pokéstop"
   },
   "quest_select_type":{  
     "NL":"Selecteer een quest type:",
@@ -69,7 +76,8 @@
     "IT":"Seleziona il tipo di spedizione:",
     "PT-BR":"TRANSLATE",
     "RU":"Выберите тип квеста:",
-    "NO":"Velg quest type"
+    "NO":"Velg quest type",
+    "FR":"Sélectionne le type de quête"
   },
   "quest_select_qty_action":{  
     "NL":"Selecteer de taak van de quest:",
@@ -78,7 +86,8 @@
     "IT":"Seleziona l'obiettivo della spedizione:",
     "PT-BR":"TRANSLATE",
     "RU":"Выберите задание квеста:",
-    "NO":"Velg hvilket oppdrag som er her:"
+    "NO":"Velg hvilket oppdrag som er her:",
+    "FR":"Sélectionne la tâche de la quête"
   },
   "quest_saved":{  
     "NL":"Quest opgeslagen:",
@@ -87,7 +96,8 @@
     "IT":"Spedizione salvata:",
     "PT-BR":"TRANSLATE",
     "RU":"Сохраненный квест:",
-    "NO":"Oppdrag lagret:"
+    "NO":"Oppdrag lagret:",
+    "FR":"Quête sauvegardée"
   },
   "quests_today":{  
     "NL":"De quests van vandaag:",
@@ -96,7 +106,8 @@
     "IT":"Spedizioni di oggi:",
     "PT-BR":"TRANSLATE",
     "RU":"Сегодняшние квесты:",
-    "NO":"Dagens oppdrag:"
+    "NO":"Dagens oppdrag:",
+    "FR":"Les quêtes du jour"
   },
   "no_quests_today":{  
     "NL":"Vandaag zijn er nog geen quests!",
@@ -105,7 +116,8 @@
     "IT":"Non sono ancora presenti spedizioni per oggi!",
     "PT-BR":"TRANSLATE",
     "RU":"Сегодня здесь еще нет квестов!",
-    "NO":"Ingen oppdrag er registrert i dag!"
+    "NO":"Ingen oppdrag er registrert i dag!",
+    "FR":"Il n'y a aucune quête aujourd'hui pour l'instant !"
   },
   "quest_already_submitted":{  
     "NL":"Quest voor deze pokestop is al aangemeld!",
@@ -114,7 +126,8 @@
     "IT":"La spedizione per questo Pokéstop è stata già inserita!",
     "PT-BR":"TRANSLATE",
     "RU":"Квест для этого покестопа уже был отправлен!",
-    "NO":"Det er allerede registrert ett oppdrag på dette pokestoppet"
+    "NO":"Det er allerede registrert ett oppdrag på dette pokestoppet",
+    "FR":"La quête pour ce Pokéstop a déjà été soumise"
   },
   "select_quest_to_delete":{  
     "NL":"Selecteer een queest om te verwijderen:",
@@ -123,7 +136,8 @@
     "IT":"Seleziona la spedizione da eliminare:",
     "PT-BR":"TRANSLATE",
     "RU":"Выберите квест для удаления:",
-    "NO":"Velg hvilket oppdrag som skal slettes:"
+    "NO":"Velg hvilket oppdrag som skal slettes:",
+    "FR":"Sélectionne la quête à supprimer"
   },
   "delete_this_quest":{  
     "NL":"Weet u het zeker dat u deze quest wilt verwijderen?",
@@ -132,7 +146,8 @@
     "IT":"Vuoi veramente eliminare questa spedizione?",
     "PT-BR":"TRANSLATE",
     "RU":"Действительно удалить этот квест?",
-    "NO":"Vil du virkelig at jeg skal slette dette oppdraget?"
+    "NO":"Vil du virkelig at jeg skal slette dette oppdraget?",
+    "FR":"Veux-tu vraiment supprimer cette quête ?"
   },
   "quest_deletion_was_canceled":{  
     "NL":"Verwijderen van de quest is geannuleerd!",
@@ -141,7 +156,8 @@
     "IT":"L'eliminazione della spedizione è stata annullata!",
     "PT-BR":"TRANSLATE",
     "RU":"Удаление этого квеста отменено!",
-    "NO":"Sletting av oppdraget ble avbrutt!"
+    "NO":"Sletting av oppdraget ble avbrutt!",
+    "FR":"La suppression de la quête à été annulée"
   },
   "quest_successfully_deleted":{  
     "NL":"Quest is succesvol verwijderd!",
@@ -150,7 +166,8 @@
     "IT":"La spedizione è stata eliminata con successo!",
     "PT-BR":"TRANSLATE",
     "RU":"Квест успешно удален",
-    "NO":"Oppdraget ble slettet!"
+    "NO":"Oppdraget ble slettet!",
+    "FR":"La quête à été supprimée avec succès !"
   },
   "reward":{  
     "NL":"Beloning",
@@ -159,7 +176,8 @@
     "IT":"Ricompensa",
     "PT-BR":"TRANSLATE",
     "RU":"Награда",
-    "NO":"Belønning"
+    "NO":"Belønning",
+    "FR":"Récompense"
   },
   "reward_select_type":{  
     "NL":"Selecteer het type beloning:",
@@ -168,7 +186,8 @@
     "IT":"Seleziona il tipo di ricompensa:",
     "PT-BR":"TRANSLATE",
     "RU":"Выберите тип награды:",
-    "NO":"Velg type belønning:"
+    "NO":"Velg type belønning:",
+    "FR":"Sélectionne le type de récompense"
   },
   "reward_select_qty_reward":{  
     "NL":"Selecteer de beloning:",
@@ -177,7 +196,8 @@
     "IT":"Seleziona ricompensa:",
     "PT-BR":"TRANSLATE",
     "RU":"Выберите нагарду:",
-    "NO":"Velg belønning:"
+    "NO":"Velg belønning:",
+    "FR":"Sélectionne la récompense"
   },
   "create_raid_or_quest":{  
     "NL":"Wat wil je aanmaken:",
@@ -186,7 +206,8 @@
     "IT":"Crea Raid o spedizione:",
     "PT-BR":"TRANSLATE",
     "RU":"Создать рейд или квест:",
-    "NO":"Opprett raid eller oppdrag"
+    "NO":"Opprett raid eller oppdrag",
+    "FR":"Créer un raid ou une quête"
   },
   "quest_access_denied":{  
     "NL":"Je hebt geen rechten om deze quest aan te passen!",
@@ -195,7 +216,8 @@
     "IT":"Non sei autorizzato a modificare questa Spedizione!",
     "PT-BR":"Você não tem permissão para editar esta quest!",
     "RU":"Вы не можете редактировать этот квест!",
-    "NO":"Du har ikke tillatelse til å redigere dette oppdraget!"
+    "NO":"Du har ikke tillatelse til å redigere dette oppdraget!",
+    "FR":"Tu n'es pas autorisé à modifier cette quête !"
   },
   "coordination_succes":{  
     "NL":"Coördinatie geslaagd!",
@@ -204,7 +226,8 @@
     "IT":"Coordinate inserite con successo!",
     "PT-BR":"Coordenadas enviadas com sucesso!",
     "RU":"Координаты успешно отправлены!",
-    "NO":"Koordinater ble lagt til!"
+    "NO":"Koordinater ble lagt til!",
+    "FR":"Les coordonnées ont été soumises avec succès !"
   },
   "send_location":{  
     "NL":"Of stuur me alsjeblieft een locatie.",
@@ -213,7 +236,8 @@
     "IT":"O inviami una localizzazione.",
     "PT-BR":"Por favor, antes me envie a localização.",
     "RU":"Или отправить мне локацию",
-    "NO":"Eller send meg lokasjonen din ved å trykke på bindersen"
+    "NO":"Eller send meg lokasjonen din ved å trykke på bindersen",
+    "FR":"Ou envoie moi la localisation."
   },
   "mods_details":{  
     "NL":"Selecteer moderator voor meer informatie:",
@@ -221,7 +245,8 @@
     "EN":"Select moderator for details:",
     "PT-BR":"Escolha moderador para detalhes:",
     "RU":"Выберите модератора для деталей:",
-    "NO":"Velg moderator for å vise detaljer"
+    "NO":"Velg moderator for å vise detaljer",
+    "FR":"Sélectionne un modérateur pour plus de détails"
   },
   "mods_add_new":{  
     "NL":"Nieuwe moderator toevoegen:",
@@ -230,7 +255,8 @@
     "IT":"Aggiungi nuovo moderatore:",
     "PT-BR":"Adicionar novo moderador:",
     "RU":"Добавить нового модератора:",
-    "NO":"Legg til ny moderator"
+    "NO":"Legg til ny moderator",
+    "FR":"Ajouter un nouveau modérateur :"
   },
   "mods_delete":{  
     "NL":"Moderator verwijderen:",
@@ -239,7 +265,8 @@
     "IT":"Rimuovi moderatore:",
     "PT-BR":"Excluir moderador:",
     "RU":"Удалить модератора:",
-    "NO":"Slett moderator:"
+    "NO":"Slett moderator:",
+    "FR":"Supprimer un modérteur :"
   },
   "mods_list_of_all":{  
     "NL":"Lijst met alle moderators.",
@@ -248,7 +275,8 @@
     "IT":"Lista di tutti i moderatori.",
     "PT-BR":"Lista de todos os moderadores.",
     "RU":"Список всех модераторов:",
-    "NO":"Lise over alle moderatorer"
+    "NO":"Lise over alle moderatorer",
+    "FR":"Liste des modérateurs :"
   },
   "mods_list_add_delete":{  
     "NL":"Lijst, toevoegen of verwijderen van moderators",
@@ -257,7 +285,8 @@
     "IT":"Lista, aggiungi o rimuovi moderatori",
     "PT-BR":"Listar, adicionar ou remover moderadores",
     "RU":"Список, добавить или удалить модераторов",
-    "NO":"List, legg til eller fjern moderatorer"
+    "NO":"List, legg til eller fjern moderatorer",
+    "FR":"Liste, ajouter ou supprimer un modérateur"
   },
   "mods_not_found":{  
     "NL":"Error! Geen Moderator of gebruiker gevonden!",
@@ -266,7 +295,8 @@
     "IT":"Errore! Nessun moderatore o utente trovato!",
     "PT-BR":"Erro! Nenhum moderador ou usuário encontrado!",
     "RU":"Ошибка! Нет модераторов или ползователей",
-    "NO":"Feil! Ingen moderator eller brukere funnet!"
+    "NO":"Feil! Ingen moderator eller brukere funnet!",
+    "FR":"Erreur : aucun modérateur ou utilisateur trouvé !"
   },
   "mods_saved_mod":{  
     "NL":"Moderator opgeslagen!",
@@ -275,7 +305,8 @@
     "IT":"Moderatore salvato!",
     "PT-BR":"Moderador salvo!",
     "RU":"Модератор сохранен!",
-    "NO":"Moderator lagret!"
+    "NO":"Moderator lagret!",
+    "FR":"Modérateur enregistré !"
   },
   "mods_delete_mod":{  
     "NL":"Moderator verwijderd!",
@@ -284,7 +315,8 @@
     "IT":"Moderatore rimosso!",
     "PT-BR":"Moderador excluído!",
     "RU":"Модератор удален!",
-    "NO":"Moderator slettet!"
+    "NO":"Moderator slettet!",
+    "FR":"Modérateur supprimé !"
   },
   "mods_info_about_mod":{  
     "NL":"Informatie over deze moderator:",
@@ -293,6 +325,8 @@
     "IT":"Informazioni su questo moderatore:",
     "PT-BR":"Informações sobre esse moderador:",
     "RU":"Информация о модераторе",
-    "NO":"Informasjon om denne moderatoren"
+    "NO":"Informasjon om denne moderatoren",
+    "FR":"Info sur ce modérateur :"
   }
 }
+

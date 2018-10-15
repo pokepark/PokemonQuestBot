@@ -1,338 +1,603 @@
 {
-	"quest_type_1": {
+	"quest_type_1" : {
 		"NL": "Hatch",
 		"DE": "Brüte",
 		"EN": "Hatch",
-		"PT-BR": "TRANSLATE"
+		"FR": "Fais éclore"
 	},
-	"quest_type_2": {
+	"quest_type_2" : {
 		"NL": "Spin",
 		"DE": "Drehe",
 		"EN": "Spin",
-		"PT-BR": "TRANSLATE"
+		"FR": "Tourne"
 	},
-	"quest_type_3": {
+	"quest_type_3" : {
 		"NL": "Earn",
-		"DE": "Erhalte",
+		"DE": "Verdiene",
 		"EN": "Earn",
-		"PT-BR": "TRANSLATE"
+		"FR": "Gagne"
 	},
-	"quest_type_4": {
+	"quest_type_4" : {
 		"NL": "Evolve",
 		"DE": "Entwickle",
 		"EN": "Evolve",
-		"PT-BR": "TRANSLATE"
+		"FR": "Fais évoluer"
 	},
-	"quest_type_5": {
+	"quest_type_5" : {
 		"NL": "Make",
 		"DE": "Lande",
 		"EN": "Make",
-		"PT-BR": "TRANSLATE"
+		"FR": "Fais"
 	},
-	"quest_type_6": {
+	"quest_type_6" : {
 		"NL": "Catch",
 		"DE": "Fange",
 		"EN": "Catch",
-		"PT-BR": "TRANSLATE"
+		"FR": "Attrape"
 	},
-	"quest_type_7": {
-		"NL": "Use",
-		"DE": "Setze",
-		"EN": "Use",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_type_8": {
+	"quest_type_7" : {
 		"NL": "Battle",
 		"DE": "Kämpfe",
 		"EN": "Battle",
-		"PT-BR": "TRANSLATE"
+		"FR": "Combat"
 	},
-	"quest_type_9": {
+	"quest_type_8" : {
 		"NL": "Win",
 		"DE": "Gewinne",
 		"EN": "Win",
-		"PT-BR": "TRANSLATE"
+		"FR": "Gagne"
 	},
-	"quest_type_10": {
+	"quest_type_9" : {
+		"NL": "Use",
+		"DE": "Verwende/Setze",
+		"EN": "Use",
+		"FR": "Utilise"
+	},
+	"quest_type_10" : {
 		"NL": "Power-up",
-		"DE": "Power-up",
+		"DE": "Power-Up",
 		"EN": "Power-up",
-		"PT-BR": "TRANSLATE"
+		"FR": "Recharge"
 	},
-	"quest_action_1": {
+	"quest_type_11" : {
+		"NL": "Send",
+		"DE": "Verschicke",
+		"EN": "Send",
+		"FR": "Envoie"
+	},
+	"quest_type_12" : {
+		"NL": "Trade",
+		"DE": "Tausche",
+		"EN": "Trade",
+		"FR": "Echange"
+	},
+	"quest_action_1001" : {
 		"NL": "Egg:Eggs",
 		"DE": "Ei aus:Eier aus",
 		"EN": "Egg:Eggs",
-		"PT-BR": "TRANSLATE"
+		"FR": "Œuf:Œufs"
 	},
-	"quest_action_2": {
-		"NL": "Pokestop you have not visited before:Pokestops you have not visited before",
-		"DE": "Pokestop, den du noch nicht besucht hast:Pokestops, die du noch nicht besucht hast",
-		"EN": "Pokestop you have not visited before:Pokestops you have not visited before",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_3": {
-		"NL": "time:times",
-		"DE": "Mal:Mal",
-		"EN": "time:times",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_4": {
-		"NL": "Pokemon:Pokemon",
-		"DE": "Pokemon:Pokemon",
-		"EN": "Pokemon:Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_5": {
-		"NL": "electric type pokemon:electric type pokemon",
-		"DE": "Pokemon vom Typ Elektro:Pokemon vom Typ Elektro",
-		"EN": "electric type pokemon:electric type pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_6": {
-		"NL": "excellent throw in a row:excellent throws in a row",
-		"DE": "fabelhaften Wurf hintereinander:fabelhafte Würfe hintereinander",
-		"EN": "excellent throw in a row:excellent throws in a row",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_7": {
-		"NL": "great curveball throw in a row:great curveball throws in a row",
-		"DE": "großartigen Curveball hintereinander:großartige Curvebälle hintereinander",
-		"EN": "great curveball throw in a row:great curveball throws in a row",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_8": {
-		"NL": "nice curveball throw in a row:nice curveball throws in a row",
-		"DE": "guten Curveball hintereinander:gute Curvebälle hintereinander",
-		"EN": "nice curveball throw in a row:nice curveball throws in a row",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_9": {
-		"NL": "nice throw:nice throws",
-		"DE": "guten Wurf:gute Würfe",
-		"EN": "nice throw:nice throws",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_10": {
-		"NL": "great throw in a row:great throws in a row",
-		"DE": "großartigen Wurf hintereinander:großartige Würfe hintereinander",
-		"EN": "great throw in a row:great throws in a row",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_11": {
-		"NL": "great throw:great throws",
-		"DE": "großartigen Wurf:großartige Würfe",
-		"EN": "great throw:great throws",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_12": {
-		"NL": "battle:battles",
-		"DE": "Kampf:Kämpfe",
-		"EN": "battle:battles",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_13": {
-		"NL": "Gym battle:Gym battles",
-		"DE": "Arenakampf:Arenakämpfe",
-		"EN": "Gym battle:Gym battles",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_14": {
-		"NL": "time in a gym:times in a gym",
-		"DE": "Mal in einer Arena:Mal in einer Arena",
-		"EN": "time in a gym:times in a gym",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_15": {
-		"NL": "raid:raids",
-		"DE": "Raid:Raids",
-		"EN": "raid:raids",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_16": {
-		"NL": "Oddish or Bellsprout:Oddish or Bellsprout",
-		"DE": "Myrapla oder Knofensa:Myrapla oder Knofensa",
-		"EN": "Oddish or Bellsprout:Oddish or Bellsprout",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_17": {
-		"NL": "Meowth or Skitty:Meowth or Skitty",
-		"DE": "Mauzi oder Eneco:Mauzi oder Eneco",
-		"EN": "Meowth or Skitty:Meowth or Skitty",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_18": {
-		"NL": "Pidgey or Murkrow:Pidgey or Murkrow",
-		"DE": "Taubsi oder Kramurx:Taubsi oder Kramurx",
-		"EN": "Pidgey or Murkrow:Pidgey or Murkrow",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_19": {
-		"NL": "Treecko or Mudkip:Treecko or Mudkip",
-		"DE": "Hydropi oder Geckarbor:Hydropi oder Geckarbor",
-		"EN": "Treecko or Mudkip:Treecko or Mudkip",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_20": {
-		"NL": "Dragon-type Pokemon:Dragon-type Pokemon",
-		"DE": "Pokemon vom Typ Drache:Pokemon vom Typ Drache",
-		"EN": "Dragon-type Pokemon:Dragon-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_21": {
-		"NL": "Electric-type Pokemon:Electric-type Pokemon",
-		"DE": "Pokemon vom Typ Elektro:Pokemon vom Typ Elektro",
-		"EN": "Electric-type Pokemon:Electric-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_22": {
-		"NL": "Bug-type Pokemon:Bug-type Pokemon",
-		"DE": "Pokemon vom Typ Käfer:Pokemon vom Typ Käfer",
-		"EN": "Bug-type Pokemon:Bug-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_23": {
-		"NL": "Flying-type Pokemon:Flying-type Pokemon",
-		"DE": "Pokemon vom Typ Flug:Pokemon vom Typ Flug",
-		"EN": "Flying-type Pokemon:Flying-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_24": {
-		"NL": "Dark-type Pokemon:Dark-type Pokemon",
-		"DE": "Pokemon vom Typ Unlicht:Pokemon vom Typ Unlicht",
-		"EN": "Dark-type Pokemon:Dark-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_25": {
-		"NL": "Grass-, Ground- or Fire-type:Grass-, Ground- or Fire-type",
-		"DE": "Pokemon vom Typ Pflanze, Feuer oder Boden:Pokemon vom Typ Pflanze, Feuer oder Boden",
-		"EN": "Grass-, Ground- or Fire-type:Grass-, Ground- or Fire-type",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_26": {
-		"NL": "Poison-type Pokemon:Poison-type Pokemon",
-		"DE": "Pokemon vom Typ Gift:Pokemon vom Typ Gift",
-		"EN": "Poison-type Pokemon:Poison-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_27": {
-		"NL": "Fire-type Pokemon:Fire-type Pokemon",
-		"DE": "Pokemon vom Typ Feuer:Pokemon vom Typ Feuer",
-		"EN": "Fire-type Pokemon:Fire-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_28": {
-		"NL": "Candy for walking with your buddy:Candies for walking with your buddy",
-		"DE": "Bonbon durch Spazieren mit deinem Kumpel:Bonbons durch Spazieren mit deinem Kumpel",
-		"EN": "Candy for walking with your buddy:Candies for walking with your buddy",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_29": {
-		"NL": "Water-, Electric- or Bug-type Pokemon:Water-, Electric- or Bug-type Pokemon",
-		"DE": "Pokemon vom Typ Elektro, Wasser oder Käfer:Pokémon vom Typ Elektro, Wasser oder Käfer",
-		"EN": "Water-, Electric- or Bug-type Pokemon:Water-, Electric- or Bug-type Pokemon",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_30": {
-		"NL": "Pokemon with Weather Boost:Pokemon with Weather Boost",
-		"DE": "Pokemon mit Wetterboost:Pokemon mit Wetterboost",
-		"EN": "Pokemon with Weather Boost:Pokemon with Weather Boost",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_31": {
-		"NL": "time a supereffective Charged Attack in a Gym Battle:times a supereffective Charged Attack in a Gym Battle",
-		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
-		"EN": "time a supereffective Charged Attack in a Gym Battle:times a supereffective Charged Attack in a Gym Battle",
-		"PT-BR": "TRANSLATE"
-	},
-	"quest_action_32": {
+	"quest_action_2001" : {
 		"NL": "Pokestop:Pokestops",
 		"DE": "Pokestop:Pokestops",
 		"EN": "Pokestop:Pokestops",
-		"PT-BR": "TRANSLATE"
+		"FR": "Pokéstop:Pokéstops"
 	},
-	"quest_action_33": {
-		"NL": "level 3 or higher raid:level 3 or higher raids",
-		"DE": "Level-3-Raid oder höher:Level-3-Raids oder höher",
-		"EN": "level 3 or higher raid:level 3 or higher raids",
-		"PT-BR": "TRANSLATE"
+	"quest_action_2002" : {
+		"NL": "pokestop or gym:pokestops or gyms",
+		"DE": "Pokestop oder Arena:Pokestops oder Arenen",
+		"EN": "pokestop or gym:pokestops or gyms",
+		"FR": "pokéstop ou arène:pokéstops ou arènes"
 	},
-	"quest_action_34": {
-		"NL": "Great Curveball throw:Great Curveball throws",
-		"DE": "großartigen Curveball:großartige Curvebälle",
-		"EN": "Great Curveball throw:Great Curveball throws",
-		"PT-BR": "TRANSLATE"
+	"quest_action_2003" : {
+		"NL": "Pokestop you have not visited before:Pokestops you have not visited before",
+		"DE": "Pokestop, den du noch nicht besucht hast:Pokestops, die du noch nicht besucht hast",
+		"EN": "Pokestop you have not visited before:Pokestops you have not visited before",
+		"FR": "Pokéstop que tu n'as jamais visité avant:Pokéstops que tu n'as jamais visités avant"
 	},
-	"quest_action_35": {
-		"NL": "Omanyte or Kabuto:Omanyte or Kabuto",
-		"DE": "Amonitas oder Kabuto:Amonitas oder Kabuto",
-		"EN": "Omanyte or Kabuto:Omanyte or Kabuto",
-		"PT-BR": "TRANSLATE"
+	"quest_action_3001" : {
+		"NL": "Candy for walking with your buddy:Candies for walking with your buddy",
+		"DE": "Bonbon durch Spazieren mit deinem Kumpel:Bonbons durch Spazieren mit deinem Kumpel",
+		"EN": "Candy for walking with your buddy:Candies for walking with your buddy",
+		"FR": "Bonbon en marchant avec ton copain:Bonbons en marchant avec ton copain"
 	},
-	"quest_action_36": {
+	"quest_action_5001" : {
+		"NL": "nice throw:nice throws",
+		"DE": "guten Wurf:gute Würfe",
+		"EN": "nice throw:nice throws",
+		"FR": "joli lancer:jolis lancers"
+	},
+	"quest_action_5002" : {
+		"NL": "nice throw in a row:nice throws in a row",
+		"DE": "guten Wurf hintereinander:gute Würfe hintereinander",
+		"EN": "nice throw in a row:nice throws in a row",
+		"FR": "joli lancer à la suite:jolis lancers à la suite"
+	},
+	"quest_action_5003" : {
+		"NL": "nice curveball:nice curveball throws",
+		"DE": "guten Curveball-Wurf:gute Curveball-Würfe",
+		"EN": "nice curveball throw:nice curveball throws",
+		"FR": "joli lancer à effet:jolis lancers à effet"
+	},
+	"quest_action_5004" : {
+		"NL": "nice curveball throw in a row:nice curveball throws in a row",
+		"DE": "guten Curveball-Wurf hintereinander:gute Curveball-Würfe hintereinander",
+		"EN": "nice curveball throw in a row:nice curveball throws in a row",
+		"FR": "joli lancer à effet à la suite:jolis lancers à effet à la suite"
+	},
+	"quest_action_5010" : {
+		"NL": "great throw:great throws",
+		"DE": "großartigen Wurf:großartige Würfe",
+		"EN": "great throw:great throws",
+		"FR": "superbe lancer:superbes lancers"
+	},
+	"quest_action_5011" : {
+		"NL": "great throw in a row:great throws in a row",
+		"DE": "großartigen Wurf hintereinander:großartige Würfe hintereinander",
+		"EN": "great throw in a row:great throws in a row",
+		"FR": "superbe lancer à la suite:superbes lancers à la suite"
+	},
+	"quest_action_5012" : {
+		"NL": "great curveball:great curveball throws",
+		"DE": "großartigen Curveball-Wurf:großartige Curveball-Würfe",
+		"EN": "great curveball throw:great curveball throws",
+		"FR": "superbe lancer à effet:superbes lancers à effet"
+	},
+	"quest_action_5013" : {
+		"NL": "great curveball throw in a row:great curveball throws in a row",
+		"DE": "großartigen Curveball-Wurf hintereinander:großartige Curveball-Würfe hintereinander",
+		"EN": "great curveball throw in a row:great curveball throws in a row",
+		"FR": "superbe lancer à effet à la suite:superbes lancers à effet à la suite"
+	},
+	"quest_action_5020" : {
 		"NL": "excellent throw:excellent throws",
 		"DE": "fabelhaften Wurf:fabelhafte Würfe",
 		"EN": "excellent throw:excellent throws",
-		"PT-BR": "TRANSLATE"
+		"FR": "excellent lancer:excellents lancers"
 	},
-	"reward_type_1": {
+	"quest_action_5021" : {
+		"NL": "excellent throw in a row:excellent throws in a row",
+		"DE": "fabelhaften Wurf hintereinander:fabelhafte Würfe hintereinander",
+		"EN": "excellent throw in a row:excellent throws in a row",
+		"FR": "excellent lancer à la suite:excellents lancers à la suite"
+	},
+	"quest_action_5022" : {
+		"NL": "excellent curveball:excellent curveball throws",
+		"DE": "fabelhaften Curveball-Wurf:fabelhafte Curveball-Würfe",
+		"EN": "excellent curveball throw:excellent curveball throws",
+		"FR": "excellement lancer à effet:excellents lancers à effet"
+	},
+	"quest_action_5023" : {
+		"NL": "excellent curveball throw in a row:excellent curveball throws in a row",
+		"DE": "fabelhaften Curveball-Wurf hintereinander:fabelhafte Curveball-Würfe hintereinander",
+		"EN": "excellent curveball throw in a row:excellent curveball throws in a row",
+		"FR": "excellent lancer à effet à la suite:excellents lancers à effet à la suite"
+	},
+	"quest_action_5030" : {
+		"NL": "curveball throw:curveball throws",
+		"DE": "Curveball-Wurf:Curveball-Würfe",
+		"EN": "curveball throw:curveball throws",
+		"FR": "lancer à effet:lancers à effet"
+	},
+	"quest_action_5031" : {
+		"NL": "curveball throw in a row:curveball throws in a row",
+		"DE": "Curveball-Wurf hintereinander:Curveball-Würfe hintereinander",
+		"EN": "curveball throw in a row:curveball throws in a row",
+		"FR": "lancer à effet à la suite:lancers à effet à la suite"
+	},
+	"quest_action_6001" : {
 		"NL": "Pokemon:Pokemon",
 		"DE": "Pokemon:Pokemon",
 		"EN": "Pokemon:Pokemon",
-		"PT-BR": "TRANSLATE"
+		"FR": "Pokémon:Pokémon"
 	},
-	"reward_type_2": {
+	"quest_action_6002" : {
+		"NL": "Pokemon with weatherboost:Pokemon with weatherboost",
+		"DE": "Pokemon mit Wetterverstärkung:Pokemon mit Wetterverstärkung",
+		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
+		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
+	},	
+	"quest_action_6010" : {
+		"NL": "bug type pokemon:bug type pokemon",
+		"DE": "Pokemon vom Typ Käfer:Pokemon vom Typ Käfer",
+		"EN": "bug type pokemon:bug type pokemon",
+        "FR": "Pokémon de type insecte:Pokémon de type insecte"
+	},
+	"quest_action_6011" : {
+		"NL": "dark type pokemon:dark type pokemon",
+		"DE": "Pokemon vom Typ Unlicht:Pokemon vom Typ Unlicht",
+		"EN": "dark type pokemon:dark type pokemon",
+		"FR": "Pokémon de type ténèbre:Pokémon de type ténèbre"
+	},	
+	"quest_action_6012" : {
+		"NL": "dragon type pokemon:dragon type pokemon",
+		"DE": "Pokemon vom Typ Drache:Pokemon vom Typ Drache",
+		"EN": "dragon type pokemon:dragon type pokemon",
+		"FR": "Pokémon de type dragon:Pokémon de type dragon"
+	},
+	"quest_action_6013" : {
+		"NL": "electric type pokemon:electric type pokemon",
+		"DE": "Pokemon vom Typ Elektro:Pokemon vom Typ Elektro",
+		"EN": "electric type pokemon:electric type pokemon",
+		"FR": "Pokémon de type électrique:Pokémon de type électrique"
+	},
+	"quest_action_6014" : {
+		"NL": "grass type pokemon:grass type pokemon",
+		"DE": "Pokemon vom Typ Pflanze:Pokemon vom Typ Pflanze",
+		"EN": "grass type pokemon:grass type pokemon",
+		"FR": "Pokémon de type plante:Pokémon de type plante"
+	},
+	"quest_action_6015" : {
+		"NL": "fairy type pokemon:fairy type pokemon",
+		"DE": "Pokemon vom Typ Fee:Pokemon vom Typ Fee",
+		"EN": "fairy type pokemon:fairy type pokemon",
+		"FR": "Pokémon de type fée:Pokémon de type fée"
+	},
+	"quest_action_6016" : {
+		"NL": "fighting type pokemon:fighting type pokemon",
+		"DE": "Pokemon vom Typ Kampf:Pokemon vom Typ Kampf",
+		"EN": "fighting type pokemon:fighting type pokemon",
+		"FR": "Pokémon de type combat:Pokémon de type combat"
+	},
+	"quest_action_6017" : {
+		"NL": "fire type pokemon:fire type pokemon",
+		"DE": "Pokemon vom Typ Feuer:Pokemon vom Typ Feuer",
+		"EN": "fire type pokemon:fire type pokemon",
+		"FR": "Pokémon de type feu:Pokémon de type feu"
+	},	
+	"quest_action_6018" : {
+		"NL": "flying type pokemon:flying type pokemon",
+		"DE": "Pokemon vom Typ Flug:Pokemon vom Typ Flug",
+		"EN": "flying type pokemon:flying type pokemon",
+		"FR": "Pokémon de type vol:Pokémon de type vol"
+	},
+	"quest_action_6019" : {
+		"NL": "ghost type pokemon:ghost type pokemon",
+		"DE": "Pokemon vom Typ Geist:Pokemon vom Typ Geist",
+		"EN": "ghost type pokemon:ghost type pokemon",
+		"FR": "Pokémon de type spectre:Pokémon de type spectre"
+	},	
+	"quest_action_6020" : {
+		"NL": "ground type pokemon:ground type pokemon",
+		"DE": "Pokemon vom Typ Boden:Pokemon vom Typ Boden",
+		"EN": "ground type pokemon:ground type pokemon",
+		"FR": "Pokémon de type sol:Pokémon de type sol"
+	},
+	"quest_action_6021" : {
+		"NL": "ice type pokemon:ice type pokemon",
+		"DE": "Pokemon vom Typ Eis:Pokemon vom Typ Eis",
+		"EN": "ice type pokemon:ice type pokemon",
+		"FR": "Pokémon de type glace:Pokémon de type glace"
+	},
+	"quest_action_6022" : {
+		"NL": "normal type pokemon:normal type pokemon",
+		"DE": "Pokemon vom Typ Normal:Pokemon vom Typ Normal",
+		"EN": "normal type pokemon:normal type pokemon",
+		"FR": "Pokémon de type normal:Pokémon de type normal"
+	},
+	"quest_action_6023" : {
+		"NL": "poison type pokemon:poison type pokemon",
+		"DE": "Pokemon vom Typ Gift:Pokemon vom Typ Gift",
+		"EN": "poison type pokemon:poison type pokemon",
+		"FR": "Pokémon de type poison:Pokémon de type poison"
+	},
+	"quest_action_6024" : {
+		"NL": "psychic type pokemon:psychic type pokemon",
+		"DE": "Pokemon vom Typ Psycho:Pokemon vom Typ Psycho",
+		"EN": "psychic type pokemon:psychic type pokemon",
+		"FR": "Pokémon de type psy:Pokémon de type psy"
+	},
+	"quest_action_6025" : {
+		"NL": "rock type pokemon:rock type pokemon",
+		"DE": "Pokemon vom Typ Gestein:Pokemon vom Typ Gestein",
+		"EN": "rock type pokemon:rock type pokemon",
+		"FR": "Pokémon de type roche:Pokémon de type roche"
+	},
+	"quest_action_6026" : {
+		"NL": "steel type pokemon:steel type pokemon",
+		"DE": "Pokemon vom Typ Stahl:Pokemon vom Typ Stahl",
+		"EN": "steel type pokemon:steel type pokemon",
+		"FR": "Pokémon de type acier:Pokémon de type acier"
+	},
+	"quest_action_6027" : {
+		"NL": "water type pokemon:water type pokemon",
+		"DE": "Pokemon vom Typ Wasser:Pokemon vom Typ Wasser",
+		"EN": "water type pokemon:water type pokemon",
+		"FR": "Pokémon de type eau:Pokémon de type eau"
+	},
+	"quest_action_6030" : {
+		"NL": "Grass-, Ground- or Fire-type:Grass-, Ground- or Fire-type",
+		"DE": "Pokemon vom Typ Pflanze, Feuer oder Boden:Pokemon vom Typ Pflanze, Feuer oder Boden",
+		"EN": "Grass-, Ground- or Fire-type:Grass-, Ground- or Fire-type",
+		"FR": "de type plante-, sol- ou feu:de type plante-, sol- ou feu"
+	},
+	"quest_action_6031" : {
+		"NL": "Water-, Electric- or Bug-type:Water-, Electric- or Bug-type",
+		"DE": "Pokemon vom Typ Elektro, Wasser oder Käfer:Pokemon vom Typ Elektro, Wasser oder Käfer",
+		"EN": "Water-, Electric- or Bug-type:Water-, Electric- or Bug-type",
+		"FR": "de type eau-, électrique- ou insecte:de type eau-, électrique- ou insecte"
+	},
+	"quest_action_6032" : {
+		"NL": "Electric-, Water- or Fire-type:Electric-, Water- or Fire-type",
+		"DE": "Pokemon vom Typ Elektro, Wasser oder Feuer:Pokemon vom Typ Elektro, Wasser oder Feuer",
+		"EN": "Electric-, Water- or Fire-type:Electric-, Water- or Fire-type",
+		"FR": "de type électrique-, eau- ou feu:de type électrique-, eau- ou feu"
+	},
+	"quest_action_6033" : {
+		"NL": "Plant-, Water- or Fire-type:Plant-, Water- or Fire-type",
+		"DE": "Pokemon vom Typ Pflanze, Wasser oder Feuer:Pokemon vom Typ Pflanze, Wasser oder Feuer",
+		"EN": "Plant-, Water- or Fire-type:Plant-, Water- or Fire-type",
+		"FR": "de type plante-, eau- ou feu:de type plante-, eau- ou feu"
+	},
+	"quest_action_6100" : {
+		"NL": "Oddish or Bellsprout:Oddish or Bellsprout",
+		"DE": "Myrapla oder Knofensa:Myrapla oder Knofensa",
+		"EN": "Oddish or Bellsprout:Oddish or Bellsprout",
+		"FR": "Mystherbe ou Chétiflor:Mystherbe ou Chétiflor"
+	},
+	"quest_action_6101" : {
+		"NL": "Meoth or Skitty:Meoth or Skitty",
+		"DE": "Mauzi oder Eneco:Mauzi oder Eneco",
+		"EN": "Meoth or Skitty:Meoth or Skitty",
+		"FR": "Miaouss ou Skitty:Miaouss ou Skitty"
+	},
+	"quest_action_6102" : {
+		"NL": "Pidgey or Murkrow:Pidgey or Murkrow",
+		"DE": "Taubsi oder Kramurx:Taubsi oder Kramurx",
+		"EN": "Pidgey or Murkrow:Pidgey or Murkrow",
+		"FR": "Roucoul ou Cornèbre:Roucoul ou Cornèbre"
+	},
+	"quest_action_6103" : {
+		"NL": "Treeko or Mudkip:Treeko or Mudkip",
+		"DE": "Hydropi oder Geckarbor:Hydropi oder Geckarbor",
+		"EN": "Treeko or Mudkip:Treeko or Mudkip",
+		"FR": "Arcko ou Gobou:Arcko ou Gobou"
+	},
+	"quest_action_6104" : {
+		"NL": "Kabuto or Omanyte:Kabuto or Omanyte",
+		"DE": "Kabuto oder Amonitas:Kabuto oder Amonitas",
+		"EN": "Kabuto or Omanyte:Kabuto or Omanyte",
+		"FR": "Kabuto ou Amonita:Kabuto ou Amonita"
+	},
+	"quest_action_6105" : {
+		"NL": "Ditto:Ditto",
+		"DE": "Ditto:Ditto",
+		"EN": "Ditto:Ditto",
+		"FR": "Métamorph:Métamorph"
+	},
+	"quest_action_6106" : {
+		"NL": "Swablu:Swablu",
+		"DE": "Wablu:Wablu",
+		"EN": "Swablu:Swablu",
+		"FR": "Tylton:Tylton"
+	},	
+	"quest_action_6107" : {
+		"NL": "Shellder:Shellder",
+		"DE": "Muschas:Muschas",
+		"EN": "Shellder:Shellder",
+		"FR": "Kokias:Kokias"
+	},
+	"quest_action_6108" : {
+		"NL": "Magikarp or Wailmer:Magikarp or Wailmer",
+		"DE": "Karpador oder Wailmer:Karpador oder Wailmer",
+		"EN": "Magikarp or Wailmer:Magikarp or Wailmer",
+		"FR": "Magicarpe ou Wailmer:Magicarpe ou Wailmer"
+	},
+	"quest_action_6109" : {
+		"NL": "Meowth or Growlithe:Meowth or Growlithe",
+		"DE": "Mauzi oder Fukano:Mauzi oder Fukano",
+		"EN": "Meowth or Growlithe:Meowth or Growlithe",
+		"FR": "Miaouss ou Caninos:Miaouss ou Caninos"
+	},
+	"quest_action_6110" : {
+		"NL": "Skitty or Poochyena:Skitty or Poochyena",
+		"DE": "Eneco oder Fiffyen:Eneco oder Fiffyen",
+		"EN": "Skitty or Poochyena:Skitty or Poochyena",
+		"FR": "Skitty ou Medhyèna:Skitty ou Medhyèna"
+	},
+	"quest_action_6111" : {
+		"NL": "Meowth:Meowth",
+		"DE": "Mauzi:Mauzi",
+		"EN": "Meowth:Meowth",
+		"FR": "Miaouss:Miaouss"
+	},
+	"quest_action_6112" : {
+		"NL": "Sunkern or Natu:Sunkern or Natu",
+		"DE": "Sonnkern oder Natu:Sonnkern oder Natu",
+		"EN": "Sunkern or Natu:Sunkern or Natu",
+		"FR": "Tournegrin ou Natu:Tournegrin ou Natu"
+	},
+	"quest_action_6113" : {
+		"NL": "Sunkern:Sunkern",
+		"DE": "Sonnkern:Sonnkern",
+		"EN": "Sunkern:Sunkern",
+		"FR": "Tournegrin:Tournegrin"
+	},
+	"quest_action_6114" : {
+		"NL": "Rattata or Pikachu:Rattata or Pikachu",
+		"DE": "Rattfratz oder Pikachu:Rattfratz oder Pikachu",
+		"EN": "Rattata or Pikachu:Rattata or Pikachu",
+		"FR": "Rattata ou Pikachu:Rattata ou Pikachu"
+	},
+	"quest_action_6115" : {
+		"NL": "Slowpoke or Exeggcute:Slowpoke or Exeggcute",
+		"DE": "Flegmon oder Owei:Flegmon oder Owei",
+		"EN": "Slowpoke or Exeggcute:Slowpoke or Exeggcute",
+		"FR": "Ramoloss ou Noeunoeuf:Ramoloss ou Noeunoeuf"
+	},
+	"quest_action_6116" : {
+		"NL": "Abra or Drowzee:Abra or Drowzee",
+		"DE": "Abra oder Traumato:Abra oder Traumato",
+		"EN": "Abra or Drowzee:Abra or Drowzee",
+		"FR": "Abra ou Soporifik:Abra ou Soporifik"
+	},
+	"quest_action_7001" : {
+		"NL": "time in a gym:times in a gym",
+		"DE": "Mal in einer Arena:Mal in einer Arena",
+		"EN": "time in a gym:times in a gym",
+		"FR": "fois dans une arène:fois dans une arène"
+	},
+	"quest_action_8001" : {
+		"NL": "gymbattle:gymbattles",
+		"DE": "Arenakampf:Arenakämpfe",
+		"EN": "gymbattle:gymbattles",
+		"FR": "combat d'arène:combats d'arène"
+	},
+	"quest_action_8002" : {
+		"NL": "raid:raids",
+		"DE": "Raid:Raids",
+		"EN": "raid:raids",
+		"FR": "raid:raids"
+	},
+	"quest_action_8003" : {
+		"NL": "Tier-3 Raid or higher:Tier-3 Raids or higher",
+		"DE": "Level-3-Raid oder höher:Level-3-Raids oder höher",
+		"EN": "Tier-3 Raid or higher:Tier-3 Raids or higher",
+		"FR": "raid de niveau 3 ou plus:raid de niveau 3 ou plus"
+	},
+	"quest_action_9001" : {
+		"NL": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
+		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
+		"EN": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
+		"FR": "fois une attaque chargée surper efficace dans une arène:fois une attaue chargée super efficace dans une arène"
+	},
+	"quest_action_9002" : {
+		"NL": "berry to catch pokemon:berries to catch pokemon",
+		"DE": "Beere beim Fangen von Pokemon ein:Beeren beim Fangen von Pokemon ein",
+		"EN": "berry to catch pokemon:berries to catch pokemon",
+		"FR": "baie pour attraper un Pokémon:baies pour attraper un Pokémon"
+	},
+	"quest_action_9003" : {
+		"NL": "Pinap Berry:Pinap Berries",
+		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
+		"EN": "Pinap Berry:Pinap Berries",
+		"FR": "Baie Nanana:Baies Nananas"
+	},
+	"quest_action_10001" : {
+		"NL": "time a pokemon:times a pokemon",
+		"DE": "Power-Up bei Pokemon:Power-Ups bei Pokemon",
+		"EN": "time a pokemon:times a pokemon",
+		"FR": "fois un Pokémon:fois un Pokémon"
+	},
+	"quest_action_11001" : {
+		"NL": "Gift:Gifts",
+		"DE": "Geschenk:Geschenke",
+		"EN": "Gift:Gifts",
+		"FR": "cadeau:cadeaux"
+	},
+	"reward_type_1" : {
+		"NL": "Pokemon:Pokemon",
+		"DE": "Pokemon:Pokemon",
+		"EN": "Pokemon:Pokemon",
+		"FR": "Pokémon:Pokémon"
+	},
+	"reward_type_2" : {
 		"NL": "Pokeball:Pokeballs",
 		"DE": "Pokeball:Pokebälle",
 		"EN": "Pokeball:Pokeballs",
-		"PT-BR": "TRANSLATE"
+		"FR": "Poké Ball: Poké Balls"
 	},
-	"reward_type_3": {
-		"NL": "Berry:Berries",
-		"DE": "Beere:Beeren",
-		"EN": "Berry:Berries",
-		"PT-BR": "TRANSLATE"
-	},
-	"reward_type_4": {
+	"reward_type_3" : {
 		"NL": "Stardust:Stardust",
 		"DE": "Sternenstaub:Sternenstaub",
 		"EN": "Stardust:Stardust",
-		"PT-BR": "TRANSLATE"
+		"FR": "Poussières d'étoiles:Poussières d'étoiles"
 	},
-	"reward_type_5": {
+	"reward_type_4" : {
 		"NL": "Rare candy:Rare candies",
 		"DE": "Sonderbonbon:Sonderbonbons",
 		"EN": "Rare candy:Rare candies",
-		"PT-BR": "TRANSLATE"
+		"FR": "Super Bonbon:Supers Bonbons"
 	},
-	"reward_type_6": {
-		"NL": "Fast TM:Fast TMs",
-		"DE": "Sofort TM:Sofort TMs",
-		"EN": "Fast TM:Fast TMs",
-		"PT-BR": "TRANSLATE"
+	"reward_type_5" : {
+		"NL": "Fast-TM:Fast-TMs",
+		"DE": "Sofort-TM:Sofort-TMs",
+		"EN": "Fast-TM:Fast-TMs",
+		"FR": "CT Attaque Immédiate:CT Attaque Immédiate"
 	},
-	"reward_type_7": {
-		"NL": "Charged TM:Charged TMs",
-		"DE": "Lade TM:Lade TMs",
-		"EN": "Charged TM:Charged TMs",
-		"PT-BR": "TRANSLATE"
+	"reward_type_6" : {
+		"NL": "Charged-TM:Charged-TMs",
+		"DE": "Lade-TM:Lade-TMs",
+		"EN": "Charged-TM:Charged-TMs",
+		"FR": "CAT Attaque Chargée:CT Attaque Chargée"
 	},
-	"reward_type_8": {
+	"reward_type_7" : {
+		"NL": "Berry:Berries",
+		"DE": "Beere:Beeren",
+		"EN": "Berry:Berries",
+		"FR": "Baie:Baies"
+	},
+	"reward_type_8" : {
+		"NL": "golden Berry:golden Berries",
+		"DE": "goldene Beere:goldene Beeren",
+		"EN": "golden Berry:golden Berries",
+		"FR": "Baie Framby dorée:Baies Framby dorées"
+	},
+	"reward_type_9" : {
+		"NL": "silver Berry:silver Berries",
+		"DE": "silberne Beere:silberne Beeren",
+		"EN": "silver Berry:silver Berries",
+		"FR": "Baie Nanana argentée:Baies Nanana argentées"
+	},
+	"reward_type_10" : {
 		"NL": "Potion:Potions",
 		"DE": "Trank:Tränke",
 		"EN": "Potion:Potions",
-		"PT-BR": "TRANSLATE"
+		"FR": "Potion:Potions"
 	},
-	"reward_type_9": {
-		"NL": "XP:XP",
-		"DE": "EP:EP",
-		"EN": "XP:XP",
-		"PT-BR": "TRANSLATE"
+	"reward_type_11" : {
+		"NL": "Max Potion:Max Potions",
+		"DE": "Top-Trank:Top-Tränke",
+		"EN": "Max Potion:Max Potions",
+		"FR": "Potion Max:Potions Max"
 	},
-	"reward_type_10": {
+	"reward_type_12" : {
 		"NL": "Revive:Revives",
 		"DE": "Beleber:Beleber",
 		"EN": "Revive:Revives",
-		"PT-BR": "TRANSLATE"
+		"FR": "Rappel:Rappels"
+	},
+	"reward_type_13" : {
+		"NL": "Max Revive:Max Revives",
+		"DE": "Top-Beleber:Top-Beleber",
+		"EN": "Max Revive:Max Revives",
+		"FR": "Rappel Max:Rappels Max"
+	},
+	"reward_type_14" : {
+		"NL": "Evolve Item:Evolve items",
+		"DE": "Entwicklungs-Item:Entwicklungs-Items",
+		"EN": "Evolve Item:Evolve items",
+		"FR": "Objet d'évolution:Objets d'évolution"
+	},
+	"reward_type_15" : {
+		"NL": "Dragon Scale:Dragon Scales",
+		"DE": "Drachenhaut:Drachenhäute",
+		"EN": "Dragon Scale:Dragon Scales",
+		"FR": "Ecaille Draco:Ecailles Draco"
+	},
+	"reward_type_16" : {
+		"NL": "Sun Stone:Sun Stones",
+		"DE": "Sonnenstein:Sonnensteine",
+		"EN": "Sun Stones:Sun Stones",
+		"FR": "Pierre Soleil:Pierres Soleil"
+	},
+	"reward_type_17" : {
+		"NL": "King's Rock:King's Rocks",
+		"DE": "King-Stein:King-Steine",
+		"EN": "King's Rock:King's Rocks",
+		"FR": "Roche Royale:Roches Royale"
+	},
+	"reward_type_18" : {
+		"NL": "Metal Coat:Metal Coats",
+		"DE": "Metallmantel:Metallmäntel",
+		"EN": "Metal Coat:Metal Coats",
+		"FR": "Peau Métal:Peaux Métal"
+	},
+	"reward_type_19" : {
+		"NL": "Up-Grade:Up-Grades",
+		"DE": "Up-Grade:Up-Grades",
+		"EN": "Up-Grade:Up-Grades",
+		"FR": "Améliorator:Améliorators"
 	}
 }
+
