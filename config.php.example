@@ -5,8 +5,9 @@ define('DB_USER',			'your_database_user');
 define('DB_PASSWORD',			'your_database_password');
 
 define('DEBUG',				true);
-define('CONFIG_LOGFILE',		'/var/log/tg-bots/dev-raid-bot.log');
+define('CONFIG_LOGFILE',		'/var/log/tg-bots/dev-quest-bot.log');
 define('CONFIG_HASH',			'aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000');
+define('DDOS_MAXIMUM',			'10');
 define('BRIDGE_MODE',			false);
 
 define('CURL_USEPROXY',			false);
@@ -15,7 +16,7 @@ define('CURL_PROXYSERVER',		'http://your.proxyserver.com:8080');
 define('MAINTAINER',			'@your_tg_username');
 define('MAINTAINER_ID',			'your_tg_integer');
 define('BOT_ID',			'Q');
-define('BOT_NAME',			'@RaidPokemonBot');
+define('BOT_NAME',			'@QuestPokemonBot');
 define('BOT_ADMINS',			'');
 define('BOT_ACCESS',			'');
 define('BOT_ALLOW_MEMBERS',             false);
@@ -34,7 +35,7 @@ define('QUEST_VIA_LOCATION',		true);
 define('QUEST_LOCATION',		false);
 define('QUEST_STOPS_RADIUS',		'50');
 define('QUEST_HIDE_REWARDS',		true);
-define('QUEST_HIDDEN_REWARDS',		'2,3,8,10');
+define('QUEST_HIDDEN_REWARDS',		'2,7,10,11,12,13,14,15,16,17,18,19');
 
 // Quest sharing
 define('SHARE_MODERATORS',		true);
@@ -46,11 +47,7 @@ define('MAP_URL',   			'');
 
 // Cleanup
 define('CLEANUP',			false);
-define('CLEANUP_LOGFILE',		'/var/log/tg-bots/dev-raid-bot-cleanup.log');
+define('CLEANUP_LOGFILE',		'/var/log/tg-bots/dev-quest-bot-cleanup.log');
 define('CLEANUP_SECRET',		'your-cleanup-secret/passphrase');
-define('CLEANUP_RAID_TELEGRAM',		true);
-define('CLEANUP_RAID_TIME_TG',		'10');
-define('CLEANUP_RAID_DATABASE',		true);
-define('CLEANUP_RAID_TIME_DB',		'10080');
 define('CLEANUP_QUEST_TELEGRAM',	true);
 define('CLEANUP_QUEST_DATABASE',	true);
