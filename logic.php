@@ -700,8 +700,15 @@ function get_pokestop_list_keys($searchterm)
                 "
                 SELECT    id, pokestop_name
                 FROM      pokestops
-                WHERE     pokestop_name LIKE '%$searchterm%'
-                LIMIT     10
+                WHERE     pokestop_name LIKE '$searchterm%'
+                OR        pokestop_name LIKE '%$searchterm%'
+                ORDER BY
+                  CASE
+                    WHEN  pokestop_name LIKE '$searchterm%' THEN 1
+                    WHEN  pokestop_name LIKE '%$searchterm%' THEN 2
+                    ELSE  3
+                  END
+                LIMIT     15
                 "
             );
 
