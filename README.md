@@ -41,6 +41,10 @@ Bot Settings:
  - Allow Groups
    - Group Privacy off
 
+## Git submodules
+
+`git submodule update --init --recursive`
+
 ## Database
 
 Create a new mysql database and user for your bot.

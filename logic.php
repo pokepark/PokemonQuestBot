@@ -419,7 +419,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     $pokestop_name = SP . '<b>' . (!empty($quest['pokestop_name']) ? ($quest['pokestop_name']) : ($getTypeTranslation('unnamed_pokestop'))) . '</b>' . CR;
 
     // Get pokestop info.
-    $stop = get_pokestop($quest['pokestop_id']);
+    $stop = get_pokestop($quest['pokestop_id'], false);
 
     // Add google maps link.
     if(!empty($quest['address'])) {
@@ -427,7 +427,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     } else if(!empty($stop['address'])) {
         $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $stop['lat'] . ',' . $stop['lon'] . '">' . $stop['address'] . '</a>';
     } else {
-        $pokestop_address = '<a href="http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
+        $pokestop_address = '<a href="https://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">https://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
     }
 
     // Quest action: Singular or plural?
@@ -649,7 +649,7 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
         $stop = $rs->fetch_assoc();
 
     // Get address and update address string.
-    if(!empty(GOOGLE_API_KEY) && $update_pokestop == true){
+    if(!empty(GOOGLE_API_KEY) && ($update_pokestop == true || empty($pokestop['address']))) {
         // Get address.
         $lat = $stop['lat'];
         $lon = $stop['lon'];

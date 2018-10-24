@@ -31,6 +31,8 @@ debug_log($update, $log_prefix);
 // Establish mysql connection.
 $db = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 $db->set_charset('utf8mb4');
+my_query('SET time_zone="'.TIMEZONE.'"');
+
 
 // Error connecting to db.
 if ($db->connect_errno) {
@@ -114,6 +116,11 @@ if (isset($update['callback_query'])) {
         include_once(ROOT_PATH . '/mods/quest_geo.php');
     }
     exit();
+
+// File received.
+} else if (isset($update['message']['document'])) {
+    include_once(ROOT_PATH . '/mods/setup_file.php');
+
 
 // Cleanup collection from channel/supergroup messages.
 } else if ((isset($update['channel_post']) && $update['channel_post']['chat']['type'] == "channel") || (isset($update['message']) && $update['message']['chat']['type'] == "supergroup")) {

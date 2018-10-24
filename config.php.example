@@ -45,6 +45,10 @@ define('SHARE_CHATS',			'');
 //Map settings
 define('MAP_URL',   			'');
 
+define('FUSIONTABLES_ID',		'');
+define('FUSIONTABLES_MAP_LINK',		'https://www.google.com/fusiontables/DataSource?docid=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+
+
 // Cleanup
 define('CLEANUP',			false);
 define('CLEANUP_LOGFILE',		'/var/log/tg-bots/dev-quest-bot-cleanup.log');

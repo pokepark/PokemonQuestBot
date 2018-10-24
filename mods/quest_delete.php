@@ -6,6 +6,8 @@ debug_log('quest_delete()');
 //debug_log($update);
 //debug_log($data);
 
+bot_access_check($update, BOT_ADMINS);
+
 // Quest id.
 $quest_id = $data['id'];
 

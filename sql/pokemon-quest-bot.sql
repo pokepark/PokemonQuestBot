@@ -103,6 +103,25 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `i_userid` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `raids` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) DEFAULT NULL,
+  `pokemon` varchar(12) DEFAULT NULL,
+  `lat` decimal(10,8) DEFAULT NULL,
+  `lon` decimal(11,8) DEFAULT NULL,
+  `first_seen` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `timezone` char(30) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `gym_name` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `gym_team` enum('mystic','valor','instinct') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `end_time` (`end_time`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
