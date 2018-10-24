@@ -12,6 +12,9 @@ $pokestop_id = $data['id'];
 // Check if quest already exists for this pokestop.
 $quest_in_db = quest_duplication_check($pokestop_id);
 
+// Init keys.
+$keys = [];
+
 // Quest already in database or new
 if (!$quest_in_db) {
     // Build message string.
@@ -26,14 +29,17 @@ if (!$quest_in_db) {
     // Quest already in the database for this pokestop.
     $msg = EMOJI_WARN . '<b> ' . getTranslation('quest_already_submitted') . ' </b>' . EMOJI_WARN . CR . CR;
     $quest = get_quest($quest_in_db['id']);
+    $quest_id = $quest_in_db['id'];
+    $keys_delete = universal_key($keys, $quest_id, 'quest_delete', '0', getTranslation('delete'));
+    $keys_exit = universal_key($keys, '0', 'exit', '0', getTranslation('abort'));
     $msg .= get_formatted_quest($quest);
 
     // Empty keys.
-    $keys = [];
+    $keys = array_merge($keys_delete,$keys_exit);
 }
 
 // Edit the message.
-edit_message($update, $msg, $keys);
+edit_message($update, $msg, $keys, ['disable_web_page_preview' => 'true']);
 
 // Build callback message string.
 $callback_response = 'OK';

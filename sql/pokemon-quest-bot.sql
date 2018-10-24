@@ -11,7 +11,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cleanup` (
+CREATE TABLE `qleanup` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `quest_id` int(10) unsigned NOT NULL,
   `chat_id` bigint(20) NOT NULL,
@@ -37,21 +37,6 @@ CREATE TABLE `overview` (
   `message_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pokemon` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `pokedex_id` int(10) unsigned NOT NULL,
-  `pokemon_name` varchar(12) DEFAULT NULL,
-  `raid_level` enum('0','1','2','3','4','5','X') DEFAULT '0',
-  `min_cp` int(10) unsigned NOT NULL,
-  `max_cp` int(10) unsigned NOT NULL,
-  `min_weather_cp` int(10) unsigned NOT NULL,
-  `max_weather_cp` int(10) unsigned NOT NULL,
-  `weather` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
