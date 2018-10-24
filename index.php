@@ -59,15 +59,19 @@ if (isset($update['callback_query'])) {
 
     // Callback data found.
     if ($update['callback_query']['data']) {
-        // Split bot folder name away from actual data.
-        $botnameData = explode(':', $update['callback_query']['data'], 2);
-        $botname = $botnameData[0];
-        $thedata = $botnameData[1];
-
-        // Write to log
-        debug_log('Bot Name: ' . $botname);
-        debug_log('The Data: ' . $thedata);
-
+        // Bridge mode?
+        if(defined('BRIDGE_MODE') && BRIDGE_MODE == true) {
+            // Split bot folder name away from actual data.
+            $botnameData = explode(':', $update['callback_query']['data'], 2);
+            $botname = $botnameData[0];
+            $thedata = $botnameData[1];
+            // Write to log
+            debug_log('Bot Name: ' . $botname);
+            debug_log('The Data: ' . $thedata);
+        } else {
+            // Data is just the data.
+            $thedata = $update['callback_query']['data'];
+        }
         // Split callback data and assign to data array.
         $splitData = explode(':', $thedata);
         $data['id']     = $splitData[0];
