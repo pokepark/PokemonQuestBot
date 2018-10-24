@@ -71,6 +71,12 @@
 		"EN": "Trade",
 		"FR": "Echange"
 	},
+	"quest_type_13" : {
+		"NL": "Transfer",
+		"DE": "TRANSLATE",
+		"EN": "Transfer",
+		"FR": "TRANSLATE"
+	},
 	"quest_action_1001" : {
 		"NL": "Egg:Eggs",
 		"DE": "Ei aus:Eier aus",
@@ -431,6 +437,18 @@
 		"EN": "Abra or Drowzee:Abra or Drowzee",
 		"FR": "Abra ou Soporifik:Abra ou Soporifik"
 	},
+	"quest_action_6117" : {
+		"NL": "Duskell or Shuppet:Duskell or Shuppet",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Duskell or Shuppet:Duskell or Shuppet",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_6118" : {
+		"NL": "Poochyena or Houndoor:Poochyena or Houndoor",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Poochyena or Houndoor:Poochyena or Houndoor",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
@@ -600,4 +618,3 @@
 		"FR": "Améliorator:Améliorators"
 	}
 }
-
