@@ -76,7 +76,7 @@ INSERT INTO `questlist` VALUES (50, 6, 10, 6024);
 INSERT INTO `questlist` VALUES (51, 4, 3, 6115);
 INSERT INTO `questlist` VALUES (52, 6, 5, 6116);
 INSERT INTO `questlist` VALUES (53, 6, 10, 6019);
-INSERT INTO `questlist` VALUES (54, 13, 10, 6001);
+INSERT INTO `questlist` VALUES (54, 11, 10, 6001);
 INSERT INTO `questlist` VALUES (55, 6, 5, 6118);
 INSERT INTO `questlist` VALUES (56, 4, 3, 6117);
 INSERT INTO `questlist` VALUES (57, 6, 5, 6011);
