@@ -60,9 +60,9 @@
 		"FR": "Recharge"
 	},
 	"quest_type_11" : {
-		"NL": "Send",
+		"NL": "Send/Transfer",
 		"DE": "Verschicke",
-		"EN": "Send",
+		"EN": "Send/Transfer",
 		"FR": "Envoie"
 	},
 	"quest_type_12" : {
@@ -431,6 +431,18 @@
 		"EN": "Abra or Drowzee:Abra or Drowzee",
 		"FR": "Abra ou Soporifik:Abra ou Soporifik"
 	},
+	"quest_action_6117" : {
+		"NL": "Duskull or Shuppet:Duskull or Shuppet",
+		"DE": "Zwirrlicht oder Shuppet:Zwirrlicht oder Shuppet",
+		"EN": "Duskull or Shuppet:Duskull or Shuppet",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_6118" : {
+		"NL": "Poochyena or Houndour:Poochyena or Houndour",
+		"DE": "Fiffyen oder Hunduster:Fiffyen oder Hunduster",
+		"EN": "Poochyena or Houndour:Poochyena or Houndour",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
@@ -600,4 +612,3 @@
 		"FR": "Améliorator:Améliorators"
 	}
 }
-
