@@ -60,9 +60,9 @@
 		"FR": "Recharge"
 	},
 	"quest_type_11" : {
-		"NL": "Send",
+		"NL": "Send/Transfer",
 		"DE": "Verschicke",
-		"EN": "Send",
+		"EN": "Send/Transfer",
 		"FR": "Envoie"
 	},
 	"quest_type_12" : {
@@ -70,12 +70,6 @@
 		"DE": "Tausche",
 		"EN": "Trade",
 		"FR": "Echange"
-	},
-	"quest_type_13" : {
-		"NL": "Transfer",
-		"DE": "TRANSLATE",
-		"EN": "Transfer",
-		"FR": "TRANSLATE"
 	},
 	"quest_action_1001" : {
 		"NL": "Egg:Eggs",
