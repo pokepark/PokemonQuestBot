@@ -70,7 +70,6 @@ INSERT INTO `questlist` VALUES (44, '9', '5', '9002');
 INSERT INTO `questlist` VALUES (45, '5', '3', '5002');
 INSERT INTO `questlist` VALUES (46, '7', '1', '8002');
 INSERT INTO `questlist` VALUES (47, '5', '3', '5013');
-INSERT INTO `questlist` VALUES (48, '5', '5', '5024');
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rewardlist`;
