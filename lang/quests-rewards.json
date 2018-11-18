@@ -449,6 +449,12 @@
 		"EN": "Pidgey:Pidgey",
 		"FR": "Roucoul:Roucoul"
 	},
+  "quest_action_6120" : {
+    "NL": "Anorith:Anorith",
+    "DE": "Anorith:Anorith",
+    "EN": "Anorith:Anorith",
+    "FR": "Anorith:Anorith"
+  },
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",

@@ -70,6 +70,13 @@ INSERT INTO `questlist` VALUES (44, '9', '5', '9002');
 INSERT INTO `questlist` VALUES (45, '5', '3', '5002');
 INSERT INTO `questlist` VALUES (46, '7', '1', '8002');
 INSERT INTO `questlist` VALUES (47, '5', '3', '5013');
+
+/* START Let's Go */
+INSERT INTO `questlist` VALUES (48, '1', '2', '1001');
+INSERT INTO `questlist` VALUES (49, '4', '2', '6120');
+INSERT INTO `questlist` VALUES (50, '5', '1', '5020');
+/* END Let's Go */
+
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rewardlist`;
@@ -175,6 +182,13 @@ INSERT INTO `encounterlist` VALUES (23, '27', '124');
 INSERT INTO `encounterlist` VALUES (24, '29', '125');
 INSERT INTO `encounterlist` VALUES (25, '32', '1,4,7');
 INSERT INTO `encounterlist` VALUES (26, '48', '33');
+
+/* START Let's Go */
+INSERT INTO `encounterlist` VALUES (NULL, '48', '142');
+INSERT INTO `encounterlist` VALUES (NULL, '49', '123');
+INSERT INTO `encounterlist` VALUES (NULL, '50', '132');
+/* END Let's Go */
+
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `quick_questlist`;
