@@ -181,7 +181,7 @@ INSERT INTO `encounterlist` VALUES (22, '26', '1,4,7');
 INSERT INTO `encounterlist` VALUES (23, '27', '124');
 INSERT INTO `encounterlist` VALUES (24, '29', '125');
 INSERT INTO `encounterlist` VALUES (25, '32', '1,4,7');
-INSERT INTO `encounterlist` VALUES (26, '48', '33');
+/* NOT AVAILABLE SINCE LETS GO EVENT INSERT INTO `encounterlist` VALUES (26, '48', '33'); */
 
 /* START Let's Go */
 INSERT INTO `encounterlist` VALUES (NULL, '48', '142');
