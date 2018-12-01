@@ -329,6 +329,12 @@
 		"EN": "Plant-, Water- or Fire-type:Plant-, Water- or Fire-type",
 		"FR": "de type plante-, eau- ou feu:de type plante-, eau- ou feu"
 	},
+	"quest_action_6034" : {
+		"NL": "Grass-, Water-, or Fire-type:Grass-, Water-, or Fire-type",
+		"DE": "Gras-, Wasser-, oder Feuer-typ:Gras-, Wasser-, oder Feuer-typ",
+		"EN": "Grass-, Water-, or Fire-type:Grass-, Water-, or Fire-type",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
 	"quest_action_6100" : {
 		"NL": "Oddish or Bellsprout:Oddish or Bellsprout",
 		"DE": "Myrapla oder Knofensa:Myrapla oder Knofensa",
