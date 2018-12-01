@@ -190,6 +190,7 @@ LOCK TABLES `quick_questlist` WRITE;
 /*!40000 ALTER TABLE `quick_questlist` DISABLE KEYS */;
 INSERT INTO `quick_questlist` VALUES (1,4,1);
 INSERT INTO `quick_questlist` VALUES (2,13,1);
+INSERT INTO `quick_questlist` VALUES (2,10,1);
 /*!40000 ALTER TABLE `quick_questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
