@@ -196,6 +196,12 @@
 		"DE": "Pokemon mit Wetterverstärkung:Pokemon mit Wetterverstärkung",
 		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
 		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
+	},
+	"quest_action_6003" : {
+		"NL": "Pokémon using an item:Pokémon using items",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Pokémon using an item:Pokémon using items",
+		"FR": "TRANSLATE:TRANSLATE"
 	},	
 	"quest_action_6010" : {
 		"NL": "bug type pokemon:bug type pokemon",
@@ -455,12 +461,12 @@
 		"EN": "Pidgey:Pidgey",
 		"FR": "Roucoul:Roucoul"
 	},
-  "quest_action_6120" : {
-    "NL": "Anorith:Anorith",
-    "DE": "Anorith:Anorith",
-    "EN": "Anorith:Anorith",
-    "FR": "Anorith:Anorith"
-  },
+ 	 "quest_action_6120" : {
+	    	"NL": "Anorith:Anorith",
+	    	"DE": "Anorith:Anorith",
+	    	"EN": "Anorith:Anorith",
+	    	"FR": "Anorith:Anorith"
+ 	},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
@@ -498,10 +504,16 @@
 		"FR": "baie pour attraper un Pokémon:baies pour attraper un Pokémon"
 	},
 	"quest_action_9003" : {
-		"NL": "Pinap Berry:Pinap Berries",
+		"NL": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
 		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
-		"EN": "Pinap Berry:Pinap Berries",
+		"EN": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
 		"FR": "Baie Nanana:Baies Nananas"
+	},
+	"quest_action_9004" : {
+		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"FR": "TRANSLATE:TRANSLATE"
 	},
 	"quest_action_10001" : {
 		"NL": "time a pokemon:times a pokemon",
