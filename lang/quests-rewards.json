@@ -199,7 +199,7 @@
 	},
 	"quest_action_6003" : {
 		"NL": "Pokémon using an item:Pokémon using items",
-		"DE": "TRANSLATE:TRANSLATE",
+		"DE": "Entwickle ein Pokemon mit Entwicklungsitem:Entwickle ein Pokemon mit Entwicklungsitem",
 		"EN": "Pokémon using an item:Pokémon using items",
 		"FR": "TRANSLATE:TRANSLATE"
 	},	
@@ -511,7 +511,7 @@
 	},
 	"quest_action_9004" : {
 		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
-		"DE": "TRANSLATE:TRANSLATE",
+		"DE": "Fange ein Pokemon mit Himmihbeere:Fange ein Pokemon mit Himmihbeere",
 		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
 		"FR": "TRANSLATE:TRANSLATE"
 	},
