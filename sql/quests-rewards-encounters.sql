@@ -30,7 +30,7 @@ INSERT INTO `questlist` VALUES (4, '6', '5', '6016');
 INSERT INTO `questlist` VALUES (5, '9', '10', '9003');
 INSERT INTO `questlist` VALUES (6, '9', '5', '9004');
 INSERT INTO `questlist` VALUES (7, '6', '10', '6001');
-INSERT INTO `questlist` VALUES (8, '6', '5', '602');
+INSERT INTO `questlist` VALUES (8, '6', '5', '6002');
 INSERT INTO `questlist` VALUES (9, '6', '1', '6012');
 INSERT INTO `questlist` VALUES (10, '9', '5', '9002');
 INSERT INTO `questlist` VALUES (11, '6', '10', '6002');
