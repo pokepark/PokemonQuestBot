@@ -69,6 +69,7 @@ INSERT INTO `questlist` VALUES (43, '5', '3', '5002');
 INSERT INTO `questlist` VALUES (44, '5', '1', '5020');
 INSERT INTO `questlist` VALUES (45, '5', '3', '5010');
 INSERT INTO `questlist` VALUES (46, '5', '3', '5011');
+INSERT INTO `questlist` VALUES (47, '6', '7', '6035');
 
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -182,7 +183,7 @@ INSERT INTO `encounterlist` VALUES (29, '37', '100,399');
 INSERT INTO `encounterlist` VALUES (30, '38', '92');
 INSERT INTO `encounterlist` VALUES (31, '39', '95');
 INSERT INTO `encounterlist` VALUES (32, '40', '246');
-
+INSERT INTO `encounterlist` VALUES (33, '47', '347');
 
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
