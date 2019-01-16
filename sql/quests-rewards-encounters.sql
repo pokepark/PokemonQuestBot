@@ -190,8 +190,8 @@ INSERT INTO `encounterlist` VALUES (31, '39', '95');
 INSERT INTO `encounterlist` VALUES (32, '40', '246');
 INSERT INTO `encounterlist` VALUES (33, '47', '347');
 INSERT INTO `encounterlist` VALUES (34, '48', '142');
-INSERT INTO `encounterlist` VALUES (33, '50', '299');
-INSERT INTO `encounterlist` VALUES (34, '51', '328');
+INSERT INTO `encounterlist` VALUES (35, '50', '299');
+INSERT INTO `encounterlist` VALUES (36, '51', '328');
 
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
