@@ -71,10 +71,9 @@ INSERT INTO `questlist` VALUES (45, '5', '3', '5010');
 INSERT INTO `questlist` VALUES (46, '5', '3', '5011');
 INSERT INTO `questlist` VALUES (47, '6', '7', '6035');
 INSERT INTO `questlist` VALUES (48, '8', '5', '8002');
-INSERT INTO `questlist` VALUES (49, '6', '10', '6120');
+INSERT INTO `questlist` VALUES (49, '6', '10', '6121');
 INSERT INTO `questlist` VALUES (50, '1', '2', '1001');
-INSERT INTO `questlist` VALUES (51, '4', '3', '6121');
-
+INSERT INTO `questlist` VALUES (51, '4', '3', '6122');
 
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
