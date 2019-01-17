@@ -473,6 +473,18 @@
 	    	"EN": "Anorith:Anorith",
 	    	"FR": "Anorith:Anorith"
  	},
+ 	 "quest_action_6121" : {
+	    	"NL": "Zigzagoon or taillow:Zigzagoon or taillow",
+	    	"DE": "Zigzachs oder schwalbini:Zigzachs oder schwalbini",
+	    	"EN": "Zigzagoon or taillow:Zigzagoon or taillow",
+	    	"FR": "Zigzagoon or taillow:Zigzagoon or taillow"
+ 	},
+ 	 "quest_action_6122" : {
+	    	"NL": "Wurmple:Wurmple",
+	    	"DE": "Waumpel:Waumpel",
+	    	"EN": "Wurmple:Wurmple",
+	    	"FR": "Wurmple:Wurmple"
+ 	},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
