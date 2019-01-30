@@ -1533,6 +1533,35 @@ function reward_type_keys($pokestop_id, $quest_id, $quest_type)
         // Continue if some rewards shall be hidden
         if(QUEST_HIDE_REWARDS == true && in_array($reward['reward_type'], $hide_rewards)) continue;
 
+        // Add save and share button
+        if($reward['reward_type'] == 1) {
+            // Reward pokemon forecast?
+            $msg_poke = '';
+            // Get encounters
+            $enc_pokemon = get_encounterlist_entry($quest_id);
+            $quest_pokemons = explode(',', $enc_pokemon['pokedex_ids']);
+            // Get local pokemon name
+            foreach($quest_pokemons as $pokedex_id) {
+                $msg_poke .= get_local_pokemon_name($pokedex_id);
+                $msg_poke .= ' / ';
+            }
+            // Trim last slash
+            $msg_poke = rtrim($msg_poke,' / ');
+            $msg_poke = (!empty($msg_poke) ? $msg_poke : '');
+
+            // Key to save and share
+            $save_share_keys = array();
+            if(!empty($msg_poke)) {
+                $save_share_keys[] = array(
+                    'text'          => EMOJI_DISK . SP . getTranslation('share') . ' — ' . $msg_poke,
+                    'callback_data' => $pokestop_id . ',' . $quest_id . ':quest_save_share:' . $reward['id']
+                );
+
+                // Encounter found, continue with next reward type
+                continue;
+            }
+        }
+
         // Show quantity if there is count for reward is 1
         if($reward['reward_count'] == 1) {
             // Reward qty: Singular or plural?
@@ -1563,7 +1592,9 @@ function reward_type_keys($pokestop_id, $quest_id, $quest_type)
     $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
 
     // Get the inline key array.
+    $save_share_keys = inline_key_array($save_share_keys, 1);
     $keys = inline_key_array($keys, 2);
+    $keys = array_merge($save_share_keys, $keys);
     $keys[] = $nav_keys;
 
     debug_log($keys);
