@@ -152,6 +152,10 @@ A few examples:
 
 `define('SHARE_CHATS', '-100111222333');`
 
+To allow quick(er) sharing of quests with a pokemon encounter as reward, the option `SHARE_QUICK` can be used. The quests are saved and shared in one step instead two separate steps:
+
+`define('SHARE_QUICK', '-100111222333');`
+
 ## Quest creation
 
 There are several options to customize the creation of quests:

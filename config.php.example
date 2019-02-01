@@ -41,6 +41,7 @@ define('QUEST_HIDDEN_REWARDS',		'2,7,10,11,12,13,14,15,16,17,18,19');
 define('SHARE_MODERATORS',		true);
 define('SHARE_USERS',			true);
 define('SHARE_CHATS',			'');
+define('SHARE_QUICK',                   '');
 
 //Map settings
 define('MAP_URL',   			'');
