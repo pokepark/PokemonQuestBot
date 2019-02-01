@@ -196,12 +196,6 @@
 		"DE": "Pokemon mit Wetterverstärkung:Pokemon mit Wetterverstärkung",
 		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
 		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
-	},
-	"quest_action_6003" : {
-		"NL": "Pokémon using an item:Pokémon using items",
-		"DE": "Entwickle ein Pokemon mit Entwicklungsitem:Entwickle ein Pokemon mit Entwicklungsitem",
-		"EN": "Pokémon using an item:Pokémon using items",
-		"FR": "TRANSLATE:TRANSLATE"
 	},	
 	"quest_action_6010" : {
 		"NL": "bug type pokemon:bug type pokemon",
@@ -335,18 +329,6 @@
 		"EN": "Plant-, Water- or Fire-type:Plant-, Water- or Fire-type",
 		"FR": "de type plante-, eau- ou feu:de type plante-, eau- ou feu"
 	},
-	"quest_action_6034" : {
-		"NL": "Grass-, Water-, or Fire-type:Grass-, Water-, or Fire-type",
-		"DE": "Pflanze, Wasser oder Feuer-typ:Pflanze, Wasser oder Feuer-typ",
-		"EN": "Grass-, Water-, or Fire-type:Grass-, Water-, or Fire-type",
-		"FR": "TRANSLATE:TRANSLATE"
-	},
-	"quest_action_6035" : {
-		"NL": "Flying-, Psychic-, or Dark-type Pokemon:Flying-, Psychic-, or Dark-type Pokemon",
-		"DE": "TRANSLATE:TRANSLATE",
-		"EN": "Flying-, Psychic-, or Dark-type Pokemon:Flying-, Psychic-, or Dark-type Pokemon",
-		"FR": "TRANSLATE:TRANSLATE"
-	},
 	"quest_action_6100" : {
 		"NL": "Oddish or Bellsprout:Oddish or Bellsprout",
 		"DE": "Myrapla oder Knofensa:Myrapla oder Knofensa",
@@ -467,24 +449,12 @@
 		"EN": "Pidgey:Pidgey",
 		"FR": "Roucoul:Roucoul"
 	},
- 	 "quest_action_6120" : {
-	    	"NL": "Anorith:Anorith",
-	    	"DE": "Anorith:Anorith",
-	    	"EN": "Anorith:Anorith",
-	    	"FR": "Anorith:Anorith"
- 	},
- 	 "quest_action_6121" : {
-	    	"NL": "Zigzagoon or taillow:Zigzagoon or taillow",
-	    	"DE": "Zigzachs oder schwalbini:Zigzachs oder schwalbini",
-	    	"EN": "Zigzagoon or taillow:Zigzagoon or taillow",
-	    	"FR": "Zigzagoon or taillow:Zigzagoon or taillow"
- 	},
- 	 "quest_action_6122" : {
-	    	"NL": "Wurmple:Wurmple",
-	    	"DE": "Waumpel:Waumpel",
-	    	"EN": "Wurmple:Wurmple",
-	    	"FR": "Wurmple:Wurmple"
- 	},
+  "quest_action_6120" : {
+    "NL": "Anorith:Anorith",
+    "DE": "Anorith:Anorith",
+    "EN": "Anorith:Anorith",
+    "FR": "Anorith:Anorith"
+  },
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
@@ -522,16 +492,10 @@
 		"FR": "baie pour attraper un Pokémon:baies pour attraper un Pokémon"
 	},
 	"quest_action_9003" : {
-		"NL": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
+		"NL": "Pinap Berry:Pinap Berries",
 		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
-		"EN": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
+		"EN": "Pinap Berry:Pinap Berries",
 		"FR": "Baie Nanana:Baies Nananas"
-	},
-	"quest_action_9004" : {
-		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
-		"DE": "Fange ein Pokemon mit Himmihbeere:Fange ein Pokemon mit Himmihbeere",
-		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
-		"FR": "TRANSLATE:TRANSLATE"
 	},
 	"quest_action_10001" : {
 		"NL": "time a pokemon:times a pokemon",
