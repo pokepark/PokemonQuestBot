@@ -346,7 +346,7 @@
                 "DE": "Pokemon vom Typ Elektro, Normal oder Gift:Pokemon vom Typ Elektro, Normal oder Gift",
                 "EN": "Electric-, Normal- or Poison-type Pokemon:Electric-, Normal- or Poison-type Pokemon",
                 "FR": "TRANSLATE:TRANSLATE"
-		};
+	},
 	"quest_action_6100" : {
 		"NL": "Oddish or Bellsprout:Oddish or Bellsprout",
 		"DE": "Myrapla oder Knofensa:Myrapla oder Knofensa",
@@ -473,6 +473,12 @@
     "EN": "Anorith:Anorith",
     "FR": "Anorith:Anorith"
   },
+"quest_action_6200" : {
+	"NL": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
+	"DE": "Bisasam oder Endivie:Bisasam oder Endivie",
+	"EN": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
+	"FR": "TRANSLATE:TRANSLATE"
+},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
