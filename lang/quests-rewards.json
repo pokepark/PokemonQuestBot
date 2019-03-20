@@ -329,6 +329,24 @@
 		"EN": "Plant-, Water- or Fire-type:Plant-, Water- or Fire-type",
 		"FR": "de type plante-, eau- ou feu:de type plante-, eau- ou feu"
 	},
+    "quest_action_6034" : {
+                "NL": "Grass-, Water-, or Fire-type:Grass-, Water-, or Fire-type",
+                "DE": "Pflanze, Wasser oder Feuer-typ:Pflanze, Wasser oder Feuer-typ",
+                "EN": "Grass-, Water-, or Fire-type:Grass-, Water-, or Fire-type",
+                "FR": "TRANSLATE:TRANSLATE"
+        },
+    "quest_action_6035" : {
+                "NL": "Flying-, Psychic-, or Dark-type Pokemon:Flying-, Psychic-, or Dark-type Pokemon",
+                "DE": "Pokemon vom Typ Flug, Psycho oder Unlicht:Pokemon vom Typ Flug, Psycho oder Unlicht",
+                "EN": "Flying-, Psychic-, or Dark-type Pokemon:Flying-, Psychic-, or Dark-type Pokemon",
+                "FR": "TRANSLATE:TRANSLATE"
+        },
+    "quest_action_6036" : {
+                "NL": "Electric-, Normal- or Poison-type Pokemon:Electric-, Normal- or Poison-type Pokemon",
+                "DE": "Pokemon vom Typ Elektro, Normal oder Gift:Pokemon vom Typ Elektro, Normal oder Gift",
+                "EN": "Electric-, Normal- or Poison-type Pokemon:Electric-, Normal- or Poison-type Pokemon",
+                "FR": "TRANSLATE:TRANSLATE"
+		};
 	"quest_action_6100" : {
 		"NL": "Oddish or Bellsprout:Oddish or Bellsprout",
 		"DE": "Myrapla oder Knofensa:Myrapla oder Knofensa",
