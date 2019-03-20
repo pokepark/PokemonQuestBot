@@ -74,6 +74,12 @@ INSERT INTO `questlist` VALUES (48, '8', '5', '8002');
 INSERT INTO `questlist` VALUES (49, '6', '10', '6121');
 INSERT INTO `questlist` VALUES (50, '1', '2', '1001');
 INSERT INTO `questlist` VALUES (51, '4', '3', '6122');
+INSERT INTO `questlist` VALUES (52, '6', '5', '6036');
+INSERT INTO `questlist` VALUES (53, '6', '3', '6200');
+INSERT INTO `questlist` VALUES (54, '4', '2', '6014');
+INSERT INTO `questlist` VALUES (55, '4', '5', '6014');
+INSERT INTO `questlist` VALUES (56, '6', '10', '6014');
+
 
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -154,38 +160,45 @@ CREATE TABLE `encounterlist` (
 
 LOCK TABLES `encounterlist` WRITE;
 /*!40000 ALTER TABLE `encounterlist` DISABLE KEYS */;
-INSERT INTO `encounterlist` VALUES (1, '1', '10');
-INSERT INTO `encounterlist` VALUES (2, '2', '204');
-INSERT INTO `encounterlist` VALUES (3, '3', '42');
-INSERT INTO `encounterlist` VALUES (4, '4', '327');
-INSERT INTO `encounterlist` VALUES (5, '5', '36');
-INSERT INTO `encounterlist` VALUES (6, '6', '40');
-INSERT INTO `encounterlist` VALUES (7, '7', '290');
-INSERT INTO `encounterlist` VALUES (8, '8', '127');
-INSERT INTO `encounterlist` VALUES (9, '9', '102');
-INSERT INTO `encounterlist` VALUES (10, '10', '126');
-INSERT INTO `encounterlist` VALUES (11, '11', '113');
-INSERT INTO `encounterlist` VALUES (12, '13', '133');
-INSERT INTO `encounterlist` VALUES (13, '15', '100');
-INSERT INTO `encounterlist` VALUES (14, '16', '92');
-INSERT INTO `encounterlist` VALUES (15, '17', '95');
-INSERT INTO `encounterlist` VALUES (16, '19', '246');
-INSERT INTO `encounterlist` VALUES (17, '20', '129');
-INSERT INTO `encounterlist` VALUES (18, '21', '37,61');
-INSERT INTO `encounterlist` VALUES (19, '22', '147');
-INSERT INTO `encounterlist` VALUES (20, '24', '56');
-INSERT INTO `encounterlist` VALUES (21, '25', '66');
-INSERT INTO `encounterlist` VALUES (22, '26', '1,4,7');
-INSERT INTO `encounterlist` VALUES (23, '27', '124');
-INSERT INTO `encounterlist` VALUES (24, '29', '125');
-INSERT INTO `encounterlist` VALUES (25, '32', '1,4,7');
-/* NOT AVAILABLE SINCE LETS GO EVENT INSERT INTO `encounterlist` VALUES (26, '48', '33'); */
-
-/* START Let's Go */
-INSERT INTO `encounterlist` VALUES (NULL, '48', '142');
-INSERT INTO `encounterlist` VALUES (NULL, '49', '123');
-INSERT INTO `encounterlist` VALUES (NULL, '50', '132');
-/* END Let's Go */
+/* Complete new build up the list*/;
+INSERT INTO `encounterlist` VALUES (2, '2', '140');
+INSERT INTO `encounterlist` VALUES (3, '3', '27');
+INSERT INTO `encounterlist` VALUES (4, '4', '81');
+INSERT INTO `encounterlist` VALUES (5, '5', '129');
+INSERT INTO `encounterlist` VALUES (6, '6', '104');
+INSERT INTO `encounterlist` VALUES (7, '7', '129,228');
+INSERT INTO `encounterlist` VALUES (8, '8', '37,60');
+INSERT INTO `encounterlist` VALUES (9, '9', '147');
+INSERT INTO `encounterlist` VALUES (10, '10', '58');
+INSERT INTO `encounterlist` VALUES (14, '14', '142');
+INSERT INTO `encounterlist` VALUES (15, '15', '133,191');
+INSERT INTO `encounterlist` VALUES (16, '16', '1,4,7');
+INSERT INTO `encounterlist` VALUES (18, '18', '37');
+INSERT INTO `encounterlist` VALUES (19, '19', '310');
+INSERT INTO `encounterlist` VALUES (20, '20', '73');
+INSERT INTO `encounterlist` VALUES (21, '21', '92');
+INSERT INTO `encounterlist` VALUES (22, '22', '102,209');
+INSERT INTO `encounterlist` VALUES (23, '23', '126');
+INSERT INTO `encounterlist` VALUES (24, '24', '113');
+INSERT INTO `encounterlist` VALUES (25, '25', '131');
+INSERT INTO `encounterlist` VALUES (26, '26', '56,66');
+INSERT INTO `encounterlist` VALUES (27, '27', '66');
+INSERT INTO `encounterlist` VALUES (28, '28', '1,4,7');
+INSERT INTO `encounterlist` VALUES (30, '30', '125');
+INSERT INTO `encounterlist` VALUES (31, '31', '124');
+INSERT INTO `encounterlist` VALUES (32, '32', '97');
+INSERT INTO `encounterlist` VALUES (34, '34', '138,140');
+INSERT INTO `encounterlist` VALUES (36, '36', '327');
+INSERT INTO `encounterlist` VALUES (37, '37', '100,399');
+INSERT INTO `encounterlist` VALUES (38, '38', '92,347,345');
+INSERT INTO `encounterlist` VALUES (39, '39', '95');
+INSERT INTO `encounterlist` VALUES (40, '40', '246');
+INSERT INTO `encounterlist` VALUES (47, '47', '347');
+INSERT INTO `encounterlist` VALUES (48, '48', '142');
+INSERT INTO `encounterlist` VALUES (52, '52', '121');
+INSERT INTO `encounterlist` VALUES (53, '53', '387');
+INSERT INTO `encounterlist` VALUES (54, '54', '114');
+INSERT INTO `encounterlist` VALUES (55, '55', '3');
 
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -202,9 +215,10 @@ CREATE TABLE `quick_questlist` (
 
 LOCK TABLES `quick_questlist` WRITE;
 /*!40000 ALTER TABLE `quick_questlist` DISABLE KEYS */;
-INSERT INTO `quick_questlist` VALUES (1,4,1);
-INSERT INTO `quick_questlist` VALUES (2,7,1);
-INSERT INTO `quick_questlist` VALUES (3,8,1);
+INSERT INTO `quick_questlist` VALUES (1,53,1);
+INSERT INTO `quick_questlist` VALUES (2,54,1);
+INSERT INTO `quick_questlist` VALUES (3,55,1);
+INSERT INTO `quick_questlist` VALUES (4,56,10);
 /*!40000 ALTER TABLE `quick_questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
