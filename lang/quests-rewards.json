@@ -473,6 +473,18 @@
     "EN": "Anorith:Anorith",
     "FR": "Anorith:Anorith"
   },
+ "quest_action_6121" : {
+	"NL": "Ledyba or Spinarak:Ledyba or Spinarak",
+	"DE": "Ledyba oder Webarak:Ledyba oder Webarak",
+	"EN": "Ledyba or Spinarak:Ledyba or Spinarak",
+	"FR": "Ledyba or Spinarak:Ledyba or Spinarak"
+  },
+ "quest_action_6122" : {
+	"NL": "Wurmple:Wurmple",
+	"DE": "Waumpel:Waumpel",
+	"EN": "Wurmple:Wurmple",
+	"FR": "Wurmple:Wurmple"
+  },
 "quest_action_6200" : {
 	"NL": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
 	"DE": "Bisasam oder Endivie:Bisasam oder Endivie",
