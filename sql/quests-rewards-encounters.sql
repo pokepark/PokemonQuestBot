@@ -71,14 +71,14 @@ INSERT INTO `questlist` VALUES (45, '5', '3', '5010');
 INSERT INTO `questlist` VALUES (46, '5', '3', '5011');
 INSERT INTO `questlist` VALUES (47, '6', '7', '6035');
 INSERT INTO `questlist` VALUES (48, '8', '5', '8002');
-INSERT INTO `questlist` VALUES (49, '6', '10', '6121');
+INSERT INTO `questlist` VALUES (49, '6', '5', '6121');
 INSERT INTO `questlist` VALUES (50, '1', '2', '1001');
 INSERT INTO `questlist` VALUES (51, '4', '3', '6122');
 INSERT INTO `questlist` VALUES (52, '6', '5', '6036');
-INSERT INTO `questlist` VALUES (53, '6', '3', '6200');
-INSERT INTO `questlist` VALUES (54, '4', '2', '6014');
-INSERT INTO `questlist` VALUES (55, '4', '5', '6014');
-INSERT INTO `questlist` VALUES (56, '6', '10', '6014');
+INSERT INTO `questlist` VALUES (53, '6', '10', '6010');
+INSERT INTO `questlist` VALUES (54, '6', '15', '6010');
+INSERT INTO `questlist` VALUES (55, '6', '2', '6122');
+INSERT INTO `questlist` VALUES (56, '4', '3', '6010');
 
 
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
@@ -196,10 +196,11 @@ INSERT INTO `encounterlist` VALUES (39, '39', '95');
 INSERT INTO `encounterlist` VALUES (40, '40', '246');
 INSERT INTO `encounterlist` VALUES (47, '47', '347');
 INSERT INTO `encounterlist` VALUES (48, '48', '142');
+INSERT INTO `encounterlist` VALUES (49, '49', '193');
 INSERT INTO `encounterlist` VALUES (52, '52', '121');
-INSERT INTO `encounterlist` VALUES (53, '53', '387');
-INSERT INTO `encounterlist` VALUES (54, '54', '114');
-INSERT INTO `encounterlist` VALUES (55, '55', '3');
+INSERT INTO `encounterlist` VALUES (53, '53', '123');
+INSERT INTO `encounterlist` VALUES (55, '55', '10');
+INSERT INTO `encounterlist` VALUES (56, '56', '290');
 
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -217,9 +218,10 @@ CREATE TABLE `quick_questlist` (
 LOCK TABLES `quick_questlist` WRITE;
 /*!40000 ALTER TABLE `quick_questlist` DISABLE KEYS */;
 INSERT INTO `quick_questlist` VALUES (1,53,1);
-INSERT INTO `quick_questlist` VALUES (2,54,1);
+INSERT INTO `quick_questlist` VALUES (2,54,11);
 INSERT INTO `quick_questlist` VALUES (3,55,1);
-INSERT INTO `quick_questlist` VALUES (4,56,10);
+INSERT INTO `quick_questlist` VALUES (4,56,1);
+INSERT INTO `quick_questlist` VALUES (5,49,1);
 /*!40000 ALTER TABLE `quick_questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
