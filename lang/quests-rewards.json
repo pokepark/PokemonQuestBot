@@ -71,6 +71,12 @@
 		"EN": "Trade",
 		"FR": "Echange"
 	},
+	"quest_type_13" : {
+		"NL": "EGGSTRAVAGANZA: Hatch",
+		"DE": "Ei-Spektakel: Brüte",
+		"EN": "EGGSTRAVAGANZA: Hatch",
+		"FR": "EGGSTRAVAGANZA: Fais éclore"
+	},
 	"quest_action_1001" : {
 		"NL": "Egg:Eggs",
 		"DE": "Ei aus:Eier aus",
