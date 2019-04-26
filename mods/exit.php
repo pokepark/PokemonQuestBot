@@ -12,10 +12,16 @@ $keys = [];
 // Build message string.
 $msg = ($data['arg'] == 1) ? (getTranslation('done') . '!') : (getTranslation('action_aborted'));
 
+// Telegram JSON array.
+$tg_json = array();
+
 // Edit the message.
-edit_message($update, $msg, $keys);
+$tg_json[] = edit_message($update, $msg, $keys, false, true);
 
 // Answer callback.
-answerCallbackQuery($update['callback_query']['id'], $msg);
+$tg_json[] = answerCallbackQuery($update['callback_query']['id'], $msg, true);
+
+// Telegram multicurl request.
+curl_json_multi_request($tg_json);
 
 exit();

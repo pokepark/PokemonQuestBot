@@ -53,9 +53,12 @@ CREATE TABLE `pokestops` (
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `questlist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quest_event` int(10) unsigned NOT NULL,
   `quest_type` int(10) unsigned NOT NULL,
   `quest_quantity` int(10) unsigned NOT NULL,
   `quest_action` int(10) unsigned NOT NULL,
+  `quest_pokedex_ids` varchar(20) DEFAULT '0',
+  `quest_poketypes` varchar(20) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

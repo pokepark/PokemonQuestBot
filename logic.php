@@ -1,156 +1,4 @@
 <?php
-/**
- * Bot access check.
- * @param $update
- * @param $access_type
- */
-function bot_access_check($update, $access_type = BOT_ACCESS, $return_result = false)
-{
-    // Restricted or public access
-    if(!empty($access_type)) {
-	$all_chats = '';
-	// Always add maintainer and admins.
-	$all_chats .= !empty(MAINTAINER_ID) ? MAINTAINER_ID . ',' : '';
-	$all_chats .= !empty(BOT_ADMINS) ? BOT_ADMINS . ',' : '';
-	$all_chats .= ($access_type == BOT_ADMINS) ? '' : $access_type;
-
-	// Make sure all_chats does not end with ,
-	$all_chats = rtrim($all_chats,',');
-
-	// Get telegram ID to check access from $update - either message, callback_query or inline_query
-	$update_type = '';
-	$update_type = !empty($update['message']['from']['id']) ? 'message' : $update_type; 
-	$update_type = (empty($update_type) && !empty($update['callback_query']['from']['id'])) ? 'callback_query' : $update_type; 
-	$update_type = (empty($update_type) && !empty($update['inline_query']['from']['id'])) ? 'inline_query' : $update_type; 
-	$update_id = $update[$update_type]['from']['id'];
-
-	// Check each admin chat defined in $access_type 
-	$chats = explode(',', $all_chats);
-        $chats = array_unique($chats);
-
-        // Write to log.
-	debug_log('Telegram message type: ' . $update_type);
-	debug_log('Checking access for ID: ' . $update_id);
-	debug_log('Checking these chats now: ' . implode(',', $chats));
-   	foreach($chats as $chat) {
-	    // Get chat object 
-            debug_log("Getting chat object for '" . $chat . "'");
-	    $chat_obj = get_chat($chat);
-
-	    // Check chat object for proper response.
-	    if ($chat_obj['ok'] == true) {
-		debug_log('Proper chat object received, continuing with access check.');
-		$allow_access = false;
-		// ID matching $chat and private chat type?
-		if ($chat_obj['result']['id'] == $update_id && $chat_obj['result']['type'] == "private") {
-		    debug_log('Positive result on access check!');
-		    $allow_access = true;
-		    break;
-		} else {
-		    // Result was ok, but access not granted. Continue with next chat if type is private.
-		    if ($chat_obj['result']['type'] == "private") {
-		        debug_log('Negative result on access check! Continuing with next chat...');
-		    	continue;
-		    }
-		}
-	    } else {
-		debug_log('Chat ' . $chat . ' does not exist! Continuing with next chat...');
-		continue;
-	    }
-
-	    // Clear chat_obj since it did not match 
-	    $chat_obj = '';
-
-            // Get chat member object and check status
-            debug_log("Getting user from chat '" . $chat . "'");
-            $chat_obj = get_chatmember($chat, $update_id);
-         
-            // Make sure we get a proper response
-            if ($chat_obj['ok'] == true) {
-                // Check user status
-                if ($chat_obj['result']['user']['id'] == $update_id && ($chat_obj['result']['status'] == 'creator' || $chat_obj['result']['status'] == 'administrator')) {
-		    debug_log('Positive result on access check!');
-                    $allow_access = true;
-                    break;
-                } else if (BOT_ALLOW_MEMBERS == true) {
-                    // Build chat arrays to check membership
-                    $member_chats = '';
-                    $member_chats = explode(',', BOT_ALLOW_MEMBERS_CHATS);
-                    $member_chats = array_unique($member_chats);
-                    // Allow access if being a member is enough
-                    if (in_array($chat, $member_chats) && $chat_obj['result']['user']['id'] == $update_id && $chat_obj['result']['status'] == 'member') {
-                        debug_log('Positive result on member access check!');
-                        $allow_access = true;
-                        break;
-                    }
-                }
-            }
-	}
-
-        // Fallback: Get admins from chats via get_admins method.
-        if(!$allow_access) {
-            debug_log('Fallback method: Get admin list from the chats: ' . implode(',', $chats));
-   	    foreach($chats as $chat) {
-	        // Clear chat_obj since it did not match 
-	        $chat_obj = '';
-
-	        // Get administrators from chat
-                debug_log("Getting administrators from chat '" . $chat . "'");
-    	        $chat_obj = get_admins($chat);
-
-    	        // Make sure we get a proper response
-    	        if ($chat_obj['ok'] == true) { 
-	            foreach($chat_obj['result'] as $admin) {
-	                    // If user is found as administrator allow access to the bot
-	                    if ($admin['user']['id'] == $update_id) {
-		                debug_log('Positive result on access check!');
-		                $allow_access = true;
-		                break 2;
-		            }
-                    }
-	        }
-	    }
-	}
-
-        // Prepare logging of id, username and/or first_name
-	$msg = '';
-	$msg .= !empty($update[$update_type]['from']['id']) ? "Id: " . $update[$update_type]['from']['id']  . CR : '';
-	$msg .= !empty($update[$update_type]['from']['username']) ? "Username: " . $update[$update_type]['from']['username'] . CR : '';
-	$msg .= !empty($update[$update_type]['from']['first_name']) ? "First Name: " . $update[$update_type]['from']['first_name'] . CR : '';
-
-        // Allow or deny access to the bot and log result
-        if ($allow_access && !$return_result) {
-            debug_log("Allowing access to the bot for user:" . CR . $msg);
-        } else if ($allow_access && $return_result) {
-            debug_log("Allowing access to the bot for user:" . CR . $msg);
-	    return $allow_access;
-        } else if (!$allow_access && $return_result) {
-            debug_log("Denying access to the bot for user:" . CR . $msg);
-	    return $allow_access;
-        } else {
-            debug_log("Denying access to the bot for user:" . CR . $msg);
-            $response_msg = '<b>' . getTranslation('bot_access_denied') . '</b>';
-            // Edit message or send new message based on value of $update_type
-            if ($update_type == 'callback_query') {
-                $keys = [];
-                // Edit message.
-                edit_message($update, $response_msg, $keys);
-                // Answer the callback.
-                answerCallbackQuery($update[$update_type]['id'], getTranslation('bot_access_denied'));
-            } else {
-	        sendMessage($update[$update_type]['from']['id'], $response_msg);
-            }
-            exit;
-        }
-    } else {
-        $msg = '';
-        $msg .= !empty($update['message']['from']['id']) ? "Id: " . $update['message']['from']['id'] . CR : '';
-        $msg .= !empty($update['message']['from']['username']) ? "Username: " . $update['message']['from']['username'] . CR : '';
-        $msg .= !empty($update['message']['from']['first_name']) ? "First Name: " . $update['message']['from']['first_name'] . CR : '';
-        debug_log("Bot access is not restricted! Allowing access for user: " . CR . $msg);
-        return true;
-    }
-}
 
 /**
  * Quest access check.
@@ -158,7 +6,7 @@ function bot_access_check($update, $access_type = BOT_ACCESS, $return_result = f
  * @param $data
  * @return bool
  */
-function quest_access_check($update, $data, $return_result = false)
+function quest_access_check($update, $data, $permission, $return_result = false)
 {
     // Default: Deny access to quests
     $quest_access = false;
@@ -168,59 +16,25 @@ function quest_access_check($update, $data, $return_result = false)
         "
         SELECT    user_id
         FROM      quests
-          WHERE   id = {$data['id']}
+        WHERE     id = {$data['id']}
         "
     );
 
     $quest = $rs->fetch_assoc();
 
+    // Check permissions
     if ($update['callback_query']['from']['id'] != $quest['user_id']) {
-        // Build query.
-        $rs = my_query(
-            "
-            SELECT    COUNT(*)
-            FROM      users
-              WHERE   user_id = {$update['callback_query']['from']['id']}
-               AND    moderator = 1
-            "
-        );
-
-        $row = $rs->fetch_row();
-
-        if (empty($row['0'])) {
-            $admin_access = bot_access_check($update, BOT_ADMINS, true);
-            if ($admin_access) {
-                // Allow quest access
-                $quest_access = true;
-            }
-        } else {
-            // Allow quest access
-            $quest_access = true;
-        }
+        // Check "-all" permission
+        $permission = $permission . '-all';
+        $quest_access = bot_access_check($update, $permission, $return_result);
     } else {
-        // Allow quest access
-        $quest_access = true;
+        // Check "-own" permission
+        $permission = $permission . '-own';
+        $quest_access = bot_access_check($update, $permission, $return_result);
     }
 
-    // Allow or deny access to the quest and log result
-    if ($quest_access && !$return_result) {
-        debug_log("Allowing access to the quest");
-    } else if ($quest_access && $return_result) {
-        debug_log("Allowing access to the quest");
-        return $quest_access;
-    } else if (!$quest_access && $return_result) {
-        debug_log("Denying access to the quest");
-        return $quest_access;
-    } else {
-        $keys = [];
-        if (isset($update['callback_query']['inline_message_id'])) {
-            editMessageText($update['callback_query']['inline_message_id'], '<b>' . getTranslation('quest_access_denied') . '</b>', $keys);
-        } else {
-            editMessageText($update['callback_query']['message']['message_id'], '<b>' . getTranslation('quest_access_denied') . '</b>', $keys, $update['callback_query']['message']['chat']['id'], $keys);
-        }
-        answerCallbackQuery($update['callback_query']['id'], getTranslation('quest_access_denied'));
-        exit;
-    }
+    // Return result
+    return $quest_access;
 }
 
 /**
@@ -236,7 +50,7 @@ function quest_duplication_check($pokestop_id)
         "
         SELECT    id, pokestop_id
         FROM      quests
-          WHERE   quest_date = CURDATE() 
+          WHERE   quest_date = UTC_DATE() 
             AND   pokestop_id > 0
             AND   pokestop_id = {$pokestop_id}
         "
@@ -250,79 +64,25 @@ function quest_duplication_check($pokestop_id)
     return $quest;
 }
 
-/**
- * Get raid level of a pokemon.
- * @param $pokedex_id
- * @return string
- */
-function get_raid_level($pokedex_id)
-{
-    // Make sure $pokedex_id is numeric
-    if(is_numeric($pokedex_id)) {
-        // Get raid level from database
-        $rs = my_query(
-                "
-                SELECT    raid_level
-                FROM      pokemon
-                WHERE     pokedex_id = $pokedex_id
-                "
-            );
-
-        $raid_level = '0';
-        while ($level = $rs->fetch_assoc()) {
-            $raid_level = $level['raid_level'];
-        }
-    } else {
-        $raid_level = '0';
-    }
-
-    return $raid_level;
-}
 
 /**
  * Get local name of pokemon.
  * @param $pokedex_id
  * @param $override_language
- * @param $type: raid|quest
  * @return string
  */
-function get_local_pokemon_name($pokedex_id, $override_language = false, $type = '')
+function get_local_pokemon_name($pokedex_id, $override_language = false)
 {
     // Get translation type
-    if($override_language == true && $type != '' && ($type == 'raid' || $type == 'quest')) {
-        $getTypeTranslation = 'get' . ucfirst($type) . 'Translation';
+    if($override_language == true) {
+        $getTypeTranslation = 'getPublicTranslation';
     } else {
         $getTypeTranslation = 'getTranslation';
     }
-    // Init pokemon name and define fake pokedex ids used for raid eggs
+
+    // Init pokemon name and get translation
     $pokemon_name = '';
-    $eggs = $GLOBALS['eggs'];
-
-    // Get eggs from normal translation.
-    if(in_array($pokedex_id, $eggs)) {
-        $pokemon_name = $getTypeTranslation('egg_' . substr($pokedex_id, -1));
-    } else { 
-        $pokemon_name = $getTypeTranslation('pokemon_id_' . $pokedex_id);
-    }
-
-    // Fallback 1: Valid pokedex id or just a raid egg?
-    if($pokedex_id === "NULL" || $pokedex_id == 0) {
-        $pokemon_name = $getTypeTranslation('egg_0');
-
-    // Fallback 2: Get original pokemon name from database
-    } else if(empty($pokemon_name) && $type == 'raid') {
-        $rs = my_query(
-                "
-                SELECT    pokemon_name
-                FROM      pokemon
-                WHERE     pokedex_id = $pokedex_id
-                "
-            );
-
-        while ($pokemon = $rs->fetch_assoc()) {
-            $pokemon_name = $pokemon['pokemon_name'];
-        }
-    }
+    $pokemon_name = $getTypeTranslation('pokemon_id_' . $pokedex_id);
 
     return $pokemon_name;
 }
@@ -364,7 +124,7 @@ function get_quest($quest_id)
         SELECT     quests.*,
                    users.name,
                    pokestops.pokestop_name, pokestops.lat, pokestops.lon, pokestops.address,
-                   questlist.quest_type, questlist.quest_quantity, questlist.quest_action,
+                   questlist.quest_event, questlist.quest_type, questlist.quest_quantity, questlist.quest_action, questlist.quest_pokedex_ids, questlist.quest_poketypes,
                    rewardlist.reward_type, rewardlist.reward_quantity,
                    encounterlist.pokedex_ids
         FROM       quests
@@ -391,6 +151,599 @@ function get_quest($quest_id)
 }
 
 /**
+ * Get formatted quest from questlist.
+ * @param quest_id
+ * @param hide_id
+ * @return string
+ */
+function get_formatted_questlist_entry($quest_id, $hide_id = false)
+{
+    // Get quest from questlist.
+    $ql_entry = get_questlist_entry($quest_id);
+
+    // Init empty questlist message.
+    $msg_questlist = '';
+
+    // Build message.
+    $qty_action = get_quest_action($ql_entry);
+    if($hide_id == false) {
+        $msg_questlist .= '<b>ID: ' . $ql_entry['id'] . '</b> — ';
+    }
+
+    // Event?
+    if($ql_entry['quest_event'] > 0) {
+        $msg_questlist .= getTranslation('quest_event_'. $ql_entry['quest_event']) . ':' . SP . getTranslation('quest_type_'. $ql_entry['quest_type']) . SP . $qty_action;
+    } else {
+        $msg_questlist .= getTranslation('quest_type_'. $ql_entry['quest_type']) . SP . $qty_action;
+    }
+
+    return $msg_questlist;
+}
+
+/**
+ * Get all quests in questlist.
+ * @param hide_encounter
+ * @return string
+ */
+function get_all_questlist_entries($hide_encounter = false)
+{
+    // Get all quests from questlist.
+    $rs = my_query(
+        "
+        SELECT     *
+        FROM       questlist
+        ORDER BY   quest_event, id
+        "
+    );
+
+    // Init empty questlist message.
+    $msg_questlist = '';
+
+    // Build message.
+    while ($questlist = $rs->fetch_assoc()) {
+        // Hide quests with encounters if requested and found.
+        $el_entry = get_encounterlist_entry($questlist['id']);
+        if($hide_encounter == true && $el_entry) continue; 
+
+        // Get quest action.
+        $qty_action = get_quest_action($questlist);
+
+        // Build questlist message.
+        $msg_questlist .= '<b>ID: ' . $questlist['id'] . '</b> — '; 
+
+        // Event?
+        if($questlist['quest_event'] > 0) {
+            $msg_questlist .= '<b>' . getTranslation('quest_event_'. $questlist['quest_event']) . ':</b>' . SP . getTranslation('quest_type_'. $questlist['quest_type']) . SP . $qty_action . CR;
+        } else {
+            $msg_questlist .= getTranslation('quest_type_'. $questlist['quest_type']) . SP . $qty_action . CR;
+        }
+    }
+
+    return $msg_questlist;
+}
+
+/**
+ * Get keys for all quests in questlist.
+ * @param action
+ * @param arg
+ * @param hide_encounter
+ * @return array
+ */
+function get_all_questlist_keys($action, $arg, $hide_encounter = false)
+{
+    // Get all quests from questlist.
+    $rs = my_query(
+        "
+        SELECT     id
+        FROM       questlist
+        ORDER BY   quest_event, id
+        "
+    );
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Add key for each quest
+    while ($ql_entry = $rs->fetch_assoc()) {
+        // Hide quests with encounters if requested and found.
+        $el_entry = get_encounterlist_entry($ql_entry['id']);
+        if($hide_encounter == true && $el_entry) continue;
+
+        $keys[] = array(
+            'text'          => $ql_entry['id'],
+            'callback_data' => $ql_entry['id'] . ':' . $action . ':' . $arg
+        );   
+    } 
+
+    // Add quick selection keys.
+    $keys = inline_key_array($keys, 5);
+
+    //debug_log($keys);
+
+    return $keys;
+}
+
+/**
+ * Get all encounters in encounterlist.
+ * @return string
+ */
+function get_all_encounterlist_entries()
+{
+    // Get all encounters from encounterlist.
+    $rs = my_query(
+        "
+        SELECT     *
+        FROM       encounterlist
+        "
+    );
+
+    // Init empty encounterlist message.
+    $msg_enclist = '';
+
+    // Build message.
+    while ($enclist = $rs->fetch_assoc()) {
+        // Get quest.
+        $msg_quest = get_formatted_questlist_entry($enclist['quest_id'], true);
+
+        // Get encounters
+        $quest_pokemons = explode(',', $enclist['pokedex_ids']);
+
+        // Get local pokemon name
+        $msg_poke = '';
+        foreach($quest_pokemons as $pokedex_id) {
+            $msg_poke .= get_local_pokemon_name($pokedex_id);
+            $msg_poke .= ' / ';
+        }
+        // Trim last slash
+        $msg_poke = rtrim($msg_poke,' / ');
+
+        // Build encounterlist message.
+        $msg_enclist .= '<b>ID: ' . $enclist['id'] . '</b> — ';
+        $msg_enclist .= $msg_quest;
+        $msg_enclist .= SP . '(<b>' . $msg_poke . '</b>)' . CR;
+    }
+
+    return $msg_enclist;
+}
+
+/**
+ * Get formatted encounter from encounterlist.
+ * @param encounter_id
+ * @param hide_id
+ * @param hide_quest
+ * @return string
+ */
+function get_formatted_encounterlist_entry($encounter_id, $hide_id = false, $hide_quest = false)
+{
+    // Get encounters from encounterlist.
+    $rs = my_query(
+        "
+        SELECT     *
+        FROM       encounterlist
+        WHERE      id = '{$encounter_id}'
+        "
+    );
+
+    // Init empty encounterlist message.
+    $msg_enclist = '';
+
+    // Build message.
+    while ($enclist = $rs->fetch_assoc()) {
+        // Get quest.
+        $msg_quest = get_formatted_questlist_entry($enclist['quest_id'], true);
+
+        // Get encounters
+        $quest_pokemons = explode(',', $enclist['pokedex_ids']);
+
+        // Get local pokemon name
+        $msg_poke = '';
+        foreach($quest_pokemons as $pokedex_id) {
+            $msg_poke .= get_local_pokemon_name($pokedex_id);
+            $msg_poke .= ' / ';
+        }
+        // Trim last slash
+        $msg_poke = rtrim($msg_poke,' / ');
+
+        // Build encounterlist message.
+        if($hide_id != true) {
+            $msg_enclist .= '<b>ID: ' . $enclist['id'] . '</b> — ';
+        }
+        if($hide_quest != true) {
+            $msg_enclist .= $msg_quest;
+            $msg_enclist .= SP . '(<b>' . $msg_poke . '</b>)' . CR;
+        } else {
+            $msg_enclist .= '<b>' . $msg_poke . '</b>' . CR;
+        }
+    }
+
+    return $msg_enclist;
+}
+
+/**
+ * Get keys for all encounters in encounterlist.
+ * @param $action
+ * @param $arg
+ * @return array
+ */
+function get_all_encounterlist_keys($action, $arg)
+{
+    // Get all encounters from encounterlist.
+    $rs = my_query(
+        "
+        SELECT     id
+        FROM       encounterlist
+        "
+    );
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Add key for each encounters
+    while ($enc_entry = $rs->fetch_assoc()) {
+        $keys[] = array(
+            'text'          => $enc_entry['id'],
+            'callback_data' => $enc_entry['id'] . ':' . $action . ':' . $arg
+        );
+    }
+
+    // Set keys.
+    $keys = inline_key_array($keys, 5);
+
+    //debug_log($keys);
+
+    return $keys;
+}
+
+/**
+ * Get all rewards in rewardlist.
+ * @param $skip
+ * @param $show_hidden
+ * @param $quest_id
+ * @param $w_column
+ * @param $w_operator
+ * @param $w_value
+ * @return string
+ */
+function get_all_rewardlist_entries($skip = false, $show_hidden = true, $quest_id = 0, $w_column = 'id', $w_operator = '>', $w_value = 0)
+{
+    // Build WHERE.
+    $where = $w_column . SP . $w_operator . SP . $w_value;
+
+    // Get all rewards.
+    $rs = my_query(
+        "
+        SELECT     id, reward_type
+        FROM       rewardlist
+        WHERE      $where
+        "
+    );
+
+    // Init empty message.
+    $msg_rewardlist = '';
+
+    // Hidden rewards
+    $hide_rewards = array();
+    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+
+    // Build message.
+    while ($rewardlist = $rs->fetch_assoc()) {
+        // Skip reward pokemon to avoid deletion.
+        if($skip == true && $rewardlist['id'] == 1) continue;
+
+        // Skip hidden rewards.
+        if($show_hidden == false && QUEST_HIDE_REWARDS == true && in_array($rewardlist['reward_type'], $hide_rewards)) continue;
+
+        // Build message.
+        $msg_rewardlist .= get_formatted_rewardlist_entry($rewardlist['id'], $quest_id) . CR;
+    }
+
+    return $msg_rewardlist;
+}
+
+/**
+ * Get formatted reward from rewardlist.
+ * @param reward_id
+ * @param quest_id
+ * @param hide_id
+ * @return string
+ */
+function get_formatted_rewardlist_entry($reward_id, $quest_id = 0, $hide_id = false)
+{
+    // Get reward from rewardlist.
+    $rl_entry = get_rewardlist_entry($reward_id);
+
+    // Init empty rewardlist message.
+    $msg_rewardlist = '';
+
+    // No reward forecast.
+    //if($quest_id > 0) {
+    if($quest_id == 0) {
+        // Reward type: Singular or plural?
+        $reward_type = explode(":", getTranslation('reward_type_' . $rl_entry['reward_type']));
+        $reward_type_singular = $reward_type[0];
+        $reward_type_plural = $reward_type[1];
+        $qty_reward = $rl_entry['reward_quantity'] . SP . (($rl_entry['reward_quantity'] > 1) ? ($reward_type_plural) : ($reward_type_singular));
+
+        // Build message.
+        if($hide_id == false) {
+            $msg_rewardlist .= '<b>ID: ' . $rl_entry['id'] . '</b> — ';
+        }
+        $msg_rewardlist .= $qty_reward;
+
+    // Get reward pokemon forecast.
+    } else {
+        $ql_entry = get_questlist_entry($quest_id);
+
+        // Rewardlist entry.
+        $rl_entry = get_rewardlist_entry($reward_id);
+
+        // Reward type: Singular or plural?
+        $reward_type = explode(":", getTranslation('reward_type_' . $rl_entry['reward_type']));
+        $reward_type_singular = $reward_type[0];
+        $reward_type_plural = $reward_type[1];
+        $qty_reward = $rl_entry['reward_quantity'] . SP . (($rl_entry['reward_quantity'] > 1) ? ($reward_type_plural) : ($reward_type_singular));
+
+        // Reward pokemon forecast?
+        $msg_poke = '';
+
+        if($rl_entry['reward_type'] == 1) {
+            $el_entry = get_encounterlist_entry($ql_entry['id']);
+            $quest_pokemons = explode(',', $el_entry['pokedex_ids']);
+            // Get local pokemon name
+            foreach($quest_pokemons as $pokedex_id) {
+                $msg_poke .= get_local_pokemon_name($pokedex_id);
+                $msg_poke .= ' / ';
+            }
+            // Trim last slash
+            $msg_poke = rtrim($msg_poke,' / ');
+            $msg_poke = (!empty($msg_poke) ? $msg_poke : '');
+        }
+
+        // Forecast reward text.
+        if($hide_id == false) {
+            $msg_rewardlist .= '<b>ID: ' . $rl_entry['id'] . '</b> — ';
+        }
+        $msg_rewardlist .= (!empty($msg_poke) ? $msg_poke : $qty_reward);
+    }
+
+    return $msg_rewardlist;
+}
+
+/**
+ * Get keys for all rewards in rewardlist.
+ * @param $action
+ * @param $arg
+ * @param $skip
+ * @param $show_hidden
+ * @return array
+ */
+function get_all_rewardlist_keys($action, $arg, $skip = false, $show_hidden = true)
+{
+    // Get all rewards from rewardlist.
+    $rs = my_query(
+        "
+        SELECT     id, reward_type
+        FROM       rewardlist
+        "
+    );
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Hidden rewards
+    $hide_rewards = array();
+    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+
+    // Add key for each reward
+    while ($rl_entry = $rs->fetch_assoc()) {
+        // Skip reward pokemon to avoid deletion.
+        if($skip == true && $rl_entry['id'] == 1) continue;
+
+        // Skip hidden rewards.
+        if($show_hidden == false && QUEST_HIDE_REWARDS == true && in_array($rl_entry['reward_type'], $hide_rewards)) continue;
+
+        // Add keys.
+        $keys[] = array(
+            'text'          => $rl_entry['id'],
+            'callback_data' => $rl_entry['id'] . ':' . $action . ':' . $arg
+        );
+    }
+
+    // Add quick selection keys.
+    $keys = inline_key_array($keys, 5);
+
+    //debug_log($keys);
+
+    return $keys;
+}
+
+
+/**
+ * Get keys for all entries in quicklist.
+ * @param action
+ * @param arg
+ * @param id_type
+ * @return array
+ */
+function get_all_quicklist_keys($action, $arg, $id_type = 'quest_id')
+{
+    // Get all entries from quicklist.
+    $rs = my_query(
+        "
+        SELECT     id, quest_id
+        FROM       quick_questlist
+        "
+    );
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Get id type for keys text.
+    if($id_type != 'quest_id') {
+        $id_value = 'id';
+    } else {
+        $id_value = 'quest_id';
+    }
+
+    // Add key for each quicklist entry
+    while ($ql_entry = $rs->fetch_assoc()) {
+        $keys[] = array(
+            'text'          => $ql_entry[$id_value],
+            'callback_data' => $ql_entry['id'] . ':' . $action . ':' . $arg
+        );
+    }
+
+    // Add quick selection keys.
+    $keys = inline_key_array($keys, 5);
+
+    //debug_log($keys);
+
+    return $keys;
+}
+
+/**
+ * Get all entries in quicklist.
+ * @param reward
+ * @param hide_id
+ * @param show_qq_id
+ * @return string
+ */
+function get_all_quicklist_entries($reward = false, $hide_id = false, $show_qq_id = false)
+{
+    // Get all quicklist entries.
+    $rs = my_query(
+        "
+        SELECT     * 
+        FROM       quick_questlist
+        "
+    );
+
+    // Init empty message.
+    $msg_quicklist = '';
+
+    // Build message.
+    while ($quicklist = $rs->fetch_assoc()) {
+        // Show quick questlist id.
+        if($show_qq_id == true) {
+            $msg_quicklist .= '<b>ID: ' . $quicklist['id'] . '</b> — ';
+        }
+
+        $msg_quicklist .= get_formatted_questlist_entry($quicklist['quest_id'], $hide_id);
+        // Get reward.
+        if($reward == true) {
+            $msg_quicklist .= SP . ' (' . get_formatted_rewardlist_entry($quicklist['reward_id'], $quicklist['quest_id'], true) . ')' . CR;
+        } else {
+            $msg_quicklist .= CR;
+        }
+    }
+
+    return $msg_quicklist;
+}
+
+/**
+ * Get quicklist entry.
+ * @param $quicklist_id
+ * @return array
+ */
+function get_quicklist_entry($quicklist_id)
+{
+    // Get the quicklist entry by id.
+    $rs = my_query(
+        "
+        SELECT     *
+        FROM       quick_questlist
+        WHERE      id = {$quicklist_id}
+        "
+    );
+
+    // Get the row.
+    $ql_entry = $rs->fetch_assoc();
+
+    debug_log($ql_entry);
+
+    return $ql_entry;
+}
+
+/**
+ * Get quest action.
+ * @param $quest
+ * @param $override_language
+ * @return string
+ */
+function get_quest_action($quest, $override_language = false)
+{
+    // Get translation type
+    if($override_language == true) {
+        $getTypeTranslation = 'getPublicTranslation';
+    } else {
+        $getTypeTranslation = 'getTranslation';
+    }
+
+    // Init Quantity Action Var.
+    $qty_action = '';
+
+    // Quest action - Translation?
+    if($quest['quest_action'] != '0') {
+        // Quest action: Singular or plural?
+        $quest_action = explode(":", $getTypeTranslation('quest_action_' . $quest['quest_action']));
+        $quest_action_singular = $quest_action[0];
+        $quest_action_plural = $quest_action[1];
+        $qty_action = $quest['quest_quantity'] . SP . (($quest['quest_quantity'] > 1) ? ($quest_action_plural) : ($quest_action_singular));
+
+    // Quest action - Pokemons?
+    } else if($quest['quest_pokedex_ids'] != '0') {
+        // Init pokemon names.
+        $poke_names = '';
+        $quest_pokemons = explode(',', $quest['quest_pokedex_ids']);
+
+        // Get local pokemon names.
+        foreach($quest_pokemons as $pokedex_id) {
+            $poke_names .= get_local_pokemon_name($pokedex_id, $override_language);
+            $poke_names .= ', ';
+        }
+        // Trim last comma
+        $comma = ', ';
+        $poke_names = rtrim($poke_names,$comma);
+        
+        // Get position of last comma and replace it with 'or' in case of multiple Pokemon names
+        $pos = strrpos($poke_names, $comma);
+        if($pos !== false)
+        {
+            $poke_names = substr_replace($poke_names, SP . $getTypeTranslation('or') . SP, $pos, strlen($comma));
+        }
+        $qty_action = $quest['quest_quantity'] . SP . (!empty($poke_names) ? $poke_names : '');
+
+    // Quest action - Pokemon Types?
+    } else if($quest['quest_poketypes'] != '0') {
+        // Init pokemon types.
+        $poke_types = '';
+        $quest_poketypes = explode(',', $quest['quest_poketypes']);
+
+        // Get local pokemon names.
+        foreach($quest_poketypes as $poketype_id) {
+            $poke_types .= $getTypeTranslation('pokemon_type_' . $poketype_id);
+            $poke_types .= ', ';
+        }
+        // Trim last comma
+        $comma = ', ';
+        $poke_types = rtrim($poke_types,$comma);
+
+        // Get position of last comma and replace it with 'or' in case of multiple Pokemon types
+        $pos = strrpos($poke_types, $comma);
+        if($pos !== false)
+        {
+            $poke_types = substr_replace($poke_types, SP . $getTypeTranslation('or') . SP, $pos, strlen($comma));
+        }
+
+        // Get translation for pokemon types and replace POKEMON_TYPE with actual pokemon types
+        $poke_types = str_replace('POKEMON_TYPE', $poke_types, $getTypeTranslation('pokemon_of_type'));
+        $qty_action = $quest['quest_quantity'] . SP . (!empty($poke_types) ? $poke_types : '');
+    }
+    
+    return $qty_action;
+}
+
+/**
  * Get quest and reward as formatted string.
  * @param $quest array
  * @param $add_creator bool
@@ -404,13 +757,20 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     /** Example:
      * Pokestop: Reward-Stop Number 1
      * Quest-Street 5, 13579 Poke-City
-     * Quest: Hatch 1 Egg
+     * Quest: Eggxtra-Event: Hatch 1 Egg
+     * Reward: Magikarp or Onix
+    */
+
+    /** Event-Example:
+     * Pokestop: Reward-Stop Number 1
+     * Quest-Street 5, 13579 Poke-City
+     * Eggxtra-Event: Hatch 1 Egg
      * Reward: Magikarp or Onix
     */
 
     // Get translation type
     if($override_language == true) {
-        $getTypeTranslation = 'getQuestTranslation';
+        $getTypeTranslation = 'getPublicTranslation';
     } else {
         $getTypeTranslation = 'getTranslation';
     }
@@ -430,11 +790,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
         $pokestop_address = '<a href="http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
     }
 
-    // Quest action: Singular or plural?
-    $quest_action = explode(":", $getTypeTranslation('quest_action_' . $quest['quest_action']));
-    $quest_action_singular = $quest_action[0];
-    $quest_action_plural = $quest_action[1];
-    $qty_action = $quest['quest_quantity'] . SP . (($quest['quest_quantity'] > 1) ? ($quest_action_plural) : ($quest_action_singular));
+    $qty_action = get_quest_action($quest, $override_language);
 
     // Reward type: Singular or plural?
     $reward_type = explode(":", $getTypeTranslation('reward_type_' . $quest['reward_type']));
@@ -449,7 +805,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
         $quest_pokemons = explode(',', $quest['pokedex_ids']);
         // Get local pokemon name
         foreach($quest_pokemons as $pokedex_id) {
-            $msg_poke .= ($override_language == true) ? (get_local_pokemon_name($pokedex_id, true, 'quest')) : (get_local_pokemon_name($pokedex_id));
+            $msg_poke .= get_local_pokemon_name($pokedex_id, $override_language);
             $msg_poke .= ' / ';
         }
         // Trim last slash
@@ -457,14 +813,24 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
         $msg_poke = (!empty($msg_poke) ? $msg_poke : '');
     }
 
+    // Event?
+    $msg_event = '';
+    $msg_compact = '';
+    if($quest['quest_event'] > 0) {
+        $msg_event = '<b>' . $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':' . SP;
+        $msg_compact = $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':' . SP;
+    } else {
+        $msg_event = $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':' . SP;
+    }
+
     // Build quest message
     $msg = '';
     if($compact_format == false) {
         $msg .= $getTypeTranslation('pokestop') . ':' . $pokestop_name . $pokestop_address . CR;
-        $msg .= $getTypeTranslation('quest') . ': <b>' . $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . '</b>' . CR;
+        $msg .= $msg_event . $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . '</b>' . CR;
         $msg .= $getTypeTranslation('reward') . ': <b>' . (!empty($msg_poke) ? $msg_poke : $qty_reward) . '</b>' . CR;
     } else {
-        $msg .= $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . ' — ' . (!empty($msg_poke) ? $msg_poke : $qty_reward);
+        $msg .= $msg_compact . $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . ' — ' . (!empty($msg_poke) ? $msg_poke : $qty_reward);
     }
 
     //Add custom message from the config.
@@ -477,8 +843,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
 
     // Add update time and quest id to message.
     if($add_timestamp == true) {
-        $quest_date = explode(' ', $quest['quest_date']);
-        $msg .= CR . '<i>' . $getTypeTranslation('updated') . ': ' . $quest_date[0] . '</i>';
+        $msg .= CR . '<i>' . $getTypeTranslation('updated') . ': ' . dt2date($quest['quest_date']) . '</i>';
         $msg .= '  ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = ' . $quest['id']; // DO NOT REMOVE! --> NEEDED FOR CLEANUP PREPARATION!
     }
 
@@ -496,7 +861,7 @@ function get_todays_formatted_quests()
         "
         SELECT     id
         FROM       quests
-        WHERE      quest_date = CURDATE() 
+        WHERE      quest_date = UTC_DATE() 
         "
     );
 
@@ -548,9 +913,10 @@ function get_rewardlist_entry($reward_id)
     return $reward;
 }
 
+
 /**
  * Get encounterlist entry.
- * @param $reward_id
+ * @param quest_id
  * @return array
  */
 function get_encounterlist_entry($quest_id)
@@ -558,7 +924,7 @@ function get_encounterlist_entry($quest_id)
     // Get the reward data by id.
     $rs = my_query(
         "
-        SELECT     pokedex_ids
+        SELECT     *
         FROM       encounterlist
         WHERE      quest_id = {$quest_id}
         "
@@ -570,6 +936,683 @@ function get_encounterlist_entry($quest_id)
     debug_log($encounters);
 
     return $encounters;
+}
+
+/**
+ * Get entry count of all pokemons from json.
+ * @param start
+ * @return string
+ */
+function count_all_json_pokemon()
+{
+    // Init count.
+    $count = 0;
+    
+    // Set language.
+    $language = USERLANGUAGE;
+
+    // Translation file.
+    $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+    
+    // Count entries.
+    $count = count($json);
+
+    // Write to log.
+    debug_log($count, 'Pokemon count of ' . $tfile . ':');
+
+    return $count;
+}
+
+/**
+ * Find dex id of specific pokemon from json.
+ * @param pokemon
+ * @return string
+ */
+function get_dex_entry($pokemon)
+{
+    // Init empty message.
+    $msg = '';
+
+    // Set language.
+    $language = USERLANGUAGE;
+
+    // Translation file.
+    $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Find dex ids.
+    foreach($json as $index => $pokemon_name) {
+        // Lower for better comparison
+        $find = strtolower($pokemon);
+        $pokemon_name = strtolower($pokemon_name);
+
+        // Find pokemon.
+        if(strpos($pokemon_name, $find) !== FALSE) {
+            $dex_id = $index + 1;
+            $msg .= '<b>ID: ' . $dex_id . ' </b> — ' . getTranslation('pokemon_id_' . $dex_id) . CR;
+        }
+    }
+
+    // Write to log.
+    debug_log('Found pokemon: ' . $msg);
+
+    // Empty msg?
+    $msg = empty($msg) ? getTranslation('pokemon_not_found') : $msg;
+
+    return $msg;
+}
+
+/**
+ * Get strings for all pokemons from json.
+ * @param start
+ * @param first
+ * @param second
+ * @param third
+ * @return string
+ */
+function get_all_json_pokemon($start, $first = 0, $second = 0, $third = 0)
+{
+    // Init empty message.
+    $msg = '';
+
+    // Set start and end values.
+    $start = $start + 1;
+    $limit = count_all_json_pokemon();
+    $end = ($limit > $start + 24) ? ($start + 24) : $limit;
+
+    // Get pokemons from json.
+    for ($i = $start; $i <= $end; $i = $i + 1) {
+        // Skip if already selected.
+        if($first == $i || $second == $i) continue;
+
+        // Build message.
+        $msg .= '<b>ID: ' . $i . ' </b> — ' . getTranslation('pokemon_id_' . $i) . CR;
+    }
+
+    // Write selected pokemon to log.
+    debug_log($first . ', ' . $second . ', ' . $third, 'Selected Pokemon IDs:');
+
+    // Already selected pokemon.
+    $msg .= CR;
+    if($first > 0 && $second == 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first) . CR . CR;
+    } else if($first > 0 && $second > 0 && $third == 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first);
+        $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_id_' . $second) . CR . CR;
+    } else if($first > 0 && $second > 0 && $third > 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first);
+        $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_id_' . $second);
+        $msg .= CR . '<b>ID: ' . $third . ' </b> — ' . getTranslation('pokemon_id_' . $third) . CR . CR;
+    }
+
+    return $msg;
+}
+
+/**
+ * Get keys for all pokemons from json.
+ * @param id
+ * @param action
+ * @param arg
+ * @param start
+ * @param first
+ * @param second
+ * @param third
+ * @return array
+ */
+function get_all_json_pokemon_keys($id, $action, $arg, $start, $first = 0, $second = 0, $third = 0)
+{
+    // Init empty keys array.
+    $keys = array();
+
+    // Set start and end values.
+    $start = $start + 1;
+    $limit = count_all_json_pokemon();
+    $end = ($limit > $start + 24) ? ($start + 24) : $limit;
+
+    // Get arg.
+    $arg_split = explode('#', $arg);
+    $old_arg = $arg_split[0];
+
+    // Get pokemons from json.
+    for ($i = $start; $i <= $end; $i = $i + 1) {
+        // Set new arg.
+        if($first == 0) {
+            $new_arg = $i . ',0,0';
+        } else if($first > 0 && $second == 0) {
+            $new_arg = $first . ',' . $i . ',0';
+        } else if($first > 0 && $second > 0 && $third == 0) {
+            $new_arg = $first . ',' . $second . ',' . $i;
+        }
+
+        // Skip if already selected.
+        if($first == $i || $second == $i) continue;
+
+        // Add key for each pokemon id
+        $keys[] = array(
+            'text'          => $i,
+            'callback_data' => $id . ':' . $action . ':' . $old_arg . '#' . $new_arg
+        );
+    }
+
+    // Keys array.
+    $keys = inline_key_array($keys, 5);
+
+    return $keys;
+}
+
+/**
+ * Get strings for all pokemon types from json.
+ * @param first
+ * @param second
+ * @param third
+ * @return string
+ */
+function get_all_json_pokemon_type($first, $second, $third)
+{
+    // Get all pokemon types from json.
+    $tfile = CORE_LANG_PATH . '/pokemon_types.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty message.
+    $msg = '';
+
+    // Build message.
+    foreach($json as $type_id_string => $type_translation_array)
+    {
+        // Get ID from string via substring
+        $type_id = substr($type_id_string, strrpos($type_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($type_id))) {
+            // Fallback: Get ID from string via replace
+            $type_id = str_replace('pokemon_type_', '', $type_id_string);
+        }
+
+        // Skip if already selected.
+        if($first == $type_id || $second == $type_id) continue;
+
+        // Set message 
+        $msg .= '<b>ID: ' . $type_id . '</b> — ' . getTranslation($type_id_string) . CR;
+    }
+
+    // Write selected pokemon to log.
+    debug_log($first . ', ' . $second . ', ' . $third, 'Selected Pokemon Type IDs:');
+
+    // Already selected pokemon types.
+    $msg .= CR;
+    if($first > 0 && $second == 0) {
+        $msg .= getTranslation('selected_pokemon_types');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_type_' . $first) . CR . CR;
+    } else if($first > 0 && $second > 0 && $third == 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_type_' . $first);
+        $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_type_' . $second) . CR . CR;
+    } else if($first > 0 && $second > 0 && $third > 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_type_' . $first);
+        $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_type_' . $second);
+        $msg .= CR . '<b>ID: ' . $third . ' </b> — ' . getTranslation('pokemon_type_' . $third) . CR . CR;
+    }
+
+    return $msg;
+}
+
+/**
+ * Get keys for all pokemon types from json.
+ * @param id
+ * @param action
+ * @param arg
+ * @param first
+ * @param second
+ * @param third
+ * @return array
+ */
+function get_all_json_pokemon_type_keys($id, $action, $arg, $first = 0, $second = 0, $third = 0)
+{
+    // Get all pokemon types from json.
+    $tfile = CORE_LANG_PATH . '/pokemon_types.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Get arg.
+    $arg_split = explode('#', $arg);
+    $old_arg = $arg_split[0];
+
+    // Get pokemons from json.
+    foreach($json as $type_id_string => $type_translation_array)
+    {
+        // Get ID from string via substring
+        $type_id = substr($type_id_string, strrpos($type_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($type_id))) {
+            // Fallback: Get ID from string via replace
+            $type_id = str_replace('pokemon_type_', '', $type_id_string);
+        }
+
+        // Skip if already selected.
+        if($first == $type_id || $second == $type_id) continue;
+
+        // Set new arg.
+        if($first == 0) {
+            $new_arg = $type_id . ',0,0';
+        } else if($first > 0 && $second == 0) {
+            $new_arg = $first . ',' . $type_id . ',0';
+        } else if($first > 0 && $second > 0 && $third == 0) {
+            $new_arg = $first . ',' . $second . ',' . $type_id;
+        }
+
+        // Add key for each pokemon type
+        $keys[] = array(
+            'text'          => getTranslation('pokemon_type_' . $type_id),
+            'callback_data' => $id . ':' . $action . ':' . $old_arg . '#' . $new_arg
+        );
+    }
+
+    // Keys array.
+    $keys = inline_key_array($keys, 3);
+
+    return $keys;
+}
+
+/**
+ * Get strings for all quest types from json.
+ * @return string
+ */
+function get_all_json_quest_type()
+{
+    // Get all quest types from json.
+    $tfile = BOT_LANG_PATH . '/quest_type.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty message.
+    $msg = '';
+
+    // Build message.
+    foreach($json as $type_id_string => $type_translation_array)
+    {
+        // Get ID from string via substring
+        $type_id = substr($type_id_string, strrpos($type_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($type_id))) {
+            // Fallback: Get ID from string via replace
+            $type_id = str_replace('quest_type_', '', $type_id_string);
+        }
+
+        // Always use singular
+        $quest_type = explode(":", getTranslation($type_id_string));
+        $quest_type_singular = $quest_type[0];
+        //$quest_type_plural = $quest_type[1];
+
+        // Set message 
+        $msg .= '<b>ID: ' . $type_id . '</b> — ' . $quest_type_singular . CR;
+    }
+
+    return $msg;
+}
+
+/**
+ * Get keys for all quest events from json.
+ * @param $action
+ * @param $arg
+ * @return array
+ */
+function get_all_json_quest_event_keys($action, $arg)
+{
+    // Get all quest types from json.
+    $tfile = BOT_LANG_PATH . '/quest_event.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Add key for no event.
+    $keys[] = array(
+        'text'          => getTranslation('no_event'),
+        'callback_data' => 'no-0:' . $action . ':' . $arg
+    );
+
+    // Add keys.
+    foreach($json as $event_id_string => $event_translation_array)
+    {
+        // Get ID from string via substring
+        $event_id = substr($event_id_string, strrpos($event_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($event_id))) {
+            // Fallback: Get ID from string via replace
+            $event_id = str_replace('quest_event_', '', $event_id_string);
+        }
+
+        // Add key for each quest event
+        $keys[] = array(
+            'text'          => getTranslation('quest_event_' . $event_id),
+            'callback_data' => $event_id . '-0:' . $action . ':' . $arg
+        );
+    }
+
+    // Keys array.
+    $keys = inline_key_array($keys, 1);
+
+    return $keys;
+}
+
+/**
+ * Get strings for all quest events from json.
+ * @return string
+ */
+function get_all_json_quest_event()
+{
+    // Get all quest event from json.
+    $tfile = BOT_LANG_PATH . '/quest_event.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty message.
+    $msg = '';
+
+    // Build message.
+    foreach($json as $event_id_string => $event_translation_array)
+    {
+        // Get ID from string via substring
+        $event_id = substr($event_id_string, strrpos($event_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($event_id))) {
+            // Fallback: Get ID from string via replace
+            $event_id = str_replace('quest_event_', '', $event_id_string);
+        }
+
+        // Always use singular
+        $quest_event = getTranslation($event_id_string);
+
+        // Set message 
+        $msg .= '<b>ID: ' . $event_id . '</b> — ' . $quest_event . CR;
+    }
+
+    return $msg;
+}
+
+/**
+ * Get keys for all quest types from json.
+ * @param $action
+ * @param $arg
+ * @return array
+ */
+function get_all_json_quest_type_keys($action, $arg, $event = 0)
+{
+    // Get all quest types from json.
+    $tfile = BOT_LANG_PATH . '/quest_type.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty keys array.
+    $keys = array();
+
+    foreach($json as $type_id_string => $type_translation_array)
+    {
+        // Get ID from string via substring
+        $type_id = substr($type_id_string, strrpos($type_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($type_id))) {
+            // Fallback: Get ID from string via replace
+            $type_id = str_replace('quest_type_', '', $type_id_string);
+        }
+
+        // Event?
+        if($event > 0) {
+            $cb_id = $event . '-' . $type_id;
+        } else {
+            $cb_id = $type_id;
+        }
+
+        // Add key for each quest type
+        $keys[] = array(
+            'text'          => getTranslation('quest_type_' . $type_id),
+            'callback_data' => $cb_id . ':' . $action . ':' . $arg
+        );
+    }
+
+    // Keys array.
+    $keys = inline_key_array($keys, 3);
+
+    return $keys;
+}
+
+/**
+ * Get strings for all quest actions of a specific quest type from json.
+ * @param $quest_type_id
+ * @return string
+ */
+function get_all_json_quest_action($quest_type_id)
+{
+    // Get all quest actions from json.
+    $tfile = BOT_LANG_PATH . '/quest_action.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty message.
+    $msg = '';
+
+    // Build message.
+    foreach($json as $action_id_string => $action_translation_array)
+    {
+        // Get ID from string via substring
+        $action_id = substr($action_id_string, strrpos($action_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($action_id))) {
+            // Fallback: Get ID from string via replace
+            $action_id = str_replace('quest_action_', '', $action_id_string);
+        }
+
+        // Make sure action_id and quest_type_id start with the same number
+        if(strpos($action_id, $quest_type_id) !== 0) continue;
+
+        // Every quest action is designed to be type_id + action_id and action_id is always 3 chars.
+        // To avoid quest actions being shown from another quest type check the length.
+        // Type_id + 3 should match the length of the complete quest action id length - continue if not.
+        // Example: quest_action_1001 vs. quest_action_11001 - start both with 1, but one is quest type 1 and the other is 11
+        //debug_log($action_id, 'ACTION ID:');
+        //debug_log($quest_type_id, 'QUEST TYPE ID:');
+        //debug_log(strlen($action_id), 'LENGTH ACTION ID:');
+        //debug_log(strlen($quest_type_id), 'LENGTH QUEST TYPE ID:');
+        $len_qt_id = strlen($quest_type_id);
+        $len_a_id = strlen($action_id);
+        if(($len_qt_id + 3) <> $len_a_id) continue;
+
+        // Always use singular
+        $quest_action = explode(":", getTranslation($action_id_string));
+        $quest_action_singular = $quest_action[0];
+        //$quest_action_plural = $quest_action[1];
+
+        // Set message 
+        $msg .= '<b>ID: ' . $action_id . '</b> — ' . $quest_action_singular . CR;
+    }
+
+    return $msg;
+}
+
+/**
+ * Get keys for all quest actions of a specific quest type from json.
+ * @param $event
+ * @param $id
+ * @param $action
+ * @param $arg
+ * @return array
+ */
+function get_all_json_quest_action_keys($event, $id, $action, $arg)
+{
+    // Get all quest actions from json.
+    $tfile = BOT_LANG_PATH . '/quest_action.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty keys array.
+    $keys = array();
+
+    foreach($json as $action_id_string => $action_translation_array)
+    {
+        // Get ID from string via substring
+        $action_id = substr($action_id_string, strrpos($action_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($action_id))) {
+            // Fallback: Get ID from string via replace
+            $action_id = str_replace('quest_action_', '', $action_id_string);
+        }
+
+        // Make sure action_id and (quest_type)id start with the same number
+        if(strpos($action_id, $id) !== 0) continue;
+
+        // Every quest action is designed to be type_id + action_id and action_id is always 3 chars.
+        // To avoid quest actions being shown from another quest type check the length.
+        // Type_id + 3 should match the length of the complete quest action id length - continue if not.
+        // Example: quest_action_1001 vs. quest_action_11001 - start both with 1, but one is quest type 1 and the other is 11
+        //debug_log($action_id, 'ACTION ID:');
+        //debug_log($id, 'QUEST TYPE ID:');
+        //debug_log(strlen($action_id), 'LENGTH ACTION ID:');
+        //debug_log(strlen($qid), 'LENGTH QUEST TYPE ID:');
+        $len_qt_id = strlen($id);
+        $len_a_id = strlen($action_id);
+        if(($len_qt_id + 3) <> $len_a_id) continue;
+
+        // Split arg.
+        $argsplit = explode('-', $arg);
+
+        // Set new arg for callback data.
+        $newarg = $argsplit[0] . '-' . $argsplit[1] . '-' . $argsplit[2];
+
+        // Get quantity for singular or plural action translation.
+        $action_qty = $argsplit[1];
+        $quest_action = explode(":", getTranslation('quest_action_' . $action_id));
+        $quest_action_singular = $quest_action[0];
+        $quest_action_plural = $quest_action[1];
+        $action_qty_text = (($action_qty > 1) ? ($quest_action_plural) : ($quest_action_singular));
+
+        // Add key for each quest action
+        $keys[] = array(
+            'text'          => $action_qty_text,
+            'callback_data' => $event . '-' . $id . ':' . $action . ':' . $newarg . '-' . $action_id
+        );
+    }
+
+    // Keys array.
+    $keys = inline_key_array($keys, 1);
+
+    return $keys;
+}
+
+/**
+ * Get strings for all reward types from json.
+ * @return string
+ */
+function get_all_json_reward()
+{
+    // Get all reward types from json.
+    $tfile = BOT_LANG_PATH . '/reward_type.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty message.
+    $msg = '';
+
+    // Hidden rewards
+    $hide_rewards = array();
+    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+
+    // Build message.
+    foreach($json as $type_id_string => $type_translation_array)
+    {
+        // Get ID from string via substring
+        $type_id = substr($type_id_string, strrpos($type_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($type_id))) {
+            // Fallback: Get ID from string via replace
+            $type_id = str_replace('reward_type_', '', $type_id_string);
+        }
+
+        // Skip pokemon reward.
+        if($type_id == 1) continue;
+
+        // Skip hidden rewards.
+        if(QUEST_HIDE_REWARDS == true && in_array($type_id, $hide_rewards)) continue;
+
+        // Always use singular
+        $reward_type = explode(":", getTranslation($type_id_string));
+        $reward_type_singular = $reward_type[0];
+        //$reward_type_plural = $reward_type[1];
+
+        // Set message 
+        $msg .= '<b>ID: ' . $type_id . '</b> — ' . $reward_type_singular . CR;
+    }
+
+    return $msg;
+}
+
+/**
+ * Get keys for all reward types from json.
+ * @param $action
+ * @param $arg
+ * @return array
+ */
+function get_all_json_reward_keys($action, $arg)
+{
+    // Get all reward types from json.
+    $tfile = BOT_LANG_PATH . '/reward_type.json';
+    $str = file_get_contents($tfile);
+    $json = json_decode($str, true);
+
+    // Init empty keys array.
+    $keys = array();
+
+    // Hidden rewards
+    $hide_rewards = array();
+    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : ''; 
+
+    foreach($json as $type_id_string => $type_translation_array)
+    {
+        // Get ID from string via substring
+        $type_id = substr($type_id_string, strrpos($type_id_string, '_') + 1);
+
+        // Make sure ID is numeric
+        if(!(is_numeric($type_id))) {
+            // Fallback: Get ID from string via replace
+            $type_id = str_replace('reward_type_', '', $type_id_string);
+        }
+
+        // Skip pokemon reward.
+        if($type_id == 1) continue;
+
+        // Skip hidden rewards.
+        if(QUEST_HIDE_REWARDS == true && in_array($type_id, $hide_rewards)) continue;
+
+        // Add key for each reward id
+        $keys[] = array(
+            'text'          => explode(':', getTranslation('reward_type_' . $type_id))[0],
+            'callback_data' => $type_id . ':' . $action . ':' . $arg
+        );
+    }
+
+    // Keys array.
+    $keys = inline_key_array($keys, 3);
+
+    return $keys;
 }
 
 /**
@@ -627,6 +1670,270 @@ function delete_quest($quest_id)
 }
 
 /**
+ * Delete questlist quest.
+ * @param questlist_id
+ */
+function delete_questlist_quest($questlist_id)
+{
+    global $db;
+
+    // Delete quest from questlist table.
+    debug_log('Deleting quest with ID ' . $questlist_id . ' from the questlist table');
+    $rs_quests = my_query(
+        "
+        DELETE FROM   questlist 
+        WHERE   id = '{$questlist_id}'
+        "
+    );
+}
+
+/**
+ * Add questlist quest.
+ * @param quest_event
+ * @param quest_type
+ * @param quest_qty
+ * @param quest_action_type
+ * @param quest_action_value
+ */
+function add_questlist_quest($quest_event, $quest_type, $quest_qty, $quest_action_type, $quest_action_value)
+{
+    global $db;
+
+    // Log received values.
+    debug_log('Received quest of type ' . $quest_type . ' with quantity ' . $quest_qty . ' and quest action ' . $quest_action_type . ' with value ' . $quest_action_value);
+
+    // Get quest action type.
+    if($quest_action_type == 'dex') {
+        $quest_action_type = 'quest_pokedex_ids';
+    } else if($quest_action_type == 'type') {
+        $quest_action_type = 'quest_poketypes';
+    } else {
+        $quest_action_type = 'quest_action';
+    }
+
+    // Format quest action value.
+    if($quest_action_type == 'quest_pokedex_ids' || $quest_action_type == 'quest_poketypes') {
+        // Split position from quest action value
+        $pos_qa_value = explode('#', $quest_action_value);
+        
+        // Split quest action value
+        $qa_value = explode(',', $pos_qa_value[1]);
+        $first = $qa_value[0];
+        $second = $qa_value[1];
+        $third = $qa_value[2];
+
+        // Build quest action value - get rid of "0 values"
+        if($second == 0 && $third == 0) {
+            $quest_action_value = $first;
+        } else if($second > 0 && $third == 0) {
+            $quest_action_value = $first . ',' . $second;
+        } else if($second > 0 && $third > 0) {
+            $quest_action_value = $first . ',' . $second . ',' . $third;
+        } else {
+            // Fallback: Leave value as it is.
+            $quest_action_value = $quest_action_value;
+        }
+    }
+
+    // Add quest to questlist table.
+    debug_log('Adding quest of type ' . $quest_type . ' with quantity ' . $quest_qty . ' and quest action ' . $quest_action_type . ' with value ' . $quest_action_value . ' to the questlist table');
+    $rs = my_query(
+        "
+        INSERT INTO   questlist
+        SET           quest_type = '{$quest_type}',
+                      quest_quantity = '{$quest_qty}',
+                      $quest_action_type = '{$quest_action_value}'
+        "
+    );
+}
+
+/**
+ * Delete rewardlist reward.
+ * @param $reward_id
+ */
+function delete_rewardlist_reward($reward_id)
+{
+    global $db;
+
+    // Delete reward from rewardlist table.
+    debug_log('Deleting reward ' . $reward_id . ' from the rewardlist table');
+    $rs_quests = my_query(
+        "
+        DELETE FROM   rewardlist 
+        WHERE   id = '{$reward_id}'
+        "
+    );
+}
+
+/**
+ * Add rewardlist reward.
+ * @param $reward_type
+ * @param $reward_qty
+ */
+function add_rewardlist_reward($reward_type, $reward_quantity)
+{
+    global $db;
+
+    // Add reward to rewardlist table.
+    debug_log('Adding reward of type ' . $reward_type . ' with quantity ' . $reward_quantity . ' to the rewardlist table');
+    $rs = my_query(
+        "
+        INSERT INTO   rewardlist
+        SET           reward_type = '{$reward_type}',
+                      reward_quantity = '{$reward_quantity}'
+        "
+    );
+}
+
+/**
+ * Add encounterlist entry.
+ * @param $quest_id
+ * @param $pokedex_ids
+ */
+function add_encounterlist_entry($quest_id, $pokedex_ids)
+{
+    global $db;
+
+    // Log received values.
+    debug_log('Received encounters ' . $pokedex_ids . ' for quest with ID ' . $quest_id);
+
+    // Split position from pokedex ids
+    $pos_dex_value = explode('#', $pokedex_ids);
+
+    // Split pokedex ids
+    $dex_value = explode(',', $pos_dex_value[1]);
+    $first = $dex_value[0];
+    $second = $dex_value[1];
+    $third = $dex_value[2];
+
+    // Build quest action value - get rid of "0 values"
+    if($second == 0 && $third == 0) {
+        $dex_ids = $first;
+    } else if($second > 0 && $third == 0) {
+        $dex_ids = $first . ',' . $second;
+    } else if($second > 0 && $third > 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third;
+    } else {
+        // Fallback: Leave value as it is.
+        $dex_ids = $pokedex_ids;
+    }
+
+    // Add encounter to encounterlist table.
+    debug_log('Adding encounters with IDs ' . $dex_ids . ' for quest ID ' . $quest_id . ' to the encounterlist table');
+    $rs = my_query(
+        "
+        INSERT INTO   encounterlist
+        SET           quest_id = '{$quest_id}',
+                      pokedex_ids = '{$dex_ids}'
+        "
+    );
+
+}
+
+/**
+ * Update encounterlist entry.
+ * @param $id
+ * @param $pokedex_ids
+ */
+function update_encounterlist_entry($id, $pokedex_ids)
+{
+    global $db;
+
+    // Log received values.
+    debug_log('Received encounters ' . $pokedex_ids . ' for encounter with ID ' . $id);
+
+    // Split position from pokedex ids
+    $pos_dex_value = explode('#', $pokedex_ids);
+
+    // Split pokedex ids
+    $dex_value = explode(',', $pos_dex_value[1]);
+    $first = $dex_value[0];
+    $second = $dex_value[1];
+    $third = $dex_value[2];
+
+    // Build quest action value - get rid of "0 values"
+    if($second == 0 && $third == 0) {
+        $dex_ids = $first;
+    } else if($second > 0 && $third == 0) {
+        $dex_ids = $first . ',' . $second;
+    } else if($second > 0 && $third > 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third;
+    } else {
+        // Fallback: Leave value as it is.
+        $dex_ids = $pokedex_ids;
+    }   
+
+    // Add encounter to encounterlist table.
+    debug_log('Adding encounters with IDs ' . $dex_ids . ' for encounter ID ' . $id . ' to the encounterlist table');
+    $rs = my_query(
+        "
+        UPDATE   encounterlist
+        SET      pokedex_ids = '{$dex_ids}'
+        WHERE    id = '{$id}'
+        "
+    );
+
+}
+
+/**
+ * Delete encounterlist entry.
+ * @param $id
+ * @param $where
+ */
+function delete_encounterlist_entry($id, $where = 'id')
+{
+    global $db;
+
+    // Delete entry from encounterlist table.
+    debug_log('Deleting entry with ' . $where . ' = ' . $id . ' from the encounterlist table');
+    $rs_quests = my_query(
+        "
+        DELETE FROM   encounterlist 
+        WHERE  $where = '{$id}'
+        "
+    );
+}
+
+/**
+ * Delete quicklist entry.
+ * @param $id
+ * @param $where
+ */
+function delete_quicklist_entry($id, $where = 'id')
+{
+    global $db;
+
+    // Delete entry from quicklist table.
+    debug_log('Deleting entry with ' . $where . ' = ' . $id . ' from the quicklist table');
+    $rs_quests = my_query(
+        "
+        DELETE FROM   quick_questlist 
+        WHERE  $where = '{$id}'
+        "
+    );
+}
+
+/**
+ * Add quicklist entry.
+ * @param $questlist_id
+ * @param $rewardlist_id
+ */
+function add_quicklist_entry($questlist_id, $rewardlist_id)
+{
+    global $db;
+
+    // Add entry to quicklist table.
+    debug_log('Adding quest with ID ' . $questlist_id . ' and reward with ID ' . $rewardlist_id . ' to the quicklist table');
+    $rs = my_query(
+        "
+        INSERT INTO   quick_questlist
+        SET           quest_id = '{$questlist_id}',
+                      reward_id = '{$rewardlist_id}'
+        "
+    );
+}
+
+/**
  * Get pokestop.
  * @param $pokestop_id
  * @return array
@@ -648,33 +1955,28 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
 
         $stop = $rs->fetch_assoc();
 
-    // Get address and update address string.
-    if(!empty(GOOGLE_API_KEY) && $update_pokestop == true){
-        // Get address.
-        $lat = $stop['lat'];
-        $lon = $stop['lon'];
-        $addr = get_address($lat, $lon);
+        // Get address and update address string.
+        if($update_pokestop == true){
+            // Get address.
+            $lat = $stop['lat'];
+            $lon = $stop['lon'];
+            $addr = get_address($lat, $lon);
+            $address = format_address($addr);
 
-        // Get full address - Street #, ZIP District
-        $address = "";
-        $address .= (!empty($addr['street']) ? $addr['street'] : "");
-        $address .= (!empty($addr['street_number']) ? " " . $addr['street_number'] : "");
-        $address .= (!empty($addr) ? ", " : "");
-        $address .= (!empty($addr['postal_code']) ? $addr['postal_code'] . " " : "");
-        $address .= (!empty($addr['district']) ? $addr['district'] : "");
+            // Update pokestop address.
+            if(!empty($address)) {
+                $rs = my_query(
+                    "
+                    UPDATE        pokestops
+                    SET           address = '{$db->real_escape_string($address)}'
+                       WHERE      id = '{$pokestop_id}'
+                    "
+                );
+            }
 
-        // Update pokestop address.
-        $rs = my_query(
-            "
-            UPDATE        pokestops
-            SET           address = '{$db->real_escape_string($address)}'
-               WHERE      id = '{$pokestop_id}'
-            "
-        );
-
-       // Set pokestop address.
-       $stop['address'] = $address;
-    }
+            // Set pokestop address.
+            $stop['address'] = $address;
+        }
 
     // Unnamend pokestop
     } else {
@@ -800,140 +2102,6 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius)
 }
 
 /**
- * Get gym.
- * @param $id
- * @return array
- */
-function get_gym($id)
-{
-    // Get gym from database
-    $rs = my_query(
-            "
-            SELECT    *
-            FROM      gyms
-	    WHERE     id = {$id}
-            "
-        );
-
-    $gym = $rs->fetch_assoc();
-
-    return $gym;
-}
-
-/**
- * Get pokemon info as formatted string.
- * @param $pokedex_id
- * @return array
- */
-function get_pokemon_info($pokedex_id)
-{
-    /** Example:
-     * Raid boss: Mewtwo (#ID)
-     * Weather: Icons
-     * CP: CP values (Boosted CP values)
-    */
-    $info = '';
-    $info .= getTranslation('raid_boss') . ': <b>' . get_local_pokemon_name($pokedex_id) . ' (#' . $pokedex_id . ')</b>' . CR . CR;
-    $poke_raid_level = get_raid_level($pokedex_id);
-    $poke_cp = get_formatted_pokemon_cp($pokedex_id);
-    $poke_weather = get_pokemon_weather($pokedex_id);
-    $info .= getTranslation('pokedex_raid_level') . ': ' . getTranslation($poke_raid_level . 'stars') . CR;
-    $info .= (empty($poke_cp)) ? (getTranslation('pokedex_cp') . CR) : $poke_cp . CR;
-    $info .= getTranslation('pokedex_weather') . ': ' . get_weather_icons($poke_weather) . CR . CR;
-
-    return $info;
-}
-
-/**
- * Get pokemon cp values.
- * @param $pokedex_id
- * @return array
- */
-function get_pokemon_cp($pokedex_id)
-{
-    // Get gyms from database
-    $rs = my_query(
-            "
-            SELECT    min_cp, max_cp, min_weather_cp, max_weather_cp
-            FROM      pokemon
-            WHERE     pokedex_id = {$pokedex_id}
-            "
-        );
-
-    $cp = $rs->fetch_assoc();
-
-    return $cp;
-}
-
-/**
- * Get formatted pokemon cp values.
- * @param $pokedex_id
- * @param $override_language
- * @return string
- */
-function get_formatted_pokemon_cp($pokedex_id, $override_language = false)
-{
-    // Init cp text.
-    $cp20 = '';
-    $cp25 = '';
-
-    // Valid pokedex id?
-    if($pokedex_id !== "NULL" && $pokedex_id != 0) {
-        // Get gyms from database
-        $rs = my_query(
-                "
-                SELECT    min_cp, max_cp, min_weather_cp, max_weather_cp
-                FROM      pokemon
-                WHERE     pokedex_id = {$pokedex_id}
-                "
-            );
-
-        while($row = $rs->fetch_assoc()) {
-            // CP
-            $cp20 .= ($row['min_cp'] > 0) ? $row['min_cp'] : '';
-            $cp20 .= (!empty($cp20) && $cp20 > 0) ? ('/' . $row['max_cp']) : ($row['max_cp']);
-
-            // Weather boosted CP
-            $cp25 .= ($row['min_weather_cp'] > 0) ? $row['min_weather_cp'] : '';
-            $cp25 .= (!empty($cp25) && $cp25 > 0) ? ('/' . $row['max_weather_cp']) : ($row['max_weather_cp']);
-        }
-    }
-
-    // Combine CP and weather boosted CP
-    $text = ($override_language == true) ? (getRaidTranslation('pokedex_cp')) : (getTranslation('pokedex_cp'));
-    $cp = (!empty($cp20)) ? ($text . ' <b>' . $cp20 . '</b>') : '';
-    $cp .= (!empty($cp25)) ? (' (' . $cp25 . ')') : '';
-
-    return $cp;
-}
-
-/**
- * Get pokemon weather.
- * @param $pokedex_id
- * @return string
- */
-function get_pokemon_weather($pokedex_id)
-{
-    if($pokedex_id !== "NULL" && $pokedex_id != 0) {
-        // Get pokemon weather from database
-        $rs = my_query(
-                "
-                SELECT    weather
-                FROM      pokemon
-                WHERE     pokedex_id = {$pokedex_id}
-                "
-            );
-
-        // Fetch the row.
-        $ww = $rs->fetch_assoc();
-
-        return $ww['weather'];
-    } else {
-        return 0;
-   }
-}
-
-/**
  * Get weather icons.
  * @param $weather_value
  * @return string
@@ -1006,352 +2174,59 @@ function get_user($user_id)
     return $msg;
 }
 
-/**
- * Get timezone from user or config as fallback.
- * @param $update
- * @return timezone
- */
-function get_timezone($update)
-{
-    // Get telegram ID to check access from $update - either message, callback_query or inline_query
-    $update_type = '';
-    $update_type = !empty($update['message']['from']['id']) ? 'message' : $update_type;
-    $update_type = (empty($update_type) && !empty($update['callback_query']['from']['id'])) ? 'callback_query' : $update_type;
-    $update_type = (empty($update_type) && !empty($update['inline_query']['from']['id'])) ? 'inline_query' : $update_type;
-    $update_id = $update[$update_type]['from']['id'];
-
-    // Log message type and ID
-    debug_log('Telegram message type: ' . $update_type);
-    debug_log('Getting timezone for ID: ' . $update_id);
-
-    // Build query.
-    $rs = my_query(
-        "
-        SELECT    timezone
-        FROM      raids
-          WHERE   id = (
-                      SELECT    raid_id
-                      FROM      attendance
-                        WHERE   user_id = {$update_id}
-                      ORDER BY  id DESC LIMIT 1
-                  )
-        "
-    );
-
-    // Get row.
-    $row = $rs->fetch_assoc();
-
-    // No data found.
-    if (!$row) {
-        $tz = TIMEZONE;
-        debug_log('No timezone found for ID: ' . $update_id, '!');
-        debug_log('Returning default timezone: ' . $tz, '!');
-    } else {
-        $tz = $row['timezone'];
-        debug_log('Found timezone for ID: ' . $update_id);
-        debug_log('Returning timezone: ' . $tz);
-    }
-
-    return $tz;
-}
-
-/**
- * Moderator keys.
- * @param $limit
- * @param $action
- * @return array
- */
-function edit_moderator_keys($limit, $action)
-{
-    // Number of entries to display at once.
-    $entries = 10;
-
-    // Number of entries to skip with skip-back and skip-next buttons
-    $skip = 50;
-
-    // Module for back and next keys
-    $module = "mods";
-
-    // Init empty keys array.
-    $keys = array();
-
-    // Get moderators from database
-    if ($action == "list" || $action == "delete") {
-        $rs = my_query(
-                "
-                SELECT    *
-                FROM      users
-                WHERE     moderator = 1 
-	        ORDER BY  name
-	        LIMIT     $limit, $entries
-                "
-            );
-
-	// Number of entries
-        $cnt = my_query(
-                "
-                SELECT    COUNT(*)
-                FROM      users
-                WHERE     moderator = 1 
-                "
-            );
-    } else if ($action == "add") {
-        $rs = my_query(
-                "
-                SELECT    *
-                FROM      users
-                WHERE     (moderator = 0 OR moderator IS NULL)
-                ORDER BY  name
-                LIMIT     $limit, $entries
-                "
-            );
-
-	// Number of entries
-        $cnt = my_query(
-                "
-                SELECT    COUNT(*)
-                FROM      users
-                WHERE     (moderator = 0 OR moderator IS NULL)
-                "
-            );
-    }
-
-    // Number of database entries found.
-    $sum = $cnt->fetch_row();
-    $count = $sum['0'];
-
-    // List users / moderators
-    while ($mod = $rs->fetch_assoc()) {
-        $keys[] = array(
-            'text'          => $mod['name'],
-            'callback_data' => '0:mods_' . $action . ':' . $mod['user_id']
-        );
-    }
-
-    // Empty backs and next keys
-    $keys_back = array();
-    $keys_next = array();
-
-    // Add back key.
-    if ($limit > 0) {
-        $new_limit = $limit - $entries;
-        $empty_back_key = array();
-        $back = universal_key($empty_back_key, $new_limit, $module, $action, getTranslation('back') . " (-" . $entries . ")");
-        $keys_back[] = $back[0][0];
-    }
-
-    // Add skip back key.
-    if ($limit - $skip > 0) {
-        $new_limit = $limit - $skip - $entries;
-        $empty_back_key = array();
-        $back = universal_key($empty_back_key, $new_limit, $module, $action, getTranslation('back') . " (-" . $skip . ")");
-        $keys_back[] = $back[0][0];
-    }
-
-    // Add next key.
-    if (($limit + $entries) < $count) {
-        $new_limit = $limit + $entries;
-        $empty_next_key = array();
-        $next = universal_key($empty_next_key, $new_limit, $module, $action, getTranslation('next') . " (+" . $entries . ")");
-        $keys_next[] = $next[0][0];
-    }
-
-    // Add skip next key.
-    if (($limit + $skip + $entries) < $count) {
-        $new_limit = $limit + $skip + $entries;
-        $empty_next_key = array();
-        $next = universal_key($empty_next_key, $new_limit, $module, $action, getTranslation('next') . " (+" . $skip . ")");
-        $keys_next[] = $next[0][0];
-    }
-
-    // Exit key
-    $empty_exit_key = array();
-    $key_exit = universal_key($empty_exit_key, "0", "exit", "0", getTranslation('abort'));
-
-    // Get the inline key array.
-    $keys = inline_key_array($keys, 1);
-    $keys_back = inline_key_array($keys_back, 2);
-    $keys_next = inline_key_array($keys_next, 2);
-    $keys = array_merge($keys_back, $keys);
-    $keys = array_merge($keys, $keys_next);
-    $keys = array_merge($keys, $key_exit);
-
-    return $keys;
-}
-
-/**
- * Inline key array.
- * @param $buttons
- * @param $columns
- * @return array
- */
-function inline_key_array($buttons, $columns)
-{
-    $result = array();
-    $col = 0;
-    $row = 0;
-
-    foreach ($buttons as $v) {
-        $result[$row][$col] = $v;
-        $col++;
-
-        if ($col >= $columns) {
-            $row++;
-            $col = 0;
-        }
-    }
-    return $result;
-}
-
-/**
- * Pokedex edit pokemon keys.
- * @param $limit
- * @param $action
- * @return array
- */
-function edit_pokedex_keys($limit, $action, $all_pokemon = true)
-{
-    // Number of entries to display at once.
-    $entries = 10;
-
-    // Number of entries to skip with skip-back and skip-next buttons
-    $skip = 50;
-
-    // Module for back and next keys
-    $module = "pokedex";
-
-    // Init empty keys array.
-    $keys = array();
-
-    // Get only pokemon with CP and weather values from database
-    if($all_pokemon == false) {
-        $rs = my_query(
-            "
-            SELECT    pokedex_id
-            FROM      pokemon
-            WHERE     min_cp > 0
-              AND     max_cp > 0
-              AND     min_weather_cp > 0
-              AND     max_weather_cp > 0
-              AND     weather > 0
-            ORDER BY  pokedex_id
-            LIMIT     $limit, $entries
-            "
-        );
-
-        // Number of entries
-        $cnt = my_query(
-            "
-            SELECT    COUNT(*)
-            FROM      pokemon
-            WHERE     min_cp > 0
-              AND     max_cp > 0
-              AND     min_weather_cp > 0
-              AND     max_weather_cp > 0
-              AND     weather > 0
-            "
-        );
-    // Get all pokemon from database
-    } else {
-        $rs = my_query(
-            "
-            SELECT    pokedex_id
-            FROM      pokemon
-            ORDER BY  pokedex_id
-            LIMIT     $limit, $entries
-            "
-        );
-
-        // Number of entries
-        $cnt = my_query(
-            "
-            SELECT    COUNT(*)
-            FROM      pokemon
-            "
-        );
-    }
-    // Number of database entries found.
-    $sum = $cnt->fetch_row();
-    $count = $sum['0'];
-
-    // List users / moderators
-    while ($mon = $rs->fetch_assoc()) {
-        $pokemon_name = get_local_pokemon_name($mon['pokedex_id']);
-        $keys[] = array(
-            'text'          => $mon['pokedex_id'] . ' ' . $pokemon_name,
-            'callback_data' => $mon['pokedex_id'] . ':pokedex_edit_pokemon:0'
-        );
-    }
-
-    // Empty backs and next keys
-    $keys_back = array();
-    $keys_next = array();
-
-    // Add back key.
-    if ($limit > 0) {
-        $new_limit = $limit - $entries;
-        $empty_back_key = array();
-        $back = universal_key($empty_back_key, $new_limit, $module, $action, getTranslation('back') . " (-" . $entries . ")");
-        $keys_back[] = $back[0][0];
-    }
-
-    // Add skip back key.
-    if ($limit - $skip > 0) {
-        $new_limit = $limit - $skip - $entries;
-        $empty_back_key = array();
-        $back = universal_key($empty_back_key, $new_limit, $module, $action, getTranslation('back') . " (-" . $skip . ")");
-        $keys_back[] = $back[0][0];
-    }
-
-    // Add next key.
-    if (($limit + $entries) < $count) {
-        $new_limit = $limit + $entries;
-        $empty_next_key = array();
-        $next = universal_key($empty_next_key, $new_limit, $module, $action, getTranslation('next') . " (+" . $entries . ")");
-        $keys_next[] = $next[0][0];
-    }
-
-    // Add skip next key.
-    if (($limit + $skip + $entries) < $count) {
-        $new_limit = $limit + $skip + $entries;
-        $empty_next_key = array();
-        $next = universal_key($empty_next_key, $new_limit, $module, $action, getTranslation('next') . " (+" . $skip . ")");
-        $keys_next[] = $next[0][0];
-    }
-
-    // Exit key
-    $empty_exit_key = array();
-    $key_exit = universal_key($empty_exit_key, "0", "exit", "0", getTranslation('abort'));
-
-    // Get the inline key array.
-    $keys = inline_key_array($keys, 1);
-    $keys_back = inline_key_array($keys_back, 2);
-    $keys_next = inline_key_array($keys_next, 2);
-    $keys = array_merge($keys_back, $keys);
-    $keys = array_merge($keys, $keys_next);
-    $keys = array_merge($keys, $key_exit);
-
-    return $keys;
-}
 
 /**
  * Quest type keys.
  * @param $pokestop_id
+ * @param $event
  * @return array
  */
-function quest_type_keys($pokestop_id)
+function quest_type_keys($pokestop_id, $event = 0)
 {
+    // Hide/show events
+    if($event == 0) {
+        // Init empty keys array.
+        $keys_event = array();
+
+        // Get all quest events from database
+        $rs_event = my_query(
+                "
+                SELECT    quest_event
+                FROM      questlist
+                WHERE     quest_event > 0
+                GROUP BY  quest_event
+                "
+            );
+
+        // Add key for each event
+        while ($ql_entry = $rs_event->fetch_assoc()) {
+            $text = getTranslation('quest_event_'. $ql_entry['quest_event']) . '...';
+            // Add keys.
+            $keys_event[] = array(
+                'text'          => $text,
+                'callback_data' => $pokestop_id . ':quest_edit_type:0-' . $ql_entry['quest_event'] . '-0'
+            );
+        }
+
+        // Get the inline key array.
+        if($keys_event) {
+            $keys_event = inline_key_array($keys_event, 1);
+        }
+    }
+
+    // Init empty keys array.
+    $keys = array();
+
     // Get all quest types from database
     $rs = my_query(
             "
-            SELECT    quest_type
+            SELECT    quest_event, quest_type
             FROM      questlist
+            WHERE     quest_event = {$event} 
             GROUP BY  quest_type
             "
         );
 
-    // Init empty keys array.
-    $keys = array();
 
     // Add key for each quest quantity and action
     while ($quest = $rs->fetch_assoc()) {
@@ -1359,21 +2234,36 @@ function quest_type_keys($pokestop_id)
         // Add keys.
         $keys[] = array(
             'text'          => $text,
-            'callback_data' => $pokestop_id . ':quest_edit_type:' . $quest['quest_type']
+            'callback_data' => $pokestop_id . ':quest_edit_type:1-' . $quest['quest_event'] . '-' . $quest['quest_type']
         );
     }
 
     // Get the inline key array.
     $keys = inline_key_array($keys, 2);
 
+    // Merge keys.
+    if($keys_event) {
+        $keys = array_merge($keys_event, $keys);
+    }
+
     // Add quick selection keys.
-    $quick_keys = quick_quest_keys($pokestop_id);
-    $keys = array_merge($keys, $quick_keys);
+    if($event == 0) {
+        $quick_keys = quick_quest_keys($pokestop_id);
+        $keys = array_merge($keys, $quick_keys);
+    }
 
     // Add navigation key.
-    $nav_keys = array();
-    $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
-    $keys[] = $nav_keys;
+    if($event > 0) {
+        $nav_keys = array();
+        $nav_keys[] = universal_inner_key($keys, $pokestop_id, 'quest_create', '0', getTranslation('back'));
+        $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
+        $nav_keys = inline_key_array($nav_keys, 2);
+        $keys = array_merge($keys, $nav_keys);
+    } else {
+        $nav_keys = array();
+        $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
+        $keys[] = $nav_keys;
+    }
 
     debug_log($keys);
 
@@ -1401,12 +2291,7 @@ function quick_quest_keys($pokestop_id)
     // Add key for each quest quantity and action
     while ($qq = $qs->fetch_assoc()) {
         $ql_entry = get_questlist_entry($qq['quest_id']);
-
-        // Quest action: Singular or plural?
-        $quest_action = explode(":", getTranslation('quest_action_' . $ql_entry['quest_action']));
-        $quest_action_singular = $quest_action[0];
-        $quest_action_plural = $quest_action[1];
-        $qty_action = $ql_entry['quest_quantity'] . SP . (($ql_entry['quest_quantity'] > 1) ? ($quest_action_plural) : ($quest_action_singular));
+        $qty_action = get_quest_action($ql_entry);
 
         // Rewardlist entry.
         $rl_entry = get_rewardlist_entry($qq['reward_id']);
@@ -1456,10 +2341,11 @@ function quick_quest_keys($pokestop_id)
 /**
  * Quest quantity and action keys.
  * @param $pokestop_id
+ * @param $quest_event
  * @param $quest_type
  * @return array
  */
-function quest_qty_action_keys($pokestop_id, $quest_type)
+function quest_qty_action_keys($pokestop_id, $quest_event, $quest_type)
 {
     // Get all quest types from database
     $rs = my_query(
@@ -1467,6 +2353,7 @@ function quest_qty_action_keys($pokestop_id, $quest_type)
             SELECT    *
             FROM      questlist
             WHERE     quest_type = '$quest_type'
+            AND       quest_event = {$quest_event}
             ORDER BY  quest_quantity
             "
         );
@@ -1474,18 +2361,22 @@ function quest_qty_action_keys($pokestop_id, $quest_type)
     // Init empty keys array.
     $keys = array();
 
+    // Event?
+    if($quest_event == 0) {
+        $cb_event_type = '0-' . $quest_event . '-' . $quest_type;
+    } else {
+        $cb_event_type = '1-' . $quest_event . '-' . $quest_type;
+    }
+
     // Add key for each quest quantity and action
     while ($quest = $rs->fetch_assoc()) {
-        // Quest action: Singular or plural?
-        $quest_action = explode(":", getTranslation('quest_action_' . $quest['quest_action']));
-        $quest_action_singular = $quest_action[0];
-        $quest_action_plural = $quest_action[1];
-        $qty_action = $quest['quest_quantity'] . SP . (($quest['quest_quantity'] > 1) ? ($quest_action_plural) : ($quest_action_singular));
+        $qty_action = get_quest_action($quest);
 
         // Add keys.
         $keys[] = array(
             'text'          => $qty_action,
-            'callback_data' => $pokestop_id . ':quest_edit_reward:' . $quest['id'] . ',' . $quest_type
+            //'callback_data' => $pokestop_id . ':quest_edit_reward:' . $quest['id'] . ',' . $quest_event . '-' . $quest_type
+            'callback_data' => $pokestop_id . ':quest_edit_reward:' . $quest['id'] . ',' . $cb_event_type
         );
     }
 
@@ -1580,7 +2471,7 @@ function reward_type_keys($pokestop_id, $quest_id, $quest_type)
             $text = $rw_type[0];
             // Add keys.
             $keys[] = array(
-                'text'          => $text,
+                'text'          => ucfirst($text),
                 'callback_data' => $pokestop_id . ',' . $quest_id . ':quest_edit_qty_reward:' . $quest_type . ',' . $reward['reward_type']
             );
         }
@@ -1655,135 +2546,32 @@ function reward_qty_type_keys($pokestop_id, $quest_id, $quest_type, $reward_type
 }
 
 /**
- * Pokemon keys.
- * @param $raid_id
- * @param $raid_level
- * @return array
- */
-function pokemon_keys($raid_id, $raid_level, $action)
-{
-    // Init empty keys array.
-    $keys = array();
-
-    // Get pokemon from database
-    $rs = my_query(
-            "
-            SELECT    pokedex_id
-            FROM      pokemon
-            WHERE     raid_level = '$raid_level'
-            "
-        );
-
-    // Add key for each raid level
-    while ($pokemon = $rs->fetch_assoc()) {
-        $keys[] = array(
-            'text'          => get_local_pokemon_name($pokemon['pokedex_id']),
-            'callback_data' => $raid_id . ':' . $action . ':' . $pokemon['pokedex_id']
-        );
-    }
-
-    // Get the inline key array.
-    $keys = inline_key_array($keys, 3);
-
-    return $keys;
-}
-
-/**
- * Weather keys.
- * @param $pokedex_id
+ * Quantity keys.
+ * @param $id
  * @param $action
  * @param $arg
+ * @param $type
  * @return array
  */
-function weather_keys($pokedex_id, $action, $arg)
+function quantity_keys($id, $action, $arg, $type = 'reward')
 {
-    // Get the type, level and cp
-    $data = explode("-", $arg);
-    $weather_add = $data[0] . '-';
-    $weather_value = $data[1];
+    // Get the action and value
+    $actionval = explode("-", $arg);
+    $add = $actionval[0] . '-';
+    $old = $actionval[1];
 
     // Save and reset values
-    $save_arg = 'save-' . $weather_value;
-    $reset_arg = $weather_add . '0';
+    $save_arg = ($type == 'reward') ? ('save-' . $old) : ('add-' . $old);
+    $save_text = ($type == 'reward') ? EMOJI_DISK : getTranslation('next');
+    $reset_arg = $add . '0';
     
     // Init empty keys array.
     $keys = array();
 
-    // Max amount of weathers a pokemon raid boss can have is 3 which means 999
-    // Keys will be shown up to 99 and when user is adding one more weather we exceed 99, so we remove the keys then
-    // This means we do not exceed the max amout of 3 weathers a pokemon can have :)
-    // And no, 99 is not a typo if you read my comment above :P
-    if($weather_value <= 99) {
-        // Get last number from weather array
-        end($GLOBALS['weather']);
-        $last = key($GLOBALS['weather']);
-
-        // Add buttons for each weather.
-        for ($i = 1; $i <= $last; $i = $i + 1) {
-            // Get length of arg and split arg
-            $weather_value_length = strlen((string)$weather_value);
-            $weather_value_string = str_split((string)$weather_value);
-
-            // Continue if weather got already selected
-            if($weather_value_length == 1 && $weather_value == $i) continue;
-            if($weather_value_length == 2 && $weather_value_string[0] == $i) continue;
-            if($weather_value_length == 2 && $weather_value_string[1] == $i) continue;
-
-            // Set new weather.
-            $new_weather = $weather_add . ($weather_value == 0 ? '' : $weather_value) . $i;
-
-            // Set keys.
-            $keys[] = array(
-                'text'          => $GLOBALS['weather'][$i],
-                'callback_data' => $pokedex_id . ':' . $action . ':' . $new_weather
-            ); 
-        }
-    }
-
-    // Get the inline key array.
-    $keys = inline_key_array($keys, 3);
-
-    // Save and Reset key
-    $keys[] = array(
-        array(
-            'text'          => EMOJI_DISK,
-            'callback_data' => $pokedex_id . ':' . $action . ':' . $save_arg
-        ),
-        array(
-            'text'          => getTranslation('reset'),
-            'callback_data' => $pokedex_id . ':' . $action . ':' . $reset_arg
-        )
-    );
-
-    return $keys;
-}
-
-/**
- * CP keys.
- * @param $pokedex_id
- * @param $action
- * @param $arg
- * @return array
- */
-function cp_keys($pokedex_id, $action, $arg)
-{
-    // Get the type, level and cp
-    $data = explode("-", $arg);
-    $cp_type_level = $data[0] . '-' . $data[1];
-    $cp_add = $data[0] . '-' . $data[1] . '-' . $data[2] . '-';
-    $old_cp = $data[3];
-
-    // Save and reset values
-    $save_arg = $cp_type_level . '-save-' . $old_cp;
-    $reset_arg = $cp_add . '0';
-    
-    // Init empty keys array.
-    $keys = array();
-
-    // Max CP is 9999 and no the value 999 is not a typo!
-    // Keys will be shown up to 999 and when user is adding one more number we exceed 999, so we remove the keys then
-    // This means we do not exceed a Max CP of 9999 :)
-    if($old_cp <= 999) {
+    // Max is 9999 and no the value 999 is not a typo!
+    // Keys will be shown up to 9999 and when user is adding one more number we exceed 9999, so we remove the keys then
+    // This means we do not exceed a Max value of 9999 :)
+    if($old <= 999) {
 
         // Add keys 0 to 9
         /**
@@ -1795,181 +2583,86 @@ function cp_keys($pokedex_id, $action, $arg)
 
         // 7 8 9
         for ($i = 7; $i <= 9; $i = $i + 1) {
-            // Set new cp
-            $new_cp = $cp_add . ($old_cp == 0 ? '' : $old_cp) . $i;
+            // Set new
+            $new = $add . ($old == 0 ? '' : $old) . $i;
 
             // Set keys.
             $keys[] = array(
                 'text'          => $i,
-                'callback_data' => $pokedex_id . ':' . $action . ':' . $new_cp
+                'callback_data' => $id . ':' . $action . ':' . $new
             );
         }
 
         // 4 5 6
         for ($i = 4; $i <= 6; $i = $i + 1) {
-            // Set new cp
-            $new_cp = $cp_add . ($old_cp == 0 ? '' : $old_cp) . $i;
+            // Set new
+            $new = $add . ($old == 0 ? '' : $old) . $i;
 
             // Set keys.
             $keys[] = array(
                 'text'          => $i,
-                'callback_data' => $pokedex_id . ':' . $action . ':' . $new_cp
+                'callback_data' => $id . ':' . $action . ':' . $new
             );
         }
 
         // 1 2 3
         for ($i = 1; $i <= 3; $i = $i + 1) {
-            // Set new cp
-            $new_cp = $cp_add . ($old_cp == 0 ? '' : $old_cp) . $i;
+            // Set new
+            $new = $add . ($old == 0 ? '' : $old) . $i;
 
             // Set keys.
             $keys[] = array(
                 'text'          => $i,
-                'callback_data' => $pokedex_id . ':' . $action . ':' . $new_cp
+                'callback_data' => $id . ':' . $action . ':' . $new
             );
         }
 
         // 0
-        if($old_cp != 0) {
-            // Set new cp
-            $new_cp = $cp_add . $old_cp . '0';
+        if($old != 0) {
+            // Set new
+            $new = $add . $old . '0';
         } else {
-            $new_cp = $reset_arg;
+            $new = $reset_arg;
         }
         
         // Set keys.
         $keys[] = array(
             'text'          => '0',
-            'callback_data' => $pokedex_id . ':' . $action . ':' . $new_cp
+            'callback_data' => $id . ':' . $action . ':' . $new
         );
     }
 
-    // Save
-    $keys[] = array(
-        'text'          => EMOJI_DISK,
-        'callback_data' => $pokedex_id . ':' . $action . ':' . $save_arg
-    );
+    // Reward? Save button!
+    if($type == 'reward') {
+        // Save
+        $keys[] = array(
+            'text'          => $save_text,
+            'callback_data' => $id . ':' . $action . ':' . $save_arg
+        );
+    }
 
     // Reset
     $keys[] = array(
         'text'          => getTranslation('reset'),
-        'callback_data' => $pokedex_id . ':' . $action . ':' . $reset_arg
+        'callback_data' => $id . ':' . $action . ':' . $reset_arg
     );
 
     // Get the inline key array.
     $keys = inline_key_array($keys, 3);
 
-    return $keys;
-}
+    // Not reward? Next button!
+    if($type != 'reward') {
+        // Add next navigation key.
+        $nav_keys = [];
+        $nav_keys[] = universal_inner_key($keys, $id, $action, $save_arg . '-0', getTranslation('next'));
 
-/**
- * Universal key.
- * @param $keys
- * @param $id
- * @param $action
- * @param $arg
- * @param $text
- * @return array
- */
-function universal_key($keys, $id, $action, $arg, $text = '0')
-{
-    $keys[] = [
-            array(
-                'text'          => $text,
-                'callback_data' => $id . ':' . $action . ':' . $arg
-            )
-        ];
-
-    // Write to log.
-    //debug_log($keys);
-
-    return $keys;
-}
-
-
-/**
- * Universal key.
- * @param $keys
- * @param $id
- * @param $action
- * @param $arg
- * @param $text
- * @return array
- */
-function universal_inner_key($keys, $id, $action, $arg, $text = '0')
-{
-    $keys = array(
-                'text'          => $text,
-                'callback_data' => $id . ':' . $action . ':' . $arg
-            );
-
-    // Write to log.
-    //debug_log($keys);
-
-    return $keys;
-}
-
-/**
- * Share keys.
- * @param $quest_id
- * @param $user_id
- * @return array
- */
-function share_quest_keys($quest_id, $user_id) 
-{
-    // Moderator or not?
-    debug_log("Checking if user is moderator: " . $user_id);
-    $rs = my_query(
-        "
-        SELECT    moderator
-        FROM      users
-          WHERE   user_id = {$user_id}
-        "
-    );
-
-    // Fetch user data.
-    $user = $rs->fetch_assoc();
-
-    // Check moderator status.
-    $mod = $user['moderator'];
-    debug_log('User is ' . (($mod == 1) ? '' : 'not ') . 'a moderator: ' . $user_id);
-
-    // Add share button if not restricted.
-    if ((SHARE_MODERATORS == true && $mod == 1) || SHARE_USERS == true) {
-        debug_log('Adding general share key to inline keys');
-        // Set the keys.
-        $keys[] = [
-            [
-                'text'                => getTranslation('share'),
-                'switch_inline_query' => basename(ROOT_PATH) . ':' . strval($quest_id)
-            ]
-        ];
-    }
-        
-    // Add buttons for predefined sharing chats.
-    if (!empty(SHARE_CHATS)) {
-        // Add keys for each chat.
-        $chats = explode(',', SHARE_CHATS);
-        foreach($chats as $chat) {
-            // Get chat object 
-            debug_log("Getting chat object for '" . $chat . "'");
-            $chat_obj = get_chat($chat);
-            
-            // Check chat object for proper response.
-            if ($chat_obj['ok'] == true) {
-                debug_log('Proper chat object received, continuing to add key for this chat: ' . $chat_obj['result']['title']);
-                $keys[] = [
-                    [
-                        'text'          => getTranslation('share_with') . ' ' . $chat_obj['result']['title'],
-                        'callback_data' => $quest_id . ':quest_share:' . $chat
-                    ]
-                ];
-            }
-        }
+        // Get the inline key array.
+        $keys[] = $nav_keys; 
     }
 
     return $keys;
 }
+
 
 /**
  * Insert quest cleanup info to database.
@@ -2039,7 +2732,7 @@ function insert_cleanup($chat_id, $message_id, $quest_id)
  * @param $telegram
  * @param $database
  */
-function run_quests_cleanup ($telegram = 2, $database = 2) {
+function run_cleanup ($telegram = 2, $database = 2) {
     /* Check input
      * 0 = Do nothing
      * 1 = Cleanup
@@ -2119,15 +2812,17 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             // Make sure quest exists
             $rs = my_query(
                 "
-                SELECT  id
+                SELECT  quest_date
                 FROM    quests
                   WHERE id = {$current_quest_id}
                 ", true
             );
-            $qq = $rs->fetch_row();
+
+            // Fetch quest date.
+            $quest = $rs->fetch_assoc();
 
             // No quest found - set cleanup to 0 and continue with next quest
-            if (empty($qq['0'])) {
+            if (!$quest) {
                 cleanup_log('No quest found with ID: ' . $current_quest_id, '!');
                 cleanup_log('Updating cleanup information.');
                 my_query(
@@ -2145,37 +2840,22 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
 
             // Get quest data only when quest_id changed compared to previous run
             if ($prev_quest_id != $current_quest_id) {
-                // Get the quest date by id.
-                $rs = my_query(
-                    "
-                    SELECT  quest_date,
-                            CURDATE()                   AS  today,
-                            UNIX_TIMESTAMP(quest_date)  AS  ts_questdate,
-                            UNIX_TIMESTAMP(CURDATE())   AS  ts_today
-                    FROM    quests
-                      WHERE id = {$current_quest_id}
-                    ", true
-                );
+                // Today.
+                $today = utcnow('Ymd');
+                $log_today = utcnow('Y-m-d');
 
-                // Fetch quest date.
-                $quest = $rs->fetch_assoc();
+                // Get quest date.
+                $qd = new DateTimeImmutable($quest['quest_date'], new DateTimeZone('UTC'));
+                $questdate = $qd->format('Ymd');
+                $log_questdate = $qd->format('Y-m-d');
 
-                // Get quest date and todays date.
-                $questdate = $quest['quest_date'];
-                $today = $quest['today'];
-                $unix_questdate = $quest['ts_questdate'];
-                $unix_today = $quest['ts_today'];
-
-                // Write unix timestamps and dates to log.
-                cleanup_log('Unix timestamps:');
-                cleanup_log('Today: ' . $unix_today);
-                cleanup_log('Quest date: ' . $unix_questdate);
-                cleanup_log('Today: ' . $today);
-                cleanup_log('Quest date: '  . $questdate);
+                // Write times to log.
+                cleanup_log($log_today, 'Current UTC date:');
+                cleanup_log($log_questdate, 'Quest UTC date:');
             }
 
             // Time for telegram cleanup?
-            if ($unix_today > $unix_questdate) {
+            if ($today > $questdate) {
                 // Delete quest telegram message if not already deleted
                 if ($telegram == 1 && $row['chat_id'] != 0 && $row['message_id'] != 0) {
                     // Delete telegram message.
@@ -2203,7 +2883,7 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
             }
 
             // Time for database cleanup?
-            if ($unix_today > $unix_questdate) {
+            if ($today > $questdate) {
                 // Delete quest from quests table.
                 // Make sure to delete only once - quest may be in multiple channels/supergroups, but only 1 time in database
                 if (($database == 1) && $row['quest_id'] != 0 && ($prev_quest_id != $current_quest_id)) {
@@ -2280,114 +2960,6 @@ function run_quests_cleanup ($telegram = 2, $database = 2) {
     }
 }
 
-/**
- * Get user language.
- * @param $language_code
- * @return string
- */
-function get_user_language($language_code)
-{
-    $languages = $GLOBALS['languages'];
-
-    // Get languages from normal translation.
-    if(array_key_exists($language_code, $languages)) {
-        $userlanguage = $languages[$language_code];
-    } else {
-        $userlanguage = 'EN';
-    }
-
-    debug_log('User language: ' . $userlanguage);
-
-    return $userlanguage;
-}
-
-/**
- * Update user.
- * @param $update
- * @return bool|mysqli_result
- */
-function update_user($update)
-{
-    global $db;
-
-    $name = '';
-    $nick = '';
-    $sep = '';
-
-    if (isset($update['message']['from'])) {
-        $msg = $update['message']['from'];
-    }
-
-    if (isset($update['callback_query']['from'])) {
-        $msg = $update['callback_query']['from'];
-    }
-
-    if (isset($update['inline_query']['from'])) {
-        $msg = $update['inline_query']['from'];
-    }
-
-    if (!empty($msg['id'])) {
-        $id = $msg['id'];
-
-    } else {
-        debug_log('No id', '!');
-        debug_log($update, '!');
-        return false;
-    }
-
-    if ($msg['first_name']) {
-        $name = $msg['first_name'];
-        $sep = ' ';
-    }
-
-    if (isset($msg['last_name'])) {
-        $name .= $sep . $msg['last_name'];
-    }
-
-    if (isset($msg['username'])) {
-        $nick = $msg['username'];
-    }
-
-    // Create or update the user.
-    $request = my_query(
-        "
-        INSERT INTO users
-        SET         user_id = {$id},
-                    nick    = '{$db->real_escape_string($nick)}',
-                    name    = '{$db->real_escape_string($name)}'
-        ON DUPLICATE KEY
-        UPDATE      nick    = '{$db->real_escape_string($nick)}',
-                    name    = '{$db->real_escape_string($name)}'
-        "
-    );
-
-    return $request;
-}
-
-/**
- * Convert unix timestamp to time string by timezone settings.
- * @param $unix
- * @param $tz
- * @param string $format
- * @return bool|string
- */
-function unix2tz($unix, $tz, $format = 'H:i')
-{
-    // Unix timestamp is required.
-    if (!empty($unix)) {
-        // Create dateTime object.
-        $dt = new DateTime('@' . $unix);
-
-        // Set the timezone.
-        $dt->setTimeZone(new DateTimeZone($tz));
-
-        // Return formatted time.
-        return $dt->format($format);
-
-    } else {
-        return false;
-    }
-}
 
 /**
  * Quest list.
@@ -2420,7 +2992,7 @@ function quest_list($update)
                     id AS iqq_quest_id
                     FROM      quests
                       WHERE   id = {$iqq}
-                      AND     quest_date = CURDATE()
+                      AND     quest_date = UTC_DATE()
             "
         );
 
@@ -2435,7 +3007,8 @@ function quest_list($update)
                                 quests.id AS iqq_quest_id
                     FROM        quests
                       WHERE     user_id = {$update['inline_query']['from']['id']}
-                      ORDER BY  id DESC LIMIT 2
+                      AND       quest_date = UTC_DATE()
+                      ORDER BY  id DESC LIMIT 3
             "
         );
 
@@ -2444,6 +3017,97 @@ function quest_list($update)
         }
     }
 
-    debug_log($rows);
-    answerInlineQuery($update['inline_query']['id'], $rows);
+    // Init array.
+    $contents = array();
+
+    // For each rows.
+    foreach ($rows as $key => $row) {
+            // Get the quest.
+            $quest = get_quest($row['iqq_quest_id']);
+
+            // Set the text.
+            $contents[$key]['text'] = get_formatted_quest($quest, true, true, false, true);
+
+            // Set the title.
+            $contents[$key]['title'] = $quest['pokestop_name'];
+
+            // Set the inline keyboard.
+            $contents[$key]['keyboard'] = [];
+
+            // Set the description.
+            $contents[$key]['desc'] = get_formatted_quest($quest, false, false, true, true);
+    }
+
+    debug_log($contents);
+    answerInlineQuery($update['inline_query']['id'], $contents);
 }
+
+/**
+ * Process response from telegram api.
+ * @param $json
+ * @param $json_response
+ * @return mixed
+ */
+function curl_json_response($json_response, $json)
+{
+    // Write to log.
+    debug_log($json_response, '<-');
+
+    // Decode json response.
+    $response = json_decode($json_response, true);
+
+    // Validate response.
+    if ($response['ok'] != true || isset($response['update_id'])) {
+        // Write error to log.
+        debug_log('ERROR: ' . $json . "\n\n" . $json_response . "\n\n");
+    } else {
+	// Result seems ok, get message_id and chat_id if supergroup or channel message
+	if (isset($response['result']['chat']['type']) && ($response['result']['chat']['type'] == "channel" || $response['result']['chat']['type'] == "supergroup")) {
+            // Init cleanup_id
+            $cleanup_id = 0;
+
+	    // Set chat and message_id
+            $chat_id = $response['result']['chat']['id'];
+            $message_id = $response['result']['message_id'];
+
+            // Get raid/quest id from $json
+            $json_message = json_decode($json, true);
+
+            // Write to log that message was shared with channel or supergroup
+            debug_log('Message was shared with ' . $response['result']['chat']['type'] . ' ' . $response['result']['chat']['title']);
+            debug_log('Checking input for cleanup info now...');
+
+            // Check if it's a venue and get quest id
+            if (!empty($response['result']['venue']['address'])) {
+                // Get raid_id or quest_id from address.
+                $cleanup_id = substr(strrchr($response['result']['venue']['address'], substr(strtoupper(BOT_ID), 0, 1) . '-ID = '), 7);
+
+            // Check if it's a text and get quest id
+            } else if (!empty($response['result']['text'])) {
+                $cleanup_id = substr(strrchr($response['result']['text'], substr(strtoupper(BOT_ID), 0, 1) . '-ID = '), 7);
+            }
+
+            // Trigger Cleanup when quest id was found
+            if($cleanup_id != 0) {
+                debug_log('Found ID for cleanup preparation from callback_data or venue!');
+                debug_log('Cleanup ID: ' . $cleanup_id);
+                debug_log('Chat_ID: ' . $chat_id);
+                debug_log('Message_ID: ' . $message_id);
+
+	        // Trigger cleanup preparation process when necessary id's are not empty and numeric
+	        if (!empty($chat_id) && !empty($message_id) && !empty($cleanup_id)) {
+		    debug_log('Calling cleanup preparation now!');
+		    insert_cleanup($chat_id, $message_id, $cleanup_id);
+	        } else {
+		    debug_log('Missing input! Cannot call cleanup preparation!');
+		}
+            } else {
+                debug_log('No cleanup info found! Skipping cleanup preparation!');
+            }
+	}
+    }
+
+    // Return response.
+    return $response;
+}
+

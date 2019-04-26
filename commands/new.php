@@ -6,6 +6,9 @@ debug_log('QUEST()');
 //debug_log($update);
 //debug_log($data);
 
+// Check access.
+bot_access_check($update, 'create');
+
 // Get pokestops by name.
 // Trim away everything before the first space
 $searchterm = $update['message']['text'];
@@ -19,7 +22,7 @@ if (is_array($keys)) {
     // Set message.
     $msg = '<b>' . getTranslation('quest_by_pokestop') . '</b>';
 
-    // Add back navigation key.
+    // Add abort navigation key.
     $nav_keys = [];
     $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
 

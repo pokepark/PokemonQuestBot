@@ -1,0 +1,74 @@
+{
+	"quest_type_1" : {
+		"NL": "Hatch",
+		"DE": "Brüte",
+		"EN": "Hatch",
+		"FR": "Fais éclore"
+	},
+	"quest_type_2" : {
+		"NL": "Spin",
+		"DE": "Drehe",
+		"EN": "Spin",
+		"FR": "Tourne"
+	},
+	"quest_type_3" : {
+		"NL": "Earn",
+		"DE": "Verdiene",
+		"EN": "Earn",
+		"FR": "Gagne"
+	},
+	"quest_type_4" : {
+		"NL": "Evolve",
+		"DE": "Entwickle",
+		"EN": "Evolve",
+		"FR": "Fais évoluer"
+	},
+	"quest_type_5" : {
+		"NL": "Make",
+		"DE": "Lande",
+		"EN": "Make",
+		"FR": "Fais"
+	},
+	"quest_type_6" : {
+		"NL": "Catch",
+		"DE": "Fange",
+		"EN": "Catch",
+		"FR": "Attrape"
+	},
+	"quest_type_7" : {
+		"NL": "Battle",
+		"DE": "Kämpfe",
+		"EN": "Battle",
+		"FR": "Combat"
+	},
+	"quest_type_8" : {
+		"NL": "Win",
+		"DE": "Gewinne",
+		"EN": "Win",
+		"FR": "Gagne"
+	},
+	"quest_type_9" : {
+		"NL": "Use",
+		"DE": "Verwende/Setze",
+		"EN": "Use",
+		"FR": "Utilise"
+	},
+	"quest_type_10" : {
+		"NL": "Power-up",
+		"DE": "Power-Up",
+		"EN": "Power-up",
+		"FR": "Recharge"
+	},
+	"quest_type_11" : {
+		"NL": "Send/Transfer",
+		"DE": "Verschicke",
+		"EN": "Send/Transfer",
+		"FR": "Envoie"
+	},
+	"quest_type_12" : {
+		"NL": "Trade",
+		"DE": "Tausche",
+		"EN": "Trade",
+		"FR": "Echange"
+	}
+}

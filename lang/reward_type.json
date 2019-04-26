@@ -1,0 +1,116 @@
+{
+	"reward_type_1" : {
+		"NL": "Pokemon:Pokemon",
+		"DE": "Pokemon:Pokemon",
+		"EN": "Pokemon:Pokemon",
+		"FR": "Pokémon:Pokémon"
+	},
+	"reward_type_2" : {
+		"NL": "Pokeball:Pokeballs",
+		"DE": "Pokeball:Pokebälle",
+		"EN": "Pokeball:Pokeballs",
+		"FR": "Poké Ball: Poké Balls"
+	},
+	"reward_type_3" : {
+		"NL": "Stardust:Stardust",
+		"DE": "Sternenstaub:Sternenstaub",
+		"EN": "Stardust:Stardust",
+		"FR": "Poussières d'étoiles:Poussières d'étoiles"
+	},
+	"reward_type_4" : {
+		"NL": "Rare candy:Rare candies",
+		"DE": "Sonderbonbon:Sonderbonbons",
+		"EN": "Rare candy:Rare candies",
+		"FR": "Super Bonbon:Supers Bonbons"
+	},
+	"reward_type_5" : {
+		"NL": "Fast-TM:Fast-TMs",
+		"DE": "Sofort-TM:Sofort-TMs",
+		"EN": "Fast-TM:Fast-TMs",
+		"FR": "CT Attaque Immédiate:CT Attaque Immédiate"
+	},
+	"reward_type_6" : {
+		"NL": "Charged-TM:Charged-TMs",
+		"DE": "Lade-TM:Lade-TMs",
+		"EN": "Charged-TM:Charged-TMs",
+		"FR": "CAT Attaque Chargée:CT Attaque Chargée"
+	},
+	"reward_type_7" : {
+		"NL": "Berry:Berries",
+		"DE": "Beere:Beeren",
+		"EN": "Berry:Berries",
+		"FR": "Baie:Baies"
+	},
+	"reward_type_8" : {
+		"NL": "golden Berry:golden Berries",
+		"DE": "goldene Beere:goldene Beeren",
+		"EN": "golden Berry:golden Berries",
+		"FR": "Baie Framby dorée:Baies Framby dorées"
+	},
+	"reward_type_9" : {
+		"NL": "silver Berry:silver Berries",
+		"DE": "silberne Beere:silberne Beeren",
+		"EN": "silver Berry:silver Berries",
+		"FR": "Baie Nanana argentée:Baies Nanana argentées"
+	},
+	"reward_type_10" : {
+		"NL": "Potion:Potions",
+		"DE": "Trank:Tränke",
+		"EN": "Potion:Potions",
+		"FR": "Potion:Potions"
+	},
+	"reward_type_11" : {
+		"NL": "Max Potion:Max Potions",
+		"DE": "Top-Trank:Top-Tränke",
+		"EN": "Max Potion:Max Potions",
+		"FR": "Potion Max:Potions Max"
+	},
+	"reward_type_12" : {
+		"NL": "Revive:Revives",
+		"DE": "Beleber:Beleber",
+		"EN": "Revive:Revives",
+		"FR": "Rappel:Rappels"
+	},
+	"reward_type_13" : {
+		"NL": "Max Revive:Max Revives",
+		"DE": "Top-Beleber:Top-Beleber",
+		"EN": "Max Revive:Max Revives",
+		"FR": "Rappel Max:Rappels Max"
+	},
+	"reward_type_14" : {
+		"NL": "Evolve Item:Evolve items",
+		"DE": "Entwicklungs-Item:Entwicklungs-Items",
+		"EN": "Evolve Item:Evolve items",
+		"FR": "Objet d'évolution:Objets d'évolution"
+	},
+	"reward_type_15" : {
+		"NL": "Dragon Scale:Dragon Scales",
+		"DE": "Drachenhaut:Drachenhäute",
+		"EN": "Dragon Scale:Dragon Scales",
+		"FR": "Ecaille Draco:Ecailles Draco"
+	},
+	"reward_type_16" : {
+		"NL": "Sun Stone:Sun Stones",
+		"DE": "Sonnenstein:Sonnensteine",
+		"EN": "Sun Stones:Sun Stones",
+		"FR": "Pierre Soleil:Pierres Soleil"
+	},
+	"reward_type_17" : {
+		"NL": "King's Rock:King's Rocks",
+		"DE": "King-Stein:King-Steine",
+		"EN": "King's Rock:King's Rocks",
+		"FR": "Roche Royale:Roches Royale"
+	},
+	"reward_type_18" : {
+		"NL": "Metal Coat:Metal Coats",
+		"DE": "Metallmantel:Metallmäntel",
+		"EN": "Metal Coat:Metal Coats",
+		"FR": "Peau Métal:Peaux Métal"
+	},
+	"reward_type_19" : {
+		"NL": "Up-Grade:Up-Grades",
+		"DE": "Up-Grade:Up-Grades",
+		"EN": "Up-Grade:Up-Grades",
+		"FR": "Améliorator:Améliorators"
+	}
+}

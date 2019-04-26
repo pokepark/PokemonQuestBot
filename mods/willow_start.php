@@ -1,6 +1,6 @@
 <?php
 // Write to log.
-debug_log('WILLOW()');
+debug_log('WILLOW_START()');
 
 // For debug.
 //debug_log($update);
@@ -50,7 +50,19 @@ $keys[] = $nav_keys;
 // Set message.
 $msg = '<b>' . getTranslation('edit_quests_encounters_rewards_quicklist') . '</b>';
 
-// Send message.
-send_message($update['message']['chat']['id'], $msg, $keys, ['reply_markup' => ['selective' => true, 'one_time_keyboard' => true]]);
+// Telegram JSON array.
+$tg_json = array();
+
+// Edit message.
+$tg_json[] = edit_message($update, $msg, $keys, ['disable_web_page_preview' => 'true'], true);
+
+// Build callback message string.
+$callback_response = 'OK';
+
+// Answer callback.
+$tg_json[] = answerCallbackQuery($update['callback_query']['id'], $callback_response, true);
+
+// Telegram multicurl request.
+curl_json_multi_request($tg_json);
 
 exit();

@@ -5,8 +5,8 @@ define('DB_USER',			'your_database_user');
 define('DB_PASSWORD',			'your_database_password');
 
 define('DEBUG',				true);
-define('CONFIG_LOGFILE',		'/var/log/tg-bots/dev-quest-bot.log');
-define('CONFIG_HASH',			'aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000');
+define('DEBUG_LOGFILE',			'/var/log/tg-bots/dev-quest-bot.log');
+define('APIKEY_HASH',			'aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000aaaabbbbccccddddeeeeffff1111222233334444555566667777888899990000');
 define('DDOS_MAXIMUM',			'10');
 define('BRIDGE_MODE',			false);
 
@@ -18,17 +18,15 @@ define('MAINTAINER_ID',			'your_tg_integer');
 define('BOT_ID',			'Q');
 define('BOT_NAME',			'@QuestPokemonBot');
 define('BOT_ADMINS',			'');
-define('BOT_ACCESS',			'');
-define('BOT_ALLOW_MEMBERS',             false);
-define('BOT_ALLOW_MEMBERS_CHATS',       '');
 
 // Languages
-define('LANGUAGE',             		'EN');
-define('QUEST_LANGUAGE',       		'EN');
+define('LANGUAGE_PRIVATE',             	'EN');
+define('LANGUAGE_PUBLIC',       	'EN');
 
 // Timezone and Google maps API 
 define('TIMEZONE',			'Europe/Berlin');
-define('GOOGLE_API_KEY',		''); 
+define('MAPS_LOOKUP',			false); 
+define('MAPS_API_KEY',			''); 
 
 // Quest creation
 define('QUEST_VIA_LOCATION',		true);
@@ -38,8 +36,6 @@ define('QUEST_HIDE_REWARDS',		true);
 define('QUEST_HIDDEN_REWARDS',		'2,7,10,11,12,13,14,15,16,17,18,19');
 
 // Quest sharing
-define('SHARE_MODERATORS',		true);
-define('SHARE_USERS',			true);
 define('SHARE_CHATS',			'');
 define('SHARE_QUICK',                   '');
 

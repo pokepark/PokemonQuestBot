@@ -91,22 +91,20 @@ You can set several languages for the bot. Available languages are (A-Z):
  - FR (French)
  - NL (Dutch)
 
-Set `LANGUAGE` for the prefered language the bot will answer users when they chat with them. Leave blank that the bot will answer in the users language. If the users language is not supported, e.g. ZH-CN (Chinese), the bot will always use EN (English) as fallback language.
+Set `LANGUAGE_PRIVATE` for the prefered language the bot will answer users when they chat with them. Leave blank that the bot will answer in the users language. If the users language is not supported, e.g. ZH-CN (Chinese), the bot will always use EN (English) as fallback language.
 
-Set `QUEST_LANGUAGE` to the prefered language for quests.
+Set `LANGUAGE_PUBLIC` to the prefered language for raid polls. Default value: EN
 
-So if you want to have the bot communication based on the users Telegram language, e.g. Dutch, and show the quest message in German for example:
+So if you want to have the bot communication based on the users Telegram language, e.g. Russian, and show the raid polls in German for example:
 
-`define('LANGUAGE', '');`
-`define('QUEST_LANGUAGE', 'DE');`
+`define('LANGUAGE_PRIVATE', '');`
+`define('LANGUAGE_PUBLIC', 'DE');`
 
 ## Timezone and Google maps API
 
 Set `TIMEZONE` to the timezone you wish to use for the bot. Predefined value from the example config is "Europe/Berlin".
 
-Optionally you can you use Google maps API to lookup addresses of gyms based on latitude and longitude
-
-Therefore get a Google maps API key and set it as `GOOGLE_API_KEY` in your config.
+Optionally you can you use Google maps API to lookup addresses of gyms based on latitude and longitude. Therefore get a Google maps API key.
 
 To get a new API key, navigate to https://console.developers.google.com/apis/credentials and create a new API project, e.g. PokemonQuestBot
 
@@ -124,37 +122,25 @@ https://console.developers.google.com/apis/library/geocoding-backend.googleapis.
 
 Finally check the dashboard again and make sure Google Maps Geocoding API and Google Maps Time Zone API are listed as enabled services.
 
+Set `MAPS_LOOKUP` to true and put the API key in `MAPS_API_KEY` in your config.
+
+
 ## Quest sharing
 
 You can share quests with any chat in Telegram via a share button.
 
-Sharing quests can be restricted, so only moderators or users or both can be allowed to share a quest.
+Sharing quests can be restricted, so only specific chats/users can be allowed to share a quest - take a look at the permission system!
 
-Therefore it is possible, via a comma-separated list, to specify the chats the quests can be shared with.
+With a predefined list you can specify the chats which should appear as buttons for sharing quests.
 
-For the ID of a chat either forward a message from the chat to a bot like @RawDataBot or search the web for another method ;)
+For the ID of a chat either forward a message from the chat to a bot like @RawDataBot, @getidsbot or search the web for another method ;)
 
-A few examples:
+Example:
 
-#### Restrict sharing for moderators and users to chats -100111222333 and -100444555666
-
-`define('SHARE_MODERATORS', false);`
-
-`define('SHARE_USERS', false);`
+#### Predefine sharing to the chats -100111222333 and -100444555666
 
 `define('SHARE_CHATS', '-100111222333,-100444555666');`
 
-#### Allow moderators to share with any chat, restrict sharing for users to chat -100111222333
-
-`define('SHARE_MODERATORS', true);`
-
-`define('SHARE_USERS', false);`
-
-`define('SHARE_CHATS', '-100111222333');`
-
-To allow quick(er) sharing of quests with a pokemon encounter as reward, the option `SHARE_QUICK` can be used. The quests are saved and shared in one step instead two separate steps:
-
-`define('SHARE_QUICK', '-100111222333');`
 
 ## Quest creation
 
@@ -206,85 +192,158 @@ Activate the cleanup of telegram messages and/or the database for quests by sett
 
 The cleanup process will automatically detect old quests which are not from the present day.
 
-Finally set up a cronjob to trigger the cleanup. You can also trigger telegram / database cleanup per cronjob: For no cleanup use 0, for cleanup use 1 and to use your config file use 2 or leave "telegram" and "database" out of the request data array. Please make sure to always specify the cleanup type which needs to be `quest`.
+Finally set up a cronjob to trigger the cleanup. You can also trigger telegram / database cleanup per cronjob: For no cleanup use 0, for cleanup use 1 and to use your config file use 2 or leave "telegram" and "database" out of the request data array.
 
 A few examples for quests - make sure to replace the URL with yours:
 
 #### Cronjob using cleanup values from config.php for quests: Just the secret without telegram/database OR telegram = 2 and database = 2
 
-`curl -k -d '{"cleanup":{"type":"quest","secret":"your-cleanup-secret/passphrase"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
+`curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
 OR
 
-`curl -k -d '{"cleanup":{"type":"quest","secret":"your-cleanup-secret/passphrase","telegram":"2","database":"2"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
+`curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase","telegram":"2","database":"2"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
 #### Cronjob to clean up telegram quest messages only: telegram = 1 and database = 0 
 
-`curl -k -d '{"cleanup":{"type":"quest","secret":"your-cleanup-secret/passphrase","telegram":"1","database":"0"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
+`curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase","telegram":"1","database":"0"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
 #### Cronjob to clean up database and telegram quest messages: telegram = 1 and database = 1
 
-`curl -k -d '{"cleanup":{"type":"quest","secret":"your-cleanup-secret/passphrase","telegram":"1","database":"1"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
+`curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase","telegram":"1","database":"1"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
 # Access permissions
 
 ## Public access
 
-When no telegram id, group, supergroup or channel is specified in `BOT_ADMINS` and/or `BOT_ACCESS`, the bot will allow everyone to use it (public access).
+When no telegram id, group, supergroup or channel is specified in `BOT_ADMINS` the bot will allow everyone to use it (public access).
 
 Example for public access: `define('BOT_ACCESS', '');`
 
-## Restricted access
+## Access and permissions
 
-With BOT_ADMINS and BOT_ACCESS being used to restrict access, there are several access roles / types. When you do not configure BOT_ACCESS, everyone will have access to your bot (public access).  
+The `MAINTAINER_ID` is not able to access the bot nor has any permissions as that id is only contacted in case of errors and issues with the bot configuration.
 
-Set `BOT_ADMINS` and `BOT_ACCESS` to id (-100123456789) of one or multiple by comma separated individual telegram chat names/ids, groups, supergroups or channels.
+The `BOT_ADMINS` have all permissions and can use any feature of the bot.
 
-Please note, when you're setting groups, supergroups or channels only administrators (not members!) from these chats will gain access to the bot! So make sure this requirement is fulfilled or add their individual telegram usernames/ids instead.
+Telegram Users can only vote on raid polls, but have no access to other bot functions (unless you configured it).
 
-Example for restricted access:  
-`define('BOT_ADMINS', '111222333,111555999');`
+That telegram chats/users can access the bot and use the features, you need to create an access file.
 
-`define('BOT_ACCESS', '111222333,-100224466889,-100112233445,111555999');`
+Those access files need to be placed under the subdirectory 'access' and follow the name scheme 'accessCHAT_ID'.
 
-To allow members from groups, supergroups or channels:
+Every access file allows the access for a particular chat and must include the permissons which should be granted to that chat.
 
-Set `BOT_ALLOW_MEMBERS` to true, so members of a Telegram chat in addition to the administrators are considered during the access check and allowed to use the bot if they are a member of the respective chat.
+To grant permissions via an access file, you easily add every permission on a single line of the access file.
 
-Set `BOT_ALLOW_MEMBERS_CHAT` to the chats you wish to allow member access for.
+This way you define individual access to bot commands per chat id.
 
-Example to allow members of chat groups -100112233445 and -100224466889:
-`define('BOT_ALLOW_MEMBERS', true);`
+Last but not least: It does not matter if a chat is a user, group, supergroup or channel - any kind of chat is supported as every chat has a chat id!
 
-`define('BOT_ALLOW_MEMBERS_CHATS', '-100112233445, -100224466889');`
+## Permissions overview
+
+The following two tables are showing the permissions you need to write into an access file (last column) to grant permissions to users/chats.
+
+For groups, supergroups or channels you need add at least one of the following permissions that either the creator, the admins or the members can access the bot.
+
+So it's always a combination of at least one of the permissions from the first table plus the actual permissions from the second table.
+
+| Chat type  | Role      | **Permission inside access file** |
+|------------|-----------|-----------------------------------|
+| User       | Not required!                                ||
+|            |           |                                   |
+| Group      | Creator   | `allow-creator`                   |
+|            | Admins    | `allow-admins`                    |
+|            | Members   | `allow-members`                   |
+|            |           |                                   |
+| Supergroup | Creator   | `allow-creator`                   |
+|            | Admins    | `allow-admins`                    |
+|            | Members   | `allow-members`                   |
+|            |           |                                   |
+| Channel    | Creator   | `allow-creator`                   |
+|            | Admins    | `allow-admins`                    |
+|            | Members   | `allow-members`                   |
+
+A few examples for access files can be found below the permission overview table.
 
 
-## Access overview
+| Access     | **Action and /command**                                          | Permission inside access file            |
+|------------|------------------------------------------------------------------|------------------------------------------|
+| Bot        | Access the bot itself                                            | `bot-access`                             |
+|            |                                                                  |                                          |
+| Quest      | Create quests `/start`, `/new`                                   | `create`                                 |
+|            | List all quests `/list`                                          | `list`                                   |
+|            | Delete OWN quests `/delete`                                      | `delete` and `delete-own`                |
+|            | Delete ALL quests `/delete`                                      | `delete` and `delete-all`                |
+|            |                                                                  |                                          |
+| Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share-own`                              |
+|            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share-all`                              |
+|            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
+|            | Share ALL created raids to any chat                              | `share-own` and `share-any-chat`         |
+|            |                                                                  |                                          |
+| Dex        | Get pokemon id by pokemon name `/dex`                            | `pokemon` and `pokemon-own`              |
+|            |                                                                  |                                          |
+| Willow     | Manage quests, rewards, encounters and quicklist `/willow`       | `willow`                                 |
+|            |                                                                  |                                          |
+| Help       | Show help `/help`                                                | `help`                                   |
 
-With your `MAINTAINER_ID` and as a member of `BOT_ADMINS` you have the permissions to do anything. **For performance improvements, it's recommended to add the MAINTAINER and all members of BOT_ADMINS as moderator via /mods command!** 
 
-As a member of `BOT_ACCESS` you can create and share quests. `BOT_ACCESS` members who are moderators too, can delete their own quests and also quests from other users. Note that members of `BOT_ACCESS` are not allowed to see the available quests in DB by ID, only the `MAINTAINER_ID` and the `BOT_ADMINS` have the right to do so.
+#### Example: Allow the user 111555999 to create quests and share them to the predefined chat list
 
-Telegram Users can only see on shared quests, but have no access to other bot functions (unless you configured it for public access).
+Access file: `access\access111555999`
 
+Content of the access file, so the actual permissions:
+`access-bot
+create
+share-own`
 
-| Access:   |            |                                  | MAINTAINER_ID | BOT_ADMINS | BOT_ACCESS | BOT_ACCESS | Telegram |
-|-----------|------------|----------------------------------|---------------|------------|------------|------------|----------|
-| Database: |            |                                  |               |            | Moderator  | User       | User     |
-|           | **Area**   | **Action and /command**          |               |            |            |            |          |
-|           |            |                                  |               |            |            |            |          |
-|           | Moderators | List `/mods`                     | Yes           | Yes        |            |            |          |
-|           |            | Add `/mods`                      | Yes           | Yes        |            |            |          |
-|           |            | Delete `/mods`                   | Yes           | Yes        |            |            |          |
-|           |            |                                  |               |            |            |            |          |
-|           | Quests     | Create `/start` or `/new`        | Yes           | Yes        | Yes        | Yes        |          |
-|           |            | List `/list`                     | Yes           | Yes        | Yes        | Yes        |          |
-|           |            | Delete ALL quests `/delete`      | Yes           | Yes        |            |            |          |
-|           |            | Delete OWN quests `/delete`      | Yes           | Yes        | Yes        | Yes        |          |
-|           |            | Quests in DB by ID `/willow`     | Yes           | Yes        |            |            |          |
-|           |            |                                  |               |            |            |            |          |
-|           | Help       | Show `/help`                     | Yes           | Yes        | Yes        | Yes        |          |
+#### Example: Allow the creator and the admins of the channel -100224466889 to create quests as well as sharing quests created by their own or others to the predefined chat list or any other chat
 
+Access file: `access\access-100224466889`
+
+Important: The minus `-` in front of the actual chat id must be part of the name as it's part of the chat id!
+
+Content of the access file, so the actual permissions:
+`access-bot
+allow-creator
+allow-admins
+create
+share-all
+share-own
+share-any-chat`
+
+# Customization
+
+The bot allows you to customize things and therefore has a folder 'custom' for your customizations.
+
+## Custom icons
+
+In case you do not like some of the predefined icons and might like to change them to other/own icons:
+- Create a file named `constants.php` in the custom folder
+- Lookup the icon definitions you'd like to change in either the core or bot constants.php (`core/bot/constants.php` and `constants.php`)
+- Define your own icons in your custom constants.php
+- For example to change the yellow exclamation mark icon to a red exclamation mark put the following in your `custom/constants.php`:
+`<?php
+defined('EMOJI_WARN')           or define('EMOJI_WARN',    iconv('UCS-4LE', 'UTF-8', pack('V', 0x2757)));
+`
+- Make sure to not miss the first line which declares the file as php file!
+- To get the codes (here: 0x2757) of the icons/emojis, take a look at one of the large emoji databases in the web. They ususally have them mentioned and also show how the icons look like on different systems.
+
+## Custom translation
+
+To change translations you can do the following:
+- Create a file named `language.json` in the custom folder
+- Find the translation name/id by searching the core and bot language.php files (`core/lang/language.php` and `lang/language.php`)
+- Set your own translation in your custom language.json
+- For example to change the translation of 'Friday' to a shorter 'Fri' put the following in your `custom/language.json`:
+`{
+    "weekday_5":{
+        "EN":"Fri"
+    }
+}
+`
+- Make sure to create a valid JSON file for your custom translations
+- To verify your custom language.json you can use several apps, programs and web services.
 
 # Usage
 
@@ -317,14 +376,16 @@ The bot will allow you to get a list of the quests from today, share and delete 
 The bot will answer you "This is a private bot" so you can verify the bot is working and accepting input.
 
 
-### Command: /mods
+### Command: /dex
 
-The bot allows you to set some users as moderators. You can list, add and delete moderators from the bot. Note that when you have restricted the access to your bot via BOT_ADMINS and BOT_ACCESS, you need to add the users as administrators of a chat or their Telegram IDs to either BOT_ADMINS or BOT_ACCESS. Otherwise they won't have access to the bot, even though you have added them as moderators! 
+Get the pokemon id of a pokemon by name.
+
+Example input: `/dex Pikachu`
 
 
 ### Command: /willow
 
-Get a list of all available quests and their ID from the database.
+You can manage several things under this command and add/delete quests, rewards, encounters and quicklist entries.
 
 # Debugging
 
@@ -335,6 +396,13 @@ Check your bot logfile and other related log files, e.g. apache/httpd log, php l
 Currently constantly new features, bug fixes and improvements are added to the bot. Since we do not have an update mechanism yet, when updating the bot, please always do the following:
  - Add new config variables which got added to the config.php.example to your own config.php!
  - If new tables and/or columns got added or changed inside pokemon-quest-bot.sql, please add/alter these tables/columns at your existing installation!
+
+# TODO
+
+- Add pokestops
+- Delete pokestops
+- Edit addresses of pokestops
+- Support pokemon forms!
 
 # SQL Files
 

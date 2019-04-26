@@ -6,6 +6,9 @@ debug_log('quest_delete()');
 //debug_log($update);
 //debug_log($data);
 
+// Access check.
+quest_access_check($update, $data, 'delete');
+
 // Quest id.
 $quest_id = $data['id'];
 
@@ -53,13 +56,19 @@ if ($action == 0) {
     delete_quest($quest_id);
 }
 
+// Telegram JSON array.
+$tg_json = array();
+
 // Edit message.
-edit_message($update, $msg, $keys, ['disable_web_page_preview' => 'true']);
+$tg_json[] = edit_message($update, $msg, $keys, ['disable_web_page_preview' => 'true'], true);
 
 // Build callback message string.
 $callback_response = 'OK';
 
 // Answer callback.
-answerCallbackQuery($update['callback_query']['id'], $callback_response);
+$tg_json[] = answerCallbackQuery($update['callback_query']['id'], $callback_response, true);
+
+// Telegram multicurl request.
+curl_json_multi_request($tg_json);
 
 exit();

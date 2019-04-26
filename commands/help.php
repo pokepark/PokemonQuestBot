@@ -1,5 +1,8 @@
 <?php
 
+// Check access.
+bot_access_check($update, 'help');
+
 $msg = '
 <b>EN Guide on how to create a raid poll raid bot</b>
 1) make sure the raid hasn\'t been posted yet in the chat
@@ -11,5 +14,16 @@ $msg = '
 7) press share and choose yourRaid channel
 8) wait until the option with the boss name appears and select it
 ';
-$msg = 'This is a private bot.'; // temp
-sendMessage($update['message']['from']['id'], $msg);
+$msg1 = 'This is a private bot.'; // temp
+$msg2 = 'This is a private questbot.'; // temp
+sendMessage($update['message']['from']['id'], $msg1);
+sendMessage($update['message']['from']['id'], $msg2);
+
+$curl1 = sendMessage($update['message']['from']['id'], $msg1, true);
+$curl2 = sendMessage($update['message']['from']['id'], $msg2, true);
+
+$json = array();
+$json[] = $curl1;
+$json[] = $curl2;
+
+curl_json_multi_request($json);

@@ -6,6 +6,9 @@ debug_log('quest_save_share()');
 //debug_log($update);
 //debug_log($data);
 
+// Check access.
+bot_access_check($update, 'create');
+
 // Set the user id.
 $userid = $update['callback_query']['from']['id'];
 
@@ -29,7 +32,7 @@ if (!$quest_in_db) {
         "
         INSERT INTO   quests
         SET           user_id = {$update['callback_query']['from']['id']},
-                      quest_date = CURDATE(),
+                      quest_date = UTC_DATE(),
                       pokestop_id = {$pokestop_id},
                       quest_id = {$quest_id},
                       reward_id = {$reward_id}
@@ -93,10 +96,16 @@ if (!$quest_in_db) {
 // Set callback keys
 $callback_keys = [];
 
+// Telegram JSON array.
+$tg_json = array();
+
 // Edit message.
-edit_message($update, $callback_msg, $callback_keys, ['disable_web_page_preview' => 'true']);
+$tg_json[] = edit_message($update, $callback_msg, $callback_keys, ['disable_web_page_preview' => 'true'], true);
 
 // Answer callback.
-answerCallbackQuery($update['callback_query']['id'], getTranslation('successfully_shared'));
+$tg_json[] = answerCallbackQuery($update['callback_query']['id'], getTranslation('successfully_shared'), true);
+
+// Telegram multicurl request.
+curl_json_multi_request($tg_json);
 
 exit();

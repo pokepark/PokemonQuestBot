@@ -6,11 +6,14 @@ debug_log('LIST()');
 //debug_log($update);
 //debug_log($data);
 
+// Check access.
+bot_access_check($update, 'list');
+
 // Get all quests of the day from database.
 $rs = my_query(
         "
         SELECT     quests.*,
-                   questlist.quest_type, questlist.quest_quantity, questlist.quest_action,
+                   questlist.quest_event, questlist.quest_type, questlist.quest_quantity, questlist.quest_action, questlist.quest_pokedex_ids, questlist.quest_poketypes,
                    rewardlist.reward_type, rewardlist.reward_quantity, 
                    pokestops.pokestop_name, pokestops.lat, pokestops.lon, pokestops.address
         FROM       quests
@@ -20,7 +23,7 @@ $rs = my_query(
         ON         quests.quest_id = questlist.id
         LEFT JOIN  rewardlist
         ON         quests.reward_id = rewardlist.id
-        WHERE      quest_date = CURDATE()
+        WHERE      quest_date = UTC_DATE()
         ORDER BY   quests.id
         "
     );
