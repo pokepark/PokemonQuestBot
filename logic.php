@@ -817,17 +817,17 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     $msg_event = '';
     $msg_compact = '';
     if($quest['quest_event'] > 0) {
-        $msg_event = '<b>' . $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':' . SP;
+        $msg_event = '<b>' . $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':</b>' . SP;
         $msg_compact = $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':' . SP;
     } else {
-        $msg_event = $getTypeTranslation('quest_event_'. $quest['quest_event']) . ':' . SP;
+        $msg_event = $getTypeTranslation('quest') . ':' . SP;
     }
 
     // Build quest message
     $msg = '';
     if($compact_format == false) {
         $msg .= $getTypeTranslation('pokestop') . ':' . $pokestop_name . $pokestop_address . CR;
-        $msg .= $msg_event . $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . '</b>' . CR;
+        $msg .= $msg_event . '<b>' . $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . '</b>' . CR;
         $msg .= $getTypeTranslation('reward') . ': <b>' . (!empty($msg_poke) ? $msg_poke : $qty_reward) . '</b>' . CR;
     } else {
         $msg .= $msg_compact . $getTypeTranslation('quest_type_' . $quest['quest_type']) . SP . $qty_action . ' — ' . (!empty($msg_poke) ? $msg_poke : $qty_reward);

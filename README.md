@@ -226,43 +226,36 @@ The `MAINTAINER_ID` is not able to access the bot nor has any permissions as tha
 
 The `BOT_ADMINS` have all permissions and can use any feature of the bot.
 
-Telegram Users can only vote on raid polls, but have no access to other bot functions (unless you configured it).
+Telegram Users have no access to bot functions (unless you configured it).
 
-That telegram chats/users can access the bot and use the features, you need to create an access file.
+In order to allow telegram chats to access the bot and use commands/features, you need to create an access file.
 
-Those access files need to be placed under the subdirectory 'access' and follow the name scheme 'accessCHAT_ID'.
+It does not matter if a chat is a user, group, supergroup or channel - any kind of chat is supported as every chat has a chat id!
+
+Those access files need to be placed under the subdirectory 'access' and follow a special name scheme.
+
+| Chat type                     | User role      | Name of the access file           | Example                 |
+|-------------------------------|----------------|-----------------------------------|-------------------------|
+| User                          | -              | `accessCHAT_ID`                   | `access111555999`       |
+|                               |                |                                   |                         |
+| Group, Supergroup, Channel    | Any role       | `accessCHAT_ID`                   | `access-100224466889`   |
+|                               | Creator        | `creatorCHAT_ID`                  | `creator-100224466889`  |
+|                               | Admin          | `adminsCHAT_ID`                   | `admins-100224466889`   |
+|                               | Member         | `membersCHAT_ID`                  | `members-100224466889`  |
+
+As you can see in the table, you can define different permissions for the creator, the admins and the members of a group, supergroup and channel.
+
+You can also create just one access file, so any user has the same permission regardless of their role in the chat. But this is not recommended (see important note below!).
+
+**Important: Any role means any role - so in addition to roles 'creator', 'administrator' or 'member' this will also grant 'kicked', 'restricted' and 'left' users to access the bot with the defined permissions!**
 
 Every access file allows the access for a particular chat and must include the permissons which should be granted to that chat.
 
-To grant permissions via an access file, you easily add every permission on a single line of the access file.
-
-This way you define individual access to bot commands per chat id.
-
-Last but not least: It does not matter if a chat is a user, group, supergroup or channel - any kind of chat is supported as every chat has a chat id!
-
 ## Permissions overview
 
-The following two tables are showing the permissions you need to write into an access file (last column) to grant permissions to users/chats.
+The following table shows the permissions you need to write into an access file (last column) to grant permissions to chats.
 
-For groups, supergroups or channels you need add at least one of the following permissions that either the creator, the admins or the members can access the bot.
-
-So it's always a combination of at least one of the permissions from the first table plus the actual permissions from the second table.
-
-| Chat type  | Role      | **Permission inside access file** |
-|------------|-----------|-----------------------------------|
-| User       | Not required!                                ||
-|            |           |                                   |
-| Group      | Creator   | `allow-creator`                   |
-|            | Admins    | `allow-admins`                    |
-|            | Members   | `allow-members`                   |
-|            |           |                                   |
-| Supergroup | Creator   | `allow-creator`                   |
-|            | Admins    | `allow-admins`                    |
-|            | Members   | `allow-members`                   |
-|            |           |                                   |
-| Channel    | Creator   | `allow-creator`                   |
-|            | Admins    | `allow-admins`                    |
-|            | Members   | `allow-members`                   |
+In an access file it is **One permission per line** - so not separated by space, comma or any other char!
 
 A few examples for access files can be found below the permission overview table.
 
@@ -279,7 +272,7 @@ A few examples for access files can be found below the permission overview table
 | Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share-own`                              |
 |            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share-all`                              |
 |            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
-|            | Share ALL created raids to any chat                              | `share-own` and `share-any-chat`         |
+|            | Share ALL created raids to any chat                              | `share-all` and `share-any-chat`         |
 |            |                                                                  |                                          |
 | Dex        | Get pokemon id by pokemon name `/dex`                            | `pokemon` and `pokemon-own`              |
 |            |                                                                  |                                          |
@@ -299,14 +292,14 @@ share-own`
 
 #### Example: Allow the creator and the admins of the channel -100224466889 to create quests as well as sharing quests created by their own or others to the predefined chat list or any other chat
 
-Access file: `access\access-100224466889`
+Access file for the creator: `access\creator-100224466889`
+
+Access file for the admins: `access\admins-100224466889`
 
 Important: The minus `-` in front of the actual chat id must be part of the name as it's part of the chat id!
 
-Content of the access file, so the actual permissions:
+Content of the access files, so the actual permissions:
 `access-bot
-allow-creator
-allow-admins
 create
 share-all
 share-own
