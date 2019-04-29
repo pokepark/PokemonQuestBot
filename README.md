@@ -55,29 +55,36 @@ Command quests, rewards and encounters: `mysql -u USERNAME -p DATABASENAME < que
 
 ## Config
 
-Copy config.php.example to config.php and edit (values explained further).
+Copy the example config.php.example to your own config.php and edit the values (explained further).
 
-Enter the details for the database connection to the config.php file.
+Some values are missing as the bot has default values. If you like to change those, you need to add and define them in your config.php file, e.g. `define('DDOS_MAXIMUM', '10');`.
+
+## Database connection
+
+Enter the details for the database connection to the config.php file via `DB_HOST`, `DB_NAME`, `DB_USER` and `DB_PASSWORD`.
 
 ## General config and log files
 
 Set `DEBUG` to true, to enable the debug logfile.
 
-Set `CONFIG_LOGFILE` to the location of the logfile, e.g. /var/log/tg-bots/dev-quest-bot.log. Make sure to create the log dir, e.g. /var/log/tg-bots/ and set it writeable by webserver.
+Set `DEBUG_LOGFILE` to the location of the logfile, e.g. /var/log/tg-bots/dev-raid-bot.log. Make sure to create the log dir, e.g. /var/log/tg-bots/ and set it writeable by webserver.
 
-Set `CONFIG_HASH` to the hashed value of your bot token (preferably lowercase) using a hash generator, e.g. https://www.miniwebtool.com/sha512-hash-generator/ 
+Set `APIKEY_HASH` to the hashed value of your bot token (preferably lowercase) using a hash generator, e.g. https://www.miniwebtool.com/sha512-hash-generator/ 
 
-Set `DDOS_MAXIMUM` to the amount of callback queries each user is allowed to do each minute. If the amount is reached, e.g. 10, any further callback query is rejected by the DDOS check.
+Set `DDOS_MAXIMUM` to the amount of callback queries each user is allowed to do each minute. If the amount is reached any further callback query is rejected by the DDOS check. Default value: 10.
 
-Set `BRIDGE_MODE` to true when you're using the PokemonBotBridge. If you're not using the PokemonBotBridge keep the default false. PokemonBotBridge: https://github.com/florianbecker/PokemonBotBridge
+Set `BRIDGE_MODE` to true when you're using the PokemonBotBridge. If you're not using the PokemonBotBridge the default value of false is used. PokemonBotBridge: https://github.com/florianbecker/PokemonBotBridge
 
 ## Proxy
 
-Set `CURL_USEPROXY` to `true` in case you are running the bot behind a proxy server.
+Set `CURL_USEPROXY` with a value of `true` in case you are running the bot behind a proxy server.
 
-Set `CURL_PROXYSERVER` to the proxy server address and port.
+Set `CURL_PROXYSERVER` to the proxy server address and port, for example:
 
-Authentication against the proxy server by username and password is currently not supported!
+```
+define('CURL_USEPROXY',                 false);
+define('CURL_PROXYSERVER',              'http://your.proxyserver.com:8080');
+```
 
 ## Webhooks
 
@@ -93,20 +100,22 @@ You can set several languages for the bot. Available languages are (A-Z):
 
 Set `LANGUAGE_PRIVATE` for the prefered language the bot will answer users when they chat with them. Leave blank that the bot will answer in the users language. If the users language is not supported, e.g. ZH-CN (Chinese), the bot will always use EN (English) as fallback language.
 
-Set `LANGUAGE_PUBLIC` to the prefered language for raid polls. Default value: EN
+Set `LANGUAGE_PUBLIC` to the prefered language for shared quests. Default value: EN
 
-So if you want to have the bot communication based on the users Telegram language, e.g. Russian, and show the raid polls in German for example:
+So if you want to have the bot communication based on the users Telegram language, e.g. Russian, and show the shared quests in German for example:
 
-`define('LANGUAGE_PRIVATE', '');`
-`define('LANGUAGE_PUBLIC', 'DE');`
+```
+define('LANGUAGE_PRIVATE', '');
+define('LANGUAGE_PUBLIC', 'DE');
+```
 
 ## Timezone and Google maps API
 
 Set `TIMEZONE` to the timezone you wish to use for the bot. Predefined value from the example config is "Europe/Berlin".
 
-Optionally you can you use Google maps API to lookup addresses of gyms based on latitude and longitude. Therefore get a Google maps API key.
+Optionally you can you use Google maps API to lookup addresses of gyms based on latitude and longitude. Therefore get a Google maps API key. 
 
-To get a new API key, navigate to https://console.developers.google.com/apis/credentials and create a new API project, e.g. PokemonQuestBot
+To get a new API key, navigate to https://console.developers.google.com/apis/credentials and create a new API project, e.g. PokemonQuestBot 
 
 Once the project is created select "API key" from the "Create credentials" dropdown menu - a new API key is created.
 
@@ -218,7 +227,7 @@ OR
 
 When no telegram id, group, supergroup or channel is specified in `BOT_ADMINS` the bot will allow everyone to use it (public access).
 
-Example for public access: `define('BOT_ACCESS', '');`
+Example for public access: `define('BOT_ADMINS', '');`
 
 ## Access and permissions
 
@@ -274,7 +283,7 @@ A few examples for access files can be found below the permission overview table
 |            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
 |            | Share ALL created raids to any chat                              | `share-all` and `share-any-chat`         |
 |            |                                                                  |                                          |
-| Dex        | Get pokemon id by pokemon name `/dex`                            | `pokemon` and `pokemon-own`              |
+| Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
 |            |                                                                  |                                          |
 | Willow     | Manage quests, rewards, encounters and quicklist `/willow`       | `willow`                                 |
 |            |                                                                  |                                          |
@@ -286,9 +295,11 @@ A few examples for access files can be found below the permission overview table
 Access file: `access\access111555999`
 
 Content of the access file, so the actual permissions:
-`access-bot
+```
+access-bot
 create
-share-own`
+share-own
+```
 
 #### Example: Allow the creator and the admins of the channel -100224466889 to create quests as well as sharing quests created by their own or others to the predefined chat list or any other chat
 
@@ -299,11 +310,13 @@ Access file for the admins: `access\admins-100224466889`
 Important: The minus `-` in front of the actual chat id must be part of the name as it's part of the chat id!
 
 Content of the access files, so the actual permissions:
-`access-bot
+```
+access-bot
 create
 share-all
 share-own
-share-any-chat`
+share-any-chat
+```
 
 # Customization
 
@@ -316,6 +329,7 @@ In case you do not like some of the predefined icons and might like to change th
 - Lookup the icon definitions you'd like to change in either the core or bot constants.php (`core/bot/constants.php` and `constants.php`)
 - Define your own icons in your custom constants.php
 - For example to change the yellow exclamation mark icon to a red exclamation mark put the following in your `custom/constants.php`:
+
 `<?php
 defined('EMOJI_WARN')           or define('EMOJI_WARN',    iconv('UCS-4LE', 'UTF-8', pack('V', 0x2757)));
 `
@@ -329,12 +343,14 @@ To change translations you can do the following:
 - Find the translation name/id by searching the core and bot language.php files (`core/lang/language.php` and `lang/language.php`)
 - Set your own translation in your custom language.json
 - For example to change the translation of 'Friday' to a shorter 'Fri' put the following in your `custom/language.json`:
-`{
+
+```
+{
     "weekday_5":{
         "EN":"Fri"
     }
 }
-`
+```
 - Make sure to create a valid JSON file for your custom translations
 - To verify your custom language.json you can use several apps, programs and web services.
 
