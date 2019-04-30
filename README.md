@@ -446,4 +446,4 @@ Export command: `mysqldump -u USERNAME -p --no-data --skip-add-drop-table --skip
 
 #### quests-rewards-encounters.sql
 
-Export command: `mysqldump -u USERNAME -p --skip-extended-insert --skip-comments DATABASENAME questlist rewardlist encounterlist quick_questlist > sql/quests-rewards-encounters.sql`
+Export command: `mysqldump -u USERNAME -p --skip-extended-insert --skip-comments DATABASENAME quick_questlist questlist encounterlist rewardlist > sql/quests-rewards-encounters.sql`
