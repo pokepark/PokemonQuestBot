@@ -17,12 +17,11 @@ CREATE TABLE `quick_questlist` (
   `quest_id` int(10) unsigned NOT NULL,
   `reward_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `quick_questlist` WRITE;
 /*!40000 ALTER TABLE `quick_questlist` DISABLE KEYS */;
-INSERT INTO `quick_questlist` VALUES (1,1,1);
 /*!40000 ALTER TABLE `quick_questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `questlist`;
@@ -37,12 +36,12 @@ CREATE TABLE `questlist` (
   `quest_pokedex_ids` varchar(20) DEFAULT '0',
   `quest_poketypes` varchar(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `questlist` WRITE;
 /*!40000 ALTER TABLE `questlist` DISABLE KEYS */;
-INSERT INTO `questlist` VALUES (1,1,1,1,1001,'0','0');
+INSERT INTO `questlist` VALUES (100,0,1,1,1001,'0','0');
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `encounterlist`;
@@ -53,12 +52,11 @@ CREATE TABLE `encounterlist` (
   `quest_id` int(10) unsigned NOT NULL,
   `pokedex_ids` varchar(20) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 LOCK TABLES `encounterlist` WRITE;
 /*!40000 ALTER TABLE `encounterlist` DISABLE KEYS */;
-INSERT INTO `encounterlist` VALUES (1,1,'102,209');
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
 DROP TABLE IF EXISTS `rewardlist`;
