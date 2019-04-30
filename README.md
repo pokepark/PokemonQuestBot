@@ -30,19 +30,23 @@ The following apache packages need to be installed:
 #### Core module inside bot folder
 
 For git 2.13 and above:
+
 `git clone --recurse-submodules https://github.com/florianbecker/PokemonQuestBot.git`
 
 If you're running an older version of git use the deprecated recursive command:
+
 `git clone --recursive https://github.com/florianbecker/PokemonQuestBot.git`
 
 #### Core module outside bot folder
 
 If you like to keep the core repo outside the bot folder so multiple bots can access the core (e.g. via the [PokemonBotBridge](https://github.com/florianbecker/PokemonBotBridge.git "PokemonBotBridge")) you can do the following:
 
-Clone the bot repo to e.g. `var/www/html`
+Clone the bot repo to e.g. `var/www/html`:
+
 `git clone https://github.com/florianbecker/PokemonQuestBot.git`
 
-Clone the core repo to e.g. `var/www/html`
+Clone the core repo to e.g. `var/www/html`:
+
 `git clone https://github.com/florianbecker/php.core.telegram.git`
 
 Change to the bot folder and create a symlink to make core accessible for the bot:
