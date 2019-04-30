@@ -94,7 +94,7 @@ if(is_numeric($event) && $event == 0 && $id == 0 && $action == 0 && $qty == 0) {
     $quest_type = getTranslation('quest_type_' . $id);
     $msg .= getTranslation('quest') . ': <b>' . CR;
     // Event?
-    if(is_numeric($event)) {
+    if(is_numeric($event) && $event > 0) {
         $msg .= getTranslation('quest_event_' . $event) . ':' . SP;
     }
     $msg .= $quest_type . SP . $qty . SP . ' ...</b>';
@@ -120,7 +120,7 @@ if(is_numeric($event) && $event == 0 && $id == 0 && $action == 0 && $qty == 0) {
     $quest_type = getTranslation('quest_type_' . $id);
     $msg .= getTranslation('quest') . ': <b>' . CR;
     // Event?
-    if(is_numeric($event)) {
+    if(is_numeric($event) && $event > 0) {
         $msg .= getTranslation('quest_event_' . $event) . ':' . SP;
     }
     $msg .= $quest_type . SP . $qty . SP . ' ...</b>' . CR . CR;
@@ -255,7 +255,7 @@ if(is_numeric($event) && $event == 0 && $id == 0 && $action == 0 && $qty == 0) {
         $quest_type = getTranslation('quest_type_' . $id);
         $msg .= getTranslation('quest') . ': <b>' . CR;
         // Event?
-        if(is_numeric($event)) {
+        if(is_numeric($event) && $event > 0) {
             $msg .= getTranslation('quest_event_' . $event) . ':' . SP;
         }
         $msg .= $quest_type . SP . $qty . SP . $msg_poke . '</b>' . CR . CR;
@@ -312,7 +312,7 @@ if(is_numeric($event) && $event == 0 && $id == 0 && $action == 0 && $qty == 0) {
         $poke_types = str_replace('POKEMON_TYPE', $msg_poke_type, getTranslation('pokemon_of_type'));
         $msg .= getTranslation('quest') . ': <b>' . CR;
         // Event?
-        if(is_numeric($event)) {
+        if(is_numeric($event) && $event > 0) {
             $msg .= getTranslation('quest_event_' . $event) . ':' . SP;
         }
         $msg .= $quest_type . SP . $qty . SP . $poke_types . '</b>' . CR . CR;
@@ -336,7 +336,7 @@ if(is_numeric($event) && $event == 0 && $id == 0 && $action == 0 && $qty == 0) {
             // Final quest.
             $msg .= getTranslation('quest') . ': <b>' . CR;
             // Event?
-            if(is_numeric($event)) {
+            if(is_numeric($event) && $event > 0) {
                 $msg .= getTranslation('quest_event_' . $event) . ':' . SP;
             }
             $msg .= $quest_type . SP . $qty . SP . $action_qty_text . '</b>' . CR . CR;
@@ -364,7 +364,7 @@ if(is_numeric($event) && $event == 0 && $id == 0 && $action == 0 && $qty == 0) {
             // Build message.
             $msg .= getTranslation('quest') . ': <b>' . CR;
             // Event?
-            if(is_numeric($event)) {
+            if(is_numeric($event) && $event > 0) {
                 $msg .= getTranslation('quest_event_' . $event) . ':' . SP;
             }
             $msg .= $quest_type . SP . $qty . SP . ' ...</b>' . CR . CR;
