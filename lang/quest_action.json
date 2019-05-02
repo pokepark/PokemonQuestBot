@@ -139,7 +139,7 @@
 	},
 	"quest_action_6003" : {
 		"NL": "Pokémon using an item:Pokémon using items",
-		"DE": "Entwickle ein Pokemon mit Entwicklungsitem:Entwickle ein Pokemon mit Entwicklungsitem",
+		"DE": "Pokemon mit Entwicklungsitem:Pokemon mit Entwicklungsitem",
 		"EN": "Pokémon using an item:Pokémon using items",
 		"FR": "TRANSLATE:TRANSLATE"
 	},	
@@ -193,7 +193,7 @@
 	},
 	"quest_action_9004" : {
 		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
-		"DE": "Fange ein Pokemon mit Himmihbeere:Fange ein Pokemon mit Himmihbeere",
+		"DE": "Pokemon mit Himmihbeere:Pokemon mit Himmihbeere",
 		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
 		"FR": "TRANSLATE:TRANSLATE"
 	},
@@ -205,13 +205,13 @@
 	},
 	"quest_action_9006" : {
 		"NL": "Nanab Berry to help catch a Pokemon:Nanab Berries to help catch a Pokemon",
-		"DE": "TRANSLATE:TRANSLATE",
-		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"DE": "Pokemon mit Nanabbeere:Pokemon mit Nanabbeere",
+		"EN": "Nanab Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
 		"FR": "TRANSLATE:TRANSLATE"
 	},
 	"quest_action_10001" : {
 		"NL": "time a pokemon:times a pokemon",
-		"DE": "Power-Up bei Pokemon:Power-Ups bei Pokemon",
+		"DE": "Pokemon:Pokemon",
 		"EN": "time a pokemon:times a pokemon",
 		"FR": "fois un Pokémon:fois un Pokémon"
 	},
