@@ -295,7 +295,7 @@ A few examples for access files can be found below the permission overview table
 
 | Access     | **Action and /command**                                          | Permission inside access file            |
 |------------|------------------------------------------------------------------|------------------------------------------|
-| Bot        | Access the bot itself                                            | `bot-access`                             |
+| Bot        | Access the bot itself                                            | `access-bot`                             |
 |            |                                                                  |                                          |
 | Quest      | Create quests `/start`, `/new`                                   | `create`                                 |
 |            | List all quests `/list`                                          | `list`                                   |
