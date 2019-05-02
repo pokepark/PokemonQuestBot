@@ -136,6 +136,12 @@
 		"DE": "Pokemon mit Wetterverstärkung:Pokemon mit Wetterverstärkung",
 		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
 		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
+	},
+	"quest_action_6003" : {
+		"NL": "Pokémon using an item:Pokémon using items",
+		"DE": "Entwickle ein Pokemon mit Entwicklungsitem:Entwickle ein Pokemon mit Entwicklungsitem",
+		"EN": "Pokémon using an item:Pokémon using items",
+		"FR": "TRANSLATE:TRANSLATE"
 	},	
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
@@ -161,6 +167,12 @@
 		"EN": "Tier-3 Raid or higher:Tier-3 Raids or higher",
 		"FR": "raid de niveau 3 ou plus:raid de niveau 3 ou plus"
 	},
+	"quest_action_8004" : {
+		"NL": "Tier-2 Raid or higher:Tier-2 Raids or higher",
+		"DE": "Level-2-Raid oder höher:Level-2-Raids oder höher",
+		"EN": "Tier-2 Raid or higher:Tier-2 Raids or higher",
+		"FR": "raid de niveau 2 ou plus:raid de niveau 2 ou plus"
+	},
 	"quest_action_9001" : {
 		"NL": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
 		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
@@ -174,14 +186,32 @@
 		"FR": "baie pour attraper un Pokémon:baies pour attraper un Pokémon"
 	},
 	"quest_action_9003" : {
-		"NL": "Pinap Berry:Pinap Berries",
+		"NL": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
 		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
-		"EN": "Pinap Berry:Pinap Berries",
+		"EN": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
 		"FR": "Baie Nanana:Baies Nananas"
+	},
+	"quest_action_9004" : {
+		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"DE": "Fange ein Pokemon mit Himmihbeere:Fange ein Pokemon mit Himmihbeere",
+		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_9005" : {
+		"NL": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
+		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
+		"EN": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
+		"FR": "fois une attaque chargée surper efficace dans une arène:fois une attaue chargée super efficace dans une arène"
+	},
+	"quest_action_9006" : {
+		"NL": "Nanab Berry to help catch a Pokemon:Nanab Berries to help catch a Pokemon",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"FR": "TRANSLATE:TRANSLATE"
 	},
 	"quest_action_10001" : {
 		"NL": "time a pokemon:times a pokemon",
-		"DE": "Pokemon:Pokemon",
+		"DE": "Power-Up bei Pokemon:Power-Ups bei Pokemon",
 		"EN": "time a pokemon:times a pokemon",
 		"FR": "fois un Pokémon:fois un Pokémon"
 	},
