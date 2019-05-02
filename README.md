@@ -302,10 +302,10 @@ A few examples for access files can be found below the permission overview table
 |            | Delete OWN quests `/delete`                                      | `delete` and `delete-own`                |
 |            | Delete ALL quests `/delete`                                      | `delete` and `delete-all`                |
 |            |                                                                  |                                          |
-| Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share-own`                              |
-|            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share-all`                              |
-|            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
-|            | Share ALL created raids to any chat                              | `share-all` and `share-any-chat`         |
+| Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share` and `share-own`                  |
+|            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share` and `share-all`                  |
+|            | Share OWN created raids to any chat                              | `share`, `share-own` and `share-any-chat`|
+|            | Share ALL created raids to any chat                              | `share`, `share-all` and `share-any-chat`|
 |            |                                                                  |                                          |
 | Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
 |            |                                                                  |                                          |
