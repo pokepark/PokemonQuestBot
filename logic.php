@@ -997,7 +997,7 @@ function get_dex_entry($pokemon)
     }
 
     // Try english language.
-    if(empty($msg)) {
+    if(empty($msg) && $language != DEFAULT_LANGUAGE) {
         debug_log('Pokemon not found! Try English language now...');
         // Set language.
         $language = DEFAULT_LANGUAGE;
