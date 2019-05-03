@@ -143,6 +143,12 @@
 		"EN": "time in a gym:times in a gym",
 		"FR": "fois dans une arène:fois dans une arène"
 	},
+	"quest_action_7002" : {
+		"NL": "time in a raid:times in a raid",
+		"DE": "Mal in einem Raid:Mal in einem Raid",
+		"EN": "time in a raid:times in a raid",
+		"FR": "fois dans une raid:fois dans une raid"
+	},
 	"quest_action_8001" : {
 		"NL": "gymbattle:gymbattles",
 		"DE": "Arenakampf:Arenakämpfe",
