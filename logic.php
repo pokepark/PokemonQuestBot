@@ -996,6 +996,31 @@ function get_dex_entry($pokemon)
         }
     }
 
+    // Try english language.
+    if(empty($msg)) {
+        debug_log('Pokemon not found! Try English language now...');
+        // Set language.
+        $language = DEFAULT_LANGUAGE;
+
+        // Translation file.
+        $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+        $str = file_get_contents($tfile);
+        $json = json_decode($str, true);
+
+        // Find dex ids.
+        foreach($json as $index => $pokemon_name) {
+            // Lower for better comparison
+            $find = strtolower($pokemon);
+            $pokemon_name = strtolower($pokemon_name);
+
+            // Find pokemon.
+            if(strpos($pokemon_name, $find) !== FALSE) {
+                $dex_id = $index + 1;
+                $msg .= '<b>ID: ' . $dex_id . ' </b> — ' . getTranslation('pokemon_id_' . $dex_id) . CR;
+            }
+        }
+    }
+
     // Write to log.
     debug_log('Found pokemon: ' . $msg);
 

@@ -174,32 +174,32 @@
 		"FR": "fois une attaque chargée surper efficace dans une arène:fois une attaue chargée super efficace dans une arène"
 	},
 	"quest_action_9002" : {
-		"NL": "berry to catch pokemon:berries to catch pokemon",
-		"DE": "Beere beim Fangen von Pokemon:Beeren beim Fangen von Pokemon",
-		"EN": "berry to catch pokemon:berries to catch pokemon",
-		"FR": "baie pour attraper un Pokémon:baies pour attraper un Pokémon"
-	},
-	"quest_action_9003" : {
-		"NL": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
-		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
-		"EN": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
-		"FR": "Baie Nanana:Baies Nananas"
-	},
-	"quest_action_9004" : {
-		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
-		"DE": "Pokemon mit Himmihbeere:Pokemon mit Himmihbeere",
-		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
-		"FR": "TRANSLATE:TRANSLATE"
-	},
-	"quest_action_9005" : {
 		"NL": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
 		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf oder Raid ein:Mal eine sehr effektive Lade-Attacke in einem Kampf oder Raid ein",
 		"EN": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
 		"FR": "fois une attaque chargée surper efficace dans une arène:fois une attaue chargée super efficace dans une arène"
 	},
-	"quest_action_9006" : {
+	"quest_action_9010" : {
+		"NL": "berry to catch pokemon:berries to catch pokemon",
+		"DE": "Beere beim Fangen von Pokemon:Beeren beim Fangen von Pokemon",
+		"EN": "berry to catch pokemon:berries to catch pokemon",
+		"FR": "baie pour attraper un Pokémon:baies pour attraper un Pokémon"
+	},
+	"quest_action_9011" : {
+		"NL": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
+		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
+		"EN": "Pinap Berry while catching Pokemon:Pinap Berries while catching Pokemon",
+		"FR": "Baie Nanana:Baies Nananas"
+	},
+	"quest_action_9012" : {
+		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"DE": "Himmihbeere beim Fangen von Pokemon:Himmihbeeren beim Fangen von Pokemon",
+		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_9013" : {
 		"NL": "Nanab Berry to help catch a Pokemon:Nanab Berries to help catch a Pokemon",
-		"DE": "Pokemon mit Nanabbeere:Pokemon mit Nanabbeere",
+		"DE": "Nanabbeere beim Fangen von Pokemon:Nanabbeeren beim Fangen von Pokemon",
 		"EN": "Nanab Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
 		"FR": "TRANSLATE:TRANSLATE"
 	},
