@@ -40,6 +40,13 @@ $keys = get_pokestops_in_radius_keys($lat, $lon, QUEST_STOPS_RADIUS);
 if ($keys) {
     // Set message.
     $msg = '<b>' . getTranslation('quest_by_pokestop') . '</b>';
+
+    // Add back navigation key.
+    $nav_keys = [];
+    $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
+
+    // Get the inline key array.
+    $keys[] = $nav_keys;
 } else {
     // Set message.
     $msg = '<b>' . getTranslation('pokestops_not_found') . '</b>';
