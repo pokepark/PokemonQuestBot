@@ -214,11 +214,11 @@
 		"DE": "Geschenk:Geschenke",
 		"EN": "Gift:Gifts",
 		"FR": "cadeau:cadeaux"
-	}
+	},
 	"quest_action_11002" : {
 		"NL": "Pokemon:Pokemon",
 		"DE": "Pokemon:Pokemon",
 		"EN": "Pokemon:Pokemon",
 		"FR": "Pokémon:Pokémon"
-	},
+	}
 }
