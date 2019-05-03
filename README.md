@@ -52,6 +52,7 @@ Clone the core repo to e.g. `var/www/html`:
 Change to the bot folder and create a symlink to make core accessible for the bot:
 ```
 cd /var/www/html/PokemonQuestBot
+rm -rf core/
 ln -sf /var/www/html/php.core.telegram core
 ```
 
@@ -294,17 +295,17 @@ A few examples for access files can be found below the permission overview table
 
 | Access     | **Action and /command**                                          | Permission inside access file            |
 |------------|------------------------------------------------------------------|------------------------------------------|
-| Bot        | Access the bot itself                                            | `bot-access`                             |
+| Bot        | Access the bot itself                                            | `access-bot`                             |
 |            |                                                                  |                                          |
 | Quest      | Create quests `/start`, `/new`                                   | `create`                                 |
 |            | List all quests `/list`                                          | `list`                                   |
 |            | Delete OWN quests `/delete`                                      | `delete` and `delete-own`                |
 |            | Delete ALL quests `/delete`                                      | `delete` and `delete-all`                |
 |            |                                                                  |                                          |
-| Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share-own`                              |
-|            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share-all`                              |
-|            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
-|            | Share ALL created raids to any chat                              | `share-all` and `share-any-chat`         |
+| Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share` and `share-own`                  |
+|            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share` and `share-all`                  |
+|            | Share OWN created raids to any chat                              | `share`, `share-own` and `share-any-chat`|
+|            | Share ALL created raids to any chat                              | `share`, `share-all` and `share-any-chat`|
 |            |                                                                  |                                          |
 | Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
 |            |                                                                  |                                          |
