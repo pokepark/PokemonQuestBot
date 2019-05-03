@@ -36,10 +36,10 @@
 		"FR": "Pokémon:Pokémon"
 	},
 	"quest_action_4002" : {
-		"NL": "Pokemon with weatherboost:Pokemon with weatherboost",
-		"DE": "Pokemon mit Wetterverstärkung:Pokemon mit Wetterverstärkung",
-		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
-		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
+		"NL": "Pokémon using an item:Pokémon using items",
+		"DE": "Pokemon mit Entwicklungsitem:Pokemon mit Entwicklungsitem",
+		"EN": "Pokémon using an item:Pokémon using items",
+		"FR": "TRANSLATE:TRANSLATE"
 	},	
 	"quest_action_5001" : {
 		"NL": "nice throw:nice throws",
@@ -137,12 +137,6 @@
 		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
 		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
 	},
-	"quest_action_6003" : {
-		"NL": "Pokémon using an item:Pokémon using items",
-		"DE": "Pokemon mit Entwicklungsitem:Pokemon mit Entwicklungsitem",
-		"EN": "Pokémon using an item:Pokémon using items",
-		"FR": "TRANSLATE:TRANSLATE"
-	},	
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
@@ -199,7 +193,7 @@
 	},
 	"quest_action_9005" : {
 		"NL": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
-		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
+		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf oder Raid ein:Mal eine sehr effektive Lade-Attacke in einem Kampf oder Raid ein",
 		"EN": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
 		"FR": "fois une attaque chargée surper efficace dans une arène:fois une attaue chargée super efficace dans une arène"
 	},
@@ -221,4 +215,10 @@
 		"EN": "Gift:Gifts",
 		"FR": "cadeau:cadeaux"
 	}
+	"quest_action_11002" : {
+		"NL": "Pokemon:Pokemon",
+		"DE": "Pokemon:Pokemon",
+		"EN": "Pokemon:Pokemon",
+		"FR": "Pokémon:Pokémon"
+	},
 }
