@@ -541,7 +541,7 @@
   },
   "pokemon_of_type":{  
     "NL":"POKEMON_TYPE-type pokemon",
-    "DE":"Pokemon von Typ POKEMON_TYPE",
+    "DE":"Pokemon vom Typ POKEMON_TYPE",
     "EN":"POKEMON_TYPE-type pokemon",
     "IT":"TRANSLATE.",
     "PT-BR":"TRANSLATE",
