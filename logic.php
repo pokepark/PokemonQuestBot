@@ -1725,7 +1725,7 @@ function add_questlist_quest($quest_event, $quest_type, $quest_qty, $quest_actio
     global $db;
 
     // Log received values.
-    debug_log('Received quest of type ' . $quest_type . ' with quantity ' . $quest_qty . ' and quest action ' . $quest_action_type . ' with value ' . $quest_action_value);
+    debug_log('Received quest for event ' . $quest_event . ' . of type ' . $quest_type . ' with quantity ' . $quest_qty . ' and quest action ' . $quest_action_type . ' with value ' . $quest_action_value);
 
     // Get quest action type.
     if($quest_action_type == 'dex') {
@@ -1761,11 +1761,12 @@ function add_questlist_quest($quest_event, $quest_type, $quest_qty, $quest_actio
     }
 
     // Add quest to questlist table.
-    debug_log('Adding quest of type ' . $quest_type . ' with quantity ' . $quest_qty . ' and quest action ' . $quest_action_type . ' with value ' . $quest_action_value . ' to the questlist table');
+    debug_log('Adding quest for event ' . $quest_event . ' . of type ' . $quest_type . ' with quantity ' . $quest_qty . ' and quest action ' . $quest_action_type . ' with value ' . $quest_action_value . ' to the questlist table');
     $rs = my_query(
         "
         INSERT INTO   questlist
-        SET           quest_type = '{$quest_type}',
+        SET           quest_event = '{$quest_event}',
+                      quest_type = '{$quest_type}',
                       quest_quantity = '{$quest_qty}',
                       $quest_action_type = '{$quest_action_value}'
         "
