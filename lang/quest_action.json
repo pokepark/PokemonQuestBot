@@ -137,6 +137,24 @@
 		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
 		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
 	},
+	"quest_action_6010" : {
+		"NL": "Seed Pokemon that is seen walking in a river:Seed Pokemon that are seen walking in a river",
+		"DE": "Samen-Pokémon, welches zu sehen ist, wie es durch den Fluss läuft (Fange 1 Bisasam):Samen-Pokémon, welche zu sehen sind, wie sie durch den Fluss laufen (Bisasam)",
+		"EN": "Seed Pokemon that is seen walking in a river:Seed Pokemon that are seen walking in a river",
+		"FR": "Seed Pokemon that is seen walking in a river:Seed Pokemon that are seen walking in a river"
+	},
+	"quest_action_6011" : {
+		"NL": "Water-type Pokemon carried in a backpack:Water-type Pokemon carried in a backpack",
+		"DE": "Wasser-Pokemon, das in einem Rucksack getragen wird (Fange 1 Enton):Wasser-Pokemon, das in einem Rucksack getragen wird (Enton)",
+		"EN": "Water-type Pokemon carried in a backpack:Water-type Pokemon carried in a backpack",
+		"FR": "Water-type Pokemon carried in a backpack:Water-type Pokemon carried in a backpack"
+	},
+	"quest_action_6012" : {
+		"NL": "Fire-type Evolution of Eevee:Fire-type Evolution of Eevee",
+		"DE": "Feuer-Typ-Entwicklung von Evoli (Fange 1 Flamara):Feuer-Typ-Entwicklung von Evoli (Flamara)",
+		"EN": "Fire-type Evolution of Eevee:Fire-type Evolution of Eevee",
+		"FR": "Fire-type Evolution of Eevee:Fire-type Evolution of Eevee"
+	},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",

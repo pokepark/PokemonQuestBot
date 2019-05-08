@@ -4,5 +4,11 @@
 		"DE": "Ei-Spektakel",
 		"EN": "Eggstravaganza",
 		"FR": "Eggstravaganza"
+	},
+	"quest_event_2" : {
+		"NL": "Detective Pikachu",
+		"DE": "Meisterdetektiv Pikachu",
+		"EN": "Detective Pikachu",
+		"FR": "Detective Pikachu"
 	}
 }
