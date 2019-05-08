@@ -883,7 +883,7 @@ function get_todays_formatted_quests()
         $msg = getTranslation('no_quests_today');
     } else {
         // Add update time to message.
-        $msg .= CR . '<i>' . getTranslation('updated') . ': ' . date('H:i:s') . '</i>';
+        $msg .= CR . '<i>' . getTranslation('updated') . ': ' . dt2time('now', 'H:i:s')  . '</i>';
     }
 
     return $msg;
@@ -2867,17 +2867,16 @@ function run_cleanup ($telegram = 2, $database = 2) {
             // Get quest data only when quest_id changed compared to previous run
             if ($prev_quest_id != $current_quest_id) {
                 // Today.
-                $today = utcnow('Ymd');
-                $log_today = utcnow('Y-m-d');
+                $today = dt2time('now', 'Ymd');
+                $log_today = dt2time('now', 'Y-m-d');
 
                 // Get quest date.
-                $qd = new DateTimeImmutable($quest['quest_date'], new DateTimeZone('UTC'));
-                $questdate = $qd->format('Ymd');
-                $log_questdate = $qd->format('Y-m-d');
+                $questdate = dt2time($quest['quest_date'], 'Ymd');
+                $log_questdate = dt2date($quest['quest_date']);
 
                 // Write times to log.
-                cleanup_log($log_today, 'Current UTC date:');
-                cleanup_log($log_questdate, 'Quest UTC date:');
+                cleanup_log($log_today, 'Current date:');
+                cleanup_log($log_questdate, 'Quest date:');
             }
 
             // Time for telegram cleanup?
