@@ -30,7 +30,7 @@
     "FR":"TRANSLATE"
   },
   "select_event":{  
-    "NL":"TRANSLATE",
+    "NL":"Selecteer event:",
     "DE":"Event auswählen:",
     "EN":"Select event:",
     "IT":"TRANSLATE.",
@@ -190,7 +190,7 @@
     "FR":"TRANSLATE"
   },
   "add_this_quest":{  
-    "NL":"Deze qeust toevoegen?",
+    "NL":"Deze quest toevoegen?",
     "DE":"Diese Forschung hinzufügen?",
     "EN":"Add this quest?",
     "IT":"TRANSLATE",
