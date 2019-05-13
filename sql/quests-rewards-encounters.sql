@@ -75,10 +75,13 @@ INSERT INTO `questlist` VALUES (49, '6', '5', '6121');
 INSERT INTO `questlist` VALUES (50, '1', '2', '1001');
 INSERT INTO `questlist` VALUES (51, '4', '3', '6122');
 INSERT INTO `questlist` VALUES (52, '6', '5', '6036');
-INSERT INTO `questlist` VALUES (53, '6', '10', '6010');
-INSERT INTO `questlist` VALUES (54, '6', '15', '6010');
-INSERT INTO `questlist` VALUES (55, '6', '2', '6122');
-INSERT INTO `questlist` VALUES (56, '4', '3', '6010');
+INSERT INTO `questlist` VALUES (53, '6', '3', '6200');
+INSERT INTO `questlist` VALUES (54, '4', '2', '6014');
+INSERT INTO `questlist` VALUES (55, '4', '5', '6014');
+INSERT INTO `questlist` VALUES (56, '6', '10', '6014');
+INSERT INTO `questlist` VALUES (57, '13', '1', '1001');
+INSERT INTO `questlist` VALUES (58, '13', '3', '1001');
+INSERT INTO `questlist` VALUES (59, '13', '5', '1001');
 
 
 /*!40000 ALTER TABLE `questlist` ENABLE KEYS */;
@@ -198,9 +201,12 @@ INSERT INTO `encounterlist` VALUES (47, '47', '347');
 INSERT INTO `encounterlist` VALUES (48, '48', '142');
 INSERT INTO `encounterlist` VALUES (49, '49', '193');
 INSERT INTO `encounterlist` VALUES (52, '52', '121');
-INSERT INTO `encounterlist` VALUES (53, '53', '123');
-INSERT INTO `encounterlist` VALUES (55, '55', '10');
-INSERT INTO `encounterlist` VALUES (56, '56', '290');
+INSERT INTO `encounterlist` VALUES (53, '53', '387');
+INSERT INTO `encounterlist` VALUES (54, '54', '114');
+INSERT INTO `encounterlist` VALUES (55, '55', '3');
+INSERT INTO `encounterlist` VALUES (57, '57', '427');
+INSERT INTO `encounterlist` VALUES (58, '58', '184');
+INSERT INTO `encounterlist` VALUES (59, '59', '113');
 
 /*!40000 ALTER TABLE `encounterlist` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -217,9 +223,9 @@ CREATE TABLE `quick_questlist` (
 
 LOCK TABLES `quick_questlist` WRITE;
 /*!40000 ALTER TABLE `quick_questlist` DISABLE KEYS */;
-INSERT INTO `quick_questlist` VALUES (1,53,1);
-INSERT INTO `quick_questlist` VALUES (2,54,11);
-INSERT INTO `quick_questlist` VALUES (3,55,1);
+INSERT INTO `quick_questlist` VALUES (1,57,1);
+INSERT INTO `quick_questlist` VALUES (2,58,1);
+INSERT INTO `quick_questlist` VALUES (3,59,1);
 INSERT INTO `quick_questlist` VALUES (4,56,1);
 INSERT INTO `quick_questlist` VALUES (5,49,1);
 /*!40000 ALTER TABLE `quick_questlist` ENABLE KEYS */;
