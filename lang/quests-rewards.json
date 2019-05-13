@@ -473,6 +473,18 @@
     "EN": "Anorith:Anorith",
     "FR": "Anorith:Anorith"
   },
+ "quest_action_6121" : {
+	"NL": "Ledyba or Spinarak:Ledyba or Spinarak",
+	"DE": "Ledyba oder Webarak:Ledyba oder Webarak",
+	"EN": "Ledyba or Spinarak:Ledyba or Spinarak",
+	"FR": "Ledyba or Spinarak:Ledyba or Spinarak"
+  },
+ "quest_action_6122" : {
+	"NL": "Wurmple:Wurmple",
+	"DE": "Waumpel:Waumpel",
+	"EN": "Wurmple:Wurmple",
+	"FR": "Wurmple:Wurmple"
+  },
 "quest_action_6200" : {
 	"NL": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
 	"DE": "Bisasam oder Endivie:Bisasam oder Endivie",
@@ -519,6 +531,12 @@
 		"NL": "Pinap Berry:Pinap Berries",
 		"DE": "Sananabeere beim Fangen von Pokemon:Sananabeere beim Fangen von Pokemon",
 		"EN": "Pinap Berry:Pinap Berries",
+		"FR": "Baie Nanana:Baies Nananas"
+	},
+	"quest_action_9004" : {
+		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"DE": "Himmihbeere beim Fangen von Pokemon:Himmihbeerem beim Fangen von Pokemon",
+		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
 		"FR": "Baie Nanana:Baies Nananas"
 	},
 	"quest_action_10001" : {
