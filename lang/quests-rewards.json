@@ -196,12 +196,18 @@
 		"DE": "Pokemon mit Wetterverstärkung:Pokemon mit Wetterverstärkung",
 		"EN": "Pokemon with weatherboost:Pokemon with weatherboost",
 		"FR": "Pokémon boosté par la météo:Pokémon boostés par la météo"
+	},
+	"quest_action_6003" : {
+		"NL": "Pokémon using an item:Pokémon using items",
+		"DE": "Entwickle ein Pokemon mit Entwicklungsitem:Entwickle ein Pokemon mit Entwicklungsitem",
+		"EN": "Pokémon using an item:Pokémon using items",
+		"FR": "TRANSLATE:TRANSLATE"
 	},	
 	"quest_action_6010" : {
 		"NL": "bug type pokemon:bug type pokemon",
 		"DE": "Pokemon vom Typ Käfer:Pokemon vom Typ Käfer",
 		"EN": "bug type pokemon:bug type pokemon",
-        "FR": "Pokémon de type insecte:Pokémon de type insecte"
+        	"FR": "Pokémon de type insecte:Pokémon de type insecte"
 	},
 	"quest_action_6011" : {
 		"NL": "dark type pokemon:dark type pokemon",
@@ -467,30 +473,54 @@
 		"EN": "Pidgey:Pidgey",
 		"FR": "Roucoul:Roucoul"
 	},
-  "quest_action_6120" : {
-    "NL": "Anorith:Anorith",
-    "DE": "Anorith:Anorith",
-    "EN": "Anorith:Anorith",
-    "FR": "Anorith:Anorith"
-  },
- "quest_action_6121" : {
-	"NL": "Ledyba or Spinarak:Ledyba or Spinarak",
-	"DE": "Ledyba oder Webarak:Ledyba oder Webarak",
-	"EN": "Ledyba or Spinarak:Ledyba or Spinarak",
-	"FR": "Ledyba or Spinarak:Ledyba or Spinarak"
-  },
- "quest_action_6122" : {
-	"NL": "Wurmple:Wurmple",
-	"DE": "Waumpel:Waumpel",
-	"EN": "Wurmple:Wurmple",
-	"FR": "Wurmple:Wurmple"
-  },
-"quest_action_6200" : {
-	"NL": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
-	"DE": "Bisasam oder Endivie:Bisasam oder Endivie",
-	"EN": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
-	"FR": "TRANSLATE:TRANSLATE"
-},
+  	"quest_action_6120" : {
+    		"NL": "Anorith:Anorith",
+    		"DE": "Anorith:Anorith",
+    		"EN": "Anorith:Anorith",
+    		"FR": "Anorith:Anorith"
+  	},
+ 	 "quest_action_6121" : {
+	    	"NL": "Zigzagoon or taillow:Zigzagoon or taillow",
+	    	"DE": "Zigzachs oder schwalbini:Zigzachs oder schwalbini",
+	    	"EN": "Zigzagoon or taillow:Zigzagoon or taillow",
+	    	"FR": "Zigzagoon or taillow:Zigzagoon or taillow"
+ 	},
+ 	 "quest_action_6122" : {
+	    	"NL": "Wurmple:Wurmple",
+	    	"DE": "Waumpel:Waumpel",
+	    	"EN": "Wurmple:Wurmple",
+	    	"FR": "Wurmple:Wurmple"
+ 	},
+ 	 "quest_action_6123" : {
+	    	"NL": "Chansey:Chansey",
+	    	"DE": "Chansey:Chansey",
+	    	"EN": "Chansey:Chansey",
+	    	"FR": "Chansey:Chansey"
+ 	},
+ 	 "quest_action_6124" : {
+	    	"NL": "Luvdisc:Luvdisc",
+	    	"DE": "Luvdisc:Luvdisc",
+	    	"EN": "Luvdisc:Luvdisc",
+	    	"FR": "Luvdisc:Luvdisc"
+ 	},
+ 	 "quest_action_6125" : {
+	    	"NL": "Makuhita or Meditite:Makuhita or Meditite",
+	    	"DE": "Makuhita or Meditite:Makuhita or Meditite",
+	    	"EN": "Makuhita or Meditite:Makuhita or Meditite",
+	    	"FR": "Makuhita or Meditite:Makuhita or Meditite"
+ 	},
+ 	 "quest_action_6126" : {
+	    	"NL": "Ledyba or Spinarak:Ledyba or Spinarak",
+	    	"DE": "Ledyba or Spinarak:Ledyba or Spinarak",
+	    	"EN": "Ledyba or Spinarak:Ledyba or Spinarak",
+	    	"FR": "Ledyba or Spinarak:Ledyba or Spinarak"
+ 	},
+	"quest_action_6200" : {
+		"NL": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
+		"DE": "Bisasam oder Endivie:Bisasam oder Endivie",
+		"EN": "Bulbasaur or Chikorita:Bulbasaur or Chikorita",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
 	"quest_action_7001" : {
 		"NL": "time in a gym:times in a gym",
 		"DE": "Mal in einer Arena:Mal in einer Arena",
@@ -515,6 +545,12 @@
 		"EN": "Tier-3 Raid or higher:Tier-3 Raids or higher",
 		"FR": "raid de niveau 3 ou plus:raid de niveau 3 ou plus"
 	},
+	"quest_action_8004" : {
+		"NL": "Tier-2 Raid or higher:Tier-2 Raids or higher",
+		"DE": "Level-2-Raid oder höher:Level-2-Raids oder höher",
+		"EN": "Tier-2 Raid or higher:Tier-2 Raids or higher",
+		"FR": "raid de niveau 2 ou plus:raid de niveau 2 ou plus"
+	},
 	"quest_action_9001" : {
 		"NL": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
 		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
@@ -535,6 +571,18 @@
 	},
 	"quest_action_9004" : {
 		"NL": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"DE": "Fange ein Pokemon mit Himmihbeere:Fange ein Pokemon mit Himmihbeere",
+		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_9005" : {
+		"NL": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
+		"DE": "Mal eine sehr effektive Lade-Attacke in einem Kampf ein:Mal eine sehr effektive Lade-Attacke in einem Kampf ein",
+		"EN": "time a supereffective charged move in a gym or raid:times a supereffective charged move in a gym or raids",
+		"FR": "fois une attaque chargée surper efficace dans une arène:fois une attaue chargée super efficace dans une arène"
+	},
+	"quest_action_9006" : {
+		"NL": "Nanab Berry to help catch a Pokemon:Nanab Berries to help catch a Pokemon",
 		"DE": "Himmihbeere beim Fangen von Pokemon:Himmihbeerem beim Fangen von Pokemon",
 		"EN": "Razz Berry to help catch a Pokemon:Razz Berries to help catch a Pokemon",
 		"FR": "Baie Nanana:Baies Nananas"
