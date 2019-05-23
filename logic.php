@@ -953,6 +953,18 @@ function count_all_json_pokemon()
 
     // Translation file.
     $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+
+    // Fallback to English language?
+    if(!is_file($tfile)) {
+        debug_log('File not found: ' . $tfile);
+        debug_log('Setting language to English now!');
+
+        // Set language.
+        $language = DEFAULT_LANGUAGE;
+        $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+    }
+
+    // Get json.
     $str = file_get_contents($tfile);
     $json = json_decode($str, true);
     
@@ -980,6 +992,18 @@ function get_dex_entry($pokemon)
 
     // Translation file.
     $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+
+    // Fallback to English language?
+    if(!is_file($tfile)) {
+        debug_log('File not found: ' . $tfile);
+        debug_log('Setting language to English now!');
+
+        // Set language.
+        $language = DEFAULT_LANGUAGE;
+        $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+    }
+
+    // Get json.
     $str = file_get_contents($tfile);
     $json = json_decode($str, true);
 
@@ -993,31 +1017,6 @@ function get_dex_entry($pokemon)
         if(strpos($pokemon_name, $find) !== FALSE) {
             $dex_id = $index + 1;
             $msg .= '<b>ID: ' . $dex_id . ' </b> — ' . getTranslation('pokemon_id_' . $dex_id) . CR;
-        }
-    }
-
-    // Try english language.
-    if(empty($msg) && $language != DEFAULT_LANGUAGE) {
-        debug_log('Pokemon not found! Try English language now...');
-        // Set language.
-        $language = DEFAULT_LANGUAGE;
-
-        // Translation file.
-        $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
-        $str = file_get_contents($tfile);
-        $json = json_decode($str, true);
-
-        // Find dex ids.
-        foreach($json as $index => $pokemon_name) {
-            // Lower for better comparison
-            $find = strtolower($pokemon);
-            $pokemon_name = strtolower($pokemon_name);
-
-            // Find pokemon.
-            if(strpos($pokemon_name, $find) !== FALSE) {
-                $dex_id = $index + 1;
-                $msg .= '<b>ID: ' . $dex_id . ' </b> — ' . getTranslation('pokemon_id_' . $dex_id) . CR;
-            }
         }
     }
 
