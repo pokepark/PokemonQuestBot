@@ -782,10 +782,10 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     $stop = get_pokestop($quest['pokestop_id']);
 
     // Add google maps link.
-    if(!empty($quest['address'])) {
-        $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $quest['lat'] . ',' . $quest['lon'] . '">' . $quest['address'] . '</a>';
-    } else if(!empty($stop['address'])) {
+    if(!empty($stop['address'])) {
         $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $stop['lat'] . ',' . $stop['lon'] . '">' . $stop['address'] . '</a>';
+    } else if(!empty($quest['address'])) {
+        $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $quest['lat'] . ',' . $quest['lon'] . '">' . $quest['address'] . '</a>';
     } else {
         $pokestop_address = '<a href="http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '">http://maps.google.com/maps?q=' . $quest['lat'] . ',' . $quest['lon'] . '</a>';
     }
@@ -1986,22 +1986,25 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
             // Get address.
             $lat = $stop['lat'];
             $lon = $stop['lon'];
-            $addr = get_address($lat, $lon);
-            $address = format_address($addr);
+            $stop_addr = $stop['address'];
 
             // Update pokestop address.
-            if(!empty($address)) {
-                $rs = my_query(
-                    "
-                    UPDATE        pokestops
-                    SET           address = '{$db->real_escape_string($address)}'
-                       WHERE      id = '{$pokestop_id}'
-                    "
-                );
-            }
+            if(empty($stop_addr) || (strpos($stop_addr, getPublicTranslation('forest')) === 0) || MAPS_LOOKUP == true) {
+                $addr = get_address($lat, $lon);
+                if(!empty($addr)) {
+                    $address = format_address($addr);
+                    $rs = my_query(
+                        "
+                        UPDATE        pokestops
+                        SET           address = '{$db->real_escape_string($address)}'
+                           WHERE      id = '{$pokestop_id}'
+                        "
+                    );
 
-            // Set pokestop address.
-            $stop['address'] = $address;
+                    // Set pokestop address.
+                    $stop['address'] = $address;
+                }
+            }
         }
 
     // Unnamend pokestop
