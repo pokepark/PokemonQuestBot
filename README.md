@@ -307,6 +307,12 @@ A few examples for access files can be found below the permission overview table
 |            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
 |            | Share ALL created raids to any chat                              | `share-all` and `share-any-chat`         |
 |            |                                                                  |                                          |
+| Pokestop   | Get pokestop details `/pokestop`                                 | `pokestop-details`                       |
+|            | Edit pokestop name `/stopname`                                   | `pokestop-name`                          |
+|            | Edit pokestop address `/stopaddress`                             | `pokestop-address`                       |
+|            | Add pokestop `/addstop`                                          | `pokestop-add`                           |
+|            | Delete pokestop `/deletestop`                                    | `pokestop-delete`                        |
+|            |                                                                  |                                          |
 | Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
 |            |                                                                  |                                          |
 | Willow     | Manage quests, rewards, encounters and quicklist `/willow`       | `willow`                                 |
@@ -397,6 +403,43 @@ Example input: `/quest Brandenburger Tor`
 Delete an existing quest. With this command you can delete a quest from telegram and the database. Use with care!
 
 Based on your access to the bot, you may can only delete quests you created yourself and cannot delete quests from other bot users.
+
+
+### Command: /pokestop
+
+Get details of a pokestop. The full name or at least a part of the name of the pokestop is required.
+
+Example input: `/pokestop Brandenburger Tor`
+
+
+### Command: /addstop
+
+The bot will add a pokestop under the coordinates you're submitting. First latitude, then longitude. The pokestop is added under the name '#YourTelegramID' (e.g. '#111555777') and you need to change the name afterwards using the `/stopname` command. You cannot submit a second pokestop unless you changed the name of the first pokestop. In case you submit a second pokestop without changing the name of the previously submitted pokestop, the first pokestop coordinates will be overwritten!
+
+Example input: `/addstop 52.5145434,13.3501189`
+
+
+### Command: /stopname
+
+The bot will set the name of a pokestop to your input. The id of the pokestop is required.
+
+Example input: `/stopname 34, Brandenburger Tor`
+
+
+### Command: /stopaddress
+
+The bot will set the address of a pokestop to your input. The id of the pokestop is required. You can delete the pokestop address using the keyword 'reset'.
+
+Example input: `/stopaddress 34, Großer Stern, 10557 Berlin`
+
+Example input to delete the gym address: `/stopaddress 34, reset`
+
+
+### Command: /deletestop
+
+Delete a pokestop from the database. The full name or at least a part of the name of the pokestop is required. Select a pokestop and confirm the deletion to remove it from the database.
+
+Example input: `/deletestop Brandenburger Tor`
 
 
 ### Command: /list

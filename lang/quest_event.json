@@ -10,5 +10,11 @@
 		"DE": "Meisterdetektiv Pikachu",
 		"EN": "Detective Pikachu",
 		"FR": "Detective Pikachu"
+	},
+	"quest_event_3" : {
+		"NL": "Adventure Week 2019",
+		"DE": "Abenteuerwoche 2019",
+		"EN": "Adventure Week 2019",
+		"FR": "Adventure Week 2019"
 	}
 }

@@ -79,6 +79,196 @@
     "NO":"<code>/quest PokeCity Stop</code>",
     "FR":"<code>/quest PokeCity Stop</code>"
   },
+  "pokestop_added":{  
+    "NL":"TRANSLATE",
+    "DE":"Pokestop erfolgreich hinzugefügt!",
+    "EN":"Successfully updated the pokestop!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_updated":{  
+    "NL":"TRANSLATE",
+    "DE":"Pokestop erfolgreich aktualisiert!",
+    "EN":"Successfully updated the pokestop!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_deleted":{  
+    "NL":"TRANSLATE",
+    "DE":"Pokestop erfolgreich gelöscht!",
+    "EN":"Successfully deleted the pokestop!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_pokestop_to_delete":{  
+    "NL":"Selecteer een pokestop om te verwijderen:",
+    "DE":"Zum Löschen Pokestop auswählen:",
+    "EN":"Select pokestop to delete:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_pokestop":{  
+    "NL":"TRANSLATE",
+    "DE":"Diesen Pokestop wirklich löschen?",
+    "EN":"Really delete this pokestop?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_details":{  
+    "NL":"TRANSLATE",
+    "DE":"Pokestop-Details",
+    "EN":"Pokestop details",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_pokestop_for_details":{  
+    "NL":"TRANSLATE",
+    "DE":"Pokestop auswählen, um Details anzuzeigen:",
+    "EN":"Select pokestop to show details:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_get_id_details":{  
+    "NL":"Om de ID en extra informatie te krijgen stuur /pokestop.",
+    "DE":"Die ID eines Pokestops und weitere Details sind unter /pokestop verfügbar.",
+    "EN":"To get the id and further pokestop details use the /pokestop command.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_instructions":{  
+    "NL":"Om het adres aan te passen stuur /stopaddress <code>pokestop id, het nieuwe pokestop adres</code>!",
+    "DE":"Zum Ändern einer Pokestop-Adresse bitte /stopaddress <code>Pokestop-ID, neue Pokestop-Adresse</code> eingeben!",
+    "EN":"To change the address of a pokestop please enter /stopaddress <code>pokestop id, new pokestop address</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_example":{  
+    "NL":"Als voorbeeld <code>/stopaddress 34, Markt 61, 3131 CR Vlaardingen </code>!",
+    "DE":"Zum Beispiel: <code>/stopaddress 34, Großer Stern, 10557 Berlin</code>",
+    "EN":"For example: <code>/stopaddress 34, Großer Stern, 10557 Berlin</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_reset":{  
+    "NL":"Om het pokestop adres te verwijderen stuur /stopaddress <code>pokestop id, reset</code>.",
+    "DE":"Zum Löschen einer Pokestop-Adresse /stopaddress <code>Pokestop-ID, reset</code> eingeben.",
+    "EN":"To delete a pokestop address enter /stopaddress <code>pokestop id, reset</code>.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_reset_example":{  
+    "NL":"Als voorbeeld <code>/stopaddress 34, reset</code>",
+    "DE":"Zum Beispiel: <code>/stopaddress 34, reset</code>",
+    "EN":"For example: <code>/stopaddress 34, reset</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_added":{  
+    "NL":"Pokestop adres succesvol toegevoegd!",
+    "DE":"Pokestop-Adresse erfolgreich hinzugefügt!",
+    "EN":"Pokestop address successfully added!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_id_address_missing":{  
+    "NL":"Error! pokestop id of adres mist!",
+    "DE":"Fehler! Pokestop-ID oder Adresse fehlt!",
+    "EN":"Error! Pokestop id or address is missing!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_deleted":{  
+    "NL":"Pokestop adres succesvol verwijderd!",
+    "DE":"Pokestop-Adresse erfolgreich gelöscht!",
+    "EN":"Pokestop address successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_id_name_missing":{  
+    "NL":"Error! Pokestop id of naam mist!",
+    "DE":"Fehler! Pokestop-ID oder Name fehlt!",
+    "EN":"Error! Pokestop id or name is missing!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_name_instructions":{  
+    "NL":"Om de pokestop naam aan te passen stuur /stopname <code>pokestop id, nieuwe pokestop naam</code>!",
+    "DE":"Zum Ändern eines Pokestop-Names bitte /stopname <code>Pokestop-ID, neuer Pokestop-Name</code> eingeben!",
+    "EN":"To change the name of a pokestop please enter /stopname <code>pokestop id, new pokestop name</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_name_example":{  
+    "NL":"Als voorbeeld <code>/stopname 34, Markt 61, 3131 CR Vlaardingen </code>!",
+    "DE":"Zum Beispiel: <code>/stopname 34, Wasserfall im Park</code>",
+    "EN":"For example: <code>/stopname 34, Waterfall in the park</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_name_updated":{  
+    "NL":"Pokestop naam aangepast.",
+    "DE":"Der Pokestop-Name wurde aktualisiert.",
+    "EN":"Pokestop name updated.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
   "unnamed_pokestop":{  
     "NL":"Onbekende pokestop",
     "DE":"Unbekannter Pokestop",

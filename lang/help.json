@@ -1,0 +1,156 @@
+{  
+  "help_create":{  
+    "NL":"TRANSLATE",
+    "DE":"/start - Forschung anlegen",
+    "EN":"/start - Create quest",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_list":{  
+    "NL":"TRANSLATE",
+    "DE":"/list - Alle heutigen Forschungen",
+    "EN":"/list - Todays quests",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_delete-own":{  
+    "NL":"TRANSLATE",
+    "DE":"/delete - Eigene Forschungen löschen",
+    "EN":"/delete - Delete own quests",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_delete-all":{  
+    "NL":"TRANSLATE",
+    "DE":"/delete - Alle Forschungen löschen",
+    "EN":"/delete - Delete all quests",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_pokestop-details":{  
+    "NL":"TRANSLATE",
+    "DE":"/pokestop - Pokestop-Details anzeigen",
+    "EN":"/pokestop - Show pokestop details",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_pokestop-name":{  
+    "NL":"TRANSLATE",
+    "DE":"/stopname - Pokestop-Namen bearbeiten",
+    "EN":"/stopname - Edit pokestop name",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_pokestop-address":{  
+    "NL":"TRANSLATE",
+    "DE":"/stopaddress - Pokestop-Adresse bearbeiten",
+    "EN":"/stopaddress - Edit pokestop address",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_pokestop-add":{  
+    "NL":"TRANSLATE",
+    "DE":"/addstop - Pokestop hinzufügen",
+    "EN":"/addstop - Add a pokestop",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_pokestop-delete":{  
+    "NL":"TRANSLATE",
+    "DE":"/deletestop - Pokestop löschen",
+    "EN":"/deletestop - Delete a pokestop",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_dex":{  
+    "NL":"TRANSLATE",
+    "DE":"/dex - ID für Pokemon-Name herausfinden",
+    "EN":"/dex - Get ID from pokemon name",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_willow":{  
+    "NL":"TRANSLATE",
+    "DE":"/willow - Forschungen, Belohnungen und Pokemon-Begegnungen verwalten",
+    "EN":"/willow - Manage quests, rewards and pokemon encounters",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_config-get":{  
+    "NL":"TRANSLATE",
+    "DE":"/getconfig - Bot-Konfiguration anzeigen",
+    "EN":"/getconfig - Show bot configuration",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_config-set":{  
+    "NL":"TRANSLATE",
+    "DE":"/setconfig - Bot-Konfiguration bearbeiten",
+    "EN":"/setconfig - Edit bot configuration",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "help_help":{  
+    "NL":"TRANSLATE",
+    "DE":"/help - Hilfe anzeigen",
+    "EN":"/help - Show help",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  }
+}

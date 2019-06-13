@@ -2019,23 +2019,28 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
 /**
  * Get pokestops starting with the searchterm.
  * @param $searchterm
+ * @param $action
  * @return bool|array
  */
-function get_pokestop_list_keys($searchterm)
+function get_pokestop_list_keys($searchterm, $action = 'quest_create')
 {
     // Make sure the search term is not empty
     if(!empty($searchterm)) {
         // Get pokestop from database
         $rs = my_query(
                 "
-                SELECT    id, pokestop_name
+                SELECT    quests.quest_date, pokestops.id, pokestops.pokestop_name,
+                CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest
                 FROM      pokestops
-                WHERE     pokestop_name LIKE '$searchterm%'
-                OR        pokestop_name LIKE '%$searchterm%'
+                LEFT JOIN quests
+                ON        quests.pokestop_id = pokestops.id 
+                WHERE     pokestops.pokestop_name LIKE '$searchterm%'
+                OR        pokestops.pokestop_name LIKE '%$searchterm%'
+                GROUP BY  pokestops.pokestop_name
                 ORDER BY
                   CASE
-                    WHEN  pokestop_name LIKE '$searchterm%' THEN 1
-                    WHEN  pokestop_name LIKE '%$searchterm%' THEN 2
+                    WHEN  pokestops.pokestop_name LIKE '$searchterm%' THEN 1
+                    WHEN  pokestops.pokestop_name LIKE '%$searchterm%' THEN 2
                     ELSE  3
                   END
                 LIMIT     15
@@ -2050,11 +2055,21 @@ function get_pokestop_list_keys($searchterm)
             // Pokestop name.
             $pokestop_name = (!empty($stops['pokestop_name']) ? ($stops['pokestop_name']) : (getTranslation('unnamed_pokestop')));
 
-            // Add keys.
-            $keys[] = array(
-                'text'          => $pokestop_name,
-                'callback_data' => $stops['id'] . ':quest_create:0'
-            );
+            // No active quest
+            if($stops ['active_quest'] == 0) {
+                // Add keys.
+                $keys[] = array(
+                    'text'          => $pokestop_name,
+                    'callback_data' => $stops['id'] . ':' . $action . ':0'
+                );
+            // Add warning emoji for active quest
+            } else {
+                // Add keys.
+                $keys[] = array(
+                    'text'          => EMOJI_WARN . SP . $pokestop_name,
+                    'callback_data' => $stops['id'] . ':' . $action . ':0'
+                );
+            }
         }
         
         if($keys) {
@@ -2083,7 +2098,7 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius)
     $radius = $radius / 1000;
     // Get all pokestop within the radius
     $rs = my_query(
-            " SELECT    id, pokestop_name,
+            " SELECT    pokestops.id, pokestops.pokestop_name,
                         (
                             6371 *
                             acos(
@@ -2095,8 +2110,12 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius)
                                 sin(radians({$lat})) *
                                 sin(radians(lat))
                             )
-                        ) AS distance
+                        ) AS distance,
+              CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest
               FROM      pokestops
+              LEFT JOIN quests
+              ON        quests.pokestop_id = pokestops.id 
+              GROUP BY  pokestops.pokestop_name
               HAVING    distance < {$radius}
               ORDER BY  distance
               LIMIT     10
@@ -2111,11 +2130,21 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius)
         // Pokestop name.
         $pokestop_name = (!empty($stops['pokestop_name']) ? ($stops['pokestop_name']) : (getTranslation('unnamed_pokestop')));
 
-        // Add keys.
-        $keys[] = array(
-            'text'          => $pokestop_name,
-            'callback_data' => $stops['id'] . ':quest_create:0'
-        );
+        // No active quest
+        if($stops ['active_quest'] == 0) {
+            // Add keys.
+            $keys[] = array(
+                'text'          => $pokestop_name,
+                'callback_data' => $stops['id'] . ':quest_create:0'
+            );
+        // Add warning emoji for active quest
+        } else {
+            // Add keys.
+            $keys[] = array(
+                'text'          => EMOJI_WARN . SP . $pokestop_name,
+                'callback_data' => $stops['id'] . ':quest_create:0'
+            );
+        }
     }
 
     // Add unknown pokestop.
@@ -2202,6 +2231,76 @@ function get_user($user_id)
     return $msg;
 }
 
+/**
+ * Get pokestop by telegram id.
+ * @param $id
+ * @return array
+ */
+function get_pokestop_by_telegram_id($id)
+{
+    // Get pokestop from database
+    $rs = my_query(
+            "
+            SELECT    *
+            FROM      pokestops
+            WHERE     pokestop_name = '{$id}'
+            ORDER BY  id DESC
+            LIMIT     1
+            "
+        );
+
+    $stop = $rs->fetch_assoc();
+
+    return $stop;
+}
+
+/**
+ * Get pokestop details.
+ * @param $pokestop
+ * @return string
+ */
+function get_pokestop_details($pokestop)
+{
+    // Add pokestop name to message.
+    $msg = '<b>' . getTranslation('pokestop_details') . ':</b>' . CR . CR;
+    $msg .= '<b>ID = ' . $pokestop['id'] . '</b>' . CR;
+    $msg .= getTranslation('pokestop') . ':' . SP . '<b>' . $pokestop['pokestop_name'] . '</b>' . CR;
+    // Add maps link to message.
+    if (!empty($pokestop['address'])) {
+        $msg .= '<a href="https://maps.google.com/?daddr=' . $pokestop['lat'] . ',' . $pokestop['lon'] . '">' . $pokestop['address'] . '</a>' . CR;
+    } else {
+        // Get the address.
+        $addr = get_address($pokestop['lat'], $pokestop['lon']);
+        $address = format_address($addr);
+
+        //Only store address if not empty
+        if(!empty($address)) {
+            //Use new address
+            $msg .= '<a href="https://maps.google.com/?daddr=' . $pokestop['lat'] . ',' . $pokestop['lon'] . '">' . $address . '</a>' . CR;
+        } else {
+            //If no address is found show maps link
+            $msg .= '<a href="http://maps.google.com/maps?q=' . $pokestop['lat'] . ',' . $pokestop['lon'] . '">http://maps.google.com/maps?q=' . $pokestop['lat'] . ',' . $pokestop['lon'] . '</a>' . CR;
+        }
+    }
+
+    return $msg;
+}
+
+/**
+ * Delete pokestop.
+ * @param $id
+ * @return array
+ */
+function delete_pokestop($id)
+{
+    // Delete pokestop from database
+    $rs = my_query(
+            "
+            DELETE FROM pokestops
+            WHERE     id = {$id}
+            "
+        );
+}
 
 /**
  * Quest type keys.
