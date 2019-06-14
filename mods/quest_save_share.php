@@ -89,7 +89,7 @@ if (!$quest_in_db) {
 } else {
     // Quest already in the database for this pokestop.
     $callback_msg = EMOJI_WARN . '<b> ' . getTranslation('quest_already_submitted') . ' </b>' . EMOJI_WARN . CR . CR;
-    $quest = get_quest($answer['id']);
+    $quest = get_quest($quest_in_db['id']);
     $callback_msg .= get_formatted_quest($quest);
 }
 

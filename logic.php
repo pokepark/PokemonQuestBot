@@ -2557,15 +2557,18 @@ function reward_type_keys($pokestop_id, $quest_id, $quest_type)
             $msg_poke = '';
             // Get encounters
             $enc_pokemon = get_encounterlist_entry($quest_id);
-            $quest_pokemons = explode(',', $enc_pokemon['pokedex_ids']);
-            // Get local pokemon name
-            foreach($quest_pokemons as $pokedex_id) {
-                $msg_poke .= get_local_pokemon_name($pokedex_id);
-                $msg_poke .= ' / ';
+            // Make sure we have encounters.
+            if($enc_pokemon['pokedex_ids'] != '0' && $enc_pokemon['pokedex_ids'] !== NULL) {
+                $quest_pokemons = explode(',', $enc_pokemon['pokedex_ids']);
+                // Get local pokemon name
+                foreach($quest_pokemons as $pokedex_id) {
+                    $msg_poke .= get_local_pokemon_name($pokedex_id);
+                    $msg_poke .= ' / ';
+                }
+                // Trim last slash
+                $msg_poke = rtrim($msg_poke,' / ');
+                $msg_poke = (!empty($msg_poke) ? $msg_poke : '');
             }
-            // Trim last slash
-            $msg_poke = rtrim($msg_poke,' / ');
-            $msg_poke = (!empty($msg_poke) ? $msg_poke : '');
 
             // Key to save and share
             $save_share_keys = array();
