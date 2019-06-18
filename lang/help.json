@@ -55,7 +55,7 @@
     "PL":"TRANSLATE"
   },
   "help_pokestop-name":{  
-    "NL":"TRANSLATE",
+    "NL":"/stopname - Verander de pokestop naam",
     "DE":"/stopname - Pokestop-Namen bearbeiten",
     "EN":"/stopname - Edit pokestop name",
     "IT":"TRANSLATE",
