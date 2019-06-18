@@ -79,13 +79,15 @@ Command quests, rewards and encounters: `mysql -u USERNAME -p DATABASENAME < que
 
 ## Config
 
-Copy the example config.php.example to your own config.php and edit the values (explained further).
+Inside the config folder, copy the example config.json.example to your own config.json and edit the values (explained further).
 
-Some values are missing as the bot has default values. If you like to change those, you need to add and define them in your config.php file, e.g. `define('DDOS_MAXIMUM', '10');`.
+Don't forget to change the file permissions of your config file to 0600 (e.g. `chmod 0600 config.json`) afterwards.
+
+Some values are missing as the bot has default values. If you like to change those, you need to add and define them in your config.json file, e.g. `"DDOS_MAXIMUM":"10"`.
 
 ## Database connection
 
-Enter the details for the database connection to the config.php file via `DB_HOST`, `DB_NAME`, `DB_USER` and `DB_PASSWORD`.
+Enter the details for the database connection to the config.json file via `DB_HOST`, `DB_NAME`, `DB_USER` and `DB_PASSWORD`.
 
 ## General config and log files
 
@@ -106,8 +108,8 @@ Set `CURL_USEPROXY` with a value of `true` in case you are running the bot behin
 Set `CURL_PROXYSERVER` to the proxy server address and port, for example:
 
 ```
-define('CURL_USEPROXY',                 false);
-define('CURL_PROXYSERVER',              'http://your.proxyserver.com:8080');
+"CURL_USEPROXY":"false",
+"CURL_PROXYSERVER":"http://your.proxyserver.com:8080",
 ```
 
 ## Webhooks
@@ -129,8 +131,8 @@ Set `LANGUAGE_PUBLIC` to the prefered language for shared quests. Default value:
 So if you want to have the bot communication based on the users Telegram language, e.g. Russian, and show the shared quests in German for example:
 
 ```
-define('LANGUAGE_PRIVATE', '');
-define('LANGUAGE_PUBLIC', 'DE');
+"LANGUAGE_PRIVATE":"",
+"LANGUAGE_PUBLIC":"DE",
 ```
 
 ## Timezone and Google maps API
@@ -172,7 +174,7 @@ Example:
 
 #### Predefine sharing to the chats -100111222333 and -100444555666
 
-`define('SHARE_CHATS', '-100111222333,-100444555666');`
+`"SHARE_CHATS":"-100111222333,-100444555666"`
 
 
 ## Quest creation
@@ -187,7 +189,7 @@ Set `QUEST_STOPS_RADIUS` to the amount in meters the bot will search for pokesto
 
 Set `QUEST_HIDE_REWARDS` to true to hide specific reward types, e.g. berries or revives. Specify the reward types you want to hide in `QUEST_HIDDEN_REWARDS` separated by comma. 
 
-Example to hide pokeballs, berries, potions and revives: `define('QUEST_HIDDEN_REWARDS', '2,7,10,12');`
+Example to hide pokeballs, berries, potions and revives: `"QUEST_HIDDEN_REWARDS":"2,7,10,12"`
 
 Every ID/number for all the available reward types:
 
@@ -229,7 +231,7 @@ Finally set up a cronjob to trigger the cleanup. You can also trigger telegram /
 
 A few examples for quests - make sure to replace the URL with yours:
 
-#### Cronjob using cleanup values from config.php for quests: Just the secret without telegram/database OR telegram = 2 and database = 2
+#### Cronjob using cleanup values from config.json for quests: Just the secret without telegram/database OR telegram = 2 and database = 2
 
 `curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
@@ -251,7 +253,7 @@ OR
 
 When no telegram id, group, supergroup or channel is specified in `BOT_ADMINS` the bot will allow everyone to use it (public access).
 
-Example for public access: `define('BOT_ADMINS', '');`
+Example for public access: `"BOT_ADMINS":""`
 
 ## Access and permissions
 
@@ -449,7 +451,7 @@ The bot will allow you to get a list of the quests from today, share and delete 
 
 ### Command: /help
 
-The bot will answer you "This is a private bot" so you can verify the bot is working and accepting input.
+The bot will give a personal help based on the permissions you have to access and use it.
 
 
 ### Command: /dex
@@ -470,14 +472,11 @@ Check your bot logfile and other related log files, e.g. apache/httpd log, php l
 # Updates
 
 Currently constantly new features, bug fixes and improvements are added to the bot. Since we do not have an update mechanism yet, when updating the bot, please always do the following:
- - Add new config variables which got added to the config.php.example to your own config.php!
+ - Add new config variables which got added to the config.json.example to your own config.json!
  - If new tables and/or columns got added or changed inside pokemon-quest-bot.sql, please add/alter these tables/columns at your existing installation!
 
 # TODO
 
-- Add pokestops
-- Delete pokestops
-- Edit addresses of pokestops
 - Support pokemon forms!
 
 # SQL Files
