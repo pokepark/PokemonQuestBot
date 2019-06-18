@@ -80,7 +80,7 @@
     "FR":"<code>/quest PokeCity Stop</code>"
   },
   "pokestop_added":{  
-    "NL":"TRANSLATE",
+    "NL":"Pokestop succesvol toegevoegd!",
     "DE":"Pokestop erfolgreich hinzugefügt!",
     "EN":"Successfully updated the pokestop!",
     "IT":"TRANSLATE",
@@ -90,7 +90,7 @@
     "FR":"TRANSLATE"
   },
   "pokestop_updated":{  
-    "NL":"TRANSLATE",
+    "NL":"Pokestop succesvol ge-update!",
     "DE":"Pokestop erfolgreich aktualisiert!",
     "EN":"Successfully updated the pokestop!",
     "IT":"TRANSLATE",
@@ -100,7 +100,7 @@
     "FR":"TRANSLATE"
   },
   "pokestop_deleted":{  
-    "NL":"TRANSLATE",
+    "NL":"Pokestop succesvol verwijderd!",
     "DE":"Pokestop erfolgreich gelöscht!",
     "EN":"Successfully deleted the pokestop!",
     "IT":"TRANSLATE",
@@ -120,7 +120,7 @@
     "FR":"TRANSLATE"
   },
   "delete_this_pokestop":{  
-    "NL":"TRANSLATE",
+    "NL":"Wilt u echt deze pokestop verwijderen?",
     "DE":"Diesen Pokestop wirklich löschen?",
     "EN":"Really delete this pokestop?",
     "IT":"TRANSLATE",
@@ -130,7 +130,7 @@
     "FR":"TRANSLATE"
   },
   "pokestop_details":{  
-    "NL":"TRANSLATE",
+    "NL":"Pokestop informatie",
     "DE":"Pokestop-Details",
     "EN":"Pokestop details",
     "IT":"TRANSLATE",
@@ -140,7 +140,7 @@
     "FR":"TRANSLATE"
   },
   "select_pokestop_for_details":{  
-    "NL":"TRANSLATE",
+    "NL":"Selecteer een pokestop voor de informatie:",
     "DE":"Pokestop auswählen, um Details anzuzeigen:",
     "EN":"Select pokestop to show details:",
     "IT":"TRANSLATE",
