@@ -449,6 +449,15 @@ Example input: `/deletestop Brandenburger Tor`
 The bot will allow you to get a list of the quests from today, share and delete all quests.
 
 
+### Command: /event
+
+Set the current event name for quests - only one event can be set! If you use the command more than once, the previously submitted event name will always be overwritten!
+
+To add events permanently, edit the quest_event.json in the lang folder!
+
+Example input: `/event Adventureweek`
+
+
 ### Command: /help
 
 The bot will give a personal help based on the permissions you have to access and use it.

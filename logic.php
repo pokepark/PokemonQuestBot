@@ -1295,7 +1295,7 @@ function get_all_json_quest_type()
  */
 function get_all_json_quest_event_keys($action, $arg)
 {
-    // Get all quest types from json.
+    // Get all quest events from json.
     $tfile = BOT_LANG_PATH . '/quest_event.json';
     $str = file_get_contents($tfile);
     $json = json_decode($str, true);
@@ -1325,6 +1325,19 @@ function get_all_json_quest_event_keys($action, $arg)
         $keys[] = array(
             'text'          => getTranslation('quest_event_' . $event_id),
             'callback_data' => $event_id . '-0:' . $action . ':' . $arg
+        );
+    }
+
+    // Add quickly added event.
+    $eventfile = BOT_LANG_PATH . '/event.json';
+    if(is_file($eventfile)) {
+        $str = file_get_contents($tfile);
+        $json = json_decode($str, true);
+
+        // Add key for current quest event
+        $keys[] = array(
+            'text'          => getTranslation('quest_event_9999'),
+            'callback_data' => '9999-0:' . $action . ':' . $arg
         );
     }
 
@@ -1365,6 +1378,19 @@ function get_all_json_quest_event()
 
         // Set message 
         $msg .= '<b>ID: ' . $event_id . '</b> — ' . $quest_event . CR;
+    }
+
+    // Add quickly added event.
+    $eventfile = BOT_LANG_PATH . '/event.json';
+    if(is_file($eventfile)) {
+        $str = file_get_contents($tfile);
+        $json = json_decode($str, true);
+
+        // Get translation.
+        $quest_event = getTranslation('quest_event_9999');
+
+        // Set message 
+        $msg .= '<b>ID: 9999</b> — ' . $quest_event . CR;
     }
 
     return $msg;

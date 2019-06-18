@@ -39,6 +39,26 @@
     "NO":"TRANSLATE",
     "FR":"TRANSLATE"
   },
+  "event_saved":{  
+    "NL":"TRANSLATE",
+    "DE":"Event gespeichert!",
+    "EN":"Event saved!",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "event_name_missing":{  
+    "NL":"TRANSLATE",
+    "DE":"Fehler! Event-Name fehlt!",
+    "EN":"Error! Event name is missing!",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
   "pokestop":{  
     "NL":"Pokestop",
     "DE":"Pokestop",
