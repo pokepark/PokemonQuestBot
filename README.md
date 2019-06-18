@@ -315,6 +315,8 @@ A few examples for access files can be found below the permission overview table
 |            | Add pokestop `/addstop`                                          | `pokestop-add`                           |
 |            | Delete pokestop `/deletestop`                                    | `pokestop-delete`                        |
 |            |                                                                  |                                          |
+| Event      | Set current quest event name `/event`                            | `event`                                  |
+|            |                                                                  |                                          |
 | Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
 |            |                                                                  |                                          |
 | Willow     | Manage quests, rewards, encounters and quicklist `/willow`       | `willow`                                 |
