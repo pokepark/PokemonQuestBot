@@ -40,7 +40,7 @@
     "FR":"TRANSLATE"
   },
   "event_saved":{  
-    "NL":"TRANSLATE",
+    "NL":"Event opgeslagen!",
     "DE":"Event gespeichert!",
     "EN":"Event saved!",
     "IT":"TRANSLATE.",
@@ -50,7 +50,7 @@
     "FR":"TRANSLATE"
   },
   "event_name_missing":{  
-    "NL":"TRANSLATE",
+    "NL":"Error! Event naam mist!",
     "DE":"Fehler! Event-Name fehlt!",
     "EN":"Error! Event name is missing!",
     "IT":"TRANSLATE.",
