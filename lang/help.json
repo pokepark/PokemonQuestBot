@@ -110,7 +110,7 @@
     "PL":"TRANSLATE"
   },
   "help_event":{  
-    "NL":"TRANSLATE",
+    "NL":"/event - Stel de huidige event naam in",
     "DE":"/event - Name für aktuelles Quest-Event festlegen",
     "EN":"/event - Set current quest event name",
     "IT":"TRANSLATE",
