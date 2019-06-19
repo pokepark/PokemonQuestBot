@@ -109,6 +109,17 @@
     "FR":"TRANSLATE",
     "PL":"TRANSLATE"
   },
+  "help_event":{  
+    "NL":"TRANSLATE",
+    "DE":"/event - Name für aktuelles Quest-Event festlegen",
+    "EN":"/event - Set current quest event name",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
   "help_dex":{  
     "NL":"/dex - Vraag pokedex nummer aan de hand van de naam",
     "DE":"/dex - ID für Pokemon-Name herausfinden",
@@ -124,28 +135,6 @@
     "NL":"/willow - Quest, reward en pokemon encouter manager",
     "DE":"/willow - Forschungen, Belohnungen und Pokemon-Begegnungen verwalten",
     "EN":"/willow - Manage quests, rewards and pokemon encounters",
-    "IT":"TRANSLATE",
-    "PT-BR":"TRANSLATE",
-    "RU":"TRANSLATE",
-    "NO":"TRANSLATE",
-    "FR":"TRANSLATE",
-    "PL":"TRANSLATE"
-  },
-  "help_config-get":{  
-    "NL":"/getconfig - laat bot configuratie zien",
-    "DE":"/getconfig - Bot-Konfiguration anzeigen",
-    "EN":"/getconfig - Show bot configuration",
-    "IT":"TRANSLATE",
-    "PT-BR":"TRANSLATE",
-    "RU":"TRANSLATE",
-    "NO":"TRANSLATE",
-    "FR":"TRANSLATE",
-    "PL":"TRANSLATE"
-  },
-  "help_config-set":{  
-    "NL":"/setconfig - Verander bot configuratie",
-    "DE":"/setconfig - Bot-Konfiguration bearbeiten",
-    "EN":"/setconfig - Edit bot configuration",
     "IT":"TRANSLATE",
     "PT-BR":"TRANSLATE",
     "RU":"TRANSLATE",
