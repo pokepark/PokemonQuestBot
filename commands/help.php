@@ -24,11 +24,11 @@ if($access && (is_file(ROOT_PATH . '/access/' . $access) || $access == 'BOT_ADMI
         $permissions[] = 'help';
     } else {
         // Get permissions from file.
-        $permissions = file(ROOT_PATH . '/access/' . $access);
+        $permissions = file(ROOT_PATH . '/access/' . $access, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     }
 
     // Write to log.
-    // debug_log($permissions,'ACCESS: ');
+    debug_log($permissions,'ACCESS: ');
 
     // Show help header.
     debug_log('Showing help to user now');
