@@ -215,6 +215,10 @@ Every ID/number for all the available reward types:
 | 18        | Metal Coat  | 
 | 19        | Up-Grade    | 
 
+## Portal Import
+
+Set `PORTAL_IMPORT` to `true` to enable the possibility to import portals from Telegram Ingress Bots.
+
 ## Cleanup
 
 The bot features an automatic cleanup of telegram messages as well as cleanup of the database (quests tables).
@@ -315,6 +319,8 @@ A few examples for access files can be found below the permission overview table
 |            | Add pokestop `/addstop`                                          | `pokestop-add`                           |
 |            | Delete pokestop `/deletestop`                                    | `pokestop-delete`                        |
 |            |                                                                  |                                          |
+| Portal     | Import portals via inline search from other bots                 | `portal-import`                          |
+|            |                                                                  |                                          |
 | Event      | Set current quest event name `/event`                            | `event`                                  |
 |            |                                                                  |                                          |
 | Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
@@ -394,6 +400,17 @@ To change translations you can do the following:
 ### Command: No command - just send your location to the bot
 
 The bot will guide you through the creation of a quest based on the settings in the config file and ask you for the quest type and quest action to be done and the reward which will be given upon quest fulfillment.
+
+### Command: No command - using inline search of @PortalMapBot or @Ingressportalbot
+
+You can add new pokestops to the bot using the inline search of one of the bots mentioned above. Just search for a portal name, e.g. `Brandenburger Tor`, and select one of the portals shown as result of your search.
+
+On selection the portal information will get posted as a normal message and detected, so a new pokestop is automatically created from the portal info in that message.
+
+In case the portal is already in your pokestop list / database, it will get updated with the new info (latitude, longitude and address) from the message.
+
+Example: `@Ingressportalbot Brandenburger Tor`
+
 
 ### Command: /start or /new
 

@@ -26,6 +26,7 @@
   "SHARE_CHATS":"",
   "SHARE_QUICK":"",
   "MAP_URL": "",
+  "PORTAL_IMPORT":"true",
   "CLEANUP":"false",
   "CLEANUP_LOGFILE":"/var/log/tg-bots/dev-quest-bot-cleanup.log",
   "CLEANUP_SECRET":"your-cleanup-secret/passphrase",
