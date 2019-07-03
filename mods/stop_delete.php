@@ -49,6 +49,9 @@ if($arg == 0) {
     $msg = '<b>' . getTranslation('pokestop_deleted') . '</b>' . CR;
     $msg .= get_pokestop_details($pokestop);
 
+    // Set keys
+    $keys = [];
+
     // Delete pokestop.
     delete_pokestop($id);
     
