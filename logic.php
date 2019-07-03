@@ -834,7 +834,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     }
 
     //Add custom message from the config.
-    if (defined('MAP_URL') && !empty(MAP_URL)) {
+    if($compact_format == false && defined('MAP_URL') && !empty(MAP_URL)) {
         $msg .= CR . MAP_URL ;
     }
 
