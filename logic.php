@@ -1023,7 +1023,31 @@ function get_dex_entry($pokemon)
     // Write to log.
     debug_log('Found pokemon: ' . $msg);
 
-    // Empty msg?
+    // Try English as fallback.
+    if(empty($msg)) {
+        // Set language.
+        $language = DEFAULT_LANGUAGE;
+        $tfile = CORE_LANG_PATH . '/pokemon_' . strtolower($language) . '.json';
+
+        // Get json.
+        $str = file_get_contents($tfile);
+        $json = json_decode($str, true);
+
+        // Find dex ids.
+        foreach($json as $index => $pokemon_name) {
+            // Lower for better comparison
+            $find = strtolower($pokemon);
+            $pokemon_name = strtolower($pokemon_name);
+
+            // Find pokemon.
+            if(strpos($pokemon_name, $find) !== FALSE) {
+                $dex_id = $index + 1;
+                $msg .= '<b>ID: ' . $dex_id . ' </b> — ' . getTranslation('pokemon_id_' . $dex_id) . CR;
+            }
+        }
+    }
+
+    // Empty message?
     $msg = empty($msg) ? getTranslation('pokemon_not_found') : $msg;
 
     return $msg;
