@@ -1059,9 +1059,11 @@ function get_dex_entry($pokemon)
  * @param first
  * @param second
  * @param third
+ * @param fourth
+ * @param fifth
  * @return string
  */
-function get_all_json_pokemon($start, $first = 0, $second = 0, $third = 0)
+function get_all_json_pokemon($start, $first = 0, $second = 0, $third = 0, $fourth = 0, $fifth = 0)
 {
     // Init empty message.
     $msg = '';
@@ -1074,14 +1076,14 @@ function get_all_json_pokemon($start, $first = 0, $second = 0, $third = 0)
     // Get pokemons from json.
     for ($i = $start; $i <= $end; $i = $i + 1) {
         // Skip if already selected.
-        if($first == $i || $second == $i) continue;
+        if($first == $i || $second == $i || $third == $i || $fourth == $i) continue;
 
         // Build message.
         $msg .= '<b>ID: ' . $i . ' </b> — ' . getTranslation('pokemon_id_' . $i) . CR;
     }
 
     // Write selected pokemon to log.
-    debug_log($first . ', ' . $second . ', ' . $third, 'Selected Pokemon IDs:');
+    debug_log($first . ', ' . $second . ', ' . $third . ', ' . $fourth . ', ' . $fifth, 'Selected Pokemon IDs:');
 
     // Already selected pokemon.
     $msg .= CR;
@@ -1092,11 +1094,24 @@ function get_all_json_pokemon($start, $first = 0, $second = 0, $third = 0)
         $msg .= getTranslation('selected_pokemon');
         $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first);
         $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_id_' . $second) . CR . CR;
-    } else if($first > 0 && $second > 0 && $third > 0) {
+    } else if($first > 0 && $second > 0 && $third > 0 && $fourth == 0) {
         $msg .= getTranslation('selected_pokemon');
         $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first);
         $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_id_' . $second);
         $msg .= CR . '<b>ID: ' . $third . ' </b> — ' . getTranslation('pokemon_id_' . $third) . CR . CR;
+    } else if($first > 0 && $second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first);
+        $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_id_' . $second);
+        $msg .= CR . '<b>ID: ' . $third . ' </b> — ' . getTranslation('pokemon_id_' . $third);
+        $msg .= CR . '<b>ID: ' . $fourth . ' </b> — ' . getTranslation('pokemon_id_' . $fourth) . CR . CR;
+    } else if($first > 0 && $second > 0 && $third > 0 && $fourth > 0 && $fifth > 0) {
+        $msg .= getTranslation('selected_pokemon');
+        $msg .= CR . '<b>ID: ' . $first . ' </b> — ' . getTranslation('pokemon_id_' . $first);
+        $msg .= CR . '<b>ID: ' . $second . ' </b> — ' . getTranslation('pokemon_id_' . $second);
+        $msg .= CR . '<b>ID: ' . $third . ' </b> — ' . getTranslation('pokemon_id_' . $third);
+        $msg .= CR . '<b>ID: ' . $fourth . ' </b> — ' . getTranslation('pokemon_id_' . $fourth);
+        $msg .= CR . '<b>ID: ' . $fifth . ' </b> — ' . getTranslation('pokemon_id_' . $fifth) . CR . CR;
     }
 
     return $msg;
@@ -1111,9 +1126,11 @@ function get_all_json_pokemon($start, $first = 0, $second = 0, $third = 0)
  * @param first
  * @param second
  * @param third
+ * @param fourth
+ * @param fifth
  * @return array
  */
-function get_all_json_pokemon_keys($id, $action, $arg, $start, $first = 0, $second = 0, $third = 0)
+function get_all_json_pokemon_keys($id, $action, $arg, $start, $first = 0, $second = 0, $third = 0, $fourth = 0, $fifth = 0)
 {
     // Init empty keys array.
     $keys = array();
@@ -1131,15 +1148,19 @@ function get_all_json_pokemon_keys($id, $action, $arg, $start, $first = 0, $seco
     for ($i = $start; $i <= $end; $i = $i + 1) {
         // Set new arg.
         if($first == 0) {
-            $new_arg = $i . ',0,0';
+            $new_arg = $i . ',0,0,0,0';
         } else if($first > 0 && $second == 0) {
-            $new_arg = $first . ',' . $i . ',0';
+            $new_arg = $first . ',' . $i . ',0,0,0';
         } else if($first > 0 && $second > 0 && $third == 0) {
-            $new_arg = $first . ',' . $second . ',' . $i;
+            $new_arg = $first . ',' . $second . ',' . $i . ',0,0';
+        } else if($first > 0 && $second > 0 && $third > 0 && $fourth == 0) {
+            $new_arg = $first . ',' . $second . ',' . $third . ',' . $i . ',0';
+        } else if($first > 0 && $second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+            $new_arg = $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $i;
         }
 
         // Skip if already selected.
-        if($first == $i || $second == $i) continue;
+        if($first == $i || $second == $i || $third == $i || $fourth == $i) continue;
 
         // Add key for each pokemon id
         $keys[] = array(
@@ -1880,14 +1901,22 @@ function add_encounterlist_entry($quest_id, $pokedex_ids)
     $first = $dex_value[0];
     $second = $dex_value[1];
     $third = $dex_value[2];
+    $fourth = $dex_value[3];
+    $fifth = $dex_value[4];
 
     // Build quest action value - get rid of "0 values"
     if($second == 0 && $third == 0) {
         $dex_ids = $first;
     } else if($second > 0 && $third == 0) {
         $dex_ids = $first . ',' . $second;
-    } else if($second > 0 && $third > 0) {
+    } else if($second > 0 && $third > 0 && $fourth == 0) {
         $dex_ids = $first . ',' . $second . ',' . $third;
+    } else if($second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third . ',' . $fourth;
+    } else if($second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third . ',' . $fourth;
+    } else if($second > 0 && $third > 0 && $fourth > 0 && $fifth > 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
     } else {
         // Fallback: Leave value as it is.
         $dex_ids = $pokedex_ids;
@@ -1925,14 +1954,22 @@ function update_encounterlist_entry($id, $pokedex_ids)
     $first = $dex_value[0];
     $second = $dex_value[1];
     $third = $dex_value[2];
+    $fourth = $dex_value[3];
+    $fifth = $dex_value[4];
 
     // Build quest action value - get rid of "0 values"
     if($second == 0 && $third == 0) {
         $dex_ids = $first;
     } else if($second > 0 && $third == 0) {
         $dex_ids = $first . ',' . $second;
-    } else if($second > 0 && $third > 0) {
+    } else if($second > 0 && $third > 0 && $fourth == 0) {
         $dex_ids = $first . ',' . $second . ',' . $third;
+    } else if($second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third . ',' . $fourth;
+    } else if($second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third . ',' . $fourth;
+    } else if($second > 0 && $third > 0 && $fourth > 0 && $fifth > 0) {
+        $dex_ids = $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
     } else {
         // Fallback: Leave value as it is.
         $dex_ids = $pokedex_ids;

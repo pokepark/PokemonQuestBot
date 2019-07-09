@@ -15,8 +15,8 @@ $id = $data['id'];
 // Get data arg.
 $arg = $data['arg'];
 
-// add-50#0,0,0
-// edit-50#0,0,0
+// add-50#0,0,0,0,0
+// edit-50#0,0,0,0,0
 
 // Get data arg.
 if(strpos($arg, '-') !== false) {
@@ -43,7 +43,7 @@ if ($id == 0 && $action == 'add') {
     $msg .= CR . '<b>' . getTranslation('encounter') . ' — ' . getTranslation('select_id_to_add') . '</b>';
 
     // Get keys.
-    $keys = get_all_questlist_keys('willow_encounter_add', 'add-0#0,0,0', true);
+    $keys = get_all_questlist_keys('willow_encounter_add', 'add-0#0,0,0,0,0', true);
 
     // Add abort navigation key.
     $nav_keys = [];
@@ -58,7 +58,7 @@ if ($id == 0 && $action == 'add') {
     // Get all encounters from json.
     $msg = get_all_encounterlist_entries();
     $msg .= CR . '<b>' . getTranslation('encounter') . ' — ' . getTranslation('select_id_to_edit') . '</b>';
-    $keys = get_all_encounterlist_keys('willow_encounter_add', 'edit-0#0,0,0');
+    $keys = get_all_encounterlist_keys('willow_encounter_add', 'edit-0#0,0,0,0,0');
 
     // Add abort navigation key.
     $nav_keys = [];
@@ -85,41 +85,48 @@ if ($id == 0 && $action == 'add') {
     $first = $sel_pokemons[0];
     $second = $sel_pokemons[1];
     $third = $sel_pokemons[2];
+    $fourth = $sel_pokemons[3];
+    $fifth = $sel_pokemons[4];
 
     // New args.
-    $new_arg = $action . '-' . $start . '#' . $first . ',' . $second . ',' . $third;
-    $new_prev_25 = $action . '-' . ($start - 25) . '#' . $first . ',' . $second . ',' . $third;
-    $new_prev_50 = $action . '-' . ($start - 50) . '#' . $first . ',' . $second . ',' . $third;
-    $new_next_25 = $action . '-' . ($start + 25) . '#' . $first . ',' . $second . ',' . $third;
-    $new_next_50 = $action . '-' . ($start + 50) . '#' . $first . ',' . $second . ',' . $third;
+    $new_arg = $action . '-' . $start . '#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
+    $new_prev_25 = $action . '-' . ($start - 25) . '#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
+    $new_prev_50 = $action . '-' . ($start - 50) . '#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
+    $new_next_25 = $action . '-' . ($start + 25) . '#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
+    $new_next_50 = $action . '-' . ($start + 50) . '#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
 
     // Save
     if($action == 'add') {
-        $new_save = 'save-0#' . $first . ',' . $second . ',' . $third;
+        $new_save = 'save-0#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
     } else if($action == 'edit') {
-        $new_save = 'update-0#' . $first . ',' . $second . ',' . $third;
+        $new_save = 'update-0#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',' . $fifth;
     }
 
     // Reset and currently selected pokemons.
     $msg_poke = '...';
     if($first > 0 && $second == 0) {
-        $new_reset = $action . '-' . $start . '#0,0,0';
+        $new_reset = $action . '-' . $start . '#0,0,0,0,0';
         $msg_poke = getTranslation('pokemon_id_' . $first);
     } else if($first > 0 && $second > 0 && $third == 0) {
-        $new_reset = $action . '-' . $start . '#' . $first . ',0,0';
+        $new_reset = $action . '-' . $start . '#' . $first . ',0,0,0,0';
         $msg_poke = getTranslation('pokemon_id_' . $first) . SP . getTranslation('or') . SP . getTranslation('pokemon_id_' . $second);
-    } else if($first > 0 && $second > 0 && $third > 0) {
-        $new_reset = $action . '-' . $start . '#' . $first . ',' . $second . ',0';
+    } else if($first > 0 && $second > 0 && $third > 0 && $fourth == 0) {
+        $new_reset = $action . '-' . $start . '#' . $first . ',' . $second . ',0,0,0';
         $msg_poke = getTranslation('pokemon_id_' . $first) . ', ' . getTranslation('pokemon_id_' . $second) . SP . getTranslation('or') . SP . getTranslation('pokemon_id_' . $third);
+    } else if($first > 0 && $second > 0 && $third > 0 && $fourth > 0 && $fifth == 0) {
+        $new_reset = $action . '-' . $start . '#' . $first . ',' . $second . ',' . $third . ',0,0';
+        $msg_poke = getTranslation('pokemon_id_' . $first) . ', ' . getTranslation('pokemon_id_' . $second) . ', ' . getTranslation('pokemon_id_' . $third) . SP . getTranslation('or') . SP . getTranslation('pokemon_id_' . $fourth);
+    } else if($first > 0 && $second > 0 && $third > 0 && $fourth > 0 && $fifth > 0) {
+        $new_reset = $action . '-' . $start . '#' . $first . ',' . $second . ',' . $third . ',' . $fourth . ',0';
+        $msg_poke = getTranslation('pokemon_id_' . $first) . ', ' . getTranslation('pokemon_id_' . $second) . ', ' . getTranslation('pokemon_id_' . $third) . ', ' . getTranslation('pokemon_id_' . $fourth) . SP . getTranslation('or') . SP . getTranslation('pokemon_id_' . $fifth);
     }
 
     // Get pokemon.
     $limit = count_all_json_pokemon();
-    //$end = ($limit > $start + 50) ? ($start + 50) : $limit;
 
     // Get pokemon keys.
-    if($third == 0) {
-        $keys = get_all_json_pokemon_keys($id, 'willow_encounter_add', $new_arg, $start, $first, $second, $third);
+    if($fifth == 0) {
+        $keys = get_all_json_pokemon_keys($id, 'willow_encounter_add', $new_arg, $start, $first, $second, $third, $fourth, $fifth);
     }
 
     // Add navigation keys.
@@ -127,22 +134,22 @@ if ($id == 0 && $action == 'add') {
     $n_50_keys = [];
 
     // Previous 25 key.
-    if($start - 25 >= 0 && $third == 0) {
+    if($start - 25 >= 0 && $fifth == 0) {
         $n_25_keys[] = universal_inner_key($keys, $id, 'willow_encounter_add', $new_prev_25, getTranslation('back') . ' (-25)');
     }
 
     // Next 25 key.
-    if($limit > $start + 25 && $third == 0) {
+    if($limit > $start + 25 && $fifth == 0) {
         $n_25_keys[] = universal_inner_key($keys, $id, 'willow_encounter_add', $new_next_25, getTranslation('next') . ' (+25)');
     }
 
     // Previous 50 key.
-    if($start - 50 >= 0 && $third == 0) {
+    if($start - 50 >= 0 && $fifth == 0) {
         $n_50_keys[] = universal_inner_key($keys, $id, 'willow_encounter_add', $new_prev_50, getTranslation('back') . ' (-50)');
     }
 
     // Next 50 key.
-    if($limit > $start + 50 && $third == 0) {
+    if($limit > $start + 50 && $fifth == 0) {
         $n_50_keys[] = universal_inner_key($keys, $id, 'willow_encounter_add', $new_next_50, getTranslation('next') . ' (+50)');
     }
 
@@ -159,7 +166,7 @@ if ($id == 0 && $action == 'add') {
     }
 
     // Set message.
-    $msg .= get_all_json_pokemon($start, $first, $second, $third);
+    $msg .= get_all_json_pokemon($start, $first, $second, $third, $fourth, $fifth);
 
     // Get quest.
     $quest_enc = '';
@@ -176,12 +183,12 @@ if ($id == 0 && $action == 'add') {
     // Build message.
     $msg .= '<b>';
     $msg .= getTranslation('pokemon') . ' — ';
-    $msg .= ($third == 0) ? (getTranslation('select_id_to_' . $action)) : (getTranslation($action . '_this_encounter'));
+    $msg .= ($fifth == 0) ? (getTranslation('select_id_to_' . $action)) : (getTranslation($action . '_this_encounter'));
     $msg .= '</b>';
 
     // Add navigation keys.
     $nav_keys = [];
-    $nav_keys[] = universal_inner_key($keys, '0', 'willow_encounter_add', $action . '-0#0,0,0', getTranslation('back'));
+    $nav_keys[] = universal_inner_key($keys, '0', 'willow_encounter_add', $action . '-0#0,0,0,0,0', getTranslation('back'));
     $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
 
     // Get the inline key array.
