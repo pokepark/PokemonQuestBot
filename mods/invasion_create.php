@@ -62,7 +62,7 @@ if(!$invasion_in_db && $invasion_time == 0) {
         [
             [
                 'text'          => getTranslation('yes'),
-                'callback_data' => $pokestop_id . ':invasion_save:0'
+                'callback_data' => $pokestop_id . ':invasion_save:' . $invasion_time
             ]
         ],
         [

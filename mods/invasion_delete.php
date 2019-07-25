@@ -36,7 +36,7 @@ if ($action == 0) {
     // Set message.
     $msg = EMOJI_WARN . '<b> ' . getTranslation('delete_this_invasion') . ' </b>' . EMOJI_WARN . CR . CR;
     $invasion = get_invasion($invasion_id);
-    $msg .= get_formatted_invasion($invasion);
+    $msg .= get_formatted_invasion($invasion, false, false, true);
 } else if ($action == 1) {
     debug_log('Invasion deletion for invasion ID ' . $invasion_id . ' was canceled!');
     // Set message.

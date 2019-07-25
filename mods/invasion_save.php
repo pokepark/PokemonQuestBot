@@ -14,7 +14,7 @@ $pokestop_id = $data['id'];
 
 // Invasion time.
 $invasion_time = $data['arg'];
-$invasion_time = INVASION_DURATION_LONG;
+debug_log($invasion_time, 'Approx invasion time in minutes:');
 
 // Check if invasion already exists for this pokestop.
 $invasion_in_db = invasion_duplication_check($pokestop_id);
@@ -43,7 +43,7 @@ if (!$invasion_in_db) {
     // Set message.
     $msg = '<b>' . getTranslation('invasion_saved') . '</b>' . CR . CR;
     $invasion = get_invasion($id);
-    $msg .= get_formatted_invasion($invasion);
+    $msg .= get_formatted_invasion($invasion, false, false, true);
 
     // Init keys.
     $keys = array();
