@@ -7,7 +7,7 @@ debug_log('DELETE()');
 //debug_log($data);
 
 // Check access.
-bot_access_check($update, 'delete');
+bot_access_check($update, 'access-bot');
 
 // Get all quests of the day from database.
 $rs = my_query(

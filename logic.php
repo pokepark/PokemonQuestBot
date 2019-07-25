@@ -64,6 +64,262 @@ function quest_duplication_check($pokestop_id)
     return $quest;
 }
 
+/**
+ * Invasion access check.
+ * @param $update
+ * @param $data
+ * @return bool
+ */
+function invasion_access_check($update, $data, $permission, $return_result = false)
+{
+    // Default: Deny access to invasions
+    $quest_access = false;
+
+    // Build query.
+    $rs = my_query(
+        "
+        SELECT    user_id
+        FROM      invasions
+        WHERE     id = {$data['id']}
+        "
+    );
+
+    $invasion = $rs->fetch_assoc();
+
+    // Check permissions
+    if ($update['callback_query']['from']['id'] != $invasion['user_id']) {
+        // Check "-all" permission
+        $permission = $permission . '-all';
+        $invasion_access = bot_access_check($update, $permission, $return_result);
+    } else {
+        // Check "-own" permission
+        $permission = $permission . '-own';
+        $invasion_access = bot_access_check($update, $permission, $return_result);
+    }
+
+    // Return result
+    return $invasion_access;
+}
+
+/**
+ * Invasion duplication check.
+ * @param $pokestop_id
+ * @return array
+ */
+function invasion_duplication_check($pokestop_id)
+{
+    // Check if invasion already exists for this pokestop.
+    // Exclude unnamed pokestops with pokestop_id 0.
+    $rs = my_query(
+        "
+        SELECT    id, pokestop_id
+        FROM      invasions
+          WHERE   end_time > UTC_TIMESTAMP() 
+            AND   pokestop_id > 0
+            AND   pokestop_id = {$pokestop_id}
+        "
+    );
+
+    // Get the row.
+    $invasion = $rs->fetch_assoc();
+
+    debug_log($invasion);
+
+    return $invasion;
+}
+
+/**
+ * Get invasion.
+ * @param $invasion_id
+ * @return array
+ */
+function get_invasion($invasion_id)
+{
+    // Get the invasion data by id.
+    $rs = my_query(
+        "
+        SELECT     invasions.*,
+                   users.name,
+                   pokestops.pokestop_name, pokestops.lat, pokestops.lon, pokestops.address
+        FROM       invasions
+        LEFT JOIN  users
+        ON         invasions.user_id = users.user_id
+        LEFT JOIN  pokestops
+        ON         invasions.pokestop_id = pokestops.id
+        WHERE      invasions.id = {$invasion_id}
+        "
+    );
+
+    // Get the row.
+    $invasion = $rs->fetch_assoc();
+
+    debug_log($invasion);
+
+    return $invasion;
+}
+
+/**
+ * Get invasion as formatted string.
+ * @param $invasion array
+ * @param $add_creator bool
+ * @param $add_timestamp bool
+ * @param $compact_format bool
+ * @param $override_language bool
+ * @return array
+ */
+function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp = false, $compact_format = false, $override_language = false)
+{
+    /** Example:
+     * Invasion: 13:05 to approx. 13:35
+     * Pokestop: Reward-Stop Number 1
+     * Invasion-Street 5, 13579 Poke-City
+     * Reward: Magikarp or Onix
+    */
+
+    // Get translation type
+    if($override_language == true) {
+        $getTypeTranslation = 'getPublicTranslation';
+    } else {
+        $getTypeTranslation = 'getTranslation';
+    }
+
+    // Pokestop name and address.
+    $pokestop_name = '<b>' . (!empty($invasion['pokestop_name']) ? ($invasion['pokestop_name']) : ($getTypeTranslation('unnamed_pokestop'))) . '</b>' . CR;
+
+    // Get pokestop info.
+    $stop = get_pokestop($invasion['pokestop_id']);
+
+    // Add google maps link.
+    if(!empty($stop['address'])) {
+        $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $stop['lat'] . ',' . $stop['lon'] . '">' . $stop['address'] . '</a>';
+    } else if(!empty($invasion['address'])) {
+        $pokestop_address = '<a href="https://maps.google.com/?daddr=' . $invasion['lat'] . ',' . $invasion['lon'] . '">' . $invasion['address'] . '</a>';
+    } else {
+        $pokestop_address = '<a href="http://maps.google.com/maps?q=' . $invasion['lat'] . ',' . $invasion['lon'] . '">http://maps.google.com/maps?q=' . $invasion['lat'] . ',' . $invasion['lon'] . '</a>';
+    }
+
+    // Build invasion message
+    $msg = '';
+    if($compact_format == false) {
+        $msg .= '<b>' . $getTypeTranslation('invasion') . SP . dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']) . '</b>' . CR;
+        $msg .= $getTypeTranslation('pokestop') . ': ' . $pokestop_name . $pokestop_address . CR;
+    } else {
+        $msg .= dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']) . CR . $pokestop_name . $pokestop_address; 
+        //$msg .= $pokestop_name . $pokestop_address . ' — ' . dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']); 
+    }
+
+    //Add custom message from the config.
+    if($compact_format == false && defined('MAP_URL') && !empty(MAP_URL)) {
+        $msg .= CR . MAP_URL ;
+    }
+
+    // Display creator.
+    $msg .= ($invasion['user_id'] && $add_creator == true) ? (CR . $getTypeTranslation('created_by') . ': <a href="tg://user?id=' . $invasion['user_id'] . '">' . htmlspecialchars($invasion['name']) . '</a>') : '';
+
+    // Add update time and invasion id to message.
+    if($add_timestamp == true) {
+        $msg .= CR . '<i>' . $getTypeTranslation('updated') . ': ' . dt2time('now', 'H:i:s') . '</i>';
+        // Commented without the little dirty hack:
+        //$msg .= '  ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = ' . $invasion['id']; // DO NOT REMOVE! --> NEEDED FOR CLEANUP PREPARATION!
+        // Dirty hack: Make invasion ID negative, so we can differ from quest id.
+        $msg .= '  ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = -' . $invasion['id']; // DO NOT REMOVE! --> NEEDED FOR CLEANUP PREPARATION!
+    }
+
+    return $msg;
+}
+
+
+/**
+ * Get current invasions as formatted string.
+ * @return string
+ */
+function get_current_formatted_invasions()
+{
+    // Get the invasion data by id.
+    $rs = my_query(
+        "
+        SELECT     id
+        FROM       invasions
+        WHERE      end_time > UTC_TIMESTAMP() 
+        "
+    );
+
+    // Init empty message and counter.
+    $msg = '';
+    $count = 0;
+
+    // Get the invasions.
+    while ($current_invasions = $rs->fetch_assoc()) {
+        $invasion = get_invasion($current_invasions['id']);
+        $msg .= CR . get_formatted_invasion($invasion, false, false, true, false);
+        $msg .= CR;
+        $count = $count + 1;
+    }
+
+    // No invasions currently?
+    if($count == 0) {
+        $msg = getTranslation('no_invasions_currently');
+    } else {
+        // Add update time to message.
+        $msg .= CR . '<i>' . getTranslation('updated') . ': ' . dt2time('now', 'H:i:s')  . '</i>';
+    }
+
+    return $msg;
+}
+
+/**
+ * Delete invasion.
+ * @param $invasion_id
+ */
+function delete_invasion($invasion_id)
+{
+    global $db;
+
+    // Delete telegram messages for invasion.
+    $rs = my_query(
+        "
+        SELECT        *
+            FROM      qleanup
+            WHERE     quest_id = '-{$invasion_id}'
+              AND     chat_id <> 0
+        "
+    );
+
+    // Counter
+    $counter = 0;
+
+    // Delete every telegram message
+    while ($row = $rs->fetch_assoc()) {
+        // Delete telegram message.
+        debug_log('Deleting telegram message ' . $row['message_id'] . ' from chat ' . $row['chat_id'] . ' for invasion ' . $row['quest_id']);
+        delete_message($row['chat_id'], $row['message_id']);
+        $counter = $counter + 1;
+    }
+
+    // Nothing to delete on telegram.
+    if ($counter == 0) {
+        debug_log('Invasion with ID ' . $invasion_id . ' was not found in the cleanup table! Skipping deletion of telegram messages!');
+    }
+
+    // Delete invasion from cleanup table.
+    debug_log('Deleting invasion ' . $invasion_id . ' from the cleanup table:');
+    $rs_cleanup = my_query(
+        "
+        DELETE FROM   qleanup
+        WHERE   quest_id = '-{$invasion_id}' 
+           OR   cleaned = '-{$invasion_id}'
+        "
+    );
+
+    // Delete invasion from invasions table.
+    debug_log('Deleting invasion ' . $invasion_id . ' from the invasions table:');
+    $rs_invasions = my_query(
+        "
+        DELETE FROM   invasions 
+        WHERE   id = '{$invasion_id}'
+        "
+    );
+}
 
 /**
  * Get local name of pokemon.
@@ -2107,9 +2363,10 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
  * Get pokestops starting with the searchterm.
  * @param $searchterm
  * @param $action
+ * @param $type
  * @return bool|array
  */
-function get_pokestop_list_keys($searchterm, $action = 'quest_create')
+function get_pokestop_list_keys($searchterm, $action = 'quest_create', $type = 'quest')
 {
     // Make sure the search term is not empty
     if(!empty($searchterm)) {
@@ -2117,10 +2374,13 @@ function get_pokestop_list_keys($searchterm, $action = 'quest_create')
         $rs = my_query(
                 "
                 SELECT    quests.quest_date, pokestops.id, pokestops.pokestop_name,
-                CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest
+                CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest,
+                CASE WHEN SUM(invasions.end_time > UTC_TIMESTAMP()) THEN 1 ELSE 0 END AS active_invasion
                 FROM      pokestops
                 LEFT JOIN quests
                 ON        quests.pokestop_id = pokestops.id 
+                LEFT JOIN invasions
+                ON        invasions.pokestop_id = pokestops.id 
                 WHERE     pokestops.pokestop_name LIKE '$searchterm%'
                 OR        pokestops.pokestop_name LIKE '%$searchterm%'
                 GROUP BY  pokestops.pokestop_name
@@ -2143,7 +2403,7 @@ function get_pokestop_list_keys($searchterm, $action = 'quest_create')
             $pokestop_name = (!empty($stops['pokestop_name']) ? ($stops['pokestop_name']) : (getTranslation('unnamed_pokestop')));
 
             // No active quest
-            if($stops ['active_quest'] == 0) {
+            if(($stops['active_quest'] == 0 && $type == 'quest') || ($stops['active_invasion'] == 0 && $type == 'invasion')) {
                 // Add keys.
                 $keys[] = array(
                     'text'          => $pokestop_name,
@@ -2178,9 +2438,11 @@ function get_pokestop_list_keys($searchterm, $action = 'quest_create')
  * @param $lat
  * @param $lon
  * @param $radius
+ * @param $action
+ * @param $type
  * @return array
  */
-function get_pokestops_in_radius_keys($lat, $lon, $radius)
+function get_pokestops_in_radius_keys($lat, $lon, $radius, $action = 'quest_create', $type = 'quest')
 {
     $radius = $radius / 1000;
     // Get all pokestop within the radius
@@ -2198,10 +2460,13 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius)
                                 sin(radians(lat))
                             )
                         ) AS distance,
-              CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest
+              CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest,
+              CASE WHEN SUM(invasions.end_time > UTC_TIMESTAMP()) THEN 1 ELSE 0 END AS active_invasion
               FROM      pokestops
               LEFT JOIN quests
               ON        quests.pokestop_id = pokestops.id 
+              LEFT JOIN invasions
+              ON        invasions.pokestop_id = pokestops.id 
               GROUP BY  pokestops.pokestop_name
               HAVING    distance < {$radius}
               ORDER BY  distance
@@ -2218,18 +2483,18 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius)
         $pokestop_name = (!empty($stops['pokestop_name']) ? ($stops['pokestop_name']) : (getTranslation('unnamed_pokestop')));
 
         // No active quest
-        if($stops ['active_quest'] == 0) {
+        if(($stops['active_quest'] == 0 && $type == 'quest') || ($stops['active_invasion'] == 0 && $type == 'invasion')) {
             // Add keys.
             $keys[] = array(
                 'text'          => $pokestop_name,
-                'callback_data' => $stops['id'] . ':quest_create:0'
+                'callback_data' => $stops['id'] . ':' . $action . ':0'
             );
         // Add warning emoji for active quest
         } else {
             // Add keys.
             $keys[] = array(
                 'text'          => EMOJI_WARN . SP . $pokestop_name,
-                'callback_data' => $stops['id'] . ':quest_create:0'
+                'callback_data' => $stops['id'] . ':' . $action . ':0'
             );
         }
     }
@@ -2894,6 +3159,7 @@ function insert_cleanup($chat_id, $message_id, $quest_id)
     debug_log('Chat_ID: ' . $chat_id);
     debug_log('Message_ID: ' . $message_id);
 
+    // Quests
     if ((is_numeric($chat_id)) && (is_numeric($message_id)) && (is_numeric($quest_id)) && ($quest_id > 0)) {
         global $db;
 
@@ -2906,7 +3172,7 @@ function insert_cleanup($chat_id, $message_id, $quest_id)
         // Insert cleanup info to database
         if ($quest) {
             // Check if cleanup info is already in database or not
-            // Needed since raids can be shared to multiple channels / supergroups!
+            // Needed since quests can be shared to multiple channels / supergroups!
             $rs = my_query(
                 "
                 SELECT    *
@@ -2926,8 +3192,56 @@ function insert_cleanup($chat_id, $message_id, $quest_id)
             }
         }
 
-        // Insert into database when raid found but no cleanup info found
+        // Insert into database when quest found but no cleanup info found
         if ($quest && !$found) {
+            // Build query for cleanup table to add cleanup info to database
+            debug_log('Adding cleanup info to database:');
+            $rs = my_query(
+                "
+                INSERT INTO   qleanup
+                SET           quest_id = '{$quest_id}',
+                                  chat_id = '{$chat_id}',
+                                  message_id = '{$message_id}'
+                "
+            );
+        }
+
+    // Invasions
+    } else if ((is_numeric($chat_id)) && (is_numeric($message_id)) && (is_numeric($quest_id)) && ($quest_id < 0)) {
+        global $db;
+
+        // Get invasion.
+        $invasion_id = abs($quest_id);
+        $invasion = get_invasion($invasion_id);
+
+        // Init found.
+        $found = false;
+
+        // Insert cleanup info to database
+        if ($invasion) {
+            // Check if cleanup info is already in database or not
+            // Needed since invasions can be shared to multiple channels / supergroups!
+            $rs = my_query(
+                "
+                SELECT    *
+                    FROM      qleanup
+                    WHERE     quest_id = '{$quest_id}'
+                "
+            );
+
+            // Chat_id and message_id equal to info from database
+            while ($cleanup = $rs->fetch_assoc()) {
+                // Leave while loop if cleanup info is already in database
+                if(($cleanup['chat_id'] == $chat_id) && ($cleanup['message_id'] == $message_id)) {
+                    debug_log('Cleanup preparation info is already in database!');
+                    $found = true;
+                    break;
+                }
+            }
+        }
+
+        // Insert into database when invasion found but no cleanup info found
+        if ($invasion && !$found) {
             // Build query for cleanup table to add cleanup info to database
             debug_log('Adding cleanup info to database:');
             $rs = my_query(
@@ -2992,11 +3306,23 @@ function run_cleanup ($telegram = 2, $database = 2) {
             );
         // Query for telegram and database cleanup
         } else {
-            // Get cleanup info.
+            // Get cleanup info for telegram cleanup.
             $rs = my_query(
                 "
                 SELECT    * 
                 FROM      qleanup
+                  WHERE   chat_id <> 0
+                  ORDER BY id DESC
+                  LIMIT 0, 250
+                ", true
+            );
+
+            // Get cleanup info for database cleanup.
+            $rs_db = my_query(
+                "
+                SELECT    * 
+                FROM      qleanup
+                  WHERE   chat_id = 0
                   LIMIT 0, 250
                 ", true
             );
@@ -3010,11 +3336,20 @@ function run_cleanup ($telegram = 2, $database = 2) {
             $cleanup_jobs[] = $rowJob;
         }
 
+        // Cleanup telegram and database?
+        if($telegram == 1 && $database == 1) {
+            // Add database cleanup jobs to array.
+            while ($rowDBJob = $rs_db->fetch_assoc()) {
+                $cleanup_jobs[] = $rowDBJob;
+            }
+        }
+
         // Write to log.
         cleanup_log($cleanup_jobs);
 
-        // Init previous quest id.
+        // Init previous quest and invasion id.
         $prev_quest_id = "FIRST_RUN";
+        $prev_invasion_id = "FIRST_RUN";
 
         foreach ($cleanup_jobs as $row) {
             // Set current quest id.
@@ -3024,61 +3359,32 @@ function run_cleanup ($telegram = 2, $database = 2) {
             cleanup_log("Cleanup ID: " . $row['id']);
             cleanup_log("Chat ID: " . $row['chat_id']);
             cleanup_log("Message ID: " . $row['message_id']);
-            cleanup_log("Quest ID: " . $row['quest_id']);
+            if($current_quest_id[0] == '-') {
+                cleanup_log("Invasion ID: " . $row['quest_id']);
+            } else {
+                cleanup_log("Quest ID: " . $row['quest_id']);
+            }
 
-            // Make sure quest exists
-            $rs = my_query(
-                "
-                SELECT  quest_date
-                FROM    quests
-                  WHERE id = {$current_quest_id}
-                ", true
-            );
-
-            // Fetch quest date.
-            $quest = $rs->fetch_assoc();
-
-            // No quest found - set cleanup to 0 and continue with next quest
-            if (!$quest) {
-                cleanup_log('No quest found with ID: ' . $current_quest_id, '!');
-                cleanup_log('Updating cleanup information.');
-                my_query(
-                "
-                    UPDATE    qleanup
-                    SET       chat_id = 0, 
-                              message_id = 0 
-                    WHERE   id = {$row['id']}
-                ", true
+            // Quest or invasion?
+            // Invasion
+            if($current_quest_id[0] == '-') {
+                $current_invasion_id = abs($current_quest_id);
+                // Make sure invasion exists
+                $rs = my_query(
+                    "
+                    SELECT  end_time
+                    FROM    invasions
+                      WHERE id = {$current_invasion_id}
+                    ", true
                 );
 
-                // Continue with next quest
-                continue;
-            }
+                // Fetch invasion date.
+                $invasion = $rs->fetch_assoc();
 
-            // Get quest data only when quest_id changed compared to previous run
-            if ($prev_quest_id != $current_quest_id) {
-                // Today.
-                $today = dt2time('now', 'Ymd');
-                $log_today = dt2time('now', 'Y-m-d');
-
-                // Get quest date.
-                $questdate = dt2time($quest['quest_date'], 'Ymd');
-                $log_questdate = dt2date($quest['quest_date']);
-
-                // Write times to log.
-                cleanup_log($log_today, 'Current date:');
-                cleanup_log($log_questdate, 'Quest date:');
-            }
-
-            // Time for telegram cleanup?
-            if ($today > $questdate) {
-                // Delete quest telegram message if not already deleted
-                if ($telegram == 1 && $row['chat_id'] != 0 && $row['message_id'] != 0) {
-                    // Delete telegram message.
-                    cleanup_log('Deleting telegram message ' . $row['message_id'] . ' from chat ' . $row['chat_id'] . ' for quest ' . $row['quest_id']);
-                    delete_message($row['chat_id'], $row['message_id']);
-                    // Set database values of chat_id and message_id to 0 so we know telegram message was deleted already.
-                    cleanup_log('Updating telegram cleanup information.');
+                // No invasion found - set cleanup to 0 and continue with next invasion
+                if (!$invasion) {
+                    cleanup_log('No invasion found with ID: ' . $current_invasion_id, '!');
+                    cleanup_log('Updating cleanup information.');
                     my_query(
                     "
                         UPDATE    qleanup
@@ -3087,89 +3393,281 @@ function run_cleanup ($telegram = 2, $database = 2) {
                         WHERE   id = {$row['id']}
                     ", true
                     );
-                } else {
-                    if ($telegram == 1) {
-                        cleanup_log('Telegram message is already deleted!');
-                    } else {
-                        cleanup_log('Telegram cleanup was not triggered! Skipping...');
-                    }
-                }
-            } else {
-                cleanup_log('Skipping cleanup of telegram for this quest! Cleanup time has not yet come...');
-            }
 
-            // Time for database cleanup?
-            if ($today > $questdate) {
-                // Delete quest from quests table.
-                // Make sure to delete only once - quest may be in multiple channels/supergroups, but only 1 time in database
-                if (($database == 1) && $row['quest_id'] != 0 && ($prev_quest_id != $current_quest_id)) {
-                    // Delete quest from quest table.
-                    cleanup_log('Deleting quest ' . $current_quest_id);
+                    // Continue with next invasion
+                    continue;
+                }
+
+                // Get invasion data only when invasion_id changed compared to previous run
+                if ($prev_invasion_id != $current_invasion_id) {
+                    // Now.
+                    $now = utcnow('YmdHis');
+                    $log_now = utcnow();
+
+                    // Set cleanup time for telegram. 
+                    $cleanup_time_tg = new DateTimeImmutable($invasion['end_time'], new DateTimeZone('UTC'));
+                    $cleanup_time_tg = $cleanup_time_tg->add(new DateInterval("PT".CLEANUP_INVASION_TIME_TG."M"));
+                    $clean_tg = $cleanup_time_tg->format('YmdHis');
+                    $log_clean_tg = $cleanup_time_tg->format('Y-m-d H:i:s');
+
+                    // Set cleanup time for database. 
+                    $cleanup_time_db = new DateTimeImmutable($invasion['end_time'], new DateTimeZone('UTC'));
+                    $cleanup_time_db = $cleanup_time_db->add(new DateInterval("PT".CLEANUP_INVASION_TIME_DB."M"));
+                    $clean_db = $cleanup_time_db->format('YmdHis');
+                    $log_clean_db = $cleanup_time_db->format('Y-m-d H:i:s');
+
+                    // Write times to log.
+                    cleanup_log($log_now, 'Current UTC time:');
+                    cleanup_log($invasion['end_time'], 'Invasion UTC end time:');
+                    cleanup_log($log_clean_tg, 'Telegram UTC cleanup time:');
+                    cleanup_log($log_clean_db, 'Database UTC cleanup time:');
+                }
+
+                // Time for telegram cleanup?
+                if ($clean_tg < $now) {
+                    // Delete telegram message if not already deleted
+                    if ($telegram == 1 && $row['chat_id'] != 0 && $row['message_id'] != 0) {
+                        // Delete telegram message.
+                        cleanup_log('Deleting telegram message ' . $row['message_id'] . ' from chat ' . $row['chat_id'] . ' for invasion ' . $row['quest_id']);
+                        delete_message($row['chat_id'], $row['message_id']);
+                        // Set database values of chat_id and message_id to 0 so we know telegram message was deleted already.
+                        cleanup_log('Updating telegram cleanup information.');
+                        my_query(
+                        "
+                            UPDATE    qleanup
+                            SET       chat_id = 0, 
+                                      message_id = 0 
+                            WHERE   id = {$row['id']}
+                        ", true
+                        );
+                    } else {
+                        if ($telegram == 1) {
+                            cleanup_log('Telegram message is already deleted!');
+                        } else {
+                            cleanup_log('Telegram cleanup was not triggered! Skipping...');
+                        }
+                    }
+                } else {
+                    cleanup_log('Skipping cleanup of telegram for this invasion! Cleanup time has not yet come...');
+                }
+
+                // Time for database cleanup?
+                if ($clean_db < $now) {
+                    // Delete invasion from invasions table.
+                    // Make sure to delete only once - invasion may be in multiple channels/supergroups, but only 1 time in database
+                    if (($database == 1) && $row['quest_id'] != 0 && ($prev_invasion_id != $current_invasion_id)) {
+                        // Delete invasion from invasions table.
+                        cleanup_log('Deleting invasion ' . $current_invasion_id);
+                        my_query(
+                        "
+                            DELETE FROM    invasions
+                            WHERE   id = {$current_invasion_id}
+                        ", true
+                        );
+
+                        // Set database value of quest_id to 0 so we know info was deleted already
+                        // Use quest_id in where clause since the same quest_id can in cleanup more than once
+                        cleanup_log('Updating database cleanup information.');
+                        my_query(
+                        "
+                            UPDATE    qleanup
+                            SET       quest_id = 0, 
+                                      cleaned = {$row['quest_id']}
+                            WHERE   quest_id = {$row['quest_id']}
+                        ", true
+                        );
+                    } else {
+                        if ($database == 1) {
+                            cleanup_log('Invasion is already deleted!');
+                        } else {
+                            cleanup_log('Invasion cleanup was not triggered! Skipping...');
+                        }
+                    }
+
+                    // Delete invasion from cleanup table once every value is set to 0 and cleaned got updated from 0 to the quest_id
+                    // In addition trigger deletion only when previous and current quest_id are different to avoid unnecessary sql queries
+                    if ($row['quest_id'] == 0 && $row['chat_id'] == 0 && $row['message_id'] == 0 && $row['cleaned'] != 0 && ($prev_invasion_id != $current_invasion_id)) {
+                        // Get all cleanup jobs which will be deleted now.
+                        cleanup_log('Removing cleanup info from database:');
+                        $rs_cl = my_query(
+                        "
+                            SELECT *
+                            FROM    qleanup
+                            WHERE   cleaned = {$row['cleaned']}
+                        ", true
+                        );
+
+                        // Log each cleanup ID which will be deleted.
+                        while($rs_cleanups = $rs_cl->fetch_assoc()) {
+                            cleanup_log('Cleanup ID: ' . $rs_cleanups['id'] . ', Former Invasion ID: ' . $rs_cleanups['cleaned']);
+                        }
+
+                        // Finally delete from cleanup table.
+                        my_query(
+                        "
+                            DELETE FROM    qleanup
+                            WHERE   cleaned = {$row['cleaned']}
+                        ", true
+                        );
+                    } else {
+                        if ($prev_invasion_id != $current_invasion_id) {
+                            cleanup_log('Time for complete removal of invasion from database has not yet come.');
+                        } else {
+                            cleanup_log('Complete removal of invasion from database was already done!');
+                        }
+                    }
+                } else {
+                    cleanup_log('Skipping cleanup of database for this invasion! Cleanup time has not yet come...');
+                }
+
+            // Quest
+            } else {
+                // Make sure quest exists
+                $rs = my_query(
+                    "
+                    SELECT  quest_date
+                    FROM    quests
+                      WHERE id = {$current_quest_id}
+                    ", true
+                );
+
+                // Fetch quest date.
+                $quest = $rs->fetch_assoc();
+
+                // No quest found - set cleanup to 0 and continue with next quest
+                if (!$quest) {
+                    cleanup_log('No quest found with ID: ' . $current_quest_id, '!');
+                    cleanup_log('Updating cleanup information.');
                     my_query(
                     "
-                        DELETE FROM    quests
+                        UPDATE    qleanup
+                        SET       chat_id = 0, 
+                                  message_id = 0 
                         WHERE   id = {$row['id']}
                     ", true
                     );
 
-                    // Set database value of quest_id to 0 so we know info was deleted already
-                    // Use quest_id in where clause since the same quest_id can in cleanup more than once
-                    cleanup_log('Updating database cleanup information.');
-                    my_query(
-                    "
-                        UPDATE    qleanup
-                        SET       quest_id = 0, 
-                                  cleaned = {$row['quest_id']}
-                        WHERE   quest_id = {$row['quest_id']}
-                    ", true
-                    );
-                } else {
-                    if ($database == 1) {
-                        cleanup_log('Quest is already deleted!');
-                    } else {
-                        cleanup_log('Quest cleanup was not triggered! Skipping...');
-                    }
+                    // Continue with next quest
+                    continue;
                 }
 
-                // Delete quest from cleanup table once every value is set to 0 and cleaned got updated from 0 to the quest_id
-                // In addition trigger deletion only when previous and current quest_id are different to avoid unnecessary sql queries
-                if ($row['quest_id'] == 0 && $row['chat_id'] == 0 && $row['message_id'] == 0 && $row['cleaned'] != 0 && ($prev_quest_id != $current_quest_id)) {
-                    // Get all cleanup jobs which will be deleted now.
-                    cleanup_log('Removing cleanup info from database:');
-                    $rs_cl = my_query(
-                    "
-                        SELECT *
-                        FROM    qleanup
-                        WHERE   cleaned = {$row['cleaned']}
-                    ", true
-                    );
+                // Get quest data only when quest_id changed compared to previous run
+                if ($prev_quest_id != $current_quest_id) {
+                    // Today.
+                    $today = dt2time('now', 'Ymd');
+                    $log_today = dt2time('now', 'Y-m-d');
 
-                    // Log each cleanup ID which will be deleted.
-                    while($rs_cleanups = $rs_cl->fetch_assoc()) {
-                        cleanup_log('Cleanup ID: ' . $rs_cleanups['id'] . ', Former Quest ID: ' . $rs_cleanups['cleaned']);
-                    }
+                    // Get quest date.
+                    $questdate = dt2time($quest['quest_date'], 'Ymd');
+                    $log_questdate = dt2date($quest['quest_date']);
 
-                    // Finally delete from cleanup table.
-                    my_query(
-                    "
-                        DELETE FROM    qleanup
-                        WHERE   cleaned = {$row['cleaned']}
-                    ", true
-                    );
-                } else {
-                    if ($prev_quest_id != $current_quest_id) {
-                        cleanup_log('Time for complete removal of quest from database has not yet come.');
-                    } else {
-                        cleanup_log('Complete removal of quest from database was already done!');
-                    }
+                    // Write times to log.
+                    cleanup_log($log_today, 'Current date:');
+                    cleanup_log($log_questdate, 'Quest date:');
                 }
-            } else {
-                cleanup_log('Skipping cleanup of database for this quest! Cleanup time has not yet come...');
+
+                // Time for telegram cleanup?
+                if ($today > $questdate) {
+                    // Delete quest telegram message if not already deleted
+                    if ($telegram == 1 && $row['chat_id'] != 0 && $row['message_id'] != 0) {
+                        // Delete telegram message.
+                        cleanup_log('Deleting telegram message ' . $row['message_id'] . ' from chat ' . $row['chat_id'] . ' for quest ' . $row['quest_id']);
+                        delete_message($row['chat_id'], $row['message_id']);
+                        // Set database values of chat_id and message_id to 0 so we know telegram message was deleted already.
+                        cleanup_log('Updating telegram cleanup information.');
+                        my_query(
+                        "
+                            UPDATE    qleanup
+                            SET       chat_id = 0, 
+                                      message_id = 0 
+                            WHERE   id = {$row['id']}
+                        ", true
+                        );
+                    } else {
+                        if ($telegram == 1) {
+                            cleanup_log('Telegram message is already deleted!');
+                        } else {
+                            cleanup_log('Telegram cleanup was not triggered! Skipping...');
+                        }
+                    }
+                } else {
+                    cleanup_log('Skipping cleanup of telegram for this quest! Cleanup time has not yet come...');
+                }
+
+                // Time for database cleanup?
+                if ($today > $questdate) {
+                    // Delete quest from quests table.
+                    // Make sure to delete only once - quest may be in multiple channels/supergroups, but only 1 time in database
+                    if (($database == 1) && $row['quest_id'] != 0 && ($prev_quest_id != $current_quest_id)) {
+                        // Delete quest from quest table.
+                        cleanup_log('Deleting quest ' . $current_quest_id);
+                        my_query(
+                        "
+                            DELETE FROM    quests
+                            WHERE   id = {$row['quest_id']}
+                        ", true
+                        );
+
+                        // Set database value of quest_id to 0 so we know info was deleted already
+                        // Use quest_id in where clause since the same quest_id can in cleanup more than once
+                        cleanup_log('Updating database cleanup information.');
+                        my_query(
+                        "
+                            UPDATE    qleanup
+                            SET       quest_id = 0, 
+                                      cleaned = {$row['quest_id']}
+                            WHERE   quest_id = {$row['quest_id']}
+                        ", true
+                        );
+                    } else {
+                        if ($database == 1) {
+                            cleanup_log('Quest is already deleted!');
+                        } else {
+                            cleanup_log('Quest cleanup was not triggered! Skipping...');
+                        }
+                    }
+
+                    // Delete quest from cleanup table once every value is set to 0 and cleaned got updated from 0 to the quest_id
+                    // In addition trigger deletion only when previous and current quest_id are different to avoid unnecessary sql queries
+                    if ($row['quest_id'] == 0 && $row['chat_id'] == 0 && $row['message_id'] == 0 && $row['cleaned'] != 0 && ($prev_quest_id != $current_quest_id)) {
+                        // Get all cleanup jobs which will be deleted now.
+                        cleanup_log('Removing cleanup info from database:');
+                        $rs_cl = my_query(
+                        "
+                            SELECT *
+                            FROM    qleanup
+                            WHERE   cleaned = {$row['cleaned']}
+                        ", true
+                        );
+
+                        // Log each cleanup ID which will be deleted.
+                        while($rs_cleanups = $rs_cl->fetch_assoc()) {
+                            cleanup_log('Cleanup ID: ' . $rs_cleanups['id'] . ', Former Quest ID: ' . $rs_cleanups['cleaned']);
+                        }
+
+                        // Finally delete from cleanup table.
+                        my_query(
+                        "
+                            DELETE FROM    qleanup
+                            WHERE   cleaned = {$row['cleaned']}
+                        ", true
+                        );
+                    } else {
+                        if ($prev_quest_id != $current_quest_id) {
+                            cleanup_log('Time for complete removal of quest from database has not yet come.');
+                        } else {
+                            cleanup_log('Complete removal of quest from database was already done!');
+                        }
+                    }
+                } else {
+                    cleanup_log('Skipping cleanup of database for this quest! Cleanup time has not yet come...');
+                }
             }
 
             // Store current quest id as previous id for next loop
             $prev_quest_id = $current_quest_id;
         }
+
 
         // Write to log.
         cleanup_log('Finished with cleanup process!');

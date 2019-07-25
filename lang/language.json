@@ -9,6 +9,16 @@
     "NO":"Oppdrag",
     "FR":"Quête"
   },
+  "invasion":{  
+    "NL":"TRANSLATE",
+    "DE":"Invasion",
+    "EN":"Invasion",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
   "event":{  
     "NL":"Event",
     "DE":"Event",
@@ -298,6 +308,116 @@
     "RU":"Неизвестный покестоп",
     "NO":"Ukjent Pokestop",
     "FR":"Pokéstop inconnu"
+  },
+  "invasion_by_pokestop":{  
+    "NL":"TRANSLATE",
+    "DE":"Teile eine Invasion mittels Pokestop-Auswahl:",
+    "EN":"Share an invasion via pokestop selection:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_invasion":{  
+    "NL":"TRANSLATE",
+    "DE":"Diese Invasion hinzufügen?",
+    "EN":"Add this invasion?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_select_time":{  
+    "NL":"TRANSLATE",
+    "DE":"Wie viele Minuten wird die Invasion da sein? Wähle die kleinere Zahl, wenn du dir unsicher bist!",
+    "EN":"How many minutes will the invasion be there? Select the smaller number if you're unsure!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_expected_time":{  
+    "NL":"TRANSLATE",
+    "DE":"Erwartete Invasionszeit:",
+    "EN":"Expected invasion time:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_saved":{  
+    "NL":"TRANSLATE",
+    "DE":"Invasion gespeichert:",
+    "EN":"Invasion saved:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_already_submitted":{  
+    "NL":"TRANSLATE",
+    "DE":"Invasion für diesen Pokestop ist bereits vorhanden!",
+    "EN":"Invasion for this pokestop was already submitted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_invasion":{  
+    "NL":"TRANSLATE",
+    "DE":"Diese Invasion wirklich löschen?",
+    "EN":"Really delete this invasion?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_successfully_deleted":{  
+    "NL":"TRANSLATE",
+    "DE":"Invasion wurde erfolgreich gelöscht!",
+    "EN":"Invasion was successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasions_currently":{  
+    "NL":"TRANSLATE",
+    "DE":"Aktuelle Invasionen:",
+    "EN":"Current invasions:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "no_invasions_currently":{  
+    "NL":"TRANSLATE",
+    "DE":"Aktuell gibt es keine Invasionen!",
+    "EN":"Currently there are no invasions!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "until_approx":{  
+    "NL":"TRANSLATE",
+    "DE":"bis ca.",
+    "EN":"until approx.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   },
   "quest_by_pokestop":{  
     "NL":"Maak een quest, selecteer een pokestop:",

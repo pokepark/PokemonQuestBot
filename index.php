@@ -39,9 +39,15 @@ if (isset($update['callback_query'])) {
 
 // Location received.
 } else if (isset($update['message']['location']) && $update['message']['chat']['type'] == 'private') {
-    // Create raid and exit.
-    if(QUEST_VIA_LOCATION == true) {
+    // Ask for quest or invasion and exit.
+    if(QUEST_VIA_LOCATION == true && INVASION_VIA_LOCATION == true) {
+        include_once(ROOT_PATH . '/mods/geo.php');
+    // Create quest and exit.
+    } else if(QUEST_VIA_LOCATION == true) {
         include_once(ROOT_PATH . '/mods/quest_geo.php');
+    // Create invasion and exit.
+    } else if(INVASION_VIA_LOCATION == true) {
+        include_once(ROOT_PATH . '/mods/invasion_geo.php');
     }
     exit();
 

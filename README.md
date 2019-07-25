@@ -296,6 +296,20 @@ User with the role 'left' are automatically receiving an 'Access denied' from th
 
 Every access file allows the access for a particular chat and must include the permissons which should be granted to that chat.
 
+To differ between all those access file you can add any kind of comment to the filename of the access file itself. Just make sure to not use a number (0-9) right after the chat id!
+
+Consider you have 4 channels. One for each district of your town: east, west, south and north. So you could name the access file for example like this:
+
+```
+access-100333444555 South-Channel
+access-100444555666+NorthernChannel
+admins-100222333444_West-District
+creator-100111222333-Channel-East-District
+creator-100444555666+NorthernChannel
+members-100111222333-Channel-East-District
+members-100222333444_West-District
+```
+
 ## Permissions overview
 
 The following table shows the permissions you need to write into an access file (last column) to grant permissions to chats.
@@ -305,37 +319,46 @@ In an access file it is **One permission per line** - so not separated by space,
 A few examples for access files can be found below the permission overview table.
 
 
-| Access     | **Action and /command**                                          | Permission inside access file            |
-|------------|------------------------------------------------------------------|------------------------------------------|
-| Bot        | Access the bot itself                                            | `access-bot`                             |
-|            | Deny access to restricted group/supergroup/channel members       | `ignore-restricted`                      |
-|            | Deny access to kicked group/supergroup/channel members           | `ignore-kicked`                          |
-|            |                                                                  |                                          |
-| Quest      | Create quests `/start`, `/new`                                   | `create`                                 |
-|            | List all quests `/list`                                          | `list`                                   |
-|            | Delete OWN quests `/delete`                                      | `delete-own`                             |
-|            | Delete ALL quests `/delete`                                      | `delete-all`                             |
-|            |                                                                  |                                          |
-| Sharing    | Share OWN created raids to predefined chats 'SHARE_CHATS'        | `share-own`                              |
-|            | Share ALL created raids to predefined chats 'SHARE_CHATS'        | `share-all`                              |
-|            | Share OWN created raids to any chat                              | `share-own` and `share-any-chat`         |
-|            | Share ALL created raids to any chat                              | `share-all` and `share-any-chat`         |
-|            |                                                                  |                                          |
-| Pokestop   | Get pokestop details `/pokestop`                                 | `pokestop-details`                       |
-|            | Edit pokestop name `/stopname`                                   | `pokestop-name`                          |
-|            | Edit pokestop address `/stopaddress`                             | `pokestop-address`                       |
-|            | Add pokestop `/addstop`                                          | `pokestop-add`                           |
-|            | Delete pokestop `/deletestop`                                    | `pokestop-delete`                        |
-|            |                                                                  |                                          |
-| Portal     | Import portals via inline search from other bots                 | `portal-import`                          |
-|            |                                                                  |                                          |
-| Event      | Set current quest event name `/event`                            | `event`                                  |
-|            |                                                                  |                                          |
-| Dex        | Get pokemon id by pokemon name `/dex`                            | `dex`                                    |
-|            |                                                                  |                                          |
-| Willow     | Manage quests, rewards, encounters and quicklist `/willow`       | `willow`                                 |
-|            |                                                                  |                                          |
-| Help       | Show help `/help`                                                | `help`                                   |
+| Access     | **Action and /command**                                            | Permission inside access file              |
+|------------|--------------------------------------------------------------------|--------------------------------------------|
+| Bot        | Access the bot itself                                              | `access-bot`                               |
+|            | Deny access to restricted group/supergroup/channel members         | `ignore-restricted`                        |
+|            | Deny access to kicked group/supergroup/channel members             | `ignore-kicked`                            |
+|            |                                                                    |                                            |
+| Quest      | Create quests `/start`, `/new`                                     | `create`                                   |
+|            | List all quests `/list`                                            | `list`                                     |
+|            | Delete OWN quests `/delete`                                        | `delete-own`                               |
+|            | Delete ALL quests `/delete`                                        | `delete-all`                               |
+|            |                                                                    |                                            |
+| Invasion   | Create invasions `/rocket`                                         | `invasion-create`                          |
+|            | List all invasions `/list`                                         | `invasion-list`                            |
+|            | Delete OWN invasions `/delete`                                     | `invasion-delete-own`                      |
+|            | Delete ALL invasions `/delete`                                     | `invasion-delete-all`                      |
+|            |                                                                    |                                            |
+| Sharing    | Share OWN created quests to predefined chats 'SHARE_CHATS'         | `share-own`                                |
+|            | Share ALL created quests to predefined chats 'SHARE_CHATS'         | `share-all`                                |
+|            | Share OWN created quests to any chat                               | `share-own` and `share-any-chat`           |
+|            | Share ALL created quests to any chat                               | `share-all` and `share-any-chat`           |
+|            | Share OWN created invasions to predefined chats 'SHARE_INVASIONS'  | `invasion-share-own`                       |
+|            | Share ALL created invasions to predefined chats 'SHARE_INVASIONS'  | `invasion-share-all`                       |
+|            | Share OWN created invasions to any chat                            | `invasion-share-own` and `share-any-chat`  |
+|            | Share ALL created invasions to any chat                            | `invasion-share-all` and `share-any-chat`  |
+|            |                                                                    |                                            |
+| Pokestop   | Get pokestop details `/pokestop`                                   | `pokestop-details`                         |
+|            | Edit pokestop name `/stopname`                                     | `pokestop-name`                            |
+|            | Edit pokestop address `/stopaddress`                               | `pokestop-address`                         |
+|            | Add pokestop `/addstop`                                            | `pokestop-add`                             |
+|            | Delete pokestop `/deletestop`                                      | `pokestop-delete`                          |
+|            |                                                                    |                                            |
+| Portal     | Import portals via inline search from other bots                   | `portal-import`                            |
+|            |                                                                    |                                            |
+| Event      | Set current quest event name `/event`                              | `event`                                    |
+|            |                                                                    |                                            |
+| Dex        | Get pokemon id by pokemon name `/dex`                              | `dex`                                      |
+|            |                                                                    |                                            |
+| Willow     | Manage quests, rewards, encounters and quicklist `/willow`         | `willow`                                   |
+|            |                                                                    |                                            |
+| Help       | Show help `/help`                                                  | `help`                                     |
 
 
 #### Example: Allow the user 111555999 to create quests and share them to the predefined chat list

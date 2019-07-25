@@ -11,11 +11,15 @@ if($access && (is_file(ROOT_PATH . '/access/' . $access) || $access == 'BOT_ADMI
         $permissions[] = 'create';
         $permissions[] = 'list';
         $permissions[] = 'delete-all';
+        $permissions[] = 'invasion-create';
+        $permissions[] = 'invasion-list';
+        $permissions[] = 'invasion-delete-all';
         $permissions[] = 'pokestop-details';
         $permissions[] = 'pokestop-name';
         $permissions[] = 'pokestop-address';
         $permissions[] = 'pokestop-add';
         $permissions[] = 'pokestop-delete';
+        $permissions[] = 'portal-import';
         $permissions[] = 'event';
         $permissions[] = 'dex';
         $permissions[] = 'willow';
@@ -34,14 +38,20 @@ if($access && (is_file(ROOT_PATH . '/access/' . $access) || $access == 'BOT_ADMI
     debug_log('Showing help to user now');
     $msg = '<b>' . getTranslation('personal_help') . '</b>' . CR . CR;
 
-    // Quest via location?
-    if(QUEST_VIA_LOCATION == true) {
+    // Quest and invasion via location?
+    if(QUEST_VIA_LOCATION == true && INVASION_VIA_LOCATION == true) {
         $msg .= EMOJI_CLIPPY . SP . getTranslation('help_create_via_location') . CR . CR;
+    // Quest via location?
+    } else if(QUEST_VIA_LOCATION == true) {
+        $msg .= EMOJI_CLIPPY . SP . getTranslation('help_quest_via_location') . CR . CR;
+    // Invasion via location?
+    } else if(INVASION_VIA_LOCATION == true) {
+        $msg .= EMOJI_CLIPPY . SP . getTranslation('help_invasion_via_location') . CR . CR;
     }
 
     // Show help.
     foreach($permissions as $id => $p) {
-        if($p == 'access-bot' || strpos($p, 'share-') === 0 || strpos($p, 'ignore-') === 0) continue;
+        if($p == 'access-bot' || strpos($p, 'share-') === 0 || strpos($p, 'invasion-share-') === 0 || strpos($p, 'ignore-') === 0) continue;
         $msg .= getTranslation('help_' . $p) . CR . CR;
     }
 // No help for the user.
