@@ -46,7 +46,7 @@ while ($invasions = $rs->fetch_assoc()) {
 }
 
 // Keys array received?
-if (is_array($keys)) {
+if ($keys) {
     // Set message.
     $msg = '<b>' . getTranslation('add_this_info_to_invasion') . '</b>';
     $msg .= CR . CR . getTranslation('info') . ': ' . '<b>' . $comment . '</b>';
