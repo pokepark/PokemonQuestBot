@@ -9,7 +9,7 @@ debug_log('ROCKETLIST()');
 // Check access.
 bot_access_check($update, 'invasion-list');
 
-// Get all quests of the day from database.
+// Get current invasions from database.
 $rs = my_query(
         "
         SELECT     invasions.*,
@@ -25,7 +25,7 @@ $rs = my_query(
 // Init empty keys array.
 $keys = array();
 
-// Add key for quest
+// Add key for invasion
 while ($invasions = $rs->fetch_assoc()) {
     // Pokestop name.
     $text = empty($invasions['pokestop_name']) ? getTranslation('unnamed_pokestop') : $invasions['pokestop_name'];

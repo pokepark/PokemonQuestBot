@@ -173,7 +173,7 @@ function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp 
      * Invasion: 13:05 to approx. 13:35
      * Pokestop: Reward-Stop Number 1
      * Invasion-Street 5, 13579 Poke-City
-     * Reward: Magikarp or Onix
+     * Info: Snorlax (Snorlax, Snorlax and Dragonite battle)
     */
 
     // Get translation type
@@ -202,15 +202,21 @@ function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp 
     $msg = '';
     if($compact_format == false) {
         $msg .= '<b>' . $getTypeTranslation('invasion') . SP . dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']) . '</b>' . CR;
-        $msg .= $getTypeTranslation('pokestop') . ': ' . $pokestop_name . $pokestop_address . CR;
+        $msg .= $getTypeTranslation('pokestop') . ': ' . $pokestop_name . $pokestop_address;
     } else {
         $msg .= dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']) . CR . $pokestop_name . $pokestop_address; 
-        //$msg .= $pokestop_name . $pokestop_address . ' — ' . dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']); 
+    }
+
+    // Add comment to message.
+    if(!empty($invasion['comment'])) {
+        $msg .= CR . $getTypeTranslation('info') . ': ' . '<b>' . $invasion['comment'] . '</b>';
     }
 
     //Add custom message from the config.
     if($compact_format == false && defined('MAP_URL') && !empty(MAP_URL)) {
-        $msg .= CR . MAP_URL ;
+        $msg .= CR . CR . MAP_URL;
+    } else if($compact_format == false) {
+        $msg .= CR;
     }
 
     // Display creator.

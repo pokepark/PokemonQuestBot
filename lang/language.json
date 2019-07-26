@@ -19,6 +19,16 @@
     "NO":"TRANSLATE",
     "FR":"TRANSLATE"
   },
+  "info":{  
+    "NL":"TRANSLATE",
+    "DE":"Info",
+    "EN":"Info",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
   "event":{  
     "NL":"Event",
     "DE":"Event",
@@ -329,6 +339,16 @@
     "NO":"TRANSLATE",
     "FR":"TRANSLATE"
   },
+  "add_this_info_to_invasion":{  
+    "NL":"TRANSLATE",
+    "DE":"Diese Information zur Invasion hinzufügen?",
+    "EN":"Add this info to the invasion?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
   "invasion_select_time":{  
     "NL":"TRANSLATE",
     "DE":"Wie viele Minuten wird die Invasion da sein? Wähle die kleinere Zahl, wenn du dir unsicher bist!",
@@ -356,6 +376,16 @@
     "IT":"TRANSLATE",
     "PT-BR":"TRANSLATE",
     "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_crypto_instructions":{  
+    "NL":"TRANSLATE",
+    "DE":"Optional - Info wie das Crypto-Pokemon hinzufügen:\n/crypto <code>Relaxo</code>",
+    "EN":"Optional - Add an info like the crypto pokemon:\n/crypto <code>Snorlax</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
     "NO":"TRANSLATE",
     "FR":"TRANSLATE"
   },

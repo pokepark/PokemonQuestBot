@@ -44,6 +44,7 @@ if (!$invasion_in_db) {
     $msg = '<b>' . getTranslation('invasion_saved') . '</b>' . CR . CR;
     $invasion = get_invasion($id);
     $msg .= get_formatted_invasion($invasion, false, false, true);
+    $msg .= CR . CR . getTranslation('invasion_crypto_instructions');
 
     // Init keys.
     $keys = array();

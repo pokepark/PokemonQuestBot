@@ -42,6 +42,7 @@ $tg_json[] = send_message($chat, $text, $keys, ['reply_to_message_id' => $chat, 
 
 // Set callback keys and message
 $callback_msg = getTranslation('successfully_shared');
+$callback_msg .= CR . CR . getTranslation('invasion_crypto_instructions');
 $callback_keys = [];
 
 // Edit message.
