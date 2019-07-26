@@ -1,6 +1,6 @@
 {  
   "help_create_via_location":{  
-    "NL":"Locatie delen - Maak een quest of invasie",
+    "NL":"Locatie delen - Maak een quest of Team R invasie",
     "DE":"Standort teilen - Forschung oder Invasion anlegen",
     "EN":"Share location - Create quest or invasion",
     "IT":"TRANSLATE",
@@ -22,7 +22,7 @@
     "PL":"TRANSLATE"
   },
   "help_invasion_via_location":{  
-    "NL":"TRANSLATE",
+    "NL":"Deel locatie - Maak een Team R invasie",
     "DE":"Standort teilen - Invasion anlegen",
     "EN":"Share location - Create invasion",
     "IT":"TRANSLATE",
@@ -77,7 +77,7 @@
     "PL":"TRANSLATE"
   },
   "help_invasion-create":{
-    "NL":"TRANSLATE",
+    "NL":"/rocket - Maak een Team R invasie aan",
     "DE":"/rocket - Invasion anlegen",
     "EN":"/rocket - Create invasion",
     "IT":"TRANSLATE",
@@ -88,7 +88,7 @@
     "PL":"TRANSLATE"
   },
   "help_invasion-list":{
-    "NL":"TRANSLATE",
+    "NL":"/rocketlist - Huidige Team R invasies",
     "DE":"/rocketlist - Aktuelle Invasionen",
     "EN":"/rocketlist - Current invasions",
     "IT":"TRANSLATE",
@@ -99,7 +99,7 @@
     "PL":"TRANSLATE"
   },
   "help_invasion-delete-own":{
-    "NL":"TRANSLATE",
+    "NL":"/rocketdelete - Verwijder eigen Team R invasie",
     "DE":"/rocketdelete - Eigene Invasionen löschen",
     "EN":"/rocketdelete - Delete own invasions",
     "IT":"TRANSLATE",
@@ -110,7 +110,7 @@
     "PL":"TRANSLATE"
   },
   "help_invasion-delete-all":{
-    "NL":"TRANSLATE",
+    "NL":"/rocketdelete - Verwijder alle Team R invasies",
     "DE":"/rocketdelete - Alle Invasionen löschen",
     "EN":"/rocketdelete - Delete all invasions",
     "IT":"TRANSLATE",
@@ -176,7 +176,7 @@
     "PL":"TRANSLATE"
   },
   "help_portal-import":{  
-    "NL":"TRANSLATE",
+    "NL":"@PortalMapBot of @Ingressportalbot - Importeer pokestop",
     "DE":"@PortalMapBot oder @Ingressportalbot - Pokestop importieren",
     "EN":"@PortalMapBot or @Ingressportalbot - Import pokestop",
     "IT":"TRANSLATE",
