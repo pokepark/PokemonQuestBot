@@ -32,7 +32,7 @@ if (!$quest_in_db) {
         "
         INSERT INTO   quests
         SET           user_id = {$update['callback_query']['from']['id']},
-                      quest_date = UTC_DATE(),
+                      quest_date = UTC_TIMESTAMP(),
                       pokestop_id = {$pokestop_id},
                       quest_id = {$quest_id},
                       reward_id = {$reward_id}

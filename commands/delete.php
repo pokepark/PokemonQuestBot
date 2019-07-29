@@ -23,7 +23,8 @@ $rs = my_query(
         ON         quests.quest_id = questlist.id
         LEFT JOIN  rewardlist
         ON         quests.reward_id = rewardlist.id
-        WHERE      quest_date = UTC_DATE()
+        WHERE      quest_date > UTC_DATE()
+        AND        quest_date < UTC_DATE() + INTERVAL 1 DAY
         ORDER BY   quests.id
         "
     );

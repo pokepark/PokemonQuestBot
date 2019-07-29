@@ -33,8 +33,8 @@ if (isset($update['callback_query'])) {
 
 // Inline query received.
 } else if (isset($update['inline_query'])) {
-    // List quests and exit.
-    quest_list($update);
+    // List inline search results and exit.
+    inline_list($update);
     exit();
 
 // Location received.

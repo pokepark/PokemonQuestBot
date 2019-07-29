@@ -50,7 +50,8 @@ function quest_duplication_check($pokestop_id)
         "
         SELECT    id, pokestop_id
         FROM      quests
-          WHERE   quest_date = UTC_DATE() 
+        WHERE     quest_date > UTC_DATE()
+            AND   quest_date < UTC_DATE() + INTERVAL 1 DAY
             AND   pokestop_id > 0
             AND   pokestop_id = {$pokestop_id}
         "
@@ -165,9 +166,10 @@ function get_invasion($invasion_id)
  * @param $add_timestamp bool
  * @param $compact_format bool
  * @param $override_language bool
+ * @param $inline_format bool
  * @return array
  */
-function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp = false, $compact_format = false, $override_language = false)
+function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp = false, $compact_format = false, $override_language = false, $inline_format = false)
 {
     /** Example:
      * Invasion: 13:05 to approx. 13:35
@@ -203,6 +205,8 @@ function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp 
     if($compact_format == false) {
         $msg .= '<b>' . $getTypeTranslation('invasion') . SP . dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']) . '</b>' . CR;
         $msg .= $getTypeTranslation('pokestop') . ': ' . $pokestop_name . $pokestop_address;
+    } else if ($inline_format == true) {
+        $msg .= dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']);
     } else {
         $msg .= dt2time($invasion['start_time']) . SP . $getTypeTranslation('until_approx') . SP . dt2time($invasion['end_time']) . CR . $pokestop_name . $pokestop_address; 
     }
@@ -1123,7 +1127,8 @@ function get_todays_formatted_quests()
         "
         SELECT     id
         FROM       quests
-        WHERE      quest_date = UTC_DATE() 
+        WHERE      quest_date > UTC_DATE()
+        AND        quest_date < UTC_DATE() + INTERVAL 1 DAY
         "
     );
 
@@ -2380,7 +2385,7 @@ function get_pokestop_list_keys($searchterm, $action = 'quest_create', $type = '
         $rs = my_query(
                 "
                 SELECT    quests.quest_date, pokestops.id, pokestops.pokestop_name,
-                CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest,
+                CASE WHEN SUM(quests.quest_date > UTC_DATE() AND quests.quest_date < UTC_DATE() + INTERVAL 1 DAY) THEN 1 ELSE 0 END AS active_quest,
                 CASE WHEN SUM(invasions.end_time > UTC_TIMESTAMP()) THEN 1 ELSE 0 END AS active_invasion
                 FROM      pokestops
                 LEFT JOIN quests
@@ -3680,27 +3685,45 @@ function run_cleanup ($telegram = 2, $database = 2) {
     }
 }
 
+/**
+ * Inline search list.
+ * @param $update
+ */
+function inline_list($update)
+{
+    // Init quest id.
+    $in_id = 0;
+
+    // Botname:quest_id or Botname:-invasion_id received? 
+    if (substr_count($update['inline_query']['query'], ':') == 1) {
+        // Botname: received, is there a quest_id / -invasion_id after : or not?
+        if(strlen(explode(':', $update['inline_query']['query'])[1]) != 0) {
+            // Invasion / Quest ID.
+            $in_id = explode(':', $update['inline_query']['query'])[1];
+        }
+    }
+
+    // Quest or Invasion?
+    if(substr($in_id, 0, 1) === "-") {
+        // Invasion
+        debug_log('Inline request for invasion received. Invasion ID: ' . $in_id);
+        invasion_list($update, intval(abs($in_id)));
+    } else {
+        // Quest
+        debug_log('Inline request for quest received. Quest ID: ' . $in_id);
+        quest_list($update, intval($in_id));
+    }
+}
 
 /**
  * Quest list.
  * @param $update
+ * @param $iqq
  */
-function quest_list($update)
+function quest_list($update, $iqq)
 {
     // Init empty rows array and query type.
     $rows = [];
-
-    // Init quest id.
-    $iqq = 0;
-   
-    // Botname:quest_id received? 
-    if (substr_count($update['inline_query']['query'], ':') == 1) {
-        // Botname: received, is there a quest_id after : or not?
-        if(strlen(explode(':', $update['inline_query']['query'])[1]) != 0) {
-            // Quest ID.
-            $iqq = intval(explode(':', $update['inline_query']['query'])[1]);
-        }
-    }
 
     // Inline list quests.
     if ($iqq != 0) {
@@ -3712,7 +3735,8 @@ function quest_list($update)
                     id AS iqq_quest_id
                     FROM      quests
                       WHERE   id = {$iqq}
-                      AND     quest_date = UTC_DATE()
+                      AND     quest_date > UTC_DATE()
+                      AND     quest_date < UTC_DATE() + INTERVAL 1 DAY
             "
         );
 
@@ -3727,7 +3751,8 @@ function quest_list($update)
                                 quests.id AS iqq_quest_id
                     FROM        quests
                       WHERE     user_id = {$update['inline_query']['from']['id']}
-                      AND       quest_date = UTC_DATE()
+                      AND       quest_date > UTC_DATE()
+                      AND       quest_date < UTC_DATE() + INTERVAL 1 DAY
                       ORDER BY  id DESC LIMIT 3
             "
         );
@@ -3756,6 +3781,77 @@ function quest_list($update)
 
             // Set the description.
             $contents[$key]['desc'] = get_formatted_quest($quest, false, false, true, true);
+    }
+
+    debug_log($contents);
+    answerInlineQuery($update['inline_query']['id'], $contents);
+}
+
+
+/**
+ * Invasion list.
+ * @param $update
+ * @param $ivq
+ */
+function invasion_list($update, $ivq)
+{
+    // Init empty rows array and query type.
+    $rows = [];
+
+    // Inline list invasions.
+    if ($ivq != 0) {
+
+        // Quest by ID.
+        $request = my_query(
+            "
+            SELECT  *,
+                    id AS ivq_invasion_id
+                    FROM      invasions
+                      WHERE   id = {$ivq}
+                      AND     end_time > UTC_TIMESTAMP()
+            "
+        );
+
+        while ($answer = $request->fetch_assoc()) {
+            $rows[] = $answer;
+        }
+    } else {
+        // Get quest data by user.
+        $request = my_query(
+            "
+            SELECT              *,
+                                invasions.id AS ivq_invasion_id
+                    FROM        invasions
+                      WHERE     user_id = {$update['inline_query']['from']['id']}
+                      AND       end_time > UTC_TIMESTAMP()
+                      ORDER BY  id DESC LIMIT 3
+            "
+        );
+
+        while ($answer_invasions = $request->fetch_assoc()) {
+            $rows[] = $answer_invasions;
+        }
+    }
+
+    // Init array.
+    $contents = array();
+
+    // For each rows.
+    foreach ($rows as $key => $row) {
+            // Get the quest.
+            $invasion = get_invasion($row['ivq_invasion_id']);
+
+            // Set the text.
+            $contents[$key]['text'] = get_formatted_invasion($invasion, true, true, false, true);
+
+            // Set the title.
+            $contents[$key]['title'] = $invasion['pokestop_name'];
+
+            // Set the inline keyboard.
+            $contents[$key]['keyboard'] = [];
+
+            // Set the description.
+            $contents[$key]['desc'] = get_formatted_invasion($invasion, false, false, true, true, true);
     }
 
     debug_log($contents);
