@@ -10,7 +10,7 @@
     "FR":"Quête"
   },
   "invasion":{  
-    "NL":"TRANSLATE",
+    "NL":"Team R invasie",
     "DE":"Invasion",
     "EN":"Invasion",
     "IT":"TRANSLATE",
@@ -20,7 +20,7 @@
     "FR":"TRANSLATE"
   },
   "info":{  
-    "NL":"TRANSLATE",
+    "NL":"Info",
     "DE":"Info",
     "EN":"Info",
     "IT":"TRANSLATE",
@@ -320,7 +320,7 @@
     "FR":"Pokéstop inconnu"
   },
   "invasion_by_pokestop":{  
-    "NL":"TRANSLATE",
+    "NL":"Deel een Team R invasie via de volgende pokestop:",
     "DE":"Teile eine Invasion mittels Pokestop-Auswahl:",
     "EN":"Share an invasion via pokestop selection:",
     "IT":"TRANSLATE",
@@ -330,7 +330,7 @@
     "FR":"TRANSLATE"
   },
   "add_this_invasion":{  
-    "NL":"TRANSLATE",
+    "NL":"Deze informatie toevoegen?",
     "DE":"Diese Invasion hinzufügen?",
     "EN":"Add this invasion?",
     "IT":"TRANSLATE",
@@ -340,7 +340,7 @@
     "FR":"TRANSLATE"
   },
   "add_this_info_to_invasion":{  
-    "NL":"TRANSLATE",
+    "NL":"Team R invasie toevoegen?",
     "DE":"Diese Information zur Invasion hinzufügen?",
     "EN":"Add this info to the invasion?",
     "IT":"TRANSLATE",
@@ -350,7 +350,7 @@
     "FR":"TRANSLATE"
   },
   "invasion_select_time":{  
-    "NL":"TRANSLATE",
+    "NL":"Hoe lang zit de Team R invasie er nog? Selecteer een kleiner getal als je het niet zeker weet!",
     "DE":"Wie viele Minuten wird die Invasion da sein? Wähle die kleinere Zahl, wenn du dir unsicher bist!",
     "EN":"How many minutes will the invasion be there? Select the smaller number if you're unsure!",
     "IT":"TRANSLATE",
@@ -360,7 +360,7 @@
     "FR":"TRANSLATE"
   },
   "invasion_expected_time":{  
-    "NL":"TRANSLATE",
+    "NL":"Verwachte Team R invasie tijd:",
     "DE":"Erwartete Invasionszeit:",
     "EN":"Expected invasion time:",
     "IT":"TRANSLATE",
@@ -370,7 +370,7 @@
     "FR":"TRANSLATE"
   },
   "invasion_saved":{  
-    "NL":"TRANSLATE",
+    "NL":"Team R invasie opgeslagen:",
     "DE":"Invasion gespeichert:",
     "EN":"Invasion saved:",
     "IT":"TRANSLATE",
@@ -380,7 +380,7 @@
     "FR":"TRANSLATE"
   },
   "invasion_crypto_instructions":{  
-    "NL":"TRANSLATE",
+    "NL":"Optional - Extra informatie toevoegen aan de Team R invasie pokemon:\n/crypto <code>Snorlax</code>",
     "DE":"Optional - Info wie das Crypto-Pokemon hinzufügen:\n/crypto <code>Relaxo</code>",
     "EN":"Optional - Add an info like the crypto pokemon:\n/crypto <code>Snorlax</code>",
     "IT":"TRANSLATE",
@@ -390,7 +390,7 @@
     "FR":"TRANSLATE"
   },
   "invasion_already_submitted":{  
-    "NL":"TRANSLATE",
+    "NL":"Team R invasie voor deze pokestop is al toegevoegd!",
     "DE":"Invasion für diesen Pokestop ist bereits vorhanden!",
     "EN":"Invasion for this pokestop was already submitted!",
     "IT":"TRANSLATE",
@@ -400,7 +400,7 @@
     "FR":"TRANSLATE"
   },
   "delete_this_invasion":{  
-    "NL":"TRANSLATE",
+    "NL":"Verwijder deze Team R invasie?",
     "DE":"Diese Invasion wirklich löschen?",
     "EN":"Really delete this invasion?",
     "IT":"TRANSLATE",
@@ -410,7 +410,7 @@
     "FR":"TRANSLATE"
   },
   "invasion_successfully_deleted":{  
-    "NL":"TRANSLATE",
+    "NL":"Team R invasie succesvol verwijderd!",
     "DE":"Invasion wurde erfolgreich gelöscht!",
     "EN":"Invasion was successfully deleted!",
     "IT":"TRANSLATE",
@@ -420,7 +420,7 @@
     "FR":"TRANSLATE"
   },
   "invasions_currently":{  
-    "NL":"TRANSLATE",
+    "NL":"Huidige Team R invasies:",
     "DE":"Aktuelle Invasionen:",
     "EN":"Current invasions:",
     "IT":"TRANSLATE",
@@ -430,7 +430,7 @@
     "FR":"TRANSLATE"
   },
   "no_invasions_currently":{  
-    "NL":"TRANSLATE",
+    "NL":"Er zijn geen huidige Team R invasies!",
     "DE":"Aktuell gibt es keine Invasionen!",
     "EN":"Currently there are no invasions!",
     "IT":"TRANSLATE",
@@ -440,7 +440,7 @@
     "FR":"TRANSLATE"
   },
   "until_approx":{  
-    "NL":"TRANSLATE",
+    "NL":"Tot ongeveer",
     "DE":"bis ca.",
     "EN":"until approx.",
     "IT":"TRANSLATE",
