@@ -10,7 +10,7 @@ debug_log('invasion_share()');
 invasion_access_check($update, $data, 'invasion-share');
 
 // Get invasion id.
-$id = $data['id'];
+$id = abs($data['id']);
 
 // Get chat id.
 $chat = $data['arg'];
