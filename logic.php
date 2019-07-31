@@ -2471,7 +2471,7 @@ function get_pokestops_in_radius_keys($lat, $lon, $radius, $action = 'quest_crea
                                 sin(radians(lat))
                             )
                         ) AS distance,
-              CASE WHEN SUM(quests.quest_date = UTC_DATE()) THEN 1 ELSE 0 END AS active_quest,
+              CASE WHEN SUM(quests.quest_date > UTC_DATE() AND quests.quest_date < UTC_DATE() + INTERVAL 1 DAY) THEN 1 ELSE 0 END AS active_quest,
               CASE WHEN SUM(invasions.end_time > UTC_TIMESTAMP()) THEN 1 ELSE 0 END AS active_invasion
               FROM      pokestops
               LEFT JOIN quests
