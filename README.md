@@ -160,23 +160,6 @@ Finally check the dashboard again and make sure Google Maps Geocoding API and Go
 Set `MAPS_LOOKUP` to true and put the API key in `MAPS_API_KEY` in your config.
 
 
-## Quest sharing
-
-You can share quests with any chat in Telegram via a share button.
-
-Sharing quests can be restricted, so only specific chats/users can be allowed to share a quest - take a look at the permission system!
-
-With a predefined list you can specify the chats which should appear as buttons for sharing quests.
-
-For the ID of a chat either forward a message from the chat to a bot like @RawDataBot, @getidsbot or search the web for another method ;)
-
-Example:
-
-#### Predefine sharing to the chats -100111222333 and -100444555666
-
-`"SHARE_CHATS":"-100111222333,-100444555666"`
-
-
 ## Quest creation
 
 There are several options to customize the creation of quests:
@@ -214,6 +197,57 @@ Every ID/number for all the available reward types:
 | 17        | King's Rock | 
 | 18        | Metal Coat  | 
 | 19        | Up-Grade    | 
+
+
+## Quest sharing
+
+You can share quests with any chat in Telegram via a share button.
+
+Sharing quests can be restricted, so only specific chats/users can be allowed to share a quest - take a look at the permission system!
+
+With a predefined list you can specify the chats which should appear as buttons for sharing quests.
+
+For the ID of a chat either forward a message from the chat to a bot like @RawDataBot, @getidsbot or search the web for another method ;)
+
+Example:
+
+#### Predefine sharing to the chats -100111222333 and -100444555666
+
+`"SHARE_CHATS":"-100111222333,-100444555666"`
+
+
+## Invasion creation
+
+There are several options to customize the creation of Team Rocket invasions:
+
+Set `INVASION_VIA_LOCATION` to true to allow invasion creation from a location shared with the bot.
+
+Set `INVASION_LOCATION` to true to send back the location as message in addition to the invasion.
+
+Set `INVASION_STOPS_RADIUS` to the amount in meters the bot will search for pokestops around the location shared with the bot.
+
+Set `INVASION_DURATION_SHORT` to the amount of time in minutes how long at least the invasion is probably at the pokestop.
+
+Set `INVASION_DURATION_LONG` to the amount of time in minutes how long idially the invasion is probably at the pokestop.
+
+Set `INVASION_DURATION_EVENT` to the amount of time in minutes how long invasions will be at pokestops during an event. This will give the users the options to choose between the event invasion time and the shortest possible invasion time in 5 minute steps.
+
+## Invasion sharing
+
+You can share invasions with any chat in Telegram via a share button.
+
+Sharing invasions can be restricted, so only specific chats/users can be allowed to share an invasion - take a look at the permission system!
+
+With a predefined list you can specify the chats which should appear as buttons for sharing invasions.
+
+For the ID of a chat either forward a message from the chat to a bot like @RawDataBot, @getidsbot or search the web for another method ;)
+
+Example:
+
+#### Predefine sharing to the chats -100111222333 and -100444555666
+
+`"SHARE_INVASIONS":"-100111222333,-100444555666"`
+
 
 ## Portal Import
 
@@ -331,9 +365,10 @@ A few examples for access files can be found below the permission overview table
 |            | Delete ALL quests `/delete`                                        | `delete-all`                               |
 |            |                                                                    |                                            |
 | Invasion   | Create invasions `/rocket`                                         | `invasion-create`                          |
-|            | List all invasions `/list`                                         | `invasion-list`                            |
-|            | Delete OWN invasions `/delete`                                     | `invasion-delete-own`                      |
-|            | Delete ALL invasions `/delete`                                     | `invasion-delete-all`                      |
+|            | List all invasions `/rocketlist`                                   | `invasion-list`                            |
+|            | Delete OWN invasions `/rocketdelete`                               | `invasion-delete-own`                      |
+|            | Delete ALL invasions `/rocketdelete`                               | `invasion-delete-all`                      |
+|            | Add comments to invasions `/crypto`                                | `invasion-create`                          |
 |            |                                                                    |                                            |
 | Sharing    | Share OWN created quests to predefined chats 'SHARE_CHATS'         | `share-own`                                |
 |            | Share ALL created quests to predefined chats 'SHARE_CHATS'         | `share-all`                                |
@@ -450,11 +485,42 @@ Create a quest by searching for the Pokestop name in the database. The bot will 
 Example input: `/quest Brandenburger Tor`
 
 
+### Command: /list
+
+The bot will allow you to get a list of the quests from today, share and delete all quests.
+
+
 ### Command: /delete
 
 Delete an existing quest. With this command you can delete a quest from telegram and the database. Use with care!
 
 Based on your access to the bot, you may can only delete quests you created yourself and cannot delete quests from other bot users.
+
+
+### Command: /rocket
+
+Create a Team Rocket invasion by searching for the Pokestop name in the database. The bot will answer with all pokestops matching the name, e.g. "Brandenburger Tor".
+
+Example input: `/rocket Brandenburger Tor`
+
+
+### Command: /rocketlist
+
+The bot will allow you to get a list of the currently active Team Rocket Invasions, share and delete all of them.
+
+
+### Command: /rocketdelete
+
+Delete an existing Team Rocket Invasion. With this command you can delete an invasion from telegram and the database. Use with care!
+
+Based on your access to the bot, you may can only delete invasions you created yourself and cannot delete invasions from other bot users.
+
+
+### Command: /crypto
+
+The bot will allow you to add a comment like the pokemon you have to beat, to a currently active Team Rocket Invasion.
+
+Example input: `/crypto Snorlax, Snorlax, Snorlax`
 
 
 ### Command: /pokestop
@@ -492,11 +558,6 @@ Example input to delete the gym address: `/stopaddress 34, reset`
 Delete a pokestop from the database. The full name or at least a part of the name of the pokestop is required. Select a pokestop and confirm the deletion to remove it from the database.
 
 Example input: `/deletestop Brandenburger Tor`
-
-
-### Command: /list
-
-The bot will allow you to get a list of the quests from today, share and delete all quests.
 
 
 ### Command: /event
