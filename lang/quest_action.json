@@ -250,5 +250,17 @@
 		"DE": "Pokemon:Pokemon",
 		"EN": "Pokemon:Pokemon",
 		"FR": "Pokémon:Pokémon"
+	},
+	"quest_action_13002" : {
+		"NL": "Team GO Rocket Grunt:Team GO Rocket Grunts",
+		"DE": "Team GO Rocket Rüpel:Team GO Rocket Rüpel",
+		"EN": "Team GO Rocket Grunt:Team GO Rocket Grunts",
+		"FR": "Team GO Rocket Grunt:Team GO Rocket Grunts"
+	},
+	"quest_action_14002" : {
+		"NL": "Pokemon:Pokemon",
+		"DE": "Pokemon:Pokemon",
+		"EN": "Pokemon:Pokemon",
+		"FR": "Pokémon:Pokémon"
 	}
 }

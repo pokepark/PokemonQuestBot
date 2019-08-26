@@ -70,5 +70,17 @@
 		"DE": "Tausche",
 		"EN": "Trade",
 		"FR": "Echange"
+	},
+	"quest_type_13" : {
+		"NL": "Defeat",
+		"DE": "Besiege",
+		"EN": "Defeat",
+		"FR": "Defeat"
+	},
+	"quest_type_14" : {
+		"NL": "Snapshot",
+		"DE": "Fotografiere",
+		"EN": "Snapshot",
+		"FR": "Snapshot"
 	}
 }
