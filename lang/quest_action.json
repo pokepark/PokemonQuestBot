@@ -167,6 +167,18 @@
 		"EN": "time in a raid:times in a raid",
 		"FR": "fois dans une raid:fois dans une raid"
 	},
+        "quest_action_7003" : {
+                "NL": "time a team leader:times a team leader",
+                "DE": "Mal gegen einen Teamleader:Mal gegen einen Teamleader",
+                "EN": "time a team leader:times a team leader",
+                "FR": "time a team leader:times a team leader"
+        },
+        "quest_action_7004" : {
+                "NL": "other trainer:times another trainer",
+                "DE": "Mal gegen einen anderen Trainer:Mal gegen einen anderen Trainer",
+                "EN": "other trainer:times another trainer",
+                "FR": "other trainer:times another trainer"
+        },
 	"quest_action_8001" : {
 		"NL": "gymbattle:gymbattles",
 		"DE": "Arenakampf:Arenakämpfe",
