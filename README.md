@@ -584,7 +584,7 @@ The bot will give a personal help based on the permissions you have to access an
 
 ### Command: /dex
 
-Get the pokemon id of a pokemon by name.
+Get the pokemon id of a pokemon by name. Works for local languages pokemon names as well as English pokemon names.
 
 Example input: `/dex Pikachu`
 
