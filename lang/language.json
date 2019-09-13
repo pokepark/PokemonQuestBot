@@ -269,6 +269,61 @@
     "NO":"TRANSLATE",
     "FR":"TRANSLATE"
   },
+  "pokestop_gps_coordinates_format_error":{  
+    "NL":"Error! Stuur de coordinaten in het volgende formaat: <code>Latitude,Longitude</code>",
+    "DE":"Fehler! Bitte übermittle die Koordinaten im folgenden Format: <code>Breitengrad,Längengrad</code>",
+    "EN":"Error! Please submit the coordinates in the following format: <code>Latitude,Longitude</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_gps_instructions":{  
+    "NL":"Om de pokestop coordinaten te veranderen stuur /stopgps <code>pokestop id, nieuwe pokestop coordinaten</code>!",
+    "DE":"Zum Ändern der Pokestop-Koordinaten bitte /stopgps <code>Pokestop-ID, neue Pokestop-Koordinaten</code> eingeben!",
+    "EN":"To change the coordinates of a pokestop please enter /stopgps <code>pokestop id, new pokestop coordinates</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_gps_example":{  
+    "NL":"Als voorbeeld: <code>/stopgps 34, 51.516263,4.377755</code>",
+    "DE":"Zum Beispiel: <code>/stopgps 34, 52.516263,13.377755</code>",
+    "EN":"For example: <code>/stopgps 34, 52.516263,13.377755</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_gps_added":{  
+    "NL":"Pokestop coordinaten succesvol toegevoegd!",
+    "DE":"Pokestop-Koordinaten erfolgreich hinzugefügt!",
+    "EN":"Pokestop coordinates successfully added!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_id_gps_missing":{  
+    "NL":"Error! Pokestop id of coordinaten mist!",
+    "DE":"Fehler! Pokestop-ID oder Koordinaten fehlen!",
+    "EN":"Error! Pokestop id or coordinates are missing!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
   "pokestop_id_name_missing":{  
     "NL":"Error! Pokestop id of naam mist!",
     "DE":"Fehler! Pokestop-ID oder Name fehlt!",

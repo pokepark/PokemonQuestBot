@@ -17,6 +17,7 @@ if($access && (is_file(ROOT_PATH . '/access/' . $access) || $access == 'BOT_ADMI
         $permissions[] = 'pokestop-details';
         $permissions[] = 'pokestop-name';
         $permissions[] = 'pokestop-address';
+        $permissions[] = 'pokestop-gps';
         $permissions[] = 'pokestop-add';
         $permissions[] = 'pokestop-delete';
         $permissions[] = 'portal-import';

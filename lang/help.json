@@ -153,6 +153,17 @@
     "FR":"TRANSLATE",
     "PL":"TRANSLATE"
   },
+  "help_pokestop-gps":{  
+    "NL":"/stopgps - verander pokestop coordinaten",
+    "DE":"/stopgps - Pokestop-Koordinaten bearbeiten",
+    "EN":"/stopgps - Edit pokestop coordinates",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
   "help_pokestop-add":{  
     "NL":"/addstop - Pokestop toevoegen",
     "DE":"/addstop - Pokestop hinzufügen",
