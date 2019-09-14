@@ -6,8 +6,8 @@ debug_log('quest_share()');
 //debug_log($update);
 //debug_log($data);
 
-// Check quest access.
-quest_access_check($update, $data);
+// Access check.
+quest_access_check($update, $data, 'share');
 
 // Get quest id.
 $id = $data['id'];
@@ -34,17 +34,23 @@ if (QUEST_LOCATION == true) {
     debug_log($loc);
 }
 
+// Telegram JSON array.
+$tg_json = array();
+
 // Send the message.
-send_message($chat, $text, $keys, ['reply_to_message_id' => $chat, 'disable_web_page_preview' => 'true']);
+$tg_json[] = send_message($chat, $text, $keys, ['reply_to_message_id' => $chat, 'disable_web_page_preview' => 'true'], true);
 
 // Set callback keys and message
 $callback_msg = getTranslation('successfully_shared');
 $callback_keys = [];
 
 // Edit message.
-edit_message($update, $callback_msg, $callback_keys, false);
+$tg_json[] = edit_message($update, $callback_msg, $callback_keys, false, true);
 
 // Answer callback.
-answerCallbackQuery($update['callback_query']['id'], $callback_msg);
+$tg_json[] = answerCallbackQuery($update['callback_query']['id'], $callback_msg, true);
+
+// Telegram multicurl request.
+curl_json_multi_request($tg_json);
 
 exit();

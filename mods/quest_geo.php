@@ -6,6 +6,9 @@ debug_log('quest_geo()');
 //debug_log($update);
 //debug_log($data);
 
+// Access check.
+bot_access_check($update, 'create');
+
 // Latitude and longitude
 $lat = '';
 $lon = '';
@@ -37,6 +40,13 @@ $keys = get_pokestops_in_radius_keys($lat, $lon, QUEST_STOPS_RADIUS);
 if ($keys) {
     // Set message.
     $msg = '<b>' . getTranslation('quest_by_pokestop') . '</b>';
+
+    // Add back navigation key.
+    $nav_keys = [];
+    $nav_keys[] = universal_inner_key($keys, '0', 'exit', '0', getTranslation('abort'));
+
+    // Get the inline key array.
+    $keys[] = $nav_keys;
 } else {
     // Set message.
     $msg = '<b>' . getTranslation('pokestops_not_found') . '</b>';
@@ -47,14 +57,21 @@ if ($keys) {
 
 // Answer callback or send message based on input prior raid creation
 if(empty($update['message']['location']['latitude']) && empty($update['message']['location']['longitude'])) {
+    // Telegram JSON array.
+    $tg_json = array();
+
     // Edit the message.
-    edit_message($update, $msg, $keys);
+    $tg_json[] = edit_message($update, $msg, $keys, false, true);
 
     // Build callback message string.
     $callback_response = 'OK';
 
     // Answer callback.
-    answerCallbackQuery($update['callback_query']['id'], $callback_response);
+    $tg_json[] = answerCallbackQuery($update['callback_query']['id'], $callback_response, true);
+
+    // Telegram multicurl request.
+    curl_json_multi_request($tg_json);
+
 } else {
     // Send message.
     send_message($update['message']['chat']['id'], $msg, $keys);

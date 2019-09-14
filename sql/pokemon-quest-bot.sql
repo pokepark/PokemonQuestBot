@@ -13,7 +13,7 @@
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `qleanup` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `quest_id` int(10) unsigned NOT NULL,
+  `quest_id` int(10) NOT NULL,
   `chat_id` bigint(20) NOT NULL,
   `message_id` bigint(20) unsigned NOT NULL,
   `cleaned` int(10) unsigned DEFAULT '0',
@@ -31,12 +31,16 @@ CREATE TABLE `encounterlist` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `overview` (
+CREATE TABLE `invasions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `chat_id` bigint(20) NOT NULL,
-  `message_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `pokestop_id` int(10) unsigned NOT NULL,
+  `first_seen` datetime DEFAULT NULL,
+  `start_time` datetime DEFAULT NULL,
+  `end_time` datetime DEFAULT NULL,
+  `comment` varchar(48) CHARACTER SET utf8mb4 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -53,9 +57,12 @@ CREATE TABLE `pokestops` (
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `questlist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `quest_event` int(10) unsigned NOT NULL,
   `quest_type` int(10) unsigned NOT NULL,
   `quest_quantity` int(10) unsigned NOT NULL,
   `quest_action` int(10) unsigned NOT NULL,
+  `quest_pokedex_ids` varchar(20) DEFAULT '0',
+  `quest_poketypes` varchar(20) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

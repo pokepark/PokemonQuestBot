@@ -1,393 +1,987 @@
 {  
-  "weekday_1":{  
-    "NL":"Maandag",
-    "DE":"Montag",
-    "EN":"Monday",
-    "IT":"Lunedì",
-    "PT-BR":"Segunda-feira",
-    "RU":"Понедельник",
-    "NO":"Mandag",
-    "FR":"Lundi"
-  },
-  "weekday_2":{  
-    "NL":"Dinsdag",
-    "DE":"Dienstag",
-    "EN":"Tuesday",
-    "IT":"Martedì",
-    "PT-BR":"Terça-feira",
-    "RU":"Вторник",
-    "NO":"Tirsdag",
-    "FR":"Mardi"
-  },
-  "weekday_3":{  
-    "NL":"Woensdag",
-    "DE":"Mittwoch",
-    "EN":"Wednesday",
-    "IT":"Mercoledì",
-    "PT-BR":"Quarta-feira",
-    "RU":"Среда",
-    "NO":"Onsdag",
-    "FR":"Mercredi"
-  },
-  "weekday_4":{  
-    "NL":"Donderdag",
-    "DE":"Donnerstag",
-    "EN":"Thursday",
-    "IT":"Giovedì",
-    "PT-BR":"Quinta-feira",
-    "RU":"Четверг",
-    "NO":"Torsdag",
-    "FR":"Jeudi"
-  },
-  "weekday_5":{  
-    "NL":"Vrijdag",
-    "DE":"Freitag",
-    "EN":"Friday",
-    "IT":"Venerdì",
-    "PT-BR":"Sexta-feira",
-    "RU":"Пятница",
-    "NO":"Fredag",
-    "FR":"Vendredi"
-  },
-  "weekday_6":{  
-    "NL":"Zaterdag",
-    "DE":"Samstag",
-    "EN":"Saturday",
-    "IT":"Sabato",
-    "PT-BR":"Sábado",
-    "RU":"Суббота",
-    "NO":"Lørdag",
-    "FR":"Samedi"
-  },
-  "weekday_7":{  
-    "NL":"Zondag",
-    "DE":"Sonntag",
-    "EN":"Sunday",
-    "IT":"Domenica",
-    "PT-BR":"Domingo",
-    "RU":"Воскресение",
-    "NO":"Søndag",
-    "FR":"Dimanche"
-  },
-  "month_01":{  
-    "NL":"Januari",
-    "DE":"Januar",
-    "EN":"January",
-    "IT":"Gennaio",
-    "PT-BR":"Janeiro",
-    "RU":"Январь",
-    "NO":"Januar",
-    "FR":"Janvier"
-  },
-  "month_02":{  
-    "NL":"Februari",
-    "DE":"Februar",
-    "EN":"February",
-    "IT":"Febbraio",
-    "PT-BR":"Fevereiro",
-    "RU":"Февраль",
-    "NO":"Februar",
-    "FR":"Février"
-  },
-  "month_03":{  
-    "NL":"Maart",
-    "DE":"März",
-    "EN":"March",
-    "IT":"Marzo",
-    "PT-BR":"Março",
-    "RU":"Март",
-    "NO":"Mars",
-    "FR":"Mars"
-  },
-  "month_04":{  
-    "NL":"April",
-    "DE":"April",
-    "EN":"April",
-    "IT":"Aprile",
-    "PT-BR":"Abril",
-    "RU":"Апрель",
-    "NO":"April",
-    "FR":"Avril"
-  },
-  "month_05":{  
-    "NL":"Mei",
-    "DE":"Mai",
-    "EN":"May",
-    "IT":"Maggio",
-    "PT-BR":"Mais",
-    "RU":"Май",
-    "NO":"Mai",
-    "FR":"Mai"
-  },
-  "month_06":{  
-    "NL":"Juni",
-    "DE":"Juni",
-    "EN":"June",
-    "IT":"Giugno",
-    "PT-BR":"Junho",
-    "RU":"Июнь",
-    "NO":"Juni",
-    "FR":"Juin"
-  },
-  "month_07":{  
-    "NL":"Juli",
-    "DE":"Juli",
-    "EN":"July",
-    "IT":"Luglio",
-    "PT-BR":"Julho",
-    "RU":"Июль",
-    "NO":"Juli",
-    "FR":"Juillet"
-  },
-  "month_08":{  
-    "NL":"Augustus",
-    "DE":"August",
-    "EN":"August",
-    "IT":"Agosto",
-    "PT-BR":"Agosto",
-    "RU":"Август",
-    "NO":"August",
-    "FR":"Août"
-  },
-  "month_09":{  
-    "NL":"September",
-    "DE":"September",
-    "EN":"September",
-    "IT":"Settembre",
-    "PT-BR":"Setembro",
-    "RU":"Сентябрь",
-    "NO":"September",
-    "FR":"Septembre"
-  },
-  "month_10":{  
-    "NL":"Oktober",
-    "DE":"Oktober",
-    "EN":"October",
-    "IT":"Ottobre",
-    "PT-BR":"Outubro",
-    "RU":"Октябрь",
-    "NO":"Oktober",
-    "FR":"Octobre"
-  },
-  "month_11":{  
-    "NL":"November",
-    "DE":"November",
-    "EN":"November",
-    "IT":"Novembre",
-    "PT-BR":"Novembro",
-    "RU":"Ноябрь",
-    "NO":"November",
-    "FR":"Novembre"
-  },
-  "month_12":{  
-    "NL":"December",
-    "DE":"Dezember",
-    "EN":"December",
-    "IT":"Dicembre",
-    "PT-BR":"Dezembro",
-    "RU":"Декабрь",
-    "NO":"Desember",
-    "FR":"Décembre"
-  },
-  "bot_access_denied":{  
-    "NL":"Je hebt geen toegang tot deze functie of bot!",
-    "DE":"Sie haben keine Berechtigung diesen Befehl oder Bot zu nutzen!",
-    "EN":"You are not allowed to use this command or bot!",
-    "IT":"Non hai i permessi necessari per usare questo comando o bot!",
-    "PT-BR":"Você não tem permissão para utilizar esse comando ou bot!",
-    "RU":"Вы не можете использовать эту команду или бота!",
-    "NO":"Du har ikke tillatelse til å bruke denne kommandoen eller boten!",
-    "FR":"Tu n'es pas autorisé à utiliser cette commande !"
-  },
-  "forest":{  
-    "NL":"Ergens in het bos",
-    "DE":"Irgendwo im Wald",
-    "EN":"Somewhere in the forest",
-    "IT":"Da qualche parte nella foresta",
-    "PT-BR":"Em algum lugar na floresta",
-    "RU":"Где-то в лесу",
-    "NO":"Ett sted i skogen",
-    "FR":"Quelque part dans la forêt"
-  },
-  "yes":{  
-    "NL":"Ja",
-    "DE":"Ja",
-    "EN":"Yes",
-    "IT":"Sì",
-    "PT-BR":"Sim",
-    "RU":"Да",
-    "NO":"Ja",
-    "FR":"Oui"
-  },
-  "no":{  
-    "NL":"Nee",
-    "DE":"Nein",
-    "EN":"No",
-    "IT":"No",
-    "PT-BR":"Não",
-    "RU":"Нет",
-    "NO":"Nei",
-    "FR":"Non"
-  },
-  "not_supported":{  
-    "NL":"Niet ondersteund",
-    "DE":"Nicht unterstützt",
-    "EN":"Not supported",
-    "IT":"Non compatibile",
-    "PT-BR":"Não compatível",
-    "RU":"Не поддерживается",
-    "NO":"Ikke støttet",
-    "FR":"Non compatible"
-  },
-  "abort":{  
-    "NL":"Afbreken",
-    "DE":"Abbrechen",
-    "EN":"Abort",
-    "IT":"Cancella",
-    "PT-BR":"Abortar",
-    "RU":"Прервать",
-    "NO":"Avbryt",
-    "FR":"Abandonner"
-  },
-  "action_aborted":{  
-    "NL":"Het proces is afgebroken!",
-    "DE":"Der Vorgang wurde abgebrochen!",
-    "EN":"The process was aborted!",
-    "IT":"Il processo è stato cancellato!",
-    "PT-BR":"O processo foi abortado!",
-    "RU":"Процесс был прерван!",
-    "NO":"Handlingen ble avbrutt!",
-    "FR":"Le processus à échoué !"
-  },
-  "back":{  
-    "NL":"Terug",
-    "DE":"Zurück",
-    "EN":"Back",
-    "IT":"Precedente",
-    "PT-BR":"Voltar",
-    "RU":"Назад",
-    "NO":"Tilbake",
-    "FR":"Retour"
-  },
-  "next":{  
-    "NL":"Volgende",
-    "DE":"Weiter",
-    "EN":"Next",
-    "IT":"Successivo",
-    "PT-BR":"Próximo",
-    "RU":"Вперед",
-    "NO":"Neste",
-    "FR":"Suivant"
-  },
-  "done":{  
-    "NL":"Klaar",
-    "DE":"Fertig",
-    "EN":"Done",
-    "IT":"Completato",
-    "PT-BR":"Feito",
-    "RU":"Готово",
-    "NO":"Ferdig",
-    "FR":"Terminé"
-  },
-  "add":{  
-    "NL":"Toevoegen",
-    "DE":"Hinzufügen",
-    "EN":"Add",
-    "IT":"Aggiungi",
-    "PT-BR":"Adicionar",
-    "RU":"Добавить",
-    "NO":"Legg til",
-    "FR":"Ajouter"
-  },
-  "delete":{  
-    "NL":"Verwijder",
-    "DE":"Löschen",
-    "EN":"Delete",
-    "IT":"Elimina",
-    "PT-BR":"Deletar",
-    "RU":"Удалить",
-    "NO":"Slett",
-    "FR":"Supprimer"
-  },
-  "list":{  
-    "NL":"Lijst",
-    "DE":"Anzeigen",
-    "EN":"List",
-    "IT":"Lista",
-    "PT-BR":"Lista",
-    "RU":"Список",
-    "NO":"List",
-    "FR":"Liste"
-  },
-  "reset":{  
-    "NL":"Reset",
-    "DE":"Reset",
-    "EN":"Reset",
-    "IT":"Reset",
+  "quest":{  
+    "NL":"Quest",
+    "DE":"Forschung",
+    "EN":"Quest",
+    "IT":"Spedizione",
     "PT-BR":"TRANSLATE",
-    "RU":"Сброс",
-    "NO":"Reset",
-    "FR":"Remise à zéro"
+    "RU":"Квест",
+    "NO":"Oppdrag",
+    "FR":"Quête"
   },
-  "created_by":{  
-    "NL":"Aangemaakt door",
-    "DE":"Erstellt von",
-    "EN":"Created by",
-    "IT":"Creato da",
-    "PT-BR":"Criada por",
-    "RU":"Создано",
-    "NO":"Postet av",
-    "FR":"Créé par"
+  "invasion":{  
+    "NL":"Team R invasie",
+    "DE":"Team Rocket Invasion",
+    "EN":"Team Rocket Invasion",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   },
-  "updated":{  
-    "NL":"Bijgewerkt",
-    "DE":"Aktualisiert",
-    "EN":"Updated",
-    "IT":"Aggiornato",
-    "PT-BR":"Atualizada",
-    "RU":"Обновлено",
-    "NO":"Oppdatert",
-    "FR":"Mis à jour"
+  "info":{  
+    "NL":"Info",
+    "DE":"Info",
+    "EN":"Info",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   },
-  "share":{  
-    "NL":"Delen",
-    "DE":"Teilen",
-    "EN":"Share",
-    "IT":"Condividi",
-    "PT-BR":"Compartilhar",
-    "RU":"Поделиться",
-    "NO":"Del",
-    "FR":"Partager"
+  "event":{  
+    "NL":"Event",
+    "DE":"Event",
+    "EN":"Event",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   },
-  "share_with":{  
-    "NL":"Delen met",
-    "DE":"Teilen mit",
-    "EN":"Share with",
-    "IT":"Condividi con",
-    "PT-BR":"Compartilhar com",
-    "RU":"Поделиться с",
-    "NO":"Del med",
-    "FR":"Partager avec"
+  "no_event":{  
+    "NL":"Geen event",
+    "DE":"Kein Event",
+    "EN":"No event",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   },
-  "successfully_shared":{
-    "NL":"Succesvol gedeeld!",
-    "DE":"Erfolgreich geteilt!",
-    "EN":"Successfully shared!",
-    "IT":"Condiviso con successo!",
-    "PT-BR":"Compartilhado com sucesso!",
-    "RU":"Успешно отправлено!",
-    "NO":"Deling velykket!",
-    "FR":"Partagé avec succès !"
+  "select_event":{  
+    "NL":"Selecteer event:",
+    "DE":"Event auswählen:",
+    "EN":"Select event:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   },
-  "expand":{  
-    "NL":"Uitklappen",
-    "DE":"Ausklappen",
-    "EN":"Expand",
-    "IT":"Espandi",
-    "PT-BR":"Expandir",
-    "RU":"Развернуть",
-    "NO":"Flere valg",
-    "FR":"Agrandir"
+  "event_saved":{  
+    "NL":"Event opgeslagen!",
+    "DE":"Event gespeichert!",
+    "EN":"Event saved!",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "event_name_missing":{  
+    "NL":"Error! Event naam mist!",
+    "DE":"Fehler! Event-Name fehlt!",
+    "EN":"Error! Event name is missing!",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop":{  
+    "NL":"Pokestop",
+    "DE":"Pokestop",
+    "EN":"Pokestop",
+    "IT":"Pokéstop",
+    "PT-BR":"TRANSLATE",
+    "RU":"Покестоп",
+    "NO":"Pokestop",
+    "FR":"Pokéstop"
+  },
+  "pokestops_not_found":{  
+    "NL":"Error! Geen Pokestops gevonden!",
+    "DE":"Fehler! Keine Pokestops gefunden!",
+    "EN":"Error! No pokestops found!",
+    "IT":"Errore! Nessun Pokéstop trovato!",
+    "PT-BR":"Erro! Nenhum pokestops encontrado!",
+    "RU":"Ошибка! Покестоп не найден!",
+    "NO":"Feil! Ingen pokestop funnet!",
+    "FR":"Erreur ! Aucun Pokéstop trouvé !"
+  },
+  "pokestops_not_found_command_text":{  
+    "NL":"Stuur /quest met een deel of een volledige pokestop naam.",
+    "DE":"Bitte /quest mit einem Teil oder dem vollständigen Namen des Pokestops aufrufen:",
+    "EN":"Please call /quest with a part or the complete name of the pokestop:",
+    "IT":"Prego usare /quest con una il nome completo di un Pokéstop o una sua parte:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Введите /quest с частью или полным названием покестопа:",
+    "NO":"Vennligst bruk /quest med en del av navnet på pokestoppet:",
+    "FR":"Tape /quest avec une partie ou le nom complet d'un Pokéstop"
+  },
+  "pokestops_not_found_command_example":{  
+    "NL":"<code>/quest PokeCity Stop</code>",
+    "DE":"<code>/quest PokeStadt Stop</code>",
+    "EN":"<code>/quest PokeCity Stop</code>",
+    "IT":"<code>/quest PokéCity Stop</code>",
+    "PT-BR":"<code>/quest PokeCity Stop</code>",
+    "RU":"<code>/quest PokeCity Stop</code>",
+    "NO":"<code>/quest PokeCity Stop</code>",
+    "FR":"<code>/quest PokeCity Stop</code>"
+  },
+  "pokestop_added":{  
+    "NL":"Pokestop succesvol toegevoegd!",
+    "DE":"Pokestop erfolgreich hinzugefügt!",
+    "EN":"Successfully updated the pokestop!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_updated":{  
+    "NL":"Pokestop succesvol ge-update!",
+    "DE":"Pokestop erfolgreich aktualisiert!",
+    "EN":"Successfully updated the pokestop!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_deleted":{  
+    "NL":"Pokestop succesvol verwijderd!",
+    "DE":"Pokestop erfolgreich gelöscht!",
+    "EN":"Successfully deleted the pokestop!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_pokestop_to_delete":{  
+    "NL":"Selecteer een pokestop om te verwijderen:",
+    "DE":"Zum Löschen Pokestop auswählen:",
+    "EN":"Select pokestop to delete:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_pokestop":{  
+    "NL":"Wilt u echt deze pokestop verwijderen?",
+    "DE":"Diesen Pokestop wirklich löschen?",
+    "EN":"Really delete this pokestop?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_details":{  
+    "NL":"Pokestop informatie",
+    "DE":"Pokestop-Details",
+    "EN":"Pokestop details",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_pokestop_for_details":{  
+    "NL":"Selecteer een pokestop voor de informatie:",
+    "DE":"Pokestop auswählen, um Details anzuzeigen:",
+    "EN":"Select pokestop to show details:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_get_id_details":{  
+    "NL":"Om de ID en extra informatie te krijgen stuur /pokestop.",
+    "DE":"Die ID eines Pokestops und weitere Details sind unter /pokestop verfügbar.",
+    "EN":"To get the id and further pokestop details use the /pokestop command.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_instructions":{  
+    "NL":"Om het adres aan te passen stuur /stopaddress <code>pokestop id, het nieuwe pokestop adres</code>!",
+    "DE":"Zum Ändern einer Pokestop-Adresse bitte /stopaddress <code>Pokestop-ID, neue Pokestop-Adresse</code> eingeben!",
+    "EN":"To change the address of a pokestop please enter /stopaddress <code>pokestop id, new pokestop address</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_example":{  
+    "NL":"Als voorbeeld <code>/stopaddress 34, Markt 61, 3131 CR Vlaardingen </code>!",
+    "DE":"Zum Beispiel: <code>/stopaddress 34, Großer Stern, 10557 Berlin</code>",
+    "EN":"For example: <code>/stopaddress 34, Großer Stern, 10557 Berlin</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_reset":{  
+    "NL":"Om het pokestop adres te verwijderen stuur /stopaddress <code>pokestop id, reset</code>.",
+    "DE":"Zum Löschen einer Pokestop-Adresse /stopaddress <code>Pokestop-ID, reset</code> eingeben.",
+    "EN":"To delete a pokestop address enter /stopaddress <code>pokestop id, reset</code>.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_reset_example":{  
+    "NL":"Als voorbeeld <code>/stopaddress 34, reset</code>",
+    "DE":"Zum Beispiel: <code>/stopaddress 34, reset</code>",
+    "EN":"For example: <code>/stopaddress 34, reset</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_added":{  
+    "NL":"Pokestop adres succesvol toegevoegd!",
+    "DE":"Pokestop-Adresse erfolgreich hinzugefügt!",
+    "EN":"Pokestop address successfully added!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_id_address_missing":{  
+    "NL":"Error! pokestop id of adres mist!",
+    "DE":"Fehler! Pokestop-ID oder Adresse fehlt!",
+    "EN":"Error! Pokestop id or address is missing!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_address_deleted":{  
+    "NL":"Pokestop adres succesvol verwijderd!",
+    "DE":"Pokestop-Adresse erfolgreich gelöscht!",
+    "EN":"Pokestop address successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_gps_coordinates_format_error":{  
+    "NL":"Error! Stuur de coordinaten in het volgende formaat: <code>Latitude,Longitude</code>",
+    "DE":"Fehler! Bitte übermittle die Koordinaten im folgenden Format: <code>Breitengrad,Längengrad</code>",
+    "EN":"Error! Please submit the coordinates in the following format: <code>Latitude,Longitude</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_gps_instructions":{  
+    "NL":"Om de pokestop coordinaten te veranderen stuur /stopgps <code>pokestop id, nieuwe pokestop coordinaten</code>!",
+    "DE":"Zum Ändern der Pokestop-Koordinaten bitte /stopgps <code>Pokestop-ID, neue Pokestop-Koordinaten</code> eingeben!",
+    "EN":"To change the coordinates of a pokestop please enter /stopgps <code>pokestop id, new pokestop coordinates</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_gps_example":{  
+    "NL":"Als voorbeeld: <code>/stopgps 34, 51.516263,4.377755</code>",
+    "DE":"Zum Beispiel: <code>/stopgps 34, 52.516263,13.377755</code>",
+    "EN":"For example: <code>/stopgps 34, 52.516263,13.377755</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_gps_added":{  
+    "NL":"Pokestop coordinaten succesvol toegevoegd!",
+    "DE":"Pokestop-Koordinaten erfolgreich hinzugefügt!",
+    "EN":"Pokestop coordinates successfully added!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_id_gps_missing":{  
+    "NL":"Error! Pokestop id of coordinaten mist!",
+    "DE":"Fehler! Pokestop-ID oder Koordinaten fehlen!",
+    "EN":"Error! Pokestop id or coordinates are missing!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE",
+    "PL":"TRANSLATE"
+  },
+  "pokestop_id_name_missing":{  
+    "NL":"Error! Pokestop id of naam mist!",
+    "DE":"Fehler! Pokestop-ID oder Name fehlt!",
+    "EN":"Error! Pokestop id or name is missing!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_name_instructions":{  
+    "NL":"Om de pokestop naam aan te passen stuur /stopname <code>pokestop id, nieuwe pokestop naam</code>!",
+    "DE":"Zum Ändern eines Pokestop-Names bitte /stopname <code>Pokestop-ID, neuer Pokestop-Name</code> eingeben!",
+    "EN":"To change the name of a pokestop please enter /stopname <code>pokestop id, new pokestop name</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_name_example":{  
+    "NL":"Als voorbeeld <code>/stopname 34, Markt 61, 3131 CR Vlaardingen </code>!",
+    "DE":"Zum Beispiel: <code>/stopname 34, Wasserfall im Park</code>",
+    "EN":"For example: <code>/stopname 34, Waterfall in the park</code>!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokestop_name_updated":{  
+    "NL":"Pokestop naam aangepast.",
+    "DE":"Der Pokestop-Name wurde aktualisiert.",
+    "EN":"Pokestop name updated.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "unnamed_pokestop":{  
+    "NL":"Onbekende pokestop",
+    "DE":"Unbekannter Pokestop",
+    "EN":"Unknown Pokestop",
+    "IT":"Pokéstop sconosciuto",
+    "PT-BR":"TRANSLATE",
+    "RU":"Неизвестный покестоп",
+    "NO":"Ukjent Pokestop",
+    "FR":"Pokéstop inconnu"
+  },
+  "invasion_by_pokestop":{  
+    "NL":"Deel een Team R invasie via de volgende pokestop:",
+    "DE":"Teile eine Team Rocket Invasion mittels Pokestop-Auswahl:",
+    "EN":"Share a Team Rocket invasion via pokestop selection:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_invasion":{  
+    "NL":"Deze informatie toevoegen?",
+    "DE":"Diese Invasion hinzufügen?",
+    "EN":"Add this invasion?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_info_to_invasion":{  
+    "NL":"Team R invasie toevoegen?",
+    "DE":"Diese Information zur Team Rocket Invasion hinzufügen?",
+    "EN":"Add this info to the Team Rocket invasion?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_select_time":{  
+    "NL":"Hoe lang zit de Team R invasie er nog? Selecteer een kleiner getal als je het niet zeker weet!",
+    "DE":"Wie viele Minuten wird die Team Rocket Invasion da sein? Wähle die kleinere Zahl, wenn du dir unsicher bist!",
+    "EN":"How many minutes will the Team Rocket invasion be there? Select the smaller number if you're unsure!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_expected_time":{  
+    "NL":"Verwachte Team R invasie tijd:",
+    "DE":"Erwartete Team Rocket Invasionszeit:",
+    "EN":"Expected Team Rocket invasion time:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_saved":{  
+    "NL":"Team R invasie opgeslagen:",
+    "DE":"Team Rocket Invasion gespeichert:",
+    "EN":"Team Rocket Invasion saved:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_crypto_instructions":{  
+    "NL":"Optional - Extra informatie toevoegen aan de Team R invasie pokemon:\n/crypto <code>Snorlax</code>",
+    "DE":"Optional - Info wie das Crypto-Pokemon hinzufügen:\n/crypto <code>Relaxo</code>",
+    "EN":"Optional - Add an info like the crypto pokemon:\n/crypto <code>Snorlax</code>",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_already_submitted":{  
+    "NL":"Team R invasie voor deze pokestop is al toegevoegd!",
+    "DE":"Team Rocket Invasion für diesen Pokestop ist bereits vorhanden!",
+    "EN":"Team Rocket Invasion for this pokestop was already submitted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_invasion":{  
+    "NL":"Verwijder deze Team R invasie?",
+    "DE":"Diese Team Rocket Invasion wirklich löschen?",
+    "EN":"Really delete this Team Rocket invasion?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasion_successfully_deleted":{  
+    "NL":"Team R invasie succesvol verwijderd!",
+    "DE":"Team Rocket Invasion wurde erfolgreich gelöscht!",
+    "EN":"Team Rocket Invasion was successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "invasions_currently":{  
+    "NL":"Huidige Team R invasies:",
+    "DE":"Aktuelle Team Rocket Invasionen:",
+    "EN":"Current Team Rocket invasions:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "no_invasions_currently":{  
+    "NL":"Er zijn geen huidige Team R invasies!",
+    "DE":"Aktuell gibt es keine Team Rocket Invasionen!",
+    "EN":"Currently there are no Team Rocket invasions!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "until_approx":{  
+    "NL":"Tot ongeveer",
+    "DE":"bis ca.",
+    "EN":"until approx.",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quest_by_pokestop":{  
+    "NL":"Maak een quest, selecteer een pokestop:",
+    "DE":"Lege eine Forschung per Pokestop-Auswahl an:",
+    "EN":"Make a quest per pokestop selection:",
+    "IT":"Crea una spedizione per il Pokéstop selezionato:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Создать квест для выбранного покестопа:",
+    "NO":"Lag en quest per pokestop valg",
+    "FR":"Sélectionner une quête pour un Pokéstop"
+  },
+  "quest_select_type":{  
+    "NL":"Selecteer een quest type:",
+    "DE":"Art der Forschung auswählen:",
+    "EN":"Select the quest type:",
+    "IT":"Seleziona il tipo di spedizione:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Выберите тип квеста:",
+    "NO":"Velg quest type",
+    "FR":"Sélectionne le type de quête"
+  },
+  "quest_select_qty_action":{  
+    "NL":"Selecteer de taak van de quest:",
+    "DE":"Aufgabe der Forschung auswählen:",
+    "EN":"Select the task of the quest:",
+    "IT":"Seleziona l'obiettivo della spedizione:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Выберите задание квеста:",
+    "NO":"Velg hvilket oppdrag som er her:",
+    "FR":"Sélectionne la tâche de la quête"
+  },
+  "quest_select_qty":{  
+    "NL":"Selecteer de hoeveelheid van de quest:",
+    "DE":"Anzahl der Forschung auswählen:",
+    "EN":"Select the quantity of the quest:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quest_saved":{  
+    "NL":"Quest opgeslagen:",
+    "DE":"Forschung gespeichert:",
+    "EN":"Quest saved:",
+    "IT":"Spedizione salvata:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Сохраненный квест:",
+    "NO":"Oppdrag lagret:",
+    "FR":"Quête sauvegardée"
+  },
+  "quests_today":{  
+    "NL":"De quests van vandaag:",
+    "DE":"Heutige Forschungen:",
+    "EN":"Today's quests:",
+    "IT":"Spedizioni di oggi:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Сегодняшние квесты:",
+    "NO":"Dagens oppdrag:",
+    "FR":"Les quêtes du jour"
+  },
+  "no_quests_today":{  
+    "NL":"Vandaag zijn er nog geen quests!",
+    "DE":"Heute gibt es noch keine Forschungen!",
+    "EN":"Today there are no quests yet!",
+    "IT":"Non sono ancora presenti spedizioni per oggi!",
+    "PT-BR":"TRANSLATE",
+    "RU":"Сегодня здесь еще нет квестов!",
+    "NO":"Ingen oppdrag er registrert i dag!",
+    "FR":"Il n'y a aucune quête aujourd'hui pour l'instant !"
+  },
+  "quest_already_submitted":{  
+    "NL":"Quest voor deze pokestop is al aangemeld!",
+    "DE":"Forschung für diesen Pokestop ist bereits vorhanden!",
+    "EN":"Quest for this pokestop was already submitted!",
+    "IT":"La spedizione per questo Pokéstop è stata già inserita!",
+    "PT-BR":"TRANSLATE",
+    "RU":"Квест для этого покестопа уже был отправлен!",
+    "NO":"Det er allerede registrert ett oppdrag på dette pokestoppet",
+    "FR":"La quête pour ce Pokéstop a déjà été soumise"
+  },
+  "select_quest_to_delete":{  
+    "NL":"Selecteer een queest om te verwijderen:",
+    "DE":"Zum Löschen Forschung auswählen:",
+    "EN":"Select quest to delete:",
+    "IT":"Seleziona la spedizione da eliminare:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Выберите квест для удаления:",
+    "NO":"Velg hvilket oppdrag som skal slettes:",
+    "FR":"Sélectionne la quête à supprimer"
+  },
+  "pokemon_not_found":{  
+    "NL":"Geen Pokemon gevonden!",
+    "DE":"Keine Pokemon gefunden!",
+    "EN":"No Pokemon found!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_quest":{  
+    "NL":"Deze quest toevoegen?",
+    "DE":"Diese Forschung hinzufügen?",
+    "EN":"Add this quest?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quest_successfully_saved":{  
+    "NL":"Quest is succesvol toegevoegd!",
+    "DE":"Forschung wurde erfolgreich hinzugefügt!",
+    "EN":"Quest was added successfully!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_quest":{  
+    "NL":"Weet u het zeker dat u deze quest wilt verwijderen?",
+    "DE":"Diese Forschung wirklich löschen?",
+    "EN":"Really delete this quest?",
+    "IT":"Vuoi veramente eliminare questa spedizione?",
+    "PT-BR":"TRANSLATE",
+    "RU":"Действительно удалить этот квест?",
+    "NO":"Vil du virkelig at jeg skal slette dette oppdraget?",
+    "FR":"Veux-tu vraiment supprimer cette quête ?"
+  },
+  "quest_deletion_was_canceled":{  
+    "NL":"Verwijderen van de quest is geannuleerd!",
+    "DE":"Löschung der Forschung wurde abgebrochen!",
+    "EN":"Deletion of the quest was canceled!",
+    "IT":"L'eliminazione della spedizione è stata annullata!",
+    "PT-BR":"TRANSLATE",
+    "RU":"Удаление этого квеста отменено!",
+    "NO":"Sletting av oppdraget ble avbrutt!",
+    "FR":"La suppression de la quête à été annulée"
+  },
+  "quest_successfully_deleted":{  
+    "NL":"Quest is succesvol verwijderd!",
+    "DE":"Forschung wurde erfolgreich gelöscht!",
+    "EN":"Quest was successfully deleted!",
+    "IT":"La spedizione è stata eliminata con successo!",
+    "PT-BR":"TRANSLATE",
+    "RU":"Квест успешно удален",
+    "NO":"Oppdraget ble slettet!",
+    "FR":"La quête à été supprimée avec succès !"
+  },
+  "encounter_successfully_saved":{  
+    "NL":"Pokemon encouter is succesvol opgeslagen!",
+    "DE":"Pokemon-Begegnung wurde erfolgreich gespeichert!",
+    "EN":"Pokemon encounter was saved successfully!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_encounter":{  
+    "NL":"Weet u het zeker dat u de pokemon encouter wil verwijderen?",
+    "DE":"Diese Pokemon-Begegnung wirklich löschen?",
+    "EN":"Really delete this pokemon encounter?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "encounter_deletion_was_canceled":{  
+    "NL":"Het verwijderen van de pokemon encouter is gestopt!",
+    "DE":"Löschung der Pokemon-Begegnung wurde abgebrochen!",
+    "EN":"Deletion of the pokemon encounter was canceled!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "encounter_successfully_deleted":{  
+    "NL":"Pokemon encouter is succesvol verwijderd!",
+    "DE":"Pokemon-Begegnung wurde erfolgreich gelöscht!",
+    "EN":"Pokemon encounter was successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_reward":{  
+    "NL":"Deze beloning toevoegen?",
+    "DE":"Diese Belohnung hinzufügen?",
+    "EN":"Add this reward?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_reward":{  
+    "NL":"Weet u het zeker dat u de beloning wil verwijdren?",
+    "DE":"Diese Belohnung wirklich löschen?",
+    "EN":"Really delete this reward?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "available_rewards":{  
+    "NL":"Deze beloningen zijn beschikbaar:",
+    "DE":"Bereits verfügbare Belohnungen:",
+    "EN":"Already available rewards:",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "reward_deletion_was_canceled":{  
+    "NL":"Het verwijdern van deze beloning is geannuleerd!",
+    "DE":"Löschung der Belohnung wurde abgebrochen!",
+    "EN":"Deletion of the reward was canceled!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "reward_successfully_deleted":{  
+    "NL":"Beloning was succesvol verwijderd!",
+    "DE":"Belohnung wurde erfolgreich gelöscht!",
+    "EN":"Reward was successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "reward_successfully_saved":{  
+    "NL":"Beloning was succesvol toegevoegd!",
+    "DE":"Belohnung wurde erfolgreich hinzugefügt!",
+    "EN":"Reward was added successfully!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "delete_this_quicklist_entry":{  
+    "NL":"Weet u het zeker dat u deze quicklist wil verwijderen?",
+    "DE":"Diesen Eintrag der Schnellauswahl wirklich löschen?",
+    "EN":"Really delete this quicklist entry?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quicklist_entry_addition_was_canceled":{  
+    "NL":"Het toevoegen van de quest aan de quicklist is geannuleerd!",
+    "DE":"Hinzufügen der Forschung zur Schnellauswahl wurde abgebrochen!",
+    "EN":"Adding the quest to the quicklist was canceled!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quicklist_entry_deletion_was_canceled":{  
+    "NL":"Het verwijderen van de quicklist is geannuleerd!",
+    "DE":"Löschung des Eintrags der Schnellauswahl wurde abgebrochen!",
+    "EN":"Deletion of the quicklist entry was canceled!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quicklist_entry_successfully_added":{  
+    "NL":"Quest is succesvol toegevoegd aan de quicklist!",
+    "DE":"Forschung erfolgreich zur Schnellauswahl hinzugefügt!",
+    "EN":"Quest was successfully added to the quicklist!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quicklist_entry_successfully_deleted":{  
+    "NL":"De quicklist quest is succesvol verwijderd!",
+    "DE":"Eintrag der Schnellauswahl wurde erfolgreich gelöscht!",
+    "EN":"Quicklist entry was successfully deleted!",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_quest_to_quicklist":{  
+    "NL":"Deze quest toevoegen aan de quicklist?",
+    "DE":"Diese Forschung zur Schnellauswahl hinzufügen?",
+    "EN":"Add this quest to the quicklist?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "add_this_encounter":{  
+    "NL":"Deze pokemon encouter toevoegen?",
+    "DE":"Diese Pokemon-Begegnung hinzufügen?",
+    "EN":"Add this pokemon encounter?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "edit_this_encounter":{  
+    "NL":"Weet u het zeker dat u de pokemon encouter wil aanpassen?",
+    "DE":"Diese Pokemon-Begegnung wirklich bearbeiten?",
+    "EN":"Really edit this pokemon encounter?",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "Rm":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "reward":{  
+    "NL":"Beloning",
+    "DE":"Belohnung",
+    "EN":"Reward",
+    "IT":"Ricompensa",
+    "PT-BR":"TRANSLATE",
+    "RU":"Награда",
+    "NO":"Belønning",
+    "FR":"Récompense"
+  },
+  "reward_select_type":{  
+    "NL":"Selecteer het type beloning:",
+    "DE":"Art der Belohnung auswählen:",
+    "EN":"Select the reward type:",
+    "IT":"Seleziona il tipo di ricompensa:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Выберите тип награды:",
+    "NO":"Velg type belønning:",
+    "FR":"Sélectionne le type de récompense"
+  },
+  "reward_select_qty_reward":{  
+    "NL":"Selecteer de beloning:",
+    "DE":"Belohnung auswählen:",
+    "EN":"Select reward:",
+    "IT":"Seleziona ricompensa:",
+    "PT-BR":"TRANSLATE",
+    "RU":"Выберите нагарду:",
+    "NO":"Velg belønning:",
+    "FR":"Sélectionne la récompense"
+  },
+  "quest_access_denied":{  
+    "NL":"Je hebt geen rechten om deze quest aan te passen!",
+    "DE":"Sie haben keine Berechtigung diese Forschung zu bearbeiten!",
+    "EN":"You are not allowed to edit this quest!",
+    "IT":"Non sei autorizzato a modificare questa Spedizione!",
+    "PT-BR":"Você não tem permissão para editar esta quest!",
+    "RU":"Вы не можете редактировать этот квест!",
+    "NO":"Du har ikke tillatelse til å redigere dette oppdraget!",
+    "FR":"Tu n'es pas autorisé à modifier cette quête !"
+  },
+  "coordination_succes":{  
+    "NL":"Coördinatie geslaagd!",
+    "DE":"Koordinaten erfolgreich übermittelt!",
+    "EN":"Coordinates successfully submitted!",
+    "IT":"Coordinate inserite con successo!",
+    "PT-BR":"Coordenadas enviadas com sucesso!",
+    "RU":"Координаты успешно отправлены!",
+    "NO":"Koordinater ble lagt til!",
+    "FR":"Les coordonnées ont été soumises avec succès !"
+  },
+  "send_location":{  
+    "NL":"Of stuur me alsjeblieft een locatie.",
+    "DE":"Oder sende mir einen Standort.",
+    "EN":"Or send me a location.",
+    "IT":"O inviami una localizzazione.",
+    "PT-BR":"Por favor, antes me envie a localização.",
+    "RU":"Или отправить мне локацию",
+    "NO":"Eller send meg lokasjonen din ved å trykke på bindersen",
+    "FR":"Ou envoie moi la localisation."
+  },
+  "edit_quests_encounters_rewards_quicklist":{  
+    "NL":"Edit quests, beloning, pokemon encounters en quest quicklist:",
+    "DE":"Forschungen, Belohnungen, Pokemon-Begegnungen und Quest-Schnellauswahl bearbeiten:",
+    "EN":"Edit quests, rewards, pokemon encounters and quest quicklist entries:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "selected_pokemon":{  
+    "NL":"Geselecteerde Pokemon:",
+    "DE":"Aktuell ausgewählte Pokemon:",
+    "EN":"Currently selected pokemon:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "selected_pokemon_types":{  
+    "NL":"Geselecteerde pokemon type:",
+    "DE":"Aktuell ausgewählte Pokemon-Typen:",
+    "EN":"Currently selected pokemon types:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_id_to_add":{  
+    "NL":"Kies ID om toe te voegen:",
+    "DE":"ID auswählen zum Hinzufügen:",
+    "EN":"Select ID to add:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_id_to_edit":{  
+    "NL":"Kies ID om te wijzigen:",
+    "DE":"ID auswählen zum Bearbeiten:",
+    "EN":"Select ID to edit:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "select_id_to_delete":{  
+    "NL":"Kies ID om te verwijderen:",
+    "DE":"ID auswählen zum Löschen:",
+    "EN":"Select ID to delete:",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "pokemon_of_type":{  
+    "NL":"POKEMON_TYPE-type pokemon",
+    "DE":"Pokemon vom Typ POKEMON_TYPE",
+    "EN":"POKEMON_TYPE-type pokemon",
+    "IT":"TRANSLATE.",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "encounter":{  
+    "NL":"Pokemon encounter",
+    "DE":"Pokemon-Begegnung",
+    "EN":"Pokemon encounter",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
+  },
+  "quicklist":{  
+    "NL":"Quicklist",
+    "DE":"Schnellauswahl",
+    "EN":"Quicklist",
+    "IT":"TRANSLATE",
+    "PT-BR":"TRANSLATE",
+    "RU":"TRANSLATE",
+    "NO":"TRANSLATE",
+    "FR":"TRANSLATE"
   }
 }
-

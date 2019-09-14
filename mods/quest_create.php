@@ -6,6 +6,9 @@ debug_log('quest_create()');
 //debug_log($update);
 //debug_log($data);
 
+// Access check.
+bot_access_check($update, 'create');
+
 // Pokestop id.
 $pokestop_id = $data['id'];
 
@@ -38,13 +41,19 @@ if (!$quest_in_db) {
     $keys = array_merge($keys_delete,$keys_exit);
 }
 
-// Edit the message.
-edit_message($update, $msg, $keys, ['disable_web_page_preview' => 'true']);
+// Telegram JSON array.
+$tg_json = array();
 
 // Build callback message string.
 $callback_response = 'OK';
 
 // Answer callback.
-answerCallbackQuery($update['callback_query']['id'], $callback_response);
+$tg_json[] = answerCallbackQuery($update['callback_query']['id'], $callback_response, true);
+
+// Edit the message.
+$tg_json[] = edit_message($update, $msg, $keys, ['disable_web_page_preview' => 'true'], true);
+
+// Telegram multicurl request.
+curl_json_multi_request($tg_json);
 
 exit();
