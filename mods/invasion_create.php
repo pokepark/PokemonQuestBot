@@ -51,11 +51,11 @@ if(!$invasion_in_db) {
             [
                 [
                     'text'          => $config->INVASION_DURATION_SHORT . 'min',
-                    'callback_data' => $pokestop_id . ':invasion_save:' . INVASION_DURATION_SHORT
+                    'callback_data' => $pokestop_id . ':invasion_save:' . $config->INVASION_DURATION_SHORT
                 ],
                 [
                     'text'          => $config->INVASION_DURATION_LONG . 'min',
-                    'callback_data' => $pokestop_id . ':invasion_save:' . INVASION_DURATION_LONG
+                    'callback_data' => $pokestop_id . ':invasion_save:' . $config->INVASION_DURATION_LONG
                 ]
             ],
             [
