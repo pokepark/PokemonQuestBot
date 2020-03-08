@@ -6,7 +6,7 @@ $parent = __DIR__;
 include_once(__DIR__ . '/core/bot/requirements.php');
 
 // Start logging.
-debug_log("QUEST-BOT '" . BOT_ID . "'");
+debug_log("QUEST-BOT '" . $config->BOT_ID . "'");
 
 // Check API Key and get input from telegram
 include_once(CORE_BOT_PATH . '/apikey.php');
@@ -40,13 +40,13 @@ if (isset($update['callback_query'])) {
 // Location received.
 } else if (isset($update['message']['location']) && $update['message']['chat']['type'] == 'private') {
     // Ask for quest or invasion and exit.
-    if(QUEST_VIA_LOCATION == true && INVASION_VIA_LOCATION == true) {
+    if($config->QUEST_VIA_LOCATION && $config->INVASION_VIA_LOCATION) {
         include_once(ROOT_PATH . '/mods/geo.php');
     // Create quest and exit.
-    } else if(QUEST_VIA_LOCATION == true) {
+    } else if($config->QUEST_VIA_LOCATION) {
         include_once(ROOT_PATH . '/mods/quest_geo.php');
     // Create invasion and exit.
-    } else if(INVASION_VIA_LOCATION == true) {
+    } else if($config->INVASION_VIA_LOCATION) {
         include_once(ROOT_PATH . '/mods/invasion_geo.php');
     }
     exit();

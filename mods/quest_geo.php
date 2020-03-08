@@ -34,7 +34,7 @@ if (empty($lat) && empty($lon)) {
 }
 
 // Set keys.
-$keys = get_pokestops_in_radius_keys($lat, $lon, QUEST_STOPS_RADIUS);
+$keys = get_pokestops_in_radius_keys($lat, $lon, $config->QUEST_STOPS_RADIUS);
 
 // Keys array received?
 if ($keys) {
