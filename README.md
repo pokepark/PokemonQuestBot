@@ -2,6 +2,81 @@
 
 Telegram bot for sharing quests in Pokemon Go. Developers are welcome to join https://t.me/PokemonBotSupport
 
+<!--ts-->
+   * [About](#about)
+   * [Screenshots](#screenshots)
+            * [Example quest with reward:](#example-quest-with-reward)
+            * [Example quest with pokemon encounter:](#example-quest-with-pokemon-encounter)
+   * [Installation and configuration](#installation-and-configuration)
+      * [Webserver](#webserver)
+      * [Git clone](#git-clone)
+            * [Core module inside bot folder](#core-module-inside-bot-folder)
+            * [Core module outside bot folder](#core-module-outside-bot-folder)
+      * [Bot token](#bot-token)
+      * [Database](#database)
+      * [Config](#config)
+      * [Database connection](#database-connection)
+      * [General config and log files](#general-config-and-log-files)
+      * [Proxy](#proxy)
+      * [Webhooks](#webhooks)
+      * [Languages](#languages)
+      * [Timezone and Google maps API](#timezone-and-google-maps-api)
+      * [Quest creation](#quest-creation)
+      * [Quest sharing](#quest-sharing)
+            * [Predefine sharing to the chats -100111222333 and -100444555666](#predefine-sharing-to-the-chats--100111222333-and--100444555666)
+      * [Invasion creation](#invasion-creation)
+      * [Invasion sharing](#invasion-sharing)
+            * [Predefine sharing to the chats -100111222333 and -100444555666](#predefine-sharing-to-the-chats--100111222333-and--100444555666-1)
+      * [Portal Import](#portal-import)
+      * [Cleanup](#cleanup)
+            * [Cronjob using cleanup values from config.json for quests: Just the secret without telegram/database OR telegram = 2 and database = 2](#cronjob-using-cleanup-values-from-configjson-for-quests-just-the-secret-without-telegramdatabase-or-telegram--2-and-database--2)
+            * [Cronjob to clean up telegram quest messages only: telegram = 1 and database = 0](#cronjob-to-clean-up-telegram-quest-messages-only-telegram--1-and-database--0)
+            * [Cronjob to clean up database and telegram quest messages: telegram = 1 and database = 1](#cronjob-to-clean-up-database-and-telegram-quest-messages-telegram--1-and-database--1)
+   * [Access permissions](#access-permissions)
+      * [Public access](#public-access)
+      * [Access and permissions](#access-and-permissions)
+      * [Permissions overview](#permissions-overview)
+            * [Example: Allow the user 111555999 to create quests and share them to the predefined chat list](#example-allow-the-user-111555999-to-create-quests-and-share-them-to-the-predefined-chat-list)
+            * [Example: Allow the creator and the admins of the channel -100224466889 to create quests as well as sharing quests created by their own or others to the predefined chat list or any other chat](#example-allow-the-creator-and-the-admins-of-the-channel--100224466889-to-create-quests-as-well-as-sharing-quests-created-by-their-own-or-others-to-the-predefined-chat-list-or-any-other-chat)
+   * [Customization](#customization)
+      * [Custom icons](#custom-icons)
+      * [Custom translation](#custom-translation)
+   * [Usage](#usage)
+      * [Bot commands](#bot-commands)
+         * [Command: No command - just send your location to the bot](#command-no-command---just-send-your-location-to-the-bot)
+         * [Command: No command - using inline search of @PortalMapBot or @Ingressportalbot](#command-no-command---using-inline-search-of-portalmapbot-or-ingressportalbot)
+         * [Command: /start or /new](#command-start-or-new)
+         * [Command: /list](#command-list)
+         * [Command: /delete](#command-delete)
+         * [Command: /rocket](#command-rocket)
+         * [Command: /rocketlist](#command-rocketlist)
+         * [Command: /rocketdelete](#command-rocketdelete)
+         * [Command: /crypto](#command-crypto)
+         * [Command: /pokestop](#command-pokestop)
+         * [Command: /addstop](#command-addstop)
+         * [Command: /stopname](#command-stopname)
+         * [Command: /stopaddress](#command-stopaddress)
+         * [Command: /stopgps](#command-stopgps)
+         * [Command: /deletestop](#command-deletestop)
+         * [Command: /event](#command-event)
+         * [Command: /help](#command-help)
+         * [Command: /dex](#command-dex)
+         * [Command: /willow](#command-willow)
+   * [Debugging](#debugging)
+   * [Updates](#updates)
+   * [Git Hooks](#git-hooks)
+            * [pre-commit](#pre-commit)
+   * [TODO](#todo)
+   * [SQL Files](#sql-files)
+            * [pokemon-quest-bot.sql](#pokemon-quest-botsql)
+            * [quests-rewards-encounters.sql](#quests-rewards-encounterssql)
+
+<!-- Added by: artanicus, at: Sun Mar  8 17:29:13 EET 2020 -->
+
+<!--te-->
+
+
+
 # Screenshots
 
 #### Example quest with reward:
@@ -60,7 +135,7 @@ ln -sf /var/www/html/php.core.telegram core
 
 Start chat with https://t.me/BotFather and create bot token.
 
-Bot Settings: 
+Bot Settings:
  - Enable Inline mode
  - Allow Groups
    - Group Privacy off
@@ -95,7 +170,7 @@ Set `DEBUG` to true, to enable the debug logfile.
 
 Set `DEBUG_LOGFILE` to the location of the logfile, e.g. /var/log/tg-bots/dev-raid-bot.log. Make sure to create the log dir, e.g. /var/log/tg-bots/ and set it writeable by webserver.
 
-Set `APIKEY_HASH` to the hashed value of your bot token (preferably lowercase) using a hash generator, e.g. https://www.miniwebtool.com/sha512-hash-generator/ 
+Set `APIKEY_HASH` to the hashed value of your bot token (preferably lowercase) using a hash generator, e.g. https://www.miniwebtool.com/sha512-hash-generator/
 
 Set `DDOS_MAXIMUM` to the amount of callback queries each user is allowed to do each minute. If the amount is reached any further callback query is rejected by the DDOS check. Default value: 10.
 
@@ -139,9 +214,9 @@ So if you want to have the bot communication based on the users Telegram languag
 
 Set `TIMEZONE` to the timezone you wish to use for the bot. Predefined value from the example config is "Europe/Berlin".
 
-Optionally you can you use Google maps API to lookup addresses of gyms based on latitude and longitude. Therefore get a Google maps API key. 
+Optionally you can you use Google maps API to lookup addresses of gyms based on latitude and longitude. Therefore get a Google maps API key.
 
-To get a new API key, navigate to https://console.developers.google.com/apis/credentials and create a new API project, e.g. PokemonQuestBot 
+To get a new API key, navigate to https://console.developers.google.com/apis/credentials and create a new API project, e.g. PokemonQuestBot
 
 Once the project is created select "API key" from the "Create credentials" dropdown menu - a new API key is created.
 
@@ -170,7 +245,7 @@ Set `QUEST_LOCATION` to true to send back the location as message in addition to
 
 Set `QUEST_STOPS_RADIUS` to the amount in meters the bot will search for pokestops around the location shared with the bot.
 
-Set `QUEST_HIDE_REWARDS` to true to hide specific reward types, e.g. berries or revives. Specify the reward types you want to hide in `QUEST_HIDDEN_REWARDS` separated by comma. 
+Set `QUEST_HIDE_REWARDS` to true to hide specific reward types, e.g. berries or revives. Specify the reward types you want to hide in `QUEST_HIDDEN_REWARDS` separated by comma.
 
 Example to hide pokeballs, berries, potions and revives: `"QUEST_HIDDEN_REWARDS":"2,7,10,12"`
 
@@ -182,21 +257,21 @@ Every ID/number for all the available reward types:
 | 2         | Pokeball    |
 | 3         | Stardust    |
 | 4         | Rare candy  |
-| 5         | Fast TM     | 
-| 6         | Charged TM  | 
+| 5         | Fast TM     |
+| 6         | Charged TM  |
 | 7         | Berry       |
 | 8         | golden Berry|
 | 9         | silver Berry|
-| 10        | Potion      | 
-| 11        | Max Potion  | 
-| 12        | Revive      | 
-| 13        | Max Revive  | 
-| 14        | Evolve Item | 
-| 15        | Dragon Scale| 
-| 16        | Sun Stone   | 
-| 17        | King's Rock | 
-| 18        | Metal Coat  | 
-| 19        | Up-Grade    | 
+| 10        | Potion      |
+| 11        | Max Potion  |
+| 12        | Revive      |
+| 13        | Max Revive  |
+| 14        | Evolve Item |
+| 15        | Dragon Scale|
+| 16        | Sun Stone   |
+| 17        | King's Rock |
+| 18        | Metal Coat  |
+| 19        | Up-Grade    |
 
 
 ## Quest sharing
@@ -277,7 +352,7 @@ OR
 
 `curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase","telegram":"2","database":"2"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
-#### Cronjob to clean up telegram quest messages only: telegram = 1 and database = 0 
+#### Cronjob to clean up telegram quest messages only: telegram = 1 and database = 0
 
 `curl -k -d '{"cleanup":{"secret":"your-cleanup-secret/passphrase","telegram":"1","database":"0"}}' https://localhost/index.php?apikey=111111111:AABBCCDDEEFFGGHHIIJJKKLLMMNNOOPP123`
 
@@ -607,7 +682,7 @@ Required SQL upgrades files can be found under the `sql/upgrade` folder and need
 
 After any upgrade you need to make sure to change the bot version in your config.json as that version is used for comparison against the latest bot version in the `VERSION` file.
 
-Updates to the config file are NOT checked automatically. Therefore always check for changes to the config.json.example and add new config variables to your own config.json then too!
+Updates to the config file are NOT checked automatically. Therefore always check for changes to the `config.json.example` and add new config variables to your own `config.json` then too if you want to override defaults! Defaults are specified in `config/defaults-config.json` and defining the same option in `config.json` will override it.
 
 # Git Hooks
 
