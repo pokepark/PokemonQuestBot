@@ -10,7 +10,7 @@ debug_log('importal()');
 bot_access_check($update, 'portal-import');
 
 // Import allowed?
-if(defined('PORTAL_IMPORT') && PORTAL_IMPORT == true) {
+if($config->PORTAL_IMPORT) {
 
     // Process message for portal information.
     require_once(CORE_BOT_PATH . '/importal.php');

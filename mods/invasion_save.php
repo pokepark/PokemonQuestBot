@@ -54,7 +54,7 @@ if (!$invasion_in_db) {
 
     // Add keys to delete and share.
     $keys_delete = universal_key($keys, $id, 'invasion_delete', '0', getTranslation('delete'));
-    $keys_share = share_keys($neg_id, 'invasion_share', $update, SHARE_INVASIONS);
+    $keys_share = share_keys($neg_id, 'invasion_share', $update, $config->SHARE_INVASIONS);
     $keys = array_merge($keys_delete, $keys_share);
 } else {
     // Invasion already in the database for this pokestop.

@@ -34,7 +34,7 @@ if (empty($lat) && empty($lon)) {
 }
 
 // Set keys.
-$keys = get_pokestops_in_radius_keys($lat, $lon, INVASION_STOPS_RADIUS, 'invasion_create', 'invasion');
+$keys = get_pokestops_in_radius_keys($lat, $lon, $config->INVASION_STOPS_RADIUS, 'invasion_create', 'invasion');
 
 // Keys array received?
 if ($keys) {

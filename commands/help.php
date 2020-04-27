@@ -40,13 +40,13 @@ if($access && (is_file(ROOT_PATH . '/access/' . $access) || $access == 'BOT_ADMI
     $msg = '<b>' . getTranslation('personal_help') . '</b>' . CR . CR;
 
     // Quest and invasion via location?
-    if(QUEST_VIA_LOCATION == true && INVASION_VIA_LOCATION == true) {
+    if($config->QUEST_VIA_LOCATION && $config->INVASION_VIA_LOCATION) {
         $msg .= EMOJI_CLIPPY . SP . getTranslation('help_create_via_location') . CR . CR;
     // Quest via location?
-    } else if(QUEST_VIA_LOCATION == true) {
+    } else if($config->QUEST_VIA_LOCATION) {
         $msg .= EMOJI_CLIPPY . SP . getTranslation('help_quest_via_location') . CR . CR;
     // Invasion via location?
-    } else if(INVASION_VIA_LOCATION == true) {
+    } else if($config->INVASION_VIA_LOCATION) {
         $msg .= EMOJI_CLIPPY . SP . getTranslation('help_invasion_via_location') . CR . CR;
     }
 

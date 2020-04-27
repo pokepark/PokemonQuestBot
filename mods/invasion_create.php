@@ -27,12 +27,12 @@ if(!$invasion_in_db) {
     $msg .= CR . CR . '<b>' . getTranslation('invasion_select_time') . '</b>';
 
     // Invasion event to short in 5 minute steps as duration
-    if(INVASION_DURATION_EVENT > INVASION_DURATION_LONG) { 
-        $slotmax = INVASION_DURATION_EVENT;
+    if($config->INVASION_DURATION_EVENT > $config->INVASION_DURATION_LONG) { 
+        $slotmax = $config->INVASION_DURATION_EVENT;
         $slotsize = 5;
    
         // Create the keys.
-        for ($i = $slotmax; $i >= INVASION_DURATION_SHORT; $i = $i - $slotsize) {
+        for ($i = $slotmax; $i >= $config->INVASION_DURATION_SHORT; $i = $i - $slotsize) {
             $keys[] = array(
                 // Just show the time, no text - not everyone has a phone or tablet with a large screen...
                 'text'          => floor($i / 60) . ':' . str_pad($i % 60, 2, '0', STR_PAD_LEFT),
@@ -50,12 +50,12 @@ if(!$invasion_in_db) {
         $keys = [
             [
                 [
-                    'text'          => INVASION_DURATION_SHORT . 'min',
-                    'callback_data' => $pokestop_id . ':invasion_save:' . INVASION_DURATION_SHORT
+                    'text'          => $config->INVASION_DURATION_SHORT . 'min',
+                    'callback_data' => $pokestop_id . ':invasion_save:' . $config->INVASION_DURATION_SHORT
                 ],
                 [
-                    'text'          => INVASION_DURATION_LONG . 'min',
-                    'callback_data' => $pokestop_id . ':invasion_save:' . INVASION_DURATION_LONG
+                    'text'          => $config->INVASION_DURATION_LONG . 'min',
+                    'callback_data' => $pokestop_id . ':invasion_save:' . $config->INVASION_DURATION_LONG
                 ]
             ],
             [

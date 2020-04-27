@@ -23,10 +23,10 @@ $text = get_formatted_invasion($invasion, true, true, false, true);
 $keys = [];
 
 // Send location.
-if (INVASION_LOCATION == true) {
+if ($config->INVASION_LOCATION) {
     // Send location.
     $msg_header = get_formatted_invasion($invasion, false, false, true, true);
-    $msg_text = !empty($invasion['address']) ? $invasion['address'] . ', ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = ' . $invasion['id'] : $invasion['pokestop_name'] . ', ' . $invasion['id']; // DO NOT REMOVE " ID = " --> NEEDED FOR CLEANUP PREPARATION!
+    $msg_text = !empty($invasion['address']) ? $invasion['address'] . ', ' . substr(strtoupper($config->BOT_ID), 0, 1) . '-ID = ' . $invasion['id'] : $invasion['pokestop_name'] . ', ' . $invasion['id']; // DO NOT REMOVE " ID = " --> NEEDED FOR $config->CLEANUP PREPARATION!
     $loc = send_venue($chat, $invasion['lat'], $invasion['lon'], $msg_header, $msg_text);
 
     // Write to log.

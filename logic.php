@@ -176,7 +176,9 @@ function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp 
      * Pokestop: Reward-Stop Number 1
      * Invasion-Street 5, 13579 Poke-City
      * Info: Snorlax (Snorlax, Snorlax and Dragonite battle)
-    */
+     */
+
+    global $config;
 
     // Get translation type
     if($override_language == true) {
@@ -217,8 +219,8 @@ function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp 
     }
 
     //Add custom message from the config.
-    if($compact_format == false && defined('MAP_URL') && !empty(MAP_URL)) {
-        $msg .= CR . CR . MAP_URL;
+    if($compact_format == false && !empty($config->MAP_URL)) {
+        $msg .= CR . CR . $config->MAP_URL;
     } else if($compact_format == false) {
         $msg .= CR;
     }
@@ -230,9 +232,9 @@ function get_formatted_invasion($invasion, $add_creator = false, $add_timestamp 
     if($add_timestamp == true) {
         $msg .= CR . '<i>' . $getTypeTranslation('updated') . ': ' . dt2time('now', 'H:i:s') . '</i>';
         // Commented without the little dirty hack:
-        //$msg .= '  ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = ' . $invasion['id']; // DO NOT REMOVE! --> NEEDED FOR CLEANUP PREPARATION!
+        //$msg .= '  ' . substr(strtoupper($config->BOT_ID), 0, 1) . '-ID = ' . $invasion['id']; // DO NOT REMOVE! --> NEEDED FOR $config->CLEANUP PREPARATION!
         // Dirty hack: Make invasion ID negative, so we can differ from quest id.
-        $msg .= '  ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = -' . $invasion['id']; // DO NOT REMOVE! --> NEEDED FOR CLEANUP PREPARATION!
+        $msg .= '  ' . substr(strtoupper($config->BOT_ID), 0, 1) . '-ID = -' . $invasion['id']; // DO NOT REMOVE! --> NEEDED FOR $config->CLEANUP PREPARATION!
     }
 
     return $msg;
@@ -633,6 +635,7 @@ function get_formatted_encounterlist_entry($encounter_id, $hide_id = false, $hid
  */
 function get_all_encounterlist_keys($action, $arg)
 {
+    global $config;
     // Get all encounters from encounterlist.
     $rs = my_query(
         "
@@ -689,7 +692,7 @@ function get_all_rewardlist_entries($skip = false, $show_hidden = true, $quest_i
 
     // Hidden rewards
     $hide_rewards = array();
-    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+    $hide_rewards = ($config->QUEST_HIDE_REWARDS == true && !empty($config->QUEST_HIDDEN_REWARDS)) ? (explode(',', $config->QUEST_HIDDEN_REWARDS)) : '';
 
     // Build message.
     while ($rewardlist = $rs->fetch_assoc()) {
@@ -697,7 +700,7 @@ function get_all_rewardlist_entries($skip = false, $show_hidden = true, $quest_i
         if($skip == true && $rewardlist['id'] == 1) continue;
 
         // Skip hidden rewards.
-        if($show_hidden == false && QUEST_HIDE_REWARDS == true && in_array($rewardlist['reward_type'], $hide_rewards)) continue;
+        if($show_hidden == false && $config->QUEST_HIDE_REWARDS && in_array($rewardlist['reward_type'], $hide_rewards)) continue;
 
         // Build message.
         $msg_rewardlist .= get_formatted_rewardlist_entry($rewardlist['id'], $quest_id) . CR;
@@ -785,6 +788,7 @@ function get_formatted_rewardlist_entry($reward_id, $quest_id = 0, $hide_id = fa
  */
 function get_all_rewardlist_keys($action, $arg, $skip = false, $show_hidden = true)
 {
+    global $config;
     // Get all rewards from rewardlist.
     $rs = my_query(
         "
@@ -798,7 +802,7 @@ function get_all_rewardlist_keys($action, $arg, $skip = false, $show_hidden = tr
 
     // Hidden rewards
     $hide_rewards = array();
-    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+    $hide_rewards = ($config->QUEST_HIDE_REWARDS && !empty($config->QUEST_HIDDEN_REWARDS)) ? (explode(',', $config->QUEST_HIDDEN_REWARDS)) : '';
 
     // Add key for each reward
     while ($rl_entry = $rs->fetch_assoc()) {
@@ -806,7 +810,7 @@ function get_all_rewardlist_keys($action, $arg, $skip = false, $show_hidden = tr
         if($skip == true && $rl_entry['id'] == 1) continue;
 
         // Skip hidden rewards.
-        if($show_hidden == false && QUEST_HIDE_REWARDS == true && in_array($rl_entry['reward_type'], $hide_rewards)) continue;
+        if($show_hidden == false && $config->QUEST_HIDE_REWARDS && in_array($rl_entry['reward_type'], $hide_rewards)) continue;
 
         // Add keys.
         $keys[] = array(
@@ -1032,7 +1036,9 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
      * Quest-Street 5, 13579 Poke-City
      * Eggxtra-Event: Hatch 1 Egg
      * Reward: Magikarp or Onix
-    */
+     */
+
+    global $config;
 
     // Get translation type
     if($override_language == true) {
@@ -1100,8 +1106,8 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     }
 
     //Add custom message from the config.
-    if($compact_format == false && defined('MAP_URL') && !empty(MAP_URL)) {
-        $msg .= CR . MAP_URL ;
+    if($compact_format == false && !empty($config->MAP_URL)) {
+        $msg .= CR . $config->MAP_URL ;
     }
 
     // Display creator.
@@ -1110,7 +1116,7 @@ function get_formatted_quest($quest, $add_creator = false, $add_timestamp = fals
     // Add update time and quest id to message.
     if($add_timestamp == true) {
         $msg .= CR . '<i>' . $getTypeTranslation('updated') . ': ' . dt2date($quest['quest_date']) . '</i>';
-        $msg .= '  ' . substr(strtoupper(BOT_ID), 0, 1) . '-ID = ' . $quest['id']; // DO NOT REMOVE! --> NEEDED FOR CLEANUP PREPARATION!
+        $msg .= '  ' . substr(strtoupper($config->BOT_ID), 0, 1) . '-ID = ' . $quest['id']; // DO NOT REMOVE! --> NEEDED FOR $config->CLEANUP PREPARATION!
     }
 
     return $msg;
@@ -1885,6 +1891,7 @@ function get_all_json_quest_action_keys($event, $id, $action, $arg)
  */
 function get_all_json_reward()
 {
+    global $config;
     // Get all reward types from json.
     $tfile = BOT_LANG_PATH . '/reward_type.json';
     $str = file_get_contents($tfile);
@@ -1895,7 +1902,7 @@ function get_all_json_reward()
 
     // Hidden rewards
     $hide_rewards = array();
-    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+    $hide_rewards = ($config->QUEST_HIDE_REWARDS && !empty($config->QUEST_HIDDEN_REWARDS)) ? (explode(',', $config->QUEST_HIDDEN_REWARDS)) : '';
 
     // Build message.
     foreach($json as $type_id_string => $type_translation_array)
@@ -1913,7 +1920,7 @@ function get_all_json_reward()
         if($type_id == 1) continue;
 
         // Skip hidden rewards.
-        if(QUEST_HIDE_REWARDS == true && in_array($type_id, $hide_rewards)) continue;
+        if($config->QUEST_HIDE_REWARDS && in_array($type_id, $hide_rewards)) continue;
 
         // Always use singular
         $reward_type = explode(":", getTranslation($type_id_string));
@@ -1935,6 +1942,7 @@ function get_all_json_reward()
  */
 function get_all_json_reward_keys($action, $arg)
 {
+    global $config;
     // Get all reward types from json.
     $tfile = BOT_LANG_PATH . '/reward_type.json';
     $str = file_get_contents($tfile);
@@ -1945,7 +1953,7 @@ function get_all_json_reward_keys($action, $arg)
 
     // Hidden rewards
     $hide_rewards = array();
-    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : ''; 
+    $hide_rewards = ($config->QUEST_HIDE_REWARDS && !empty($config->QUEST_HIDDEN_REWARDS)) ? (explode(',', $config->QUEST_HIDDEN_REWARDS)) : ''; 
 
     foreach($json as $type_id_string => $type_translation_array)
     {
@@ -1962,7 +1970,7 @@ function get_all_json_reward_keys($action, $arg)
         if($type_id == 1) continue;
 
         // Skip hidden rewards.
-        if(QUEST_HIDE_REWARDS == true && in_array($type_id, $hide_rewards)) continue;
+        if($config->QUEST_HIDE_REWARDS && in_array($type_id, $hide_rewards)) continue;
 
         // Add key for each reward id
         $keys[] = array(
@@ -2320,6 +2328,7 @@ function add_quicklist_entry($questlist_id, $rewardlist_id)
 function get_pokestop($pokestop_id, $update_pokestop = true)
 {
     global $db;
+    global $config;
 
     // Pokestop from database
     if($pokestop_id != 0) {
@@ -2342,7 +2351,7 @@ function get_pokestop($pokestop_id, $update_pokestop = true)
             $stop_addr = $stop['address'];
 
             // Update pokestop address.
-            if(empty($stop_addr) || (strpos($stop_addr, getPublicTranslation('forest')) === 0) || MAPS_LOOKUP == true) {
+            if(empty($stop_addr) || (strpos($stop_addr, getPublicTranslation('forest')) === 0) || $config->MAPS_LOOKUP) {
                 $addr = get_address($lat, $lon);
                 if(!empty($addr)) {
                     $address = format_address($addr);
@@ -2893,6 +2902,7 @@ function quest_qty_action_keys($pokestop_id, $quest_event, $quest_type)
  */
 function reward_type_keys($pokestop_id, $quest_id, $quest_type)
 {
+    global $config;
     // Get all reward types from database
     $rs = my_query(
             "
@@ -2907,12 +2917,12 @@ function reward_type_keys($pokestop_id, $quest_id, $quest_type)
 
     // Hidden rewards array.
     $hide_rewards = array();
-    $hide_rewards = (QUEST_HIDE_REWARDS == true && !empty(QUEST_HIDDEN_REWARDS)) ? (explode(',', QUEST_HIDDEN_REWARDS)) : '';
+    $hide_rewards = ($config->QUEST_HIDE_REWARDS && !empty($config->QUEST_HIDDEN_REWARDS)) ? (explode(',', $config->QUEST_HIDDEN_REWARDS)) : '';
 
     // Add key for each quest quantity and action
     while ($reward = $rs->fetch_assoc()) {
         // Continue if some rewards shall be hidden
-        if(QUEST_HIDE_REWARDS == true && in_array($reward['reward_type'], $hide_rewards)) continue;
+        if($config->QUEST_HIDE_REWARDS && in_array($reward['reward_type'], $hide_rewards)) continue;
 
         // Add save and share button
         if($reward['reward_type'] == 1) {
@@ -3279,15 +3289,16 @@ function run_cleanup ($telegram = 2, $database = 2) {
      * 0 = Do nothing
      * 1 = Cleanup
      * 2 = Read from config
-    */
+     */
+    global $config;
 
     // Get cleanup values from config per default.
     if ($telegram == 2) {
-        $telegram = (CLEANUP_QUEST_TELEGRAM == true) ? 1 : 0;
+        $telegram = ($config->CLEANUP_QUEST_TELEGRAM) ? 1 : 0;
     }
 
     if ($database == 2) {
-        $database = (CLEANUP_QUEST_DATABASE == true) ? 1 : 0;
+        $database = ($config->CLEANUP_QUEST_DATABASE) ? 1 : 0;
     }
 
     // Start cleanup when at least one parameter is set to trigger cleanup
@@ -3417,13 +3428,13 @@ function run_cleanup ($telegram = 2, $database = 2) {
 
                     // Set cleanup time for telegram. 
                     $cleanup_time_tg = new DateTimeImmutable($invasion['end_time'], new DateTimeZone('UTC'));
-                    $cleanup_time_tg = $cleanup_time_tg->add(new DateInterval("PT".CLEANUP_INVASION_TIME_TG."M"));
+                    $cleanup_time_tg = $cleanup_time_tg->add(new DateInterval("PT".$config->CLEANUP_INVASION_TIME_TG."M"));
                     $clean_tg = $cleanup_time_tg->format('YmdHis');
                     $log_clean_tg = $cleanup_time_tg->format('Y-m-d H:i:s');
 
                     // Set cleanup time for database. 
                     $cleanup_time_db = new DateTimeImmutable($invasion['end_time'], new DateTimeZone('UTC'));
-                    $cleanup_time_db = $cleanup_time_db->add(new DateInterval("PT".CLEANUP_INVASION_TIME_DB."M"));
+                    $cleanup_time_db = $cleanup_time_db->add(new DateInterval("PT".$config->CLEANUP_INVASION_TIME_DB."M"));
                     $clean_db = $cleanup_time_db->format('YmdHis');
                     $log_clean_db = $cleanup_time_db->format('Y-m-d H:i:s');
 
@@ -3866,6 +3877,7 @@ function invasion_list($update, $ivq)
  */
 function curl_json_response($json_response, $json)
 {
+    global $config;
     // Write to log.
     debug_log($json_response, '<-');
 
@@ -3896,11 +3908,11 @@ function curl_json_response($json_response, $json)
             // Check if it's a venue and get quest id
             if (!empty($response['result']['venue']['address'])) {
                 // Get raid_id or quest_id from address.
-                $cleanup_id = substr(strrchr($response['result']['venue']['address'], substr(strtoupper(BOT_ID), 0, 1) . '-ID = '), 7);
+                $cleanup_id = substr(strrchr($response['result']['venue']['address'], substr(strtoupper($config->BOT_ID), 0, 1) . '-ID = '), 7);
 
             // Check if it's a text and get quest id
             } else if (!empty($response['result']['text'])) {
-                $cleanup_id = substr(strrchr($response['result']['text'], substr(strtoupper(BOT_ID), 0, 1) . '-ID = '), 7);
+                $cleanup_id = substr(strrchr($response['result']['text'], substr(strtoupper($config->BOT_ID), 0, 1) . '-ID = '), 7);
             }
 
             // Trigger Cleanup when quest id was found
