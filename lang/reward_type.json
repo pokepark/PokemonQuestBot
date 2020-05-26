@@ -112,5 +112,17 @@
 		"DE": "Up-Grade:Up-Grades",
 		"EN": "Up-Grade:Up-Grades",
 		"FR": "Améliorator:Améliorators"
+	},
+	"reward_type_20" : {
+		"NL": "Sinnoh Stone:Sinnoh Stone",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Sinnoh Stone:Sinnoh Stone",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"reward_type_21" : {
+		"NL": "Unova Stone:Unova Stone",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "Unova Stone:Unova Stone",
+		"FR": "TRANSLATE:TRANSLATE"
 	}
 }
