@@ -82,5 +82,17 @@
 		"DE": "Fotografiere",
 		"EN": "Snapshot",
 		"FR": "Snapshot"
+	},
+	"quest_type_15" : {
+		"NL": "Give",
+		"DE": "TRANSLATE",
+		"EN": "Give",
+		"FR": "TRANSLATE"
+	},
+	"quest_type_16" : {
+		"NL": "Play",
+		"DE": "TRANSLATE",
+		"EN": "Play",
+		"FR": "TRANSLATE"
 	}
 }
