@@ -29,6 +29,24 @@
 		"EN": "Candy for walking with your buddy:Candies for walking with your buddy",
 		"FR": "Bonbon en marchant avec ton copain:Bonbons en marchant avec ton copain"
 	},
+	"quest_action_3002" : {
+		"NL": "treat to your buddy:treats to your buddy",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "treat to your buddy:treats to your buddy",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_3003" : {
+		"NL": "time with your buddy:times with your buddy",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "time with your buddy:times with your buddy",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
+	"quest_action_3004" : {
+		"NL": "heart with your buddy:hearts with your buddy",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "heart with your buddy:hearts with your buddy",
+		"FR": "TRANSLATE:TRANSLATE"
+	},
 	"quest_action_4001" : {
 		"NL": "Pokemon:Pokemon",
 		"DE": "Pokemon:Pokemon",
@@ -202,6 +220,12 @@
 		"DE": "Level-2-Raid oder höher:Level-2-Raids oder höher",
 		"EN": "Tier-2 Raid or higher:Tier-2 Raids or higher",
 		"FR": "raid de niveau 2 ou plus:raid de niveau 2 ou plus"
+	},
+	"quest_action_8005" : {
+		"NL": "GO Battle league:GO Battle leagues",
+		"DE": "TRANSLATE:TRANSLATE",
+		"EN": "GO Battle league:GO Battle leagues",
+		"FR": "TRANSLATE:TRANSLATE"
 	},
 	"quest_action_9001" : {
 		"NL": "time a supereffective charged move in a gym:times a supereffective charged move in a gym",
